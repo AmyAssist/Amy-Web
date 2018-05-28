@@ -1,9 +1,12 @@
 language: node_js
 node_js:
-  - "8"
+- '8'
 cache:
   directories:
-  - node_modules # NPM packages
+  - node_modules
 before_install:
-  - npm i -g npm@latest
-  - npm i -g @angular/cli
+- npm i -g npm@latest
+- npm i -g @angular/cli
+notifications:
+  slack:
+    secure: VFwXVTIRoSfmz99sI8nG2GSW5kTfsjWF8bG8htkFDo96xF79m/aaBOQK2HixdemJai8+lATv+JwUkEnZWVPohm5bEerevDPLeW/jAJNVXZeH60ks58e1fHVXATz4JZ+xZsYs6rrwJIOXSups++h+niZT065pgPo1QOcJB+36S0RxfmizenleNkdDFpzNuDY+pXJSiPc9Fqyu5LyADZZ26bxKxNGDWR9nZUMcacAPTPAPB0Zsw5rX5SAOUm3pm2IrExejhqe/4SGnUDii/YbYJnhp4A++54bqJUCSITtl7dueiuSgDN35pnpRrOAG1eeN9RXWO6vWfeZsesQD2sb+qcDL7SvqCnLDT2HlzPieI/F1/osoT473vP2nxCpGrDW/YmE5L/+VTuUA4WdnzcBjvp1dJ0IoF78gMWooT/stnn845ClsYrvZf9Pi/DuBScIhqXxpTbIVg6dIqS4eJv54p4qwJVnQdtlGCnSwMavSVCMjm9Dn8vpoiXbtEmcZS/4AVnMdajq0LVor8bcpev7XGZPJynC3jQAQdP5b2ssi0M3h3aHGMze2z+AGAoQQtHZMboy3NqHU704QAMXlovfMAnPtH+zjisfbw91Wm4sWX7tNviTBPbyEgsQXDF24tWJ1L0CawSR8hB+UNK1fdGKt7DQFRA0nJs/URIUa9DHl1OU=
