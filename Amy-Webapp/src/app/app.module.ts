@@ -1,21 +1,67 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { MatButtonModule, MatCheckboxModule, MatToolbarModule,MatGridListModule, MatMenuModule, MatListModule} from '@angular/material';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { HttpClientModule } from '@angular/common/http';
+import { Routes, RouterModule } from '@angular/router';
+import {MatSelectModule} from '@angular/material/select';
+import {MatInputModule} from '@angular/material/input';
+import {MatCardModule} from '@angular/material/card';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
+import { ClockComponent } from './Components/clock/clock.component';
 import { MusicComponent } from './Components/music/music.component';
 import { WeatherComponent } from './Components/weather/weather.component';
-import { ClockComponent } from './Components/clock/clock.component';
+import { HomeComponent } from './Components/home/home.component';
+
+/*
+    Routing of the components to the respective links
+*/
+const routes: Routes =[
+  {
+    path: '',
+    component: HomeComponent
+  },
+  {
+    path: 'music',
+    component: MusicComponent
+  },
+  {
+    path: 'clock',
+    component: ClockComponent
+  },
+  {
+    path: 'weather',
+    component: WeatherComponent
+  }
+];
 
 @NgModule({
   declarations: [
     AppComponent,
+    ClockComponent,
     MusicComponent,
     WeatherComponent,
-    ClockComponent
+    HomeComponent,
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    MatFormFieldModule,
+    MatButtonModule,
+    MatInputModule,
+    MatCardModule,
+    BrowserAnimationsModule,
+    MatSelectModule,
+    MatCheckboxModule,
+    MatToolbarModule,
+    MatMenuModule,
+    MatListModule,
+    MatGridListModule,
+    HttpClientModule,
+    RouterModule.forRoot(routes)
   ],
+  exports: [RouterModule],
   providers: [],
   bootstrap: [AppComponent]
 })
