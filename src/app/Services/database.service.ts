@@ -5,6 +5,7 @@ import { catchError, retry } from 'rxjs/operators';
 import { clock } from '../Objects/clock'
 import { music } from '../Objects/music'
 import { weather } from '../Objects/weather'
+import { command } from '../Objects/command'
 
 /*
     Service for providing and receiving data from the REST interface.
@@ -17,10 +18,17 @@ export class DatabaseService {
   constructor(private http: HttpClient) { }
 
   /*
+    Getting the current command for the web application.
+  */
+  getCommand(commandData: command): Observable<command> {
+    return this.http.post<command>('rest/command', commandData, httpOptions);
+  }
+
+  /*
     providing and getting clock-Data from the REST-Interface.
   */
   getClock(clockData: clock): Observable<clock> {
-    return this.http.post<clock>('rest/clock', clockData, httpOptions);
+    return this.http.post<clock>('rest/alarmclock', clockData, httpOptions);
   }
 
   /*
