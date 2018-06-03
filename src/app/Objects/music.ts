@@ -1,3 +1,4 @@
 export class music{
-    search: string;
+    titel: string;
+    artist: string;
 }

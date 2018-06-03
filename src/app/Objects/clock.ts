@@ -1,3 +1,4 @@
 export class clock{
-    time: Date;
+    hour: number;
+    minutes: number;
 }
