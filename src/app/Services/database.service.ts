@@ -20,29 +20,58 @@ export class DatabaseService {
   /*
     Getting the current command for the web application.
   */
+ /*
   getCommand(commandData: command): Observable<command> {
     return this.http.post<command>('rest/command', commandData, httpOptions);
-  }
+  } */
 
   /*
     providing and getting clock-Data from the REST-Interface.
   */
-  getClock(clockData: clock): Observable<clock> {
-    return this.http.post<clock>('rest/alarmclock', clockData, httpOptions);
+  getClock(): Observable<clock[]> {
+    return this.http.get<clock[]>('rest/Alarms', httpOptions);
   }
 
   /*
-    providing and getting music-Data from the REST-Interface.
+    Getting the current Song.
   */
-  getMusic(musicData: music): Observable<music> {
-    return this.http.post<music>('rest/music', musicData, httpOptions);
+  getCurrentSong(): Observable<music> {
+    return this.http.get<music>('rest/music/currentSong', httpOptions);
   }
 
   /*
-    providing and getting weather-Data from the REST-Interface.
+    Getting the current Playlist.
   */
-  getWeather(weatherData: weather): Observable<weather> {
-    return this.http.post<weather>('rest/weather', weatherData, httpOptions);
+  getPlaylist(): Observable<music[]> {
+  return this.http.get<music[]>('rest/music/playlist', httpOptions);
+  }
+
+  /*
+    giving a command to play a song.
+  */
+  playSong(musicData: music){
+    this.http.post<music>('rest/music/play', musicData, httpOptions);
+  }
+
+  /*
+    getting weather-Data for today.
+  */
+  getWeatherToday(): Observable<weather> {
+    return this.http.get<weather>('rest/weather/Today', httpOptions);
+  }
+
+  /*
+    getting weather-Data for tomorrow.
+  */
+  getWeatherTomorrow(): Observable<weather> {
+  return this.http.get<weather>('rest/weather/Tomorrow', httpOptions);
+  }
+
+  /*
+    getting weather-Data for the whole week.
+  */
+  getWeatherWeek(): Observable<weather[]> {
+  return this.http.get<weather[]>('rest/weather/Week', httpOptions);
   }
 }
 
