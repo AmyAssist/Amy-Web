@@ -28,21 +28,21 @@ export class DatabaseService {
   /*
     providing and getting clock-Data from the REST-Interface.
   */
-  getClock(): Observable<clock[]> {
+  getAlarms() {
     return this.http.get<clock[]>('rest/Alarms', httpOptions);
   }
 
   /*
     Getting the current Song.
   */
-  getCurrentSong(): Observable<music> {
+  getCurrentSong() {
     return this.http.get<music>('rest/music/currentSong', httpOptions);
   }
 
   /*
     Getting the current Playlist.
   */
-  getPlaylist(): Observable<music[]> {
+  getPlaylist() {
   return this.http.get<music[]>('rest/music/playlist', httpOptions);
   }
 
@@ -56,21 +56,21 @@ export class DatabaseService {
   /*
     getting weather-Data for today.
   */
-  getWeatherToday(): Observable<weather> {
+  getWeatherToday() {
     return this.http.get<weather>('rest/weather/Today', httpOptions);
   }
 
   /*
     getting weather-Data for tomorrow.
   */
-  getWeatherTomorrow(): Observable<weather> {
+  getWeatherTomorrow() {
   return this.http.get<weather>('rest/weather/Tomorrow', httpOptions);
   }
 
   /*
     getting weather-Data for the whole week.
   */
-  getWeatherWeek(): Observable<weather[]> {
+  getWeatherWeek() {
   return this.http.get<weather[]>('rest/weather/Week', httpOptions);
   }
 }
