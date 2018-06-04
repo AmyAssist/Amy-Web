@@ -1,6 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { MatButtonModule, MatCheckboxModule, MatToolbarModule,MatGridListModule, MatMenuModule, MatListModule} from '@angular/material';
+import { 
+  MatButtonModule, 
+  MatCheckboxModule, 
+  MatToolbarModule,
+  MatGridListModule, 
+  MatMenuModule, 
+  MatListModule,
+  MatDividerModule
+} from '@angular/material';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { HttpClientModule } from '@angular/common/http';
 import { Routes, RouterModule } from '@angular/router';
@@ -58,6 +66,7 @@ const routes: Routes =[
     MatMenuModule,
     MatListModule,
     MatGridListModule,
+    MatDividerModule,
     HttpClientModule,
     RouterModule.forRoot(routes)
   ],

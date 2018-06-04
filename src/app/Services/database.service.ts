@@ -26,7 +26,7 @@ export class DatabaseService {
   } */
 
   /*
-    providing and getting clock-Data from the REST-Interface.
+    Getting all Alarms.
   */
   getAlarms() {
     return this.http.get<clock[]>('rest/Alarms', httpOptions);
