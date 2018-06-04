@@ -1,3 +1,34 @@
-<p>
-  music works!
-</p>
+<mat-toolbar>
+  <span>Music</span>
+</mat-toolbar>
+
+<div class="musicSearch-container">
+  <mat-form-field>
+    <input matInput #artist placeholder="Artist">
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput #song placeholder="Song">
+  </mat-form-field>
+</div>
+<button mat-raised-button color="primary" (click)="playSong(artist.value, song.value)">Play</button>
+
+<div>
+  <button mat-raised-button color="basic" (click)="getCurrentSong()">Aktueller Song</button>
+  <button mat-raised-button color="basic" (click)="getPlaylist()">Playlist</button>
+</div>
+<div *ngIf=song>
+  <mat-list role="list">
+    <mat-list-item role="listitem">Interpret: {{musicData.artist}}</mat-list-item>
+    <mat-list-item role="listitem">Titel: {{musicData.titel}}</mat-list-item>
+  </mat-list>
+</div>
+<div *ngIf=playlist>
+  <div *ngFor="let music of musicPlaylistData; let i = index">
+    <mat-list role="list">
+      <mat-list-item role="listitem" >Song: {{i +1}}</mat-list-item>
+      <mat-list-item role="listitem" >Interpret: {{music.artist}}</mat-list-item>
+      <mat-list-item role="listitem" >Titel: {{music.titel}}</mat-list-item>
+    </mat-list>
+  </div>
+</div>
