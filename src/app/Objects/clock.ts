@@ -1,4 +1,9 @@
 export class clock{
     hour: number;
-    minutes: number;
+    minute: number;
+
+    constructor(_hour: number, _minute: number){
+        this.hour = _hour;
+        this.minute = _minute;
+    }
 }

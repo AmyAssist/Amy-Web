@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {MatToolbarModule} from '@angular/material/toolbar';
 import { DatabaseService } from '../../Services/database.service';
 import { clock } from '../../Objects/clock'
 
@@ -15,12 +16,8 @@ export class ClockComponent implements OnInit {
 
   ngOnInit() {
     this.clockData = new Array<clock>();
-    /*
-    this.clockData[1].hour = 12;
-    this.clockData[1].minutes  = 30;
-    this.clockData[2].hour = 18;
-    this.clockData[2].minutes  = 0;
-    */
+    /*this.clockData.push( new clock(12,30))
+    this.clockData.push( new clock(18,0))*/
   }
 
   getAlarms() {
