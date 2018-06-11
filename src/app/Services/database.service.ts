@@ -35,56 +35,56 @@ export class DatabaseService {
     Getting all Alarms.
   */
   getAlarms() {
-    return this.http.get<clock[]>(this.path + 'clock/alarms');
+    return this.http.get<clock[]>(this.path + 'clock/alarms', httpOptions);
   }
 
   /*
     Creating a new Alarm.
   */
   setNewAlarm(clockData: clock) {
-    this.http.post<clock>(this.path + 'clock/alarms/new', clockData);
+    this.http.post<clock>(this.path + 'clock/alarms/new', clockData, httpOptions);
   }
 
   /*
     Getting the current Song.
   */
   getCurrentSong() {
-    return this.http.get<music>(this.path + 'music/currentSong');
+    return this.http.get<music>(this.path + 'music/currentSong', httpOptions);
   }
 
   /*
     Getting the current Playlist.
   */
   getPlaylist() {
-    return this.http.get<playlist>(this.path + 'music/playlist');
+    return this.http.get<playlist>(this.path + 'music/playlist', httpOptions);
   }
 
   /*
     giving a command to play a song.
   */
   playSong(musicData: music){
-    this.http.post<music>(this.path + 'music/play', musicData);
+    this.http.post<music>(this.path + 'music/play', musicData, httpOptions);
   }
 
   /*
     getting weather-Data for today.
   */
   getWeatherToday() {
-    return this.http.get<weather>(this.path + 'weather/today');
+    return this.http.get<weather>(this.path + 'weather/today', httpOptions);
   }
 
   /*
     getting weather-Data for tomorrow.
   */
   getWeatherTomorrow() {
-  return this.http.get<weather>(this.path + 'weather/tomorrow');
+  return this.http.get<weather>(this.path + 'weather/tomorrow', httpOptions);
   }
 
   /*
     getting weather-Data for the whole week.
   */
   getWeatherWeek() {
-  return this.http.get<weatherWeek>(this.path + 'weather/week');
+  return this.http.get<weatherWeek>(this.path + 'weather/week', httpOptions);
   }
 }
 
