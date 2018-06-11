@@ -8,4 +8,6 @@ export class weather{
     temperatureMax: number;
     sunriseTime: string;
     sunsetTime: string;
+    
+    constructor() {}
 }
