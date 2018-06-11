@@ -13,6 +13,7 @@ export class MusicComponent implements OnInit {
 
   musicData: music;
   musicPlaylistData: playlist;
+  playlistSongs: music[];
   song: boolean;
   playlist: boolean;
   
@@ -23,6 +24,7 @@ export class MusicComponent implements OnInit {
     this.playlist = false;
     this.musicData = new music;
     this.musicPlaylistData = new playlist;
+    this.playlistSongs = new Array<music>();
   }
 
   getCurrentSong() {
@@ -37,6 +39,7 @@ export class MusicComponent implements OnInit {
     this.playlist = true;
     this.databaseService.getPlaylist()
     .subscribe((data : playlist) => this.musicPlaylistData = { ...data});
+    this.playlistSongs = this.musicPlaylistData.songs;
   }
 
   playSong(artist: string, title: string) {

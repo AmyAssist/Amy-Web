@@ -24,7 +24,7 @@ export class ClockComponent implements OnInit {
 
   getAlarms() {
     this.databaseService.getAlarms()
-    .subscribe((data : clock[]) => this.clockData = { ...data});
+    .subscribe((data : clock[]) => this.clockData = [ ...data]);
   }
 
   setAlarm(hour: number, minute: number) {
