@@ -4,8 +4,10 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { clock } from '../Objects/clock'
 import { music } from '../Objects/music'
+import { playlist } from '../Objects/playlist'
 import { weather } from '../Objects/weather'
 import { command } from '../Objects/command'
+import { weatherWeek } from '../Objects/weatherWeek';
 
 /*
     Service for providing and receiving data from the REST interface.
@@ -29,7 +31,14 @@ export class DatabaseService {
     Getting all Alarms.
   */
   getAlarms() {
-    return this.http.get<clock[]>('http://localhost:8080/rest/alarms');
+    return this.http.get<clock[]>('http://localhost:8080/rest/clock/alarms');
+  }
+
+  /*
+    Creating a new Alarm.
+  */
+  setNewAlarm(clockData: clock) {
+    this.http.post<clock>('http://localhost:8080/rest/clock/alarms/new', clockData);
   }
 
   /*
@@ -43,7 +52,7 @@ export class DatabaseService {
     Getting the current Playlist.
   */
   getPlaylist() {
-  return this.http.get<music[]>('http://localhost:8080/rest/music/playlist');
+    return this.http.get<playlist>('http://localhost:8080/rest/music/playlist');
   }
 
   /*
@@ -71,7 +80,7 @@ export class DatabaseService {
     getting weather-Data for the whole week.
   */
   getWeatherWeek() {
-  return this.http.get<weather[]>('http://localhost:8080/rest/weather/week');
+  return this.http.get<weatherWeek>('http://localhost:8080/rest/weather/week');
   }
 }
 

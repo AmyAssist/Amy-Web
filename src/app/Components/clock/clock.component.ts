@@ -11,11 +11,13 @@ import { clock } from '../../Objects/clock'
 export class ClockComponent implements OnInit {
 
   clockData: clock[];
+  newClockData: clock;
 
   constructor(private databaseService: DatabaseService) { }
 
   ngOnInit() {
     this.clockData = new Array<clock>();
+    this.newClockData = new clock;
     /*this.clockData.push( new clock(12,30))
     this.clockData.push( new clock(18,0))*/
   }
@@ -23,6 +25,13 @@ export class ClockComponent implements OnInit {
   getAlarms() {
     this.databaseService.getAlarms()
     .subscribe((data : clock[]) => this.clockData = { ...data});
+  }
+
+  setAlarm(hour: number, minute: number) {
+    this.newClockData.hour = hour;
+    this.newClockData.minute = minute;
+    this.databaseService.setNewAlarm(this.newClockData);
+    this.getAlarms();
   }
 
 }

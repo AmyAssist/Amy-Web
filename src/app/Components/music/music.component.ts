@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { DatabaseService } from '../../Services/database.service';
 import { music } from '../../Objects/music'
+import { playlist } from '../../Objects/playlist'
 
 @Component({
   selector: 'app-music',
@@ -11,7 +12,7 @@ import { music } from '../../Objects/music'
 export class MusicComponent implements OnInit {
 
   musicData: music;
-  musicPlaylistData: music[];
+  musicPlaylistData: playlist;
   song: boolean;
   playlist: boolean;
   
@@ -21,7 +22,7 @@ export class MusicComponent implements OnInit {
     this.song = false;
     this.playlist = false;
     this.musicData = new music;
-    this.musicPlaylistData = new Array<music>();
+    this.musicPlaylistData = new playlist;
   }
 
   getCurrentSong() {
@@ -35,12 +36,12 @@ export class MusicComponent implements OnInit {
     this.song = false;
     this.playlist = true;
     this.databaseService.getPlaylist()
-    .subscribe((data : music[]) => this.musicPlaylistData = { ...data});
+    .subscribe((data : playlist) => this.musicPlaylistData = { ...data});
   }
 
-  playSong(artist: string, titel: string) {
+  playSong(artist: string, title: string) {
     this.musicData.artist = artist;
-    this.musicData.titel = titel;
+    this.musicData.title = title;
     this.databaseService.playSong(this.musicData);
     this.song = true;
     this.playlist = false;

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { DatabaseService } from '../../Services/database.service';
 import { weather } from '../../Objects/weather'
+import { weatherWeek } from '../../Objects/weatherWeek';
 
 @Component({
   selector: 'app-weather',
@@ -12,7 +13,7 @@ export class WeatherComponent implements OnInit {
 
   weatherToday: weather;
   weatherTomorrow: weather;
-  weatherWeek: weather[];
+  weatherWeekData: weatherWeek;
   today: boolean;
   tommorow: boolean;
   week: boolean;
@@ -22,7 +23,7 @@ export class WeatherComponent implements OnInit {
   ngOnInit() {
     this.weatherToday = new weather();
     this.weatherTomorrow = new weather();
-    this.weatherWeek = new Array<weather>();
+    this.weatherWeekData = new weatherWeek();
     this.today = false;
     this.tommorow = false;
     this.week = false;
@@ -49,6 +50,6 @@ export class WeatherComponent implements OnInit {
     this.tommorow = false;
     this.week = true;
     this.databaseService.getWeatherWeek()
-    .subscribe((data : weather[]) => this.weatherWeek = { ...data});
+    .subscribe((data : weatherWeek) => this.weatherWeekData = { ...data});
   }
 }

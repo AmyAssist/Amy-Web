@@ -24,11 +24,11 @@
   </mat-list>
 </div>
 <div *ngIf=playlist>
-  <div *ngFor="let music of musicPlaylistData; let i = index">
+  <div *ngFor="let music of musicPlaylistData.songs; let i = index">
     <mat-list role="list">
       <mat-list-item role="listitem" >Song: {{i +1}}</mat-list-item>
       <mat-list-item role="listitem" >Interpret: {{music.artist}}</mat-list-item>
-      <mat-list-item role="listitem" >Titel: {{music.titel}}</mat-list-item>
+      <mat-list-item role="listitem" >Titel: {{music.title}}</mat-list-item>
     </mat-list>
   </div>
 </div>
