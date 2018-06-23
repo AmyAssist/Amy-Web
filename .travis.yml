@@ -26,6 +26,7 @@ jobs:
           branch: master
     - script:
       - ng test --no-progress --code-coverage --karma-config karma.conf.js
+      - ng lint Amy-Webapp --format json > tsLintReport.json
       - sonar-scanner
       addons:
         sonarcloud:
