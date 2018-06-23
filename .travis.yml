@@ -12,7 +12,7 @@ cache:
 before_install:
   - npm i -g @angular/cli
 script:
-  - ng test --no-progress --code-coverage --karma-config karma.conf.js
+  - ng test --no-progress --karma-config karma.conf.js
 jobs:
   include:
     - stage: deploy
@@ -24,7 +24,9 @@ jobs:
         local_dir: dist/Amy-Webapp/
         on:
           branch: master
-    - script: sonar-scanner
+    - script:
+      - ng test --no-progress --code-coverage --karma-config karma.conf.js
+      - sonar-scanner
       addons:
         sonarcloud:
           organization: "amyassist"
