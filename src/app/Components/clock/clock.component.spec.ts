@@ -1,25 +1,24 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { ClockComponent } from './clock.component';
+import {ClockComponent} from './clock.component';
+
+import { DatabaseService } from '../../Services/database.service';
 
 describe('ClockComponent', () => {
-  let component: ClockComponent;
-  let fixture: ComponentFixture<ClockComponent>;
+    let component: ClockComponent;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ ClockComponent ]
-    })
-    .compileComponents();
-  }));
+    beforeEach(() => {
+        const spy = jasmine.createSpyObj('DatabaseService', ['getValue']);
+        TestBed.configureTestingModule({
+            providers: [
+                ClockComponent,
+                { provide: DatabaseService, useValue: spy }
+            ]
+        });
+        component = TestBed.get(ClockComponent);
+    });
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(ClockComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
 });

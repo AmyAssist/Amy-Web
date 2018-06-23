@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {MatToolbarModule} from '@angular/material/toolbar';
 import { DatabaseService } from '../../Services/database.service';
 import { music } from '../../Objects/music'
 import { playlist } from '../../Objects/playlist'
