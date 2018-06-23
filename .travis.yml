@@ -10,14 +10,13 @@ cache:
   directories:
   - node_modules
 before_install:
-  - npm i -g npm@latest
   - npm i -g @angular/cli
 script:
-  - ng test --karma-config karma.conf.js
+  - ng test --no-progress --code-coverage --karma-config karma.conf.js
 jobs:
   include:
     - stage: deploy
-      script: ng build --prod --base-href=/Amy-Web/
+      script: ng build --prod --no-progress --base-href=/Amy-Web/
       deploy:
         provider: pages
         skip_cleanup: true
