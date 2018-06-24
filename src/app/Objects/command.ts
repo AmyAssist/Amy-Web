@@ -1,5 +1,5 @@
 export class command{
-    command: string;
+    value: string;
     
     constructor() {}
 }

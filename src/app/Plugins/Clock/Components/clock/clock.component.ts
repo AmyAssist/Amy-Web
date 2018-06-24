@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {MatToolbarModule} from '@angular/material/toolbar';
-import { DatabaseService } from '../../Services/database.service';
+import { ClockDataService } from '../../Services/clock-data.service';
 import { clock } from '../../Objects/clock'
 
 @Component({
@@ -13,7 +13,7 @@ export class ClockComponent implements OnInit {
   clockData: clock[];
   newClockData: clock;
 
-  constructor(private databaseService: DatabaseService) { }
+  constructor(private databaseService: ClockDataService) { }
 
   ngOnInit() {
     this.clockData = new Array<clock>();

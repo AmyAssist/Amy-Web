@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {MatToolbarModule} from '@angular/material/toolbar';
-import { DatabaseService } from '../../Services/database.service';
+import { MusicDataService } from '../../Services/music-data.service';
 import { music } from '../../Objects/music'
 import { playlist } from '../../Objects/playlist'
 
@@ -17,7 +17,7 @@ export class MusicComponent implements OnInit {
   song: boolean;
   playlist: boolean;
   
-  constructor(private databaseService: DatabaseService) { }
+  constructor(private databaseService: MusicDataService) { }
 
   ngOnInit() {
     this.song = false;

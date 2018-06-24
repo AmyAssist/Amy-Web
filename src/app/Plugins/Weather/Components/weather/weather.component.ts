@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {MatToolbarModule} from '@angular/material/toolbar';
-import { DatabaseService } from '../../Services/database.service';
+import { WeatherDataService } from '../../Services/weather-data.service';
 import { weather } from '../../Objects/weather'
 import { weatherWeek } from '../../Objects/weatherWeek';
 
@@ -18,7 +18,7 @@ export class WeatherComponent implements OnInit {
   tommorow: boolean;
   week: boolean;
 
-  constructor(private databaseService: DatabaseService) { }
+  constructor(private databaseService: WeatherDataService) { }
 
   ngOnInit() {
     this.weatherToday = new weather();

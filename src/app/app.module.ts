@@ -18,9 +18,9 @@ import {MatCardModule} from '@angular/material/card';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
-import { ClockComponent } from './Components/clock/clock.component';
-import { MusicComponent } from './Components/music/music.component';
-import { WeatherComponent } from './Components/weather/weather.component';
+import { ClockComponent } from './Plugins/Clock/Components/clock/clock.component';
+import { MusicComponent } from './Plugins/Music/Components/music/music.component';
+import { WeatherComponent } from './Plugins/Weather/Components/weather/weather.component';
 import { HomeComponent } from './Components/home/home.component';
 
 /*
