@@ -1,0 +1,8 @@
+<mat-toolbar>
+    <span>Home</span>
+</mat-toolbar>
+
+<mat-form-field>
+    <input matInput #command placeholder="Befehl">
+</mat-form-field>
+<button mat-raised-button color="basic" (click)="sendCommand(command.value)">Senden</button>

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { DatabaseService } from '../../Services/database.service';
+import { command } from '../../Objects/command'
 
 @Component({
   selector: 'app-home',
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  command: command;
+
+  constructor(private databaseService: DatabaseService) { }
 
   ngOnInit() {
+    this.command = new command;
   }
 
+  sendCommand(command: string){
+    this.command.value=command
+    this.databaseService.playSong(this.command);
+  }
 }
