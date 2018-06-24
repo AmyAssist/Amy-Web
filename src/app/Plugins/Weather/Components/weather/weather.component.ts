@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {MatToolbarModule} from '@angular/material/toolbar';
 import { WeatherDataService } from '../../Services/weather-data.service';
 import { weather } from '../../Objects/weather'
 import { weatherWeek } from '../../Objects/weatherWeek';

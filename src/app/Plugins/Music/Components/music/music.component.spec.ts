@@ -16,7 +16,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import {MusicComponent} from './music.component';
 
-import {DatabaseService} from '../../Services/database.service';
+import {MusicDataService} from '../../Services/music-data.service';
 
 describe('MusicComponent', () => {
     let component: MusicComponent;
@@ -27,7 +27,7 @@ describe('MusicComponent', () => {
         TestBed.configureTestingModule({
             declarations: [MusicComponent],
             providers: [
-                {provide: DatabaseService, useValue: spy}
+                {provide: MusicDataService, useValue: spy}
             ],
             imports: [
                 MatFormFieldModule,

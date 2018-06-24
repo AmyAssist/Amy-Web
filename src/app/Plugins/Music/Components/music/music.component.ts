@@ -1,10 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-<<<<<<< HEAD:src/app/Plugins/Music/Components/music/music.component.ts
-import {MatToolbarModule} from '@angular/material/toolbar';
 import { MusicDataService } from '../../Services/music-data.service';
-=======
-import { DatabaseService } from '../../Services/database.service';
->>>>>>> f0eb79aa465a59c226d03019e1aad7cc602561dc:src/app/Components/music/music.component.ts
 import { music } from '../../Objects/music'
 import { playlist } from '../../Objects/playlist'
 

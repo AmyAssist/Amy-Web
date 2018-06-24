@@ -1,7 +1,5 @@
-import { Injectable, ErrorHandler, Component, OnInit } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { weather } from '../Objects/weather'
 import { weatherWeek } from '../Objects/weatherWeek';
 
