@@ -2,7 +2,7 @@ import {TestBed} from '@angular/core/testing';
 
 import {ClockComponent} from './clock.component';
 
-import { DatabaseService } from '../../Services/database.service';
+import {ClockDataService} from '../../Services/clock-data.service';
 
 describe('ClockComponent', () => {
     let component: ClockComponent;
@@ -12,7 +12,7 @@ describe('ClockComponent', () => {
         TestBed.configureTestingModule({
             providers: [
                 ClockComponent,
-                { provide: DatabaseService, useValue: spy }
+                { provide: ClockDataService, useValue: spy }
             ]
         });
         component = TestBed.get(ClockComponent);

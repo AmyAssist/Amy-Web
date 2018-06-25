@@ -16,7 +16,7 @@ import {MatCardModule} from '@angular/material/card';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import {WeatherComponent} from './weather.component';
-import {DatabaseService} from '../../Services/database.service';
+import {WeatherDataService} from '../../Services/weather-data.service';
 
 describe('WeatherComponent', () => {
     let component: WeatherComponent;
@@ -27,7 +27,7 @@ describe('WeatherComponent', () => {
         TestBed.configureTestingModule({
             declarations: [WeatherComponent],
             providers: [
-                {provide: DatabaseService, useValue: spy}
+                {provide: WeatherDataService, useValue: spy}
             ],
             imports: [
                 MatFormFieldModule,
