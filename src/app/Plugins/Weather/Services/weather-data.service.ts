@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { weather } from '../Objects/weather'
+import { weather } from '../Objects/weather';
 import { weatherWeek } from '../Objects/weatherWeek';
 
 @Injectable({

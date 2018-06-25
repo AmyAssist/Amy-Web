@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
   }
 
   sendCommand(command: string){
-    this.command.value=command
+    this.command.value=command;
     this.databaseService.playSong(this.command);
   }
 }

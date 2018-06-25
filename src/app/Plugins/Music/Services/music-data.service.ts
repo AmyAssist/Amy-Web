@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { music } from '../Objects/music'
-import { playlist } from '../Objects/playlist'
+import { music } from '../Objects/music';
+import { playlist } from '../Objects/playlist';
 
 
 @Injectable({
