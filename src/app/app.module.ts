@@ -23,6 +23,7 @@ import { ClockComponent } from './Plugins/Clock/Components/clock/clock.component
 import { MusicComponent } from './Plugins/Music/Components/music/music.component';
 import { WeatherComponent } from './Plugins/Weather/Components/weather/weather.component';
 import { HomeComponent } from './Components/home/home.component';
+import { CalendarComponent } from './Plugins/Calendar/Components/calendar/calendar.component';
 
 /*
     Routing of the components to the respective links
@@ -53,6 +54,7 @@ const routes: Routes =[
     MusicComponent,
     WeatherComponent,
     HomeComponent,
+    CalendarComponent,
   ],
   imports: [
     BrowserModule,
