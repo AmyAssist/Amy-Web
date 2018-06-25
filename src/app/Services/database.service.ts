@@ -17,7 +17,7 @@ export class DatabaseService {
   path: string;
 
   constructor(private http: HttpClient) { 
-    this.path = 'http://localhost:8080/rest/';
+    this.path = 'http://localhost:8080/rest/home/';
   }
 
   /*
@@ -28,13 +28,13 @@ export class DatabaseService {
     return this.http.post<command>('rest/command', commandData, httpOptions);
   } */
   playSong(commandData: command){
-    this.http.post<command>(this.path + 'play', commandData, httpOptions);
+    this.http.post<command>(this.path + 'console', commandData, httpOptions);
   }
 }
 
 
 const httpOptions = {
   headers: new HttpHeaders({
-    'Content-Type':  'application/json'
+    'Content-Type':  'text/plain'
   })
 };
