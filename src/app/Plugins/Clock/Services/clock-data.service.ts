@@ -10,6 +10,12 @@ export class ClockDataService {
 
   path: string;
 
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type':  'application/json'
+    })
+  };
+
   constructor(private http: HttpClient) { 
     this.path = 'http://localhost:8080/rest/clock/';
   }
@@ -18,19 +24,13 @@ export class ClockDataService {
     Getting all Alarms.
   */
   getAlarms() {
-    return this.http.get<clock[]>(this.path + 'alarms', httpOptions);
+    return this.http.get<clock[]>(this.path + 'alarms', this.httpOptions);
   }
 
   /*
     Creating a new Alarm.
   */
   setNewAlarm(clockData: clock) {
-    this.http.post<clock>(this.path + 'alarms/new', clockData, httpOptions);
+    this.http.post<clock>(this.path + 'alarms/new', clockData, this.httpOptions);
   }
 }
-
-const httpOptions = {
-  headers: new HttpHeaders({
-    'Content-Type':  'application/json'
-  })
-};

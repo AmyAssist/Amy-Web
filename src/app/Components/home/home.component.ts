@@ -9,16 +9,19 @@ import { command } from '../../Objects/command'
 })
 export class HomeComponent implements OnInit {
 
-  command: command;
+  commandData: command;
 
   constructor(private databaseService: DatabaseService) { }
 
   ngOnInit() {
-    this.command = new command;
+    this.commandData = new command;
   }
 
-  sendCommand(command: string){
-    this.command.value=command;
-    this.databaseService.playSong(this.command);
+  /*
+    Sending typed command to the backend-service for general functions.
+  */
+  sendCommand(commandValue: string){
+    this.commandData.value=commandValue;
+    this.databaseService.sendCommand(this.commandData);
   }
 }

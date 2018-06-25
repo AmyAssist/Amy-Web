@@ -3,6 +3,9 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import { ClockDataService } from '../../Services/clock-data.service';
 import { clock } from '../../Objects/clock'
 
+/*
+  Component for the clock-plugin. It recieves data from the backend with a custom clock-dataservices and displays the data over the html-template.
+*/
 @Component({
   selector: 'app-clock',
   templateUrl: './clock.component.html',
@@ -18,8 +21,6 @@ export class ClockComponent implements OnInit {
   ngOnInit() {
     this.clockData = new Array<clock>();
     this.newClockData = new clock;
-    /*this.clockData.push( new clock(12,30))
-    this.clockData.push( new clock(18,0))*/
   }
 
   getAlarms() {
