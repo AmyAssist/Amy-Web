@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
     Sending typed command to the backend-service for general functions.
   */
   sendCommand(commandValue: string){
-    this.commandData.value=commandValue;
+    this.commandData.value = commandValue;
     this.databaseService.sendCommand(this.commandData);
   }
 }
