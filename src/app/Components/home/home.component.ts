@@ -11,7 +11,7 @@ import {command} from '../../Objects/command'
 export class HomeComponent implements OnInit {
 
     commandData: command;
-    constructor(private databaseService: DatabaseService, private ttsService: TTSService) {}
+    constructor(private readonly databaseService: DatabaseService, private readonly ttsService: TTSService) {}
 
     ngOnInit() {
         this.commandData = new command;

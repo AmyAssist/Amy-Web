@@ -8,7 +8,7 @@ import {Injectable} from '@angular/core';
 })
 export class TTSService {
 
-    private synth: SpeechSynthesis;
+    private readonly synth: SpeechSynthesis;
 
     constructor() {
         this.synth = window.speechSynthesis;
