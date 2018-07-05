@@ -22,15 +22,15 @@ export class MusicComponent implements OnInit {
     and switching to the second part;
     link for the spotify authentification
   */
-  setup: boolean;
-  setupStage2: boolean;
+  setup: boolean = true;
+  setupStage2: boolean = false;
   spotifyLink: string;
   
   //music-object for the play-function
   musicData: music;
 
   //bool for showing the current playlist
-  playlist: boolean;
+  playlist: boolean = false;
 
   /*
     -array of songs for the current playlist for display
@@ -57,7 +57,7 @@ export class MusicComponent implements OnInit {
   activeDeviceID: string;
   
   //bool to check if u paused or resumed the current song
-  playing: boolean;
+  playing: boolean = false;
 
   //output of the search request
   searchOutput: string;
@@ -71,10 +71,10 @@ export class MusicComponent implements OnInit {
   constructor(private databaseService: MusicDataService) { }
 
   ngOnInit() {
-    this.setup = true;
-    this.setupStage2 = false;
-    this.playing = false;
-    this.playlist = false;
+    //this.setup = true;
+    //this.setupStage2 = false;
+    //this.playing = false;
+    //this.playlist = false;
     this.musicData = new music;
 
     //array of songs from the current playlist for display
@@ -237,7 +237,6 @@ export class MusicComponent implements OnInit {
     requesting spotifys featured playlists
   */
   getPlaylistFeatured() {
-    this.playlist = true;
     this.databaseService.getPlaylist("featured")
     .subscribe((data : playlist[]) => this.playlistAllFeatured = [ ...data]);
   }
@@ -246,7 +245,6 @@ export class MusicComponent implements OnInit {
     requesting the users own playlists
   */
   getPlaylistUser() {
-    this.playlist = true;
     this.databaseService.getPlaylist("user")
     .subscribe((data : playlist[]) => this.playlistAllUser = [ ...data]);
   }
