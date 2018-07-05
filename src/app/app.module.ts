@@ -17,6 +17,7 @@ import {MatCardModule} from '@angular/material/card';
 import { HttpClientModule } from '@angular/common/http';
 import { Routes, RouterModule } from '@angular/router';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { ClockComponent } from './Plugins/Clock/Components/clock/clock.component';
@@ -63,6 +64,7 @@ const routes: Routes =[
     MatInputModule,
     MatCardModule,
     BrowserAnimationsModule,
+    FormsModule,
     MatSelectModule,
     MatCheckboxModule,
     MatToolbarModule,
