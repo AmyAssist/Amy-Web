@@ -2,28 +2,152 @@
   <span>Music</span>
 </mat-toolbar>
 
-<div class="musicSearch-container">
-  <mat-form-field>
-    <input matInput #artist placeholder="Artist">
-  </mat-form-field>
+<mat-accordion>
+  <mat-expansion-panel *ngIf=setup>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Setup
+      </mat-panel-title>
+      <mat-panel-description>
+        Richte deine Spotify-Verbindung ein.
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    
+    <div *ngIf=!setupStage2>
+      <mat-form-field>
+        <input matInput #clientID placeholder="ClientID">
+      </mat-form-field>
+    
+      <mat-form-field>
+        <input matInput #clientSecret placeholder="ClientSecret">
+      </mat-form-field>
+      
+      <button mat-button color="primary" (click)="setInit(clientID.value, clientSecret.value)">Absenden</button>
+    </div>
+    <div *ngIf=setupStage2>
+      <mat-card>Authentifikations-Link: {{spotifyLink}}</mat-card>
 
-  <mat-form-field>
-    <input matInput #song placeholder="Song">
-  </mat-form-field>
-</div>
-<button mat-raised-button color="primary" (click)="playSong(artist.value, song.value)">Play</button>
+      <mat-form-field>
+        <input matInput #accessToken placeholder="Access Token">
+      </mat-form-field>
+
+      <button mat-button color="primary" (click)="setToken(accessToken.value)">Absenden</button>
+    </div>
+  </mat-expansion-panel>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Play Song
+      </mat-panel-title>
+      <mat-panel-description>
+        Gib einen Song zum abspielen ein
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <mat-form-field>
+      <input matInput #artist placeholder="Artist">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput #song placeholder="Song">
+    </mat-form-field>
+
+    <button mat-icon-button color="primary" (click)="playSong(artist.value, song.value)">
+      <mat-icon>play_arrow</mat-icon>
+    </button>
+  </mat-expansion-panel>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Play Playlist
+      </mat-panel-title>
+      <mat-panel-description>
+        Wähle eine Playlist aus
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <mat-tab-group>
+      <mat-tab label="Featured Playlists">
+        <div *ngFor="let playlist of playlistAllFeatured; let i = index">
+          <mat-list-item role="listitem">
+              <mat-label>{{playlistAllFeatured[i].name}}</mat-label>
+              <button mat-icon-button color="primary" (click)="playPlaylist(playlistAllFeatured[i])">
+                <mat-icon>play_circle_outline</mat-icon>
+              </button>
+            </mat-list-item>
+        </div>
+      </mat-tab>
+      
+      <mat-tab label="Eigene Playlists">
+        <div *ngFor="let playlist of playlistAllUser; let i = index">
+          <mat-list-item role="listitem">
+              <mat-label>{{playlistAllUser[i].name}}</mat-label>
+              <button mat-icon-button color="primary" (click)="playPlaylist(playlistAllUser[i])">
+                <mat-icon>play_circle_outline</mat-icon>
+              </button>
+          </mat-list-item>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-expansion-panel>
+  
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Select Device
+      </mat-panel-title>
+      <mat-panel-description>
+        Wähle eine Gerät aus
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <mat-form-field>
+      <mat-select [(value)]="activeDeviceID">
+        <mat-option *ngFor="let device of deviceAll" value="device.id">
+          {{device.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button mat-icon-button color="primary" (click)="setDevice(activeDeviceID)">
+      <mat-icon>play_circle_outline</mat-icon>
+    </button>
+
+    <p>You selected: {{activeDeviceID}}</p>
+    
+  </mat-expansion-panel>
+</mat-accordion>
 
 <div>
-  <button mat-raised-button color="basic" (click)="getCurrentSong()">Aktueller Song</button>
-  <button mat-raised-button color="basic" (click)="getPlaylist()">Playlist</button>
+  <button mat-raised-button color="primary" (click)="getCurrentSong()">Aktueller Song</button>
+  
+  <button mat-icon-button color="primary" (click)="setBack()">
+    <mat-icon>fast_rewind</mat-icon>
+  </button>
+    <button mat-icon-button *ngIf=!playing color="primary" (click)="setResume()">
+      <mat-icon>play_arrow</mat-icon>
+    </button>   
+    <button mat-icon-button *ngIf=playing color="primary" (click)="setPause()">
+      <mat-icon>pause</mat-icon>
+    </button>
+  <button mat-icon-button color="primary" (click)="setSkip()">
+    <mat-icon>fast_forward</mat-icon>
+  </button>
+  <mat-slider 
+    [max]="volumeMax"
+    [min]="volumeMin"
+    [step]="volumeStep"
+    [(ngModel)]="volumeValue"
+    (change)="changeVolume(volumeValue)">
+  </mat-slider>
 </div>
 <div *ngIf=song>
   <mat-list role="list">
     <mat-list-item role="listitem">Interpret: {{musicData.artist}}</mat-list-item>
-    <mat-list-item role="listitem">Titel: {{musicData.titel}}</mat-list-item>
+    <mat-list-item role="listitem">Titel: {{musicData.title}}</mat-list-item>
   </mat-list>
 </div>
 <div *ngIf=playlist>
+  <mat-list-item role="listitem" >Playlist: {{musicPlaylistData.name}}</mat-list-item>
   <div *ngFor="let music of playlistSongs; let i = index">
     <mat-list role="list">
       <mat-list-item role="listitem" >Song: {{i +1}}</mat-list-item>

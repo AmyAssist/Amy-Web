@@ -14,6 +14,12 @@ import {MatInputModule} from '@angular/material/input';
 import {MatCardModule} from '@angular/material/card';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatIconModule} from '@angular/material/icon';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatSliderModule} from '@angular/material/slider';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 import {MusicComponent} from './music.component';
 
 import {MusicDataService} from '../../Services/music-data.service';
@@ -30,6 +36,12 @@ describe('MusicComponent', () => {
                 {provide: MusicDataService, useValue: spy}
             ],
             imports: [
+                MatExpansionModule,
+                MatIconModule,
+                MatTabsModule,
+                ReactiveFormsModule,
+                MatSliderModule,
+                FormsModule,
                 MatFormFieldModule,
                 MatButtonModule,
                 MatInputModule,
