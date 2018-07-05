@@ -32,9 +32,7 @@ describe('MusicComponent', () => {
         const spy = jasmine.createSpyObj('DatabaseService', ['getValue']);
         TestBed.configureTestingModule({
             declarations: [MusicComponent],
-            providers: [
-                {provide: MusicDataService, useValue: spy}
-            ],
+            
             imports: [
                 MatExpansionModule,
                 MatIconModule,
@@ -53,7 +51,10 @@ describe('MusicComponent', () => {
                 MatListModule,
                 MatGridListModule,
                 MatDividerModule,
-                BrowserAnimationsModule]
+                BrowserAnimationsModule],
+                providers: [
+                    {provide: MusicDataService, useValue: spy}
+                ]
         }).compileComponents();
     }));
 
