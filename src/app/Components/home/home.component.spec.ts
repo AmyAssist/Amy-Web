@@ -6,6 +6,7 @@ import {
 } from '@angular/material';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
 import { HomeComponent } from './home.component';
 import {DatabaseService} from '../../Services/database.service';
 
@@ -22,7 +23,8 @@ describe('HomeComponent', () => {
             MatToolbarModule,
             MatInputModule,
             MatFormFieldModule,
-            BrowserAnimationsModule
+            BrowserAnimationsModule,
+            FormsModule
       ],
       providers: [
       { provide: DatabaseService, useValue: spy }
