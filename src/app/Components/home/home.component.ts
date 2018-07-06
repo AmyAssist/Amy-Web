@@ -32,8 +32,8 @@ import {
 })
 export class HomeComponent implements OnInit {
 
-    srState: string = 'inactive';
-    commandTextValue: string = '';
+    srState = 'inactive';
+    commandTextValue = '';
     commandData: command;
     constructor(private readonly databaseService: DatabaseService, private readonly ttsService: TTSService, private readonly speechRecognitionService: SpeechRecognitionService) {}
 

@@ -16,9 +16,7 @@ declare class webkitSpeechRecognition extends SpeechRecognition {
     constructor();
 }
 
-interface callback {
-    (result: string): void;
-}
+type Callback = (result: string) => void;
 
 /**
  *   Service as abstraction of the SpeechSynthesis API of the browser
@@ -29,19 +27,19 @@ interface callback {
 export class SpeechRecognitionService {
 
     private readonly sr: SpeechRecognition;
-    private activeCallbacks: Array<callback> = [];
+    private activeCallbacks: Array<Callback> = [];
 
-    constructor(private ref: ApplicationRef) {
+    constructor(private readonly ref: ApplicationRef) {
         this.sr = new webkitSpeechRecognition();
         this.sr.lang = 'en-US';
         this.sr.onspeechend = () => {
             this.sr.stop();
-        }
+        };
         this.sr.onresult = this.onresult.bind(this);
     }
 
-    recognize(callback: callback) {
-        this.activeCallbacks.push(callback);
+    recognize(callbackFunc: Callback) {
+        this.activeCallbacks.push(callbackFunc);
         this.sr.start();
     }
 
@@ -49,8 +47,8 @@ export class SpeechRecognitionService {
         const last = event.results.length - 1;
         const text: string = event.results[last][0].transcript;
 
-        for (const callback of this.activeCallbacks) {
-            callback(text);
+        for (const callbackFunc of this.activeCallbacks) {
+            callbackFunc(text);
         }
         this.activeCallbacks = [];
         this.ref.tick();
