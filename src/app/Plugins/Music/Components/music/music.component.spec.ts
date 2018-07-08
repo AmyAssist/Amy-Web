@@ -53,7 +53,9 @@ describe('MusicComponent', () => {
                 MatDividerModule,
                 BrowserAnimationsModule],
                 providers: [
-                    {provide: MusicDataService, useValue: spy}
+                    {provide: MusicDataService
+                        , useValue: spy
+                    }
                 ]
         }).compileComponents();
     }));

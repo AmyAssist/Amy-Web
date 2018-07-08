@@ -75,6 +75,7 @@
               </button>
             </mat-list-item>
         </div>
+        <button mat-raised-button color="primary" (click)="getPlaylistFeatured()">Aktualisieren</button>
       </mat-tab>
       
       <mat-tab label="Eigene Playlists">
@@ -86,6 +87,7 @@
               </button>
           </mat-list-item>
         </div>
+        <button mat-raised-button color="primary" (click)="getPlaylistUser()">Aktualisieren</button>
       </mat-tab>
     </mat-tab-group>
   </mat-expansion-panel>
@@ -102,7 +104,7 @@
 
     <mat-form-field>
       <mat-select [(value)]="activeDeviceID">
-        <mat-option *ngFor="let device of deviceAll" value="device.id">
+        <mat-option *ngFor="let device of deviceAll" value="device?.id">
           {{device.name}}
         </mat-option>
       </mat-select>
@@ -114,6 +116,7 @@
 
     <p>You selected: {{activeDeviceID}}</p>
     
+    <button mat-raised-button color="primary" (click)="getDevs()">Aktualisieren</button>
   </mat-expansion-panel>
 </mat-accordion>
 

@@ -68,13 +68,15 @@ export class MusicComponent implements OnInit {
   volumeStep = 1;
   volumeValue = 0;
   
-  constructor(private databaseService: MusicDataService) { }
+  constructor(private readonly musicService: MusicDataService) { }
 
   ngOnInit() {
     //this.setup = true;
     //this.setupStage2 = false;
     //this.playing = false;
     //this.playlist = false;
+
+    console.log(this.musicService);
     this.musicData = new music;
 
     //array of songs from the current playlist for display
@@ -113,7 +115,7 @@ export class MusicComponent implements OnInit {
       this.deviceData
     );
 
-    this.getDevices();
+    this.getDevs();
     this.getPlaylistFeatured();
     this.getPlaylistUser();
     this.getCurrentSong();
@@ -124,7 +126,7 @@ export class MusicComponent implements OnInit {
   */
   setInit(clientID: string, clientSecret: string){
     this.setupStage2 = true;
-    this.databaseService.setInit(clientID, clientSecret)
+    this.musicService.setInit(clientID, clientSecret)
       .subscribe((data: string) => this.spotifyLink = data);
     
   }
@@ -133,7 +135,7 @@ export class MusicComponent implements OnInit {
     method for setting the access-token for the spotify-connection
   */
   setToken(token: string){
-    this.databaseService.setToken(token)
+    this.musicService.setToken(token)
       .subscribe();
     this.setup = false;
     this.setupStage2 = false;
@@ -143,7 +145,7 @@ export class MusicComponent implements OnInit {
     getting the current playing song
   */
   getCurrentSong() {
-    this.databaseService.getCurrentSong()
+    this.musicService.getCurrentSong()
       .subscribe((data: music) => this.musicData = { ...data});
       
   }
@@ -152,7 +154,7 @@ export class MusicComponent implements OnInit {
     sending a search request
   */
   search(searchValue: string, searchType: string){
-    this.databaseService.search(searchValue, searchType)
+    this.musicService.search(searchValue, searchType)
       .subscribe((data: string) => this.searchOutput = data);
   }
 
@@ -160,7 +162,7 @@ export class MusicComponent implements OnInit {
     resuming the paused song
   */
   setResume(){
-    this.databaseService.resume()
+    this.musicService.resume()
       .subscribe();
     this.playing = true;
   }
@@ -169,7 +171,7 @@ export class MusicComponent implements OnInit {
     pausing the playing song
   */
   setPause(){
-    this.databaseService.pause()
+    this.musicService.pause()
       .subscribe();
     this.playing = false;
   }
@@ -178,7 +180,7 @@ export class MusicComponent implements OnInit {
     skipping the playing song
   */
   setSkip(){
-    this.databaseService.skip()
+    this.musicService.skip()
       .subscribe();
   }
 
@@ -186,7 +188,7 @@ export class MusicComponent implements OnInit {
     returning to the previous song
   */
   setBack(){
-    this.databaseService.back()
+    this.musicService.back()
       .subscribe();
   }
 
@@ -194,7 +196,7 @@ export class MusicComponent implements OnInit {
     setting the volume
   */
   changeVolume(volumeData: number){
-    this.databaseService.setVolume(volumeData)
+    this.musicService.setVolume(volumeData)
       .subscribe();
   }
 
@@ -204,7 +206,7 @@ export class MusicComponent implements OnInit {
   playSong(artist: string, title: string) {
     this.musicData.artist = artist;
     this.musicData.title = title;
-    this.databaseService.playSong(this.musicData).subscribe();
+    this.musicService.playSong(this.musicData).subscribe();
     this.playlist = false;
     this.playing = true;
   }
@@ -213,7 +215,7 @@ export class MusicComponent implements OnInit {
     playing a playlist out of the displayed ones
   */
   playPlaylist(playlistNumber: Number, playlistType: string) {
-    this.databaseService.playPlaylist(playlistNumber, playlistType).subscribe(playlist => this.musicPlaylistData = playlist);
+    this.musicService.playPlaylist(playlistNumber, playlistType).subscribe(playlist => this.musicPlaylistData = playlist);
     this.playlistSongs = this.musicPlaylistData.songs;
     this.playlist = true;
     this.playing = true;
@@ -222,22 +224,22 @@ export class MusicComponent implements OnInit {
   /*
     getting all the available devices
   */
-  getDevices(){
-    this.databaseService.getDevices().subscribe((data: device[]) => this.deviceAll = [ ...data]);
+  getDevs(){
+    this.musicService.getDevices().subscribe((data: device[]) => this.deviceAll = [ ...data]);
   }
 
   /*
     selecting a device to play music on
   */
   setDevice(deviceID: number){
-    this.databaseService.setDevice(deviceID).subscribe((data: string) => this.activeDevice = data);
+    this.musicService.setDevice(deviceID).subscribe((data: string) => this.activeDevice = data);
   }
 
   /*
     requesting spotifys featured playlists
   */
   getPlaylistFeatured() {
-    this.databaseService.getPlaylist("featured")
+    this.musicService.getPlaylist("featured")
     .subscribe((data : playlist[]) => this.playlistAllFeatured = [ ...data]);
   }
 
@@ -245,7 +247,7 @@ export class MusicComponent implements OnInit {
     requesting the users own playlists
   */
   getPlaylistUser() {
-    this.databaseService.getPlaylist("user")
+    this.musicService.getPlaylist("user")
     .subscribe((data : playlist[]) => this.playlistAllUser = [ ...data]);
   }
 }
