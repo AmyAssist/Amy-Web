@@ -71,7 +71,7 @@ export class MusicDataService {
     Returns the device that is selected
   */
   setDevice(deviceId: number){
-    return this.http.post(this.path + 'deviceValue/' + deviceId, null).pipe(
+    return this.http.post(this.path + 'setDevice/' + deviceId, null).pipe(
       catchError(this.handleError));
   }
 
@@ -103,7 +103,7 @@ export class MusicDataService {
   /*
     giving a command to play a playlist.
   */
-  playPlaylist(playlistData: Number, playlistType: string): Observable<playlist>{
+  playPlaylist(playlistData: number, playlistType: string): Observable<playlist>{
     const params = new HttpParams().set('songNumber', playlistData.toString());
     params.set('type', playlistType);
 
@@ -141,7 +141,7 @@ export class MusicDataService {
     param: type, decides which type of playlists will be loaded, featured or user
   */
   getPlaylist(type: string){
-    return this.http.get<playlist[]>(this.path + 'playlist/' + type, this.httpOptions).pipe(
+    return this.http.post<playlist[]>(this.path + 'playlists/' + type, null).pipe(
       catchError(this.handleError));
   }
 }
