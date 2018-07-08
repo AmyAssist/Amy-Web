@@ -1,5 +1,7 @@
-export class command{
+export class Command {
     value: string;
-    
-    constructor() {}
+
+    constructor(command: string) {
+        this.value = command;
+    }
 }

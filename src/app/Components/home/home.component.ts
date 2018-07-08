@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {DatabaseService} from '../../Services/database.service';
 import {TTSService} from '../../Services/tts.service';
 import {SpeechRecognitionService} from '../../Services/speechrecognition.service';
-import {command} from '../../Objects/command';
+import {Command} from '../../Objects/command';
 import {
     trigger,
     state,
@@ -10,6 +10,14 @@ import {
     animate,
     transition
 } from '@angular/animations';
+import {ErrorStateMatcher} from '@angular/material/core';
+
+export class CommandErrorStateMatcher implements ErrorStateMatcher {
+    error = false;
+    isErrorState(control, form) {
+        return this.error;
+    }
+}
 
 @Component({
     selector: 'app-home',
@@ -30,23 +38,28 @@ import {
         ])
     ]
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
 
     srState = 'inactive';
     commandTextValue = '';
-    commandData: command;
+    response: string;
+    errorStateMatcher = new CommandErrorStateMatcher();
+
     constructor(private readonly databaseService: DatabaseService, private readonly ttsService: TTSService, private readonly speechRecognitionService: SpeechRecognitionService) {}
 
-    ngOnInit() {
-        this.commandData = new command;
-    }
 
     /*
       Sending typed command to the backend-service for general functions.
     */
     sendCommand(commandValue: string) {
-        this.commandData.value = commandValue;
-        this.databaseService.sendCommand(this.commandData);
+        const commandData = new Command(commandValue);
+        this.databaseService.sendCommand(commandData).subscribe(r => {
+            this.response = r;
+            this.errorStateMatcher.error = false;
+        }, error => {
+            this.response = null;
+            this.errorStateMatcher.error = true;
+        });
     }
 
     /**

@@ -7,7 +7,8 @@ import {
   MatGridListModule, 
   MatMenuModule, 
   MatListModule,
-  MatDividerModule
+  MatDividerModule,
+  MatIconModule
 } from '@angular/material';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
@@ -72,6 +73,7 @@ const routes: Routes =[
     MatListModule,
     MatGridListModule,
     MatDividerModule,
+    MatIconModule,
     HttpClientModule,
     RouterModule.forRoot(routes)
   ],
