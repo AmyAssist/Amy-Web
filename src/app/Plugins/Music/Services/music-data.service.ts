@@ -103,7 +103,7 @@ export class MusicDataService {
   /*
     giving a command to play a playlist.
   */
-  playPlaylist(playlistData: number, playlistType: string): Observable<playlist>{
+  playPlaylist(playlistData: Number, playlistType: string): Observable<playlist>{
     const params = new HttpParams().set('songNumber', playlistData.toString());
     params.set('type', playlistType);
 
