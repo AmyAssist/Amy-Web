@@ -19,7 +19,7 @@ export class ClockComponent implements OnInit {
   /*
     Providing the data-service for the clock-component
   */
-  constructor(private databaseService: ClockDataService) { }
+  constructor(private clockService: ClockDataService) { }
 
   ngOnInit() {
     this.clockData = new Array<clock>();
@@ -30,7 +30,7 @@ export class ClockComponent implements OnInit {
     Fetching all alarms from the service
   */
   getAlarms() {
-    this.databaseService.getAlarms()
+    this.clockService.getAlarms()
     .subscribe((data : clock[]) => this.clockData = [ ...data]);
   }
 
@@ -40,7 +40,7 @@ export class ClockComponent implements OnInit {
   setAlarm(hour: number, minute: number) {
     this.newClockData.hour = hour;
     this.newClockData.minute = minute;
-    this.databaseService.setNewAlarm(this.newClockData).subscribe();
+    this.clockService.setNewAlarm(this.newClockData).subscribe();
     this.getAlarms();
   }
 

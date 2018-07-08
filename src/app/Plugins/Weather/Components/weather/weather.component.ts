@@ -17,7 +17,7 @@ export class WeatherComponent implements OnInit {
   tommorow: boolean;
   week: boolean;
 
-  constructor(private databaseService: WeatherDataService) { }
+  constructor(private weatherService: WeatherDataService) { }
 
   ngOnInit() {
     this.weatherToday = new weather();
@@ -32,7 +32,7 @@ export class WeatherComponent implements OnInit {
     this.today = true;
     this.tommorow = false;
     this.week = false;
-    this.databaseService.getWeatherToday()
+    this.weatherService.getWeatherToday()
     .subscribe((data : weather) => this.weatherToday = { ...data});
   }
 
@@ -40,7 +40,7 @@ export class WeatherComponent implements OnInit {
     this.today = false;
     this.tommorow = true;
     this.week = false;
-    this.databaseService.getWeatherTomorrow()
+    this.weatherService.getWeatherTomorrow()
     .subscribe((data : weather) => this.weatherTomorrow = { ...data});
   }
 
@@ -48,7 +48,7 @@ export class WeatherComponent implements OnInit {
     this.today = false;
     this.tommorow = false;
     this.week = true;
-    this.databaseService.getWeatherWeek()
+    this.weatherService.getWeatherWeek()
     .subscribe((data : weatherWeek) => this.weatherWeekData = { ...data});
   }
 }

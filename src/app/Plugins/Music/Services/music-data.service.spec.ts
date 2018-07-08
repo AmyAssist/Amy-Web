@@ -8,7 +8,9 @@ describe('MusicDataService', () => {
       httpClientSpy = jasmine.createSpyObj('HttpClient', ['get']);
     TestBed.configureTestingModule({
       providers: [MusicDataService,
-      {provide: HttpClient, useValue: httpClientSpy}]
+      {provide: HttpClient
+        ,useValue: httpClientSpy
+      }]
     });
   });
 
