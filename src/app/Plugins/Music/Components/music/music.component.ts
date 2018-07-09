@@ -82,9 +82,10 @@ export class MusicComponent implements OnInit {
     //array of songs from the current playlist for display
     this.playlistSongs = new Array<music>();
     
-    //testPlaylist, will be removed
+    this.playlistAllFeatured = new Array<playlist>();
+    
+    /* testPlaylist, will be removed
     this.musicPlaylistData = new playlist("testplaylistFeatured");
-    //this.playlistAllFeatured = new Array<playlist>();
     this.playlistAllFeatured = Array(
       this.musicPlaylistData, 
       this.musicPlaylistData, 
@@ -92,10 +93,13 @@ export class MusicComponent implements OnInit {
       this.musicPlaylistData, 
       this.musicPlaylistData
     );
+    */
     
-    //testPlaylist, will be removed
+    
+    this.playlistAllUser = new Array<playlist>();
+    
+    /* testPlaylist, will be removed
     this.musicPlaylistData2 = new playlist("testplaylistUser");
-    //this.playlistAllUser = new Array<playlist>();
     this.playlistAllUser = Array(
       this.musicPlaylistData2, 
       this.musicPlaylistData2, 
@@ -103,10 +107,12 @@ export class MusicComponent implements OnInit {
       this.musicPlaylistData2, 
       this.musicPlaylistData2
     );
+    */
     
-    //testDevices, will be removed
+    this.deviceAll = new Array<device>();
+    
+    /* testDevices, will be removed
     this.deviceData = new device("testDevice");
-    //this.deviceAll = new Array<device>();
     this.deviceAll = Array(
       this.deviceData,
       this.deviceData,
@@ -114,10 +120,11 @@ export class MusicComponent implements OnInit {
       this.deviceData,
       this.deviceData
     );
+    */
 
-    this.getDevs();
-    this.getPlaylistFeatured();
-    this.getPlaylistUser();
+    //this.getDevs();
+    //this.getPlaylistFeatured();
+    //this.getPlaylistUser();
     this.getCurrentSong();
   }
 
@@ -214,8 +221,24 @@ export class MusicComponent implements OnInit {
   /*
     playing a playlist out of the displayed ones
   */
-  playPlaylist(playlistNumber: Number, playlistType: string) {
-    this.musicService.playPlaylist(playlistNumber, playlistType).subscribe(playlist => this.musicPlaylistData = playlist);
+  playPlaylistUser(id: number){
+    this.playPlaylist(id, "user");
+    //this.getCurrentSong();
+  }
+
+  playPlaylistFeatured(id: number){
+    this.playPlaylist(id, "featured");
+    //this.getCurrentSong();
+  }
+
+  playPlaylist(playlistNumber: number, playlistType: string) {
+    this.musicService.playPlaylist(playlistNumber, playlistType).subscribe();
+    //playlist => this.musicPlaylistData = playlist
+    if(playlistType== "user"){
+      this.musicPlaylistData = this.playlistAllUser[playlistNumber];
+    }else{
+      this.musicPlaylistData = this.playlistAllFeatured[playlistNumber];
+    }
     this.playlistSongs = this.musicPlaylistData.songs;
     this.playlist = true;
     this.playing = true;
@@ -239,15 +262,13 @@ export class MusicComponent implements OnInit {
     requesting spotifys featured playlists
   */
   getPlaylistFeatured() {
-    this.musicService.getPlaylist("featured")
-    .subscribe((data : playlist[]) => this.playlistAllFeatured = [ ...data]);
+    this.musicService.getPlaylist("featured").subscribe((data : playlist[]) => this.playlistAllFeatured = [ ...data]);
   }
 
   /*
     requesting the users own playlists
   */
   getPlaylistUser() {
-    this.musicService.getPlaylist("user")
-    .subscribe((data : playlist[]) => this.playlistAllUser = [ ...data]);
+    this.musicService.getPlaylist("user").subscribe((data : playlist[]) => this.playlistAllUser = [ ...data]);
   }
 }

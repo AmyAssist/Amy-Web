@@ -70,7 +70,7 @@
         <div *ngFor="let playlist of playlistAllFeatured; let i = index">
           <mat-list-item role="listitem">
               <mat-label>{{playlistAllFeatured[i].name}}</mat-label>
-              <button mat-icon-button color="primary" (click)="playPlaylist(playlistAllFeatured[i])">
+              <button mat-icon-button color="primary" (click)="playPlaylistFeatured(i)">
                 <mat-icon>play_circle_outline</mat-icon>
               </button>
             </mat-list-item>
@@ -82,7 +82,7 @@
         <div *ngFor="let playlist of playlistAllUser; let i = index">
           <mat-list-item role="listitem">
               <mat-label>{{playlistAllUser[i].name}}</mat-label>
-              <button mat-icon-button color="primary" (click)="playPlaylist(playlistAllUser[i])">
+              <button mat-icon-button color="primary" (click)="playPlaylistUser(i)">
                 <mat-icon>play_circle_outline</mat-icon>
               </button>
           </mat-list-item>
@@ -104,7 +104,7 @@
 
     <mat-form-field>
       <mat-select [(value)]="activeDeviceID">
-        <mat-option *ngFor="let device of deviceAll" value="device?.id">
+        <mat-option *ngFor="let device of deviceAll; let i = index" value={{deviceAll[i].id}}>
           {{device.name}}
         </mat-option>
       </mat-select>
@@ -151,11 +151,11 @@
 </div>
 <div *ngIf=playlist>
   <mat-list-item role="listitem" >Playlist: {{musicPlaylistData.name}}</mat-list-item>
-  <div *ngFor="let music of playlistSongs; let i = index">
-    <mat-list role="list">
-      <mat-list-item role="listitem" >Song: {{i +1}}</mat-list-item>
-      <mat-list-item role="listitem" >Interpret: {{music.artist}}</mat-list-item>
-      <mat-list-item role="listitem" >Titel: {{music.title}}</mat-list-item>
+    <mat-list>
+      <mat-list-item *ngFor="let music of playlistSongs; let i = index"> 
+        <p matLine>Song: {{i +1}}</p>
+        <p matLine>Interpret: {{music.artist}}</p>
+        <p matLine>Titel: {{music.title}}</p>
+      </mat-list-item>
     </mat-list>
-  </div>
 </div>

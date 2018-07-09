@@ -50,10 +50,11 @@ export class MusicDataService {
     clientID = clientID.trim();
     clientSecret = clientSecret.trim();
 
-    const params = new HttpParams().set('clientID', clientID);
-    params.set('clientSecret', clientSecret);
+    let params = new HttpParams();
+    params = params.append('clientID', clientID);
+    params = params.append('clientSecret', clientSecret);
 
-    return this.http.post(this.path + 'init', null, {params}).pipe(
+    return this.http.post(this.path + 'init', null, {params: params}).pipe(
       catchError(this.handleError));
   }
 
@@ -71,7 +72,7 @@ export class MusicDataService {
     Returns the device that is selected
   */
   setDevice(deviceId: number){
-    return this.http.post(this.path + 'setDevice/' + deviceId, null).pipe(
+    return this.http.post(this.path + 'setDevice/' + deviceId.toString(), null).pipe(
       catchError(this.handleError));
   }
 
@@ -84,9 +85,9 @@ export class MusicDataService {
   }
 
   search(searchValue: string, searchType: string){
-    const params = new HttpParams().set('type', searchType);
+    let params = new HttpParams().set('type', searchType);
 
-    return this.http.post(this.path + 'search/' + searchValue, null, {params}).pipe(
+    return this.http.post(this.path + 'search/' + searchValue, null, {params: params}).pipe(
       catchError(this.handleError));
   }
 
@@ -94,9 +95,9 @@ export class MusicDataService {
     giving a command to play a song.
   */
   playSong(musicData: music): Observable<music>{
-    const params = new HttpParams().set('type', 'track');
+    let params = new HttpParams().set('type', 'track');
 
-    return this.http.post<music>(this.path + 'play', musicData, {params}).pipe(
+    return this.http.post<music>(this.path + 'play', musicData, {params: params}).pipe(
       catchError(this.handleError));
   }
 
@@ -104,10 +105,11 @@ export class MusicDataService {
     giving a command to play a playlist.
   */
   playPlaylist(playlistData: Number, playlistType: string): Observable<playlist>{
-    const params = new HttpParams().set('songNumber', playlistData.toString());
-    params.set('type', playlistType);
+    let params = new HttpParams();
+    params = params.append('songNumber', playlistData.toString());
+    params = params.append('type', playlistType);
 
-    return this.http.post<playlist>(this.path + 'play', null, {params}).pipe(
+    return this.http.post<playlist>(this.path + 'play', null, {params: params}).pipe(
       catchError(this.handleError));
   }
 
