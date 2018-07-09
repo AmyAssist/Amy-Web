@@ -19,6 +19,7 @@ export class TTSService {
      */
     speak(text: string) {
         const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'en-US';
         this.synth.speak(utterance);
     }
 }
