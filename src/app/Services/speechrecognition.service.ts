@@ -12,7 +12,7 @@ declare class SpeechRecognition {
     stop(): void;
     abort(): void;
 }
-declare class WebkitSpeechRecognition extends SpeechRecognition {
+declare class webkitSpeechRecognition extends SpeechRecognition {
     constructor();
 }
 
@@ -30,7 +30,7 @@ export class SpeechRecognitionService {
     private activeCallbacks: Array<Callback> = [];
 
     constructor(private readonly ref: ApplicationRef) {
-        this.sr = new WebkitSpeechRecognition();
+        this.sr = new webkitSpeechRecognition();
         this.sr.lang = 'en-US';
         this.sr.onspeechend = () => {
             this.sr.stop();
