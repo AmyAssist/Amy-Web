@@ -1,14 +1,14 @@
 import { TestBed, inject } from '@angular/core/testing';
-import {HttpClient} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { ClockDataService } from './clock-data.service';
 
 describe('ClockDataService', () => {
-    let httpClientSpy: {get: jasmine.Spy};
+  let httpClientSpy: { get: jasmine.Spy };
   beforeEach(() => {
-       httpClientSpy = jasmine.createSpyObj('HttpClient', ['get']);
+    httpClientSpy = jasmine.createSpyObj('HttpClient', ['get']);
     TestBed.configureTestingModule({
       providers: [ClockDataService,
-      {provide: HttpClient, useValue: httpClientSpy}]
+        { provide: HttpClient, useValue: httpClientSpy }]
     });
   });
 

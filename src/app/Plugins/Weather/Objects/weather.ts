@@ -1,4 +1,4 @@
-export class weather{
+export class Weather {
     search: string;
     preamble: string;
     summary: string;
@@ -8,6 +8,5 @@ export class weather{
     temperatureMax: number;
     sunriseTime: string;
     sunsetTime: string;
-    
-    constructor() {}
+    constructor() { }
 }

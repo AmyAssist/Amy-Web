@@ -1,9 +1,9 @@
-export class device{
+export class Device {
     name: string;
     type: string;
-    //name: string;
+    // name: string;
     id: string;
-    
+
     constructor(name: string) {
         this.name = name;
     }

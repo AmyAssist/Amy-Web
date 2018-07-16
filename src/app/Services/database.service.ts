@@ -1,9 +1,9 @@
 import { Injectable, ErrorHandler, Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { Observable, throwError} from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { map, retry } from 'rxjs/operators';
 
-import {Command} from '../Objects/command';
+import { Command } from '../Objects/command';
 
 
 /*
@@ -15,7 +15,7 @@ import {Command} from '../Objects/command';
 export class DatabaseService {
 
     path: string;
-  
+
     httpOptions = {
         headers: new HttpHeaders({
             'Content-Type': 'text/plain'

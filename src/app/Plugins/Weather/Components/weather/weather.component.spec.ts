@@ -1,4 +1,4 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import {
     MatButtonModule,
@@ -9,14 +9,14 @@ import {
     MatListModule,
     MatDividerModule
 } from '@angular/material';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatSelectModule} from '@angular/material/select';
-import {MatInputModule} from '@angular/material/input';
-import {MatCardModule} from '@angular/material/card';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
+import { MatCardModule } from '@angular/material/card';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import {WeatherComponent} from './weather.component';
-import {WeatherDataService} from '../../Services/weather-data.service';
+import { WeatherComponent } from './weather.component';
+import { WeatherDataService } from '../../Services/weather-data.service';
 
 describe('WeatherComponent', () => {
     let component: WeatherComponent;
@@ -27,7 +27,7 @@ describe('WeatherComponent', () => {
         TestBed.configureTestingModule({
             declarations: [WeatherComponent],
             providers: [
-                {provide: WeatherDataService, useValue: spy}
+                { provide: WeatherDataService, useValue: spy }
             ],
             imports: [
                 MatFormFieldModule,

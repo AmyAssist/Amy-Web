@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { clock } from '../Objects/clock';
-import { Observable, throwError} from 'rxjs';
-import {map, catchError} from 'rxjs/operators';
+import { Clock } from '../Objects/clock';
+import { Observable, throwError } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +13,7 @@ export class ClockDataService {
 
   httpOptions = {
     headers: new HttpHeaders({
-      'Content-Type':  'application/json'
+      'Content-Type': 'application/json'
     })
   };
 
@@ -31,25 +31,25 @@ export class ClockDataService {
     // return an observable with a user-facing error message
     return throwError(
       'Something bad happened; please try again later.');
-  };
+  }
 
-  constructor(private http: HttpClient) { 
-    this.path = 'http://localhost:8080/rest/clock/'; //Path for all Data concerning the clock-plugin
+  constructor(private http: HttpClient) {
+    this.path = 'http://localhost:8080/rest/clock/'; // Path for all Data concerning the clock-plugin
   }
 
   /*
     Getting all from Rest-Backend Alarms.
   */
   getAlarms() {
-    return this.http.get<clock[]>(this.path + 'alarms', this.httpOptions).pipe(
+    return this.http.get<Clock[]>(this.path + 'alarms', this.httpOptions).pipe(
       catchError(this.handleError));
   }
 
   /*
     Sending a new Alarm to the REST-Backend.
   */
-  setNewAlarm(clockData: clock): Observable<clock> {
-    return this.http.post<clock>(this.path + 'alarms/new', clockData, this.httpOptions).pipe(
+  setNewAlarm(clockData: Clock): Observable<Clock> {
+    return this.http.post<Clock>(this.path + 'alarms/new', clockData, this.httpOptions).pipe(
       catchError(this.handleError));
   }
 }

@@ -6,7 +6,7 @@
                 <textarea matInput #command [(ngModel)]="commandTextValue" placeholder="Befehl" [errorStateMatcher]="errorStateMatcher"></textarea>
             </mat-form-field>
             <button mat-icon-button color="basic" [@srState]="srState" (click)="speechRecognition()">
-                    <mat-icon>keyboard_voice</mat-icon>
+                <mat-icon>keyboard_voice</mat-icon>
             </button>
         </section>
         <section *ngIf="response">
@@ -23,6 +23,3 @@
         <button mat-button color="basic" (click)="sendCommand(command.value)">SENDEN</button>
     </mat-card-actions>
 </mat-card>
-
-
-
