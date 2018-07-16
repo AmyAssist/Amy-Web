@@ -8,7 +8,7 @@ import {
   MatMenuModule, 
   MatListModule,
   MatDividerModule,
-  MatIconModule
+
 } from '@angular/material';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
@@ -18,7 +18,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatIconModule} from '@angular/material/icon';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatSliderModule} from '@angular/material/slider';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 
 import { HttpClientModule} from '@angular/common/http';
 import { Routes, RouterModule } from '@angular/router';
