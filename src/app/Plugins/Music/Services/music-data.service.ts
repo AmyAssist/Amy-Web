@@ -71,7 +71,7 @@ export class MusicDataService {
   /*
     Returns the device that is selected
   */
-  setDevice(deviceId: number){
+  setDevice(deviceId: string){
     return this.http.post(this.path + 'setDevice/' + deviceId.toString(), null).pipe(
       catchError(this.handleError));
   }

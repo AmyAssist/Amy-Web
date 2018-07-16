@@ -31,7 +31,7 @@ import { MusicComponent } from './Plugins/Music/Components/music/music.component
 import { WeatherComponent } from './Plugins/Weather/Components/weather/weather.component';
 import { HomeComponent } from './Components/home/home.component';
 import { CalendarComponent } from './Plugins/Calendar/Components/calendar/calendar.component';
-import { NavigationComponent } from './plugins/Navigation/Components/navigation/navigation.component';
+import { NavigationComponent } from './Plugins/Navigation/Components/navigation/navigation.component';
 
 /*
     Routing of the components to the respective links

@@ -254,7 +254,7 @@ export class MusicComponent implements OnInit {
   /*
     selecting a device to play music on
   */
-  setDevice(deviceID: number){
+  setDevice(deviceID: string){
     this.musicService.setDevice(deviceID).subscribe((data: string) => this.activeDevice = data);
   }
 
