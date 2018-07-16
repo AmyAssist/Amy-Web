@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { WeatherDataService } from '../../Services/weather-data.service';
-import { weather } from '../../Objects/weather'
-import { weatherWeek } from '../../Objects/weatherWeek';
+import { Weather } from '../../Objects/weather';
+import { WeatherWeek } from '../../Objects/weatherWeek';
 
 @Component({
   selector: 'app-weather',
@@ -10,19 +10,19 @@ import { weatherWeek } from '../../Objects/weatherWeek';
 })
 export class WeatherComponent implements OnInit {
 
-  weatherToday: weather;
-  weatherTomorrow: weather;
-  weatherWeekData: weatherWeek;
+  weatherToday: Weather;
+  weatherTomorrow: Weather;
+  weatherWeekData: WeatherWeek;
   today: boolean;
   tommorow: boolean;
   week: boolean;
 
-  constructor(private databaseService: WeatherDataService) { }
+  constructor(private weatherService: WeatherDataService) { }
 
   ngOnInit() {
-    this.weatherToday = new weather();
-    this.weatherTomorrow = new weather();
-    this.weatherWeekData = new weatherWeek();
+    this.weatherToday = new Weather();
+    this.weatherTomorrow = new Weather();
+    this.weatherWeekData = new WeatherWeek();
     this.today = false;
     this.tommorow = false;
     this.week = false;
@@ -32,23 +32,23 @@ export class WeatherComponent implements OnInit {
     this.today = true;
     this.tommorow = false;
     this.week = false;
-    this.databaseService.getWeatherToday()
-    .subscribe((data : weather) => this.weatherToday = { ...data});
+    this.weatherService.getWeatherToday()
+      .subscribe((data: Weather) => this.weatherToday = { ...data });
   }
 
   getWeatherTomorrow() {
     this.today = false;
     this.tommorow = true;
     this.week = false;
-    this.databaseService.getWeatherTomorrow()
-    .subscribe((data : weather) => this.weatherTomorrow = { ...data});
+    this.weatherService.getWeatherTomorrow()
+      .subscribe((data: Weather) => this.weatherTomorrow = { ...data });
   }
 
   getWeatherWeek() {
     this.today = false;
     this.tommorow = false;
     this.week = true;
-    this.databaseService.getWeatherWeek()
-    .subscribe((data : weatherWeek) => this.weatherWeekData = { ...data});
+    this.weatherService.getWeatherWeek()
+      .subscribe((data: WeatherWeek) => this.weatherWeekData = { ...data });
   }
 }

@@ -1,8 +1,11 @@
-import { music } from '../Objects/music'
+import { Music } from '../Objects/music';
 
-export class playlist{
+export class Playlist {
     name: string;
-    songs: Array<music>;
-    
-    constructor() {}
+    songs: Music[];
+    uri: string;
+    imageUrl: string;
+
+    constructor() { }
+
 }

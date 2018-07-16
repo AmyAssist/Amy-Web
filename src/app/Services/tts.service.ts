@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 
 /**
  *   Service as abstraction of the SpeechSynthesis API of the browser

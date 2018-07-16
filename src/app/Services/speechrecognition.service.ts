@@ -1,13 +1,13 @@
-import {Injectable, ApplicationRef} from '@angular/core';
+import { Injectable, ApplicationRef } from '@angular/core';
 
-interface result extends Event {
+interface Result extends Event {
     readonly results: any;
 }
 
 declare class SpeechRecognition {
     lang: string;
     onspeechend: () => void;
-    onresult: (event: result) => void;
+    onresult: (event: Result) => void;
     start(): void;
     stop(): void;
     abort(): void;
@@ -43,7 +43,7 @@ export class SpeechRecognitionService {
         this.sr.start();
     }
 
-    private onresult(event: result) {
+    private onresult(event: Result) {
         const last = event.results.length - 1;
         const text: string = event.results[last][0].transcript;
 

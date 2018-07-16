@@ -6,3 +6,7 @@
   .musicSearch-container > * {
     width: 100%;
   }
+
+  mat-slider {
+    width: 300px;
+  }

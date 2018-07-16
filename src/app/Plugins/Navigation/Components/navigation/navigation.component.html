@@ -1,0 +1,18 @@
+<mat-toolbar>
+  <span>Navigation</span>
+</mat-toolbar>
+
+
+<mat-form-field>
+  <input matInput #from placeholder="From:">
+</mat-form-field>
+
+<mat-form-field>
+  <input matInput #to placeholder="To:">
+</mat-form-field>
+
+<button mat-raised-button color="primary" (click)="searchWay(from.value, to.value)">Search</button>
+
+<div *ngIf="showWay">
+  <mat-card>Weg: {{way}}</mat-card>
+</div>

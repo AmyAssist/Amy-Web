@@ -1,8 +1,8 @@
-import {Component} from '@angular/core';
-import {DatabaseService} from '../../Services/database.service';
-import {TTSService} from '../../Services/tts.service';
-import {SpeechRecognitionService} from '../../Services/speechrecognition.service';
-import {Command} from '../../Objects/command';
+import { Component } from '@angular/core';
+import { DatabaseService } from '../../Services/database.service';
+import { TTSService } from '../../Services/tts.service';
+import { SpeechRecognitionService } from '../../Services/speechrecognition.service';
+import { Command } from '../../Objects/command';
 import {
     trigger,
     state,
@@ -10,7 +10,7 @@ import {
     animate,
     transition
 } from '@angular/animations';
-import {ErrorStateMatcher} from '@angular/material/core';
+import { ErrorStateMatcher } from '@angular/material/core';
 
 export class CommandErrorStateMatcher implements ErrorStateMatcher {
     error = false;
@@ -45,7 +45,8 @@ export class HomeComponent {
     response: string;
     errorStateMatcher = new CommandErrorStateMatcher();
 
-    constructor(private readonly databaseService: DatabaseService, private readonly ttsService: TTSService, private readonly speechRecognitionService: SpeechRecognitionService) {}
+    constructor(private readonly databaseService: DatabaseService, private readonly ttsService: TTSService,
+        private readonly speechRecognitionService: SpeechRecognitionService) { }
 
 
     /*

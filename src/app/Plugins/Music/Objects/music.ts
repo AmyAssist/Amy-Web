@@ -1,6 +1,6 @@
-export class music{
-    artist: string;
+export class Music {
     title: string;
-    
-    constructor() {}
+    artist: string;
+
+    constructor() { }
 }

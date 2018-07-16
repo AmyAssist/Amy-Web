@@ -1,8 +1,8 @@
-import {TestBed} from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 
-import {ClockComponent} from './clock.component';
+import { ClockComponent } from './clock.component';
 
-import {ClockDataService} from '../../Services/clock-data.service';
+import { ClockDataService } from '../../Services/clock-data.service';
 
 describe('ClockComponent', () => {
     let component: ClockComponent;
