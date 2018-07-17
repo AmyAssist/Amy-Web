@@ -12,16 +12,16 @@
         Richte deine Spotify-Verbindung ein.
       </mat-panel-description>
     </mat-expansion-panel-header>
-    
+
     <div *ngIf=!setupStage2>
       <mat-form-field>
         <input matInput #clientID placeholder="ClientID">
       </mat-form-field>
-    
+
       <mat-form-field>
         <input matInput #clientSecret placeholder="ClientSecret">
       </mat-form-field>
-      
+
       <button mat-button color="primary" (click)="setInit(clientID.value, clientSecret.value)">Absenden</button>
     </div>
     <div *ngIf=setupStage2>
@@ -69,29 +69,29 @@
       <mat-tab label="Featured Playlists">
         <div *ngFor="let playlist of playlistAllFeatured; let i = index">
           <mat-list-item role="listitem">
-              <mat-label>{{playlistAllFeatured[i].name}}</mat-label>
-              <button mat-icon-button color="primary" (click)="playPlaylistFeatured(i)">
-                <mat-icon>play_circle_outline</mat-icon>
-              </button>
-            </mat-list-item>
+            <mat-label>{{playlistAllFeatured[i].name}}</mat-label>
+            <button mat-icon-button color="primary" (click)="playPlaylistFeatured(i)">
+              <mat-icon>play_circle_outline</mat-icon>
+            </button>
+          </mat-list-item>
         </div>
         <button mat-raised-button color="primary" (click)="getPlaylistFeatured()">Aktualisieren</button>
       </mat-tab>
-      
+
       <mat-tab label="Eigene Playlists">
         <div *ngFor="let playlist of playlistAllUser; let i = index">
           <mat-list-item role="listitem">
-              <mat-label>{{playlistAllUser[i].name}}</mat-label>
-              <button mat-icon-button color="primary" (click)="playPlaylistUser(i)">
-                <mat-icon>play_circle_outline</mat-icon>
-              </button>
+            <mat-label>{{playlistAllUser[i].name}}</mat-label>
+            <button mat-icon-button color="primary" (click)="playPlaylistUser(i)">
+              <mat-icon>play_circle_outline</mat-icon>
+            </button>
           </mat-list-item>
         </div>
         <button mat-raised-button color="primary" (click)="getPlaylistUser()">Aktualisieren</button>
       </mat-tab>
     </mat-tab-group>
   </mat-expansion-panel>
-  
+
   <mat-expansion-panel>
     <mat-expansion-panel-header>
       <mat-panel-title>
@@ -114,7 +114,6 @@
         <button mat-icon-button color="primary" (click)="setDevice(activeDeviceID)">
           <mat-icon>play_circle_outline</mat-icon>
         </button>
-
         <p>You selected: {{activeDeviceID}}</p>
       </mat-tab>
       <mat-tab label="Gerät umbenennen">
@@ -139,25 +138,20 @@
 
 <div>
   <button mat-raised-button color="primary" (click)="getCurrentSong()">Aktueller Song</button>
-  
+
   <button mat-icon-button color="primary" (click)="setBack()">
     <mat-icon>fast_rewind</mat-icon>
   </button>
-    <button mat-icon-button *ngIf=!playing color="primary" (click)="setResume()">
-      <mat-icon>play_arrow</mat-icon>
-    </button>   
-    <button mat-icon-button *ngIf=playing color="primary" (click)="setPause()">
-      <mat-icon>pause</mat-icon>
-    </button>
+  <button mat-icon-button *ngIf=!playing color="primary" (click)="setResume()">
+    <mat-icon>play_arrow</mat-icon>
+  </button>
+  <button mat-icon-button *ngIf=playing color="primary" (click)="setPause()">
+    <mat-icon>pause</mat-icon>
+  </button>
   <button mat-icon-button color="primary" (click)="setSkip()">
     <mat-icon>fast_forward</mat-icon>
   </button>
-  <mat-slider 
-    [max]="volumeMax"
-    [min]="volumeMin"
-    [step]="volumeStep"
-    [(ngModel)]="volumeValue"
-    (change)="changeVolume(volumeValue)">
+  <mat-slider [max]="volumeMax" [min]="volumeMin" [step]="volumeStep" [(ngModel)]="volumeValue" (change)="changeVolume(volumeValue)">
   </mat-slider>
 </div>
 <div *ngIf=song>
@@ -167,12 +161,12 @@
   </mat-list>
 </div>
 <div *ngIf=playlist>
-  <mat-list-item role="listitem" >Playlist: {{musicPlaylistData.name}}</mat-list-item>
-    <mat-list>
-      <mat-list-item *ngFor="let music of playlistSongs; let i = index"> 
-        <p matLine>Song: {{i +1}}</p>
-        <p matLine>Interpret: {{music.artist}}</p>
-        <p matLine>Titel: {{music.title}}</p>
-      </mat-list-item>
-    </mat-list>
+  <mat-list-item role="listitem">Playlist: {{musicPlaylistData.name}}</mat-list-item>
+  <mat-list>
+    <mat-list-item *ngFor="let music of playlistSongs; let i = index">
+      <p matLine>Song: {{i +1}}</p>
+      <p matLine>Interpret: {{music.artist}}</p>
+      <p matLine>Titel: {{music.title}}</p>
+    </mat-list-item>
+  </mat-list>
 </div>

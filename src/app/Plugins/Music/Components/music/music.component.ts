@@ -1,9 +1,9 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import {MatToolbarModule} from '@angular/material/toolbar';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { MusicDataService } from '../../Services/music-data.service';
-import { music } from '../../Objects/music'
-import { playlist } from '../../Objects/playlist'
-import { device } from '../../Objects/device'
+import { Music } from '../../Objects/music';
+import { Playlist } from '../../Objects/playlist';
+import { Device } from '../../Objects/device';
 
 /*
   Component for controlling the spotify plugin. It recieves data from the REST-backend with a custom music-dataservice.
@@ -18,41 +18,41 @@ import { device } from '../../Objects/device'
 export class MusicComponent implements OnInit {
 
   /*
-    setup bools for showing the whole setup 
+    setup bools for showing the whole setup
     and switching to the second part;
     link for the spotify authentification
   */
-  setup: boolean = true;
-  setupStage2: boolean = false;
+  setup = true;
+  setupStage2 = false;
   spotifyLink: string;
-  
-  //music-object for the play-function
-  musicData: music;
 
-  //bool for showing the current playlist
-  playlist: boolean = false;
+  // music-object for the play-function
+  musicData: Music;
+
+  // bool for showing the current playlist
+  playlist = false;
 
   /*
     -array of songs for the current playlist for display
     -temp playlist for the current playlist
   */
-  playlistSongs: music[];
-  musicPlaylistData: playlist;
-  musicPlaylistData2: playlist;
-  
-  //featured spotify-playlists
-  playlistAllFeatured: playlist[];
- 
-  //user spotify-playlists
-  playlistAllUser: playlist[];
-  
+  playlistSongs: Music[];
+  musicPlaylistData: Playlist;
+  musicPlaylistData2: Playlist;
+
+  // featured spotify-playlists
+  playlistAllFeatured: Playlist[];
+
+  // user spotify-playlists
+  playlistAllUser: Playlist[];
+
   /*
     -single-Device for testing
     -all Devices the user has
     -the currently activ Device and its ID
   */
-  deviceData: device;
-  deviceAll: device[];
+  deviceData: Device;
+  deviceAll: Device[];
   activeDevice: string;
   activeDeviceID: string;
   renameDeviceID: string;
@@ -60,59 +60,59 @@ export class MusicComponent implements OnInit {
   //bool to check if u paused or resumed the current song
   playing: boolean = false;
 
-  //output of the search request
+  // output of the search request
   searchOutput: string;
-  
-  //vars for volume slider
+
+  // vars for volume slider
   volumeMax = 100;
   volumeMin = 0;
   volumeStep = 1;
   volumeValue = 0;
-  
+
   constructor(private readonly musicService: MusicDataService) { }
 
   ngOnInit() {
-    //this.setup = true;
-    //this.setupStage2 = false;
-    //this.playing = false;
-    //this.playlist = false;
+    // this.setup = true;
+    // this.setupStage2 = false;
+    // this.playing = false;
+    // this.playlist = false;
 
     console.log(this.musicService);
-    this.musicData = new music;
+    this.musicData = new Music;
 
-    //array of songs from the current playlist for display
-    this.playlistSongs = new Array<music>();
-    
-    this.playlistAllFeatured = new Array<playlist>();
-    
+    // array of songs from the current playlist for display
+    this.playlistSongs = new Array<Music>();
+
+    this.playlistAllFeatured = new Array<Playlist>();
+
     /* testPlaylist, will be removed
     this.musicPlaylistData = new playlist("testplaylistFeatured");
     this.playlistAllFeatured = Array(
-      this.musicPlaylistData, 
-      this.musicPlaylistData, 
-      this.musicPlaylistData, 
-      this.musicPlaylistData, 
+      this.musicPlaylistData,
+      this.musicPlaylistData,
+      this.musicPlaylistData,
+      this.musicPlaylistData,
       this.musicPlaylistData
     );
     */
-    
-    
-    this.playlistAllUser = new Array<playlist>();
-    
+
+
+    this.playlistAllUser = new Array<Playlist>();
+
     /* testPlaylist, will be removed
     this.musicPlaylistData2 = new playlist("testplaylistUser");
     this.playlistAllUser = Array(
-      this.musicPlaylistData2, 
-      this.musicPlaylistData2, 
-      this.musicPlaylistData2, 
-      this.musicPlaylistData2, 
+      this.musicPlaylistData2,
+      this.musicPlaylistData2,
+      this.musicPlaylistData2,
+      this.musicPlaylistData2,
       this.musicPlaylistData2
     );
     */
-    
-    //this.deviceAll = new Array<device>();
-    
-     //testDevices, will be removed
+
+    this.deviceAll = new Array<Device>();
+
+    /* testDevices, will be removed
     this.deviceData = new device("testDevice");
     this.deviceAll = Array(
       this.deviceData,
@@ -120,29 +120,30 @@ export class MusicComponent implements OnInit {
       this.deviceData,
       this.deviceData,
       this.deviceData
-    );
+    ); */
     
 
-    //this.getDevs();
-    //this.getPlaylistFeatured();
-    //this.getPlaylistUser();
-    this.getCurrentSong();
-  }
+    // this.getDevs();
+    // this.getPlaylistFeatured();
+    // this.getPlaylistUser();
+    // this.getCurrentSong();
+  } 
+  
 
   /*
     Method for the initialisation of the spotify-connection
   */
-  setInit(clientID: string, clientSecret: string){
+  setInit(clientID: string, clientSecret: string) {
     this.setupStage2 = true;
     this.musicService.setInit(clientID, clientSecret)
       .subscribe((data: string) => this.spotifyLink = data);
-    
+
   }
 
   /*
     method for setting the access-token for the spotify-connection
   */
-  setToken(token: string){
+  setToken(token: string) {
     this.musicService.setToken(token)
       .subscribe();
     this.setup = false;
@@ -154,14 +155,14 @@ export class MusicComponent implements OnInit {
   */
   getCurrentSong() {
     this.musicService.getCurrentSong()
-      .subscribe((data: music) => this.musicData = { ...data});
-      
+      .subscribe((data: Music) => this.musicData = { ...data });
+
   }
 
   /*
     sending a search request
   */
-  search(searchValue: string, searchType: string){
+  search(searchValue: string, searchType: string) {
     this.musicService.search(searchValue, searchType)
       .subscribe((data: string) => this.searchOutput = data);
   }
@@ -169,7 +170,7 @@ export class MusicComponent implements OnInit {
   /*
     resuming the paused song
   */
-  setResume(){
+  setResume() {
     this.musicService.resume()
       .subscribe();
     this.playing = true;
@@ -178,7 +179,7 @@ export class MusicComponent implements OnInit {
   /*
     pausing the playing song
   */
-  setPause(){
+  setPause() {
     this.musicService.pause()
       .subscribe();
     this.playing = false;
@@ -187,7 +188,7 @@ export class MusicComponent implements OnInit {
   /*
     skipping the playing song
   */
-  setSkip(){
+  setSkip() {
     this.musicService.skip()
       .subscribe();
   }
@@ -195,7 +196,7 @@ export class MusicComponent implements OnInit {
   /*
     returning to the previous song
   */
-  setBack(){
+  setBack() {
     this.musicService.back()
       .subscribe();
   }
@@ -203,7 +204,7 @@ export class MusicComponent implements OnInit {
   /*
     setting the volume
   */
-  changeVolume(volumeData: number){
+  changeVolume(volumeData: number) {
     this.musicService.setVolume(volumeData)
       .subscribe();
   }
@@ -222,22 +223,22 @@ export class MusicComponent implements OnInit {
   /*
     playing a playlist out of the displayed ones
   */
-  playPlaylistUser(id: number){
-    this.playPlaylist(id, "user");
-    //this.getCurrentSong();
+  playPlaylistUser(id: number) {
+    this.playPlaylist(id, 'user');
+    // this.getCurrentSong();
   }
 
-  playPlaylistFeatured(id: number){
-    this.playPlaylist(id, "featured");
-    //this.getCurrentSong();
+  playPlaylistFeatured(id: number) {
+    this.playPlaylist(id, 'featured');
+    // this.getCurrentSong();
   }
 
   playPlaylist(playlistNumber: number, playlistType: string) {
     this.musicService.playPlaylist(playlistNumber, playlistType).subscribe();
-    //playlist => this.musicPlaylistData = playlist
-    if(playlistType== "user"){
+    // playlist => this.musicPlaylistData = playlist
+    if (playlistType === 'user') {
       this.musicPlaylistData = this.playlistAllUser[playlistNumber];
-    }else{
+    } else {
       this.musicPlaylistData = this.playlistAllFeatured[playlistNumber];
     }
     this.playlistSongs = this.musicPlaylistData.songs;
@@ -248,14 +249,14 @@ export class MusicComponent implements OnInit {
   /*
     getting all the available devices
   */
-  getDevs(){
-    this.musicService.getDevices().subscribe((data: device[]) => this.deviceAll = [ ...data]);
+  getDevs() {
+    this.musicService.getDevices().subscribe((data: Device[]) => this.deviceAll = [...data]);
   }
 
   /*
     selecting a device to play music on
   */
-  setDevice(deviceID: string){
+  setDevice(deviceID: string) {
     this.musicService.setDevice(deviceID).subscribe((data: string) => this.activeDevice = data);
   }
 
@@ -268,13 +269,13 @@ export class MusicComponent implements OnInit {
     requesting spotifys featured playlists
   */
   getPlaylistFeatured() {
-    this.musicService.getPlaylist("featured").subscribe((data : playlist[]) => this.playlistAllFeatured = [ ...data]);
+    this.musicService.getPlaylist('featured').subscribe((data: Playlist[]) => this.playlistAllFeatured = [...data]);
   }
 
   /*
     requesting the users own playlists
   */
   getPlaylistUser() {
-    this.musicService.getPlaylist("user").subscribe((data : playlist[]) => this.playlistAllUser = [ ...data]);
+    this.musicService.getPlaylist('user').subscribe((data: Playlist[]) => this.playlistAllUser = [...data]);
   }
 }

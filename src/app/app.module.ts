@@ -8,7 +8,7 @@ import { ClockComponent } from './Plugins/Clock/Components/clock/clock.component
 import { WeatherComponent } from './Plugins/Weather/Components/weather/weather.component';
 import { HomeComponent } from './Components/home/home.component';
 import { CalendarComponent } from './Plugins/Calendar/Components/calendar/calendar.component';
-import { NavigationComponent } from './plugins/Navigation/Components/navigation/navigation.component';
+import { NavigationComponent } from './Plugins/Navigation/Components/navigation/navigation.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -18,7 +18,7 @@ import { MusicModule } from './Plugins/Music/music.module';
 /*
     Routing of the components to the respective links
 */
-const routes: Routes =[
+const routes: Routes = [
   {
     path: '',
     component: HomeComponent
