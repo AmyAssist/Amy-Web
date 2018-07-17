@@ -1,7 +1,18 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { MatIconModule } from '@angular/material/icon';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
+import { MatCardModule } from '@angular/material/card';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatSliderModule } from '@angular/material/slider';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 import { Routes, RouterModule } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { ClockComponent } from './Plugins/Clock/Components/clock/clock.component';
@@ -9,6 +20,7 @@ import { WeatherComponent } from './Plugins/Weather/Components/weather/weather.c
 import { HomeComponent } from './Components/home/home.component';
 import { CalendarComponent } from './Plugins/Calendar/Components/calendar/calendar.component';
 import { NavigationComponent } from './Plugins/Navigation/Components/navigation/navigation.component';
+import { LocationRegistryComponent } from './Plugins/Registry/Components/locationregistry/location-registry.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -34,6 +46,10 @@ const routes: Routes = [
   {
     path: 'navigation',
     component: NavigationComponent
+  },
+  {
+    path: 'locationRegistry',
+    component: LocationRegistryComponent
   }
 ];
 
@@ -44,7 +60,8 @@ const routes: Routes = [
     WeatherComponent,
     HomeComponent,
     CalendarComponent,
-    NavigationComponent
+    NavigationComponent,
+    LocationRegistryComponent,
   ],
   imports: [
     MusicModule,
