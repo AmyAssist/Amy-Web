@@ -55,6 +55,7 @@ export class MusicComponent implements OnInit {
   deviceAll: device[];
   activeDevice: string;
   activeDeviceID: string;
+  renameDeviceID: string;
   
   //bool to check if u paused or resumed the current song
   playing: boolean = false;
@@ -109,9 +110,9 @@ export class MusicComponent implements OnInit {
     );
     */
     
-    this.deviceAll = new Array<device>();
+    //this.deviceAll = new Array<device>();
     
-    /* testDevices, will be removed
+     //testDevices, will be removed
     this.deviceData = new device("testDevice");
     this.deviceAll = Array(
       this.deviceData,
@@ -120,7 +121,7 @@ export class MusicComponent implements OnInit {
       this.deviceData,
       this.deviceData
     );
-    */
+    
 
     //this.getDevs();
     //this.getPlaylistFeatured();
@@ -254,8 +255,13 @@ export class MusicComponent implements OnInit {
   /*
     selecting a device to play music on
   */
-  setDevice(deviceID: number){
+  setDevice(deviceID: string){
     this.musicService.setDevice(deviceID).subscribe((data: string) => this.activeDevice = data);
+  }
+
+  setDeviceName(deviceID: string, newName: string){
+    this.musicService.setDeviceName(deviceID, newName).subscribe((data: string) => this.activeDevice = data);
+    this.getDevs();
   }
 
   /*

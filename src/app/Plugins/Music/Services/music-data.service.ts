@@ -39,6 +39,7 @@ export class MusicDataService {
     return throwError(
       'Something bad happened; please try again later.');
   };
+  
   constructor(private http: HttpClient) { 
     this.path = 'http://localhost:8080/rest/music/';
   }
@@ -71,8 +72,17 @@ export class MusicDataService {
   /*
     Returns the device that is selected
   */
-  setDevice(deviceId: number){
-    return this.http.post(this.path + 'setDevice/' + deviceId.toString(), null).pipe(
+  setDevice(deviceId: string){
+    return this.http.post(this.path + 'setDevice/' + deviceId, null).pipe(
+      catchError(this.handleError));
+  }
+
+  setDeviceName(deviceUri: string, deviceName: string){
+    let params = new HttpParams();
+    params = params.append('uri', deviceUri);
+    params = params.append('newName', deviceName);
+
+    return this.http.post(this.path + 'setDeviceName', null, {params: params}).pipe(
       catchError(this.handleError));
   }
 

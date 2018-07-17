@@ -95,27 +95,44 @@
   <mat-expansion-panel>
     <mat-expansion-panel-header>
       <mat-panel-title>
-        Select Device
+        Devices
       </mat-panel-title>
       <mat-panel-description>
         Wähle eine Gerät aus
       </mat-panel-description>
     </mat-expansion-panel-header>
+    <mat-tab-group>
+      <mat-tab label="Geräteauswahl">
+        <mat-form-field>
+          <mat-select [(value)]="activeDeviceID">
+            <mat-option *ngFor="let device of deviceAll; let i = index" value={{deviceAll[i].id}}>
+              {{device.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
 
-    <mat-form-field>
-      <mat-select [(value)]="activeDeviceID">
-        <mat-option *ngFor="let device of deviceAll; let i = index" value={{deviceAll[i].id}}>
-          {{device.name}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+        <button mat-icon-button color="primary" (click)="setDevice(activeDeviceID)">
+          <mat-icon>play_circle_outline</mat-icon>
+        </button>
 
-    <button mat-icon-button color="primary" (click)="setDevice(activeDeviceID)">
-      <mat-icon>play_circle_outline</mat-icon>
-    </button>
+        <p>You selected: {{activeDeviceID}}</p>
+      </mat-tab>
+      <mat-tab label="Gerät umbenennen">
+        <mat-form-field>
+          <mat-select [(value)]="renameDeviceID">
+            <mat-option *ngFor="let device of deviceAll; let i = index" value={{deviceAll[i].id}}>
+              {{device.name}}
+            </mat-option>
+          </mat-select>
+          
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput #deviceName placeholder="Neuer Name">
+        </mat-form-field>
+        <button mat-raised-button color="basic" (click)="setDeviceName(renameDeviceID, deviceName.value)">Umbenennen</button>
+      </mat-tab>
+    </mat-tab-group>
 
-    <p>You selected: {{activeDeviceID}}</p>
-    
     <button mat-raised-button color="primary" (click)="getDevs()">Aktualisieren</button>
   </mat-expansion-panel>
 </mat-accordion>
