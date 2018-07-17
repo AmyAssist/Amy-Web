@@ -1,5 +1,5 @@
 <mat-toolbar>
-    <span>Wecker</span>
+  <span>Wecker</span>
 </mat-toolbar>
 
 <div class="alarmSet-container">
@@ -16,7 +16,7 @@
 <button mat-raised-button color="basic" (click)="getAlarms()">Wecker laden</button>
 <div *ngFor="let clock of clockData; let i = index">
   <mat-list role="list">
-    <mat-list-item role="listitem" >Wecker {{i +1}}</mat-list-item>
-    <mat-list-item role="listitem" >{{clock.hour}} : {{clock.minute}}</mat-list-item>
+    <mat-list-item role="listitem">Wecker {{i +1}}</mat-list-item>
+    <mat-list-item role="listitem">{{clock.hour}} : {{clock.minute}}</mat-list-item>
   </mat-list>
 </div>

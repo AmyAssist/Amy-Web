@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 
 /**
  *   Service as abstraction of the SpeechSynthesis API of the browser
@@ -19,6 +19,7 @@ export class TTSService {
      */
     speak(text: string) {
         const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'en-US';
         this.synth.speak(utterance);
     }
 }

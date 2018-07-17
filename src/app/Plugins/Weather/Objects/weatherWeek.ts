@@ -1,8 +1,8 @@
-import { weather } from '../Objects/weather'
+import { Weather } from '../Objects/weather';
 
-export class weatherWeek{
+export class WeatherWeek {
     summary: string;
-    days: Array<weather>;
-    
-    constructor() {}
+    days: Array<Weather>;
+
+    constructor() { }
 }

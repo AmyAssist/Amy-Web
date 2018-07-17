@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {MatToolbarModule} from '@angular/material/toolbar';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { ClockDataService } from '../../Services/clock-data.service';
-import { clock } from '../../Objects/clock'
+import { Clock } from '../../Objects/clock';
 
 /*
-  Component for the clock-plugin. It recieves data from the backend with a custom clock-dataservices and displays the data over the html-template.
+  Component for the clock-plugin. It recieves data from the backend with a custom clock-dataservices and displays the data over
+  the html-template.
 */
 @Component({
   selector: 'app-clock',
@@ -13,8 +14,8 @@ import { clock } from '../../Objects/clock'
 })
 export class ClockComponent implements OnInit {
 
-  clockData: clock[];
-  newClockData: clock;
+  clockData: Clock[];
+  newClockData: Clock;
 
   /*
     Providing the data-service for the clock-component
@@ -22,8 +23,8 @@ export class ClockComponent implements OnInit {
   constructor(private clockService: ClockDataService) { }
 
   ngOnInit() {
-    this.clockData = new Array<clock>();
-    this.newClockData = new clock;
+    this.clockData = new Array<Clock>();
+    this.newClockData = new Clock;
   }
 
   /*
@@ -31,7 +32,7 @@ export class ClockComponent implements OnInit {
   */
   getAlarms() {
     this.clockService.getAlarms()
-    .subscribe((data : clock[]) => this.clockData = [ ...data]);
+      .subscribe((data: Clock[]) => this.clockData = [...data]);
   }
 
   /*

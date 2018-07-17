@@ -1,11 +1,11 @@
-import {TestBed, async} from '@angular/core/testing';
+import { TestBed, async } from '@angular/core/testing';
 import { Component } from '@angular/core';
 import {
     MatButtonModule,
     MatToolbarModule,
 } from '@angular/material';
 
-import {AppComponent} from './app.component';
+import { AppComponent } from './app.component';
 describe('AppComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
@@ -38,5 +38,5 @@ describe('AppComponent', () => {
 });
 
 
-@Component({selector: 'router-outlet', template: ''})
+@Component({ selector: 'router-outlet', template: '' })
 class RouterOutletStubComponent { }
