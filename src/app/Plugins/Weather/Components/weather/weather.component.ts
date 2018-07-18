@@ -31,11 +31,13 @@ export class WeatherComponent implements OnInit {
     this.tommorow = false;
     this.week = false;
     this.weatherService.getAllLocations()
-      .subscribe((data: Location[]) => this.locations = data);
+      .subscribe((data: Location[]) => {
+        this.locations = data;
+        this.selectedLocation = this.locations[0].name;
+      });
   }
 
   public onChange(event): void {
-    this.selectedLocation = this.locations[0].city;
     console.log(event.value);
     this.weatherService.sendLocation(event.value);
 
