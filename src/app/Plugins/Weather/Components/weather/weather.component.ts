@@ -17,8 +17,8 @@ export class WeatherComponent implements OnInit {
   today: boolean;
   tommorow: boolean;
   week: boolean;
-  locations : Location[];
-  selectedLocation : string;
+  locations: Location[];
+  selectedLocation: string;
 
   constructor(private weatherService: WeatherDataService) { }
 
@@ -40,9 +40,9 @@ export class WeatherComponent implements OnInit {
     console.log(event.value);
     this.weatherService.sendLocation(event.value);
 
-    if(this.today) {this.getWeatherToday();}
-    if(this.tommorow) {this.getWeatherTomorrow();}
-    if(this.week) {this.getWeatherWeek();}
+    if (this.today) { this.getWeatherToday(); }
+    if (this.tommorow) { this.getWeatherTomorrow(); }
+    if (this.week) { this.getWeatherWeek(); }
   }
 
   getWeatherToday() {

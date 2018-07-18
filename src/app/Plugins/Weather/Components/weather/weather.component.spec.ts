@@ -47,9 +47,9 @@ describe('WeatherComponent', () => {
     }));
 
     beforeEach(() => {
-       /* fixture = TestBed.createComponent(WeatherComponent);
-        component = fixture.componentInstance;
-        fixture.detectChanges();*/
+        /* fixture = TestBed.createComponent(WeatherComponent);
+         component = fixture.componentInstance;
+         fixture.detectChanges();*/
     });
 
     it('should create', () => {
