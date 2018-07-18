@@ -3,7 +3,6 @@ import { WeatherDataService } from '../../Services/weather-data.service';
 import { Weather } from '../../Objects/weather';
 import { WeatherWeek } from '../../Objects/weatherWeek';
 import { Location } from '../../Objects/location';
-import { isObject } from 'util';
 
 @Component({
   selector: 'app-weather',
