@@ -7,7 +7,7 @@
     <mat-form-field>
       <mat-select (selectionChange)="onChange($event)" placeholder="Select Location" [(value)]="selectedLocation">
         <mat-option *ngFor="let test of locations" [value]="test.id">
-          {{test.city}}
+          {{test.name}}
         </mat-option>
       </mat-select>
     </mat-form-field>

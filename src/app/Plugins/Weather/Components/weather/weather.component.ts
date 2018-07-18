@@ -3,6 +3,7 @@ import { WeatherDataService } from '../../Services/weather-data.service';
 import { Weather } from '../../Objects/weather';
 import { WeatherWeek } from '../../Objects/weatherWeek';
 import { Location } from '../../Objects/location';
+import { isObject } from 'util';
 
 @Component({
   selector: 'app-weather',
@@ -37,6 +38,10 @@ export class WeatherComponent implements OnInit {
     this.selectedLocation = this.locations[0].city;
     console.log(event.value);
     this.weatherService.sendLocation(event.value);
+
+    if(this.today) {this.getWeatherToday();}
+    if(this.tommorow) {this.getWeatherTomorrow();}
+    if(this.week) {this.getWeatherWeek();}
   }
 
   getWeatherToday() {

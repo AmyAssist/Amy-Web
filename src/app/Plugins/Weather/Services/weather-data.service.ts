@@ -81,7 +81,7 @@ export class WeatherDataService {
 
   sendLocation(id : number) {
     console.log(id);
-    this.http.put(this.path + 'setLocation', id, this.httpPlainTextHeader).pipe(
+    this.http.put(this.path + 'setLocation', String(id), this.httpPlainTextHeader).pipe(
       catchError(this.handleError)).subscribe();
 
   }
