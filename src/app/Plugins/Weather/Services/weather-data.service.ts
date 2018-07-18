@@ -20,6 +20,12 @@ export class WeatherDataService {
     })
   };
 
+  httpPlainTextHeader = {
+    headers: new HttpHeaders({
+      'Content-Type': 'text/plain'
+    })
+  }
+
   constructor(private http: HttpClient) {
     this.path = 'http://localhost:8080/rest/weather/';
     this.pathRegistry = 'http://localhost:8080/rest/registry/location/';
@@ -71,5 +77,12 @@ export class WeatherDataService {
   getAllLocations() {
     return this.http.get<Location[]>(this.pathRegistry + 'all').pipe(
       catchError(this.handleError));
+  }
+
+  sendLocation(id : number) {
+    console.log(id);
+    this.http.put(this.path + 'setLocation', id, this.httpPlainTextHeader).pipe(
+      catchError(this.handleError)).subscribe();
+
   }
 }

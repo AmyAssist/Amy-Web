@@ -5,8 +5,8 @@
 <mat-card>
   <div class="example-container">
     <mat-form-field>
-      <mat-select placeholder="Select Location" [(value)]="selectedLocation">
-        <mat-option *ngFor="let test of locations" [value]="test.city">
+      <mat-select (selectionChange)="onChange($event)" placeholder="Select Location" [(value)]="selectedLocation">
+        <mat-option *ngFor="let test of locations" [value]="test.id">
           {{test.city}}
         </mat-option>
       </mat-select>
