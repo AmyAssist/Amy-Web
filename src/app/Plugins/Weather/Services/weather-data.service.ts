@@ -24,7 +24,7 @@ export class WeatherDataService {
     headers: new HttpHeaders({
       'Content-Type': 'text/plain'
     })
-  }
+  };
 
   constructor(private http: HttpClient) {
     this.path = 'http://localhost:8080/rest/weather/';
