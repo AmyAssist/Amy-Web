@@ -32,6 +32,7 @@ import { WeatherComponent } from './Plugins/Weather/Components/weather/weather.c
 import { HomeComponent } from './Components/home/home.component';
 import { CalendarComponent } from './Plugins/Calendar/Components/calendar/calendar.component';
 import { NavigationComponent } from './Plugins/Navigation/Components/navigation/navigation.component';
+import { EmailComponent } from './Plugins/Email/Components/email/email.component';
 
 /*
     Routing of the components to the respective links
@@ -56,6 +57,10 @@ const routes: Routes = [
   {
     path: 'navigation',
     component: NavigationComponent
+  },
+  {
+    path: 'email',
+    component: EmailComponent
   }
 ];
 
@@ -68,6 +73,7 @@ const routes: Routes = [
     HomeComponent,
     CalendarComponent,
     NavigationComponent,
+    EmailComponent,
   ],
   imports: [
     BrowserModule,
