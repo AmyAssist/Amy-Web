@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {MatToolbarModule} from '@angular/material/toolbar';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { NavigationDataService } from '../../Services/navigation-data.service';
 import { navPath } from '../../Objects/navPath'
 
@@ -23,7 +23,7 @@ export class NavigationComponent implements OnInit {
     this.navPathData = new navPath();
   }
 
-  searchWay(from: string, to: string){
+  searchWay(from: string, to: string) {
     this.navPathData.from = from;
     this.navPathData.to = to;
     this.showWay = true;

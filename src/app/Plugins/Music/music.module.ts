@@ -8,11 +8,11 @@ import { MaterialModule } from '../../material.module';
 
 @NgModule({
   imports: [
-      CommonModule,
-      MaterialModule,
-      MusicRoutingModule
+    CommonModule,
+    MaterialModule,
+    MusicRoutingModule
   ],
-  declarations: [ MusicComponent ],
-  providers:    [ forwardRef(() => MusicDataService) ]
+  declarations: [MusicComponent],
+  providers: [forwardRef(() => MusicDataService)]
 })
 export class MusicModule { }

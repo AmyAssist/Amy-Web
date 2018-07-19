@@ -8,20 +8,20 @@ import {
   MatListModule,
   MatDividerModule
 } from '@angular/material';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatSelectModule} from '@angular/material/select';
-import {MatInputModule} from '@angular/material/input';
-import {MatCardModule} from '@angular/material/card';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
+import { MatCardModule } from '@angular/material/card';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import {MatExpansionModule} from '@angular/material/expansion';
-import {MatIconModule} from '@angular/material/icon';
-import {MatTabsModule} from '@angular/material/tabs';
-import {MatSliderModule} from '@angular/material/slider';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatSliderModule } from '@angular/material/slider';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { NavigationComponent } from './navigation.component';
-import {NavigationDataService} from '../../Services/navigation-data.service';
+import { NavigationDataService } from '../../Services/navigation-data.service';
 
 describe('NavigationComponent', () => {
   let component: NavigationComponent;
@@ -30,30 +30,30 @@ describe('NavigationComponent', () => {
   beforeEach(async(() => {
     const spy = jasmine.createSpyObj('DatabaseService', ['getValue']);
     TestBed.configureTestingModule({
-      declarations: [ NavigationComponent ],
+      declarations: [NavigationComponent],
       providers: [
-          {provide: NavigationDataService, useValue: spy}
+        { provide: NavigationDataService, useValue: spy }
       ],
       imports: [
-          MatExpansionModule,
-          MatIconModule,
-          MatTabsModule,
-          ReactiveFormsModule,
-          MatSliderModule,
-          FormsModule,
-          MatFormFieldModule,
-          MatButtonModule,
-          MatInputModule,
-          MatCardModule,
-          MatSelectModule,
-          MatCheckboxModule,
-          MatToolbarModule,
-          MatMenuModule,
-          MatListModule,
-          MatGridListModule,
-          MatDividerModule,
-          BrowserAnimationsModule]
-  }).compileComponents();
+        MatExpansionModule,
+        MatIconModule,
+        MatTabsModule,
+        ReactiveFormsModule,
+        MatSliderModule,
+        FormsModule,
+        MatFormFieldModule,
+        MatButtonModule,
+        MatInputModule,
+        MatCardModule,
+        MatSelectModule,
+        MatCheckboxModule,
+        MatToolbarModule,
+        MatMenuModule,
+        MatListModule,
+        MatGridListModule,
+        MatDividerModule,
+        BrowserAnimationsModule]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

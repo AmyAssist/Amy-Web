@@ -56,7 +56,7 @@ export class MusicComponent implements OnInit {
   activeDevice: string;
   activeDeviceID: string;
   renameDeviceID: string;
-  
+
   //bool to check if u paused or resumed the current song
   playing: boolean = false;
 
@@ -121,14 +121,14 @@ export class MusicComponent implements OnInit {
       this.deviceData,
       this.deviceData
     ); */
-    
+
 
     // this.getDevs();
     // this.getPlaylistFeatured();
     // this.getPlaylistUser();
     // this.getCurrentSong();
-  } 
-  
+  }
+
 
   /*
     Method for the initialisation of the spotify-connection
@@ -137,7 +137,6 @@ export class MusicComponent implements OnInit {
     this.setupStage2 = true;
     this.musicService.setInit(clientID, clientSecret)
       .subscribe((data: string) => this.spotifyLink = data);
-
   }
 
   /*
@@ -156,7 +155,6 @@ export class MusicComponent implements OnInit {
   getCurrentSong() {
     this.musicService.getCurrentSong()
       .subscribe((data: Music) => this.musicData = { ...data });
-
   }
 
   /*
@@ -260,7 +258,7 @@ export class MusicComponent implements OnInit {
     this.musicService.setDevice(deviceID).subscribe((data: string) => this.activeDevice = data);
   }
 
-  setDeviceName(deviceID: string, newName: string){
+  setDeviceName(deviceID: string, newName: string) {
     this.musicService.setDeviceName(deviceID, newName).subscribe((data: string) => this.activeDevice = data);
     this.getDevs();
   }

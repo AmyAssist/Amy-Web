@@ -5,11 +5,11 @@ import { RouterModule } from '@angular/router';
 import { MusicComponent } from './Components/music/music.component';
 
 const routes = [
-  { path: 'music', component: MusicComponent}
+  { path: 'music', component: MusicComponent }
 ];
 
 @NgModule({
-  imports: [ RouterModule.forChild(routes) ],
-  exports: [ RouterModule ]
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
 })
-export class MusicRoutingModule {}
+export class MusicRoutingModule { }
