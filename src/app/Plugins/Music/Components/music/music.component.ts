@@ -57,8 +57,8 @@ export class MusicComponent implements OnInit {
   activeDeviceID: string;
   renameDeviceID: string;
 
-  //bool to check if u paused or resumed the current song
-  playing: boolean = false;
+  // bool to check if u paused or resumed the current song
+  playing = false;
 
   // output of the search request
   searchOutput: string;
