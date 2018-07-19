@@ -83,7 +83,6 @@ export class WeatherDataService {
   sends the selected location to amy
   */
   sendLocation(id: number) {
-    console.log(id);
     this.http.put(this.path + 'setLocation', String(id), this.httpPlainTextHeader).pipe(
       catchError(this.handleError)).subscribe();
 
