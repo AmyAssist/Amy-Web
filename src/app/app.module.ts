@@ -8,6 +8,7 @@ import {
   MatMenuModule,
   MatListModule,
   MatDividerModule,
+  MatRadioModule,
 
 } from '@angular/material';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -97,7 +98,8 @@ const routes: Routes = [
     MatDividerModule,
     MatIconModule,
     HttpClientModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    MatRadioModule
   ],
   exports: [RouterModule],
   providers: [],

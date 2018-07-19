@@ -7,8 +7,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EmailComponent implements OnInit {
 
+  loggedIn = false;
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  logIn(mailAddress: string, mailPassword: string) {
+    // TODO: implement
+    this.loggedIn = true;
+  }
+
+  logOut() {
+    // TODO: implement
+    this.loggedIn = false;
   }
 }
