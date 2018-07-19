@@ -1,7 +1,7 @@
 language: node_js
 node_js:
   - '8'
-  - '9'
+#  - '9'
   - '10'
 sudo: required
 addons:
@@ -16,6 +16,8 @@ script:
 jobs:
   include:
     - stage: deploy
+      name: "Build"
+      if: branch = master
       script: ng build --prod --no-progress --base-href=/Amy-Web/
       deploy:
         provider: pages
@@ -24,7 +26,8 @@ jobs:
         local_dir: dist/Amy-Webapp/
         on:
           branch: master
-    - script:
+    - name: "Static Code Analysis"
+      script:
       - ng test --no-progress --code-coverage --karma-config karma.conf.js
       - ng lint Amy-Webapp --format json > tsLintReport.json || true
       - sonar-scanner
