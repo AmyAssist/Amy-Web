@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, inject, TestBed} from '@angular/core/testing';
 
-import { LocationRegistryComponent } from './location-registry.component';
+import {LocationRegistryComponent} from './location-registry.component';
 import {
     MatButtonModule,
     MatCheckboxModule,
@@ -8,7 +8,8 @@ import {
     MatGridListModule,
     MatListModule,
     MatMenuModule,
-    MatTableModule, MatToolbarModule
+    MatTableModule,
+    MatToolbarModule
 } from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
@@ -21,7 +22,8 @@ import {MatSliderModule} from '@angular/material/slider';
 import {MatSelectModule} from '@angular/material/select';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatTabsModule} from '@angular/material/tabs';
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 
 describe('LocationRegistryComponent', () => {
   let component: LocationRegistryComponent;
@@ -30,31 +32,34 @@ describe('LocationRegistryComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ LocationRegistryComponent ],
-      providers: [HttpClientModule],
+      providers: [
+
+      ],
       imports: [
-          BrowserModule,
-          MatFormFieldModule,
-          MatButtonModule,
-          MatInputModule,
-          MatCardModule,
-          MatExpansionModule,
-          MatIconModule,
-          MatTabsModule,
-          MatSliderModule,
-          FormsModule,
-          BrowserAnimationsModule,
-          FormsModule,
-          MatSelectModule,
-          MatCheckboxModule,
-          MatToolbarModule,
-          MatMenuModule,
-          MatListModule,
-          MatGridListModule,
-          MatDividerModule,
-          MatIconModule,
-          MatTableModule,
-          ReactiveFormsModule,
-          HttpClientModule
+        BrowserModule,
+        MatFormFieldModule,
+        MatButtonModule,
+        MatInputModule,
+        MatCardModule,
+        MatExpansionModule,
+        MatIconModule,
+        MatTabsModule,
+        MatSliderModule,
+        FormsModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        MatSelectModule,
+        MatCheckboxModule,
+        MatToolbarModule,
+        MatMenuModule,
+        MatListModule,
+        MatGridListModule,
+        MatDividerModule,
+        MatIconModule,
+        MatTableModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        HttpClientTestingModule,
       ]
     })
     .compileComponents();
