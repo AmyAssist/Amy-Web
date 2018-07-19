@@ -14,6 +14,8 @@ export class Location {
     latitude?: number;
     work?: boolean;
     home?: boolean;
-    addressString?: string;
+    getAddressString(): string {
+        return `${this.street} ${this.houseNumber}, ${this.zipCode} ${this.city}`;
+    }
 }
 

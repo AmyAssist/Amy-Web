@@ -18,7 +18,7 @@ export class LocationRegistryDataService {
 
     httpOptionsReceiveJSON = {
         headers: new HttpHeaders({
-            'Content-Type': 'application/json'
+            'Accept': 'application/json'
         })
     };
 
@@ -28,7 +28,7 @@ export class LocationRegistryDataService {
             Object.assign(r, this.httpOptionsSendJSON);
         }
         if (receiveJSON) {
-            Object.assign(r, receiveJSON);
+            Object.assign(r, this.httpOptionsReceiveJSON);
         }
         return r;
     }
@@ -62,9 +62,16 @@ export class LocationRegistryDataService {
         return this.http.get<Location>(this.path + id, this.generateHeaders(false, true)).pipe(catchError(this.handleError));
     }
 
-    deleteById(id: number) {}
+    deleteById(id: number) {
+        return this.http.delete(this.path + id, this.generateHeaders(false, false)).pipe(catchError(this.handleError));
+    }
 
-    create(l: Location) {
-        return this.http.post(this.path, this.generateHeaders(true, true)).pipe(catchError(this.handleError));
+    /**
+     *
+     * @param {Location} l
+     * @returns {Observable<Location>} the newly created entity with primary key set
+     */
+    post(l: Location) {
+        return this.http.post<Location>(this.path, l, this.generateHeaders(true, true)).pipe(catchError(this.handleError));
     }
 }
