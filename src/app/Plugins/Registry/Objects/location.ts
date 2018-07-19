@@ -4,7 +4,7 @@
  * @author Benno Krauß
  */
 export class Location {
-    id?: number;
+    persistentId?: number;
     name?: string;
     zipCode?: string;
     city?: string;
@@ -14,6 +14,7 @@ export class Location {
     latitude?: number;
     work?: boolean;
     home?: boolean;
+    tag?: string;
     getAddressString(): string {
         return `${this.street} ${this.houseNumber}, ${this.zipCode} ${this.city}`;
     }
