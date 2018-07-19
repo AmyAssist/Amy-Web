@@ -4,6 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { map, catchError, retry } from 'rxjs/operators';
 import { Weather } from '../Objects/weather';
 import { WeatherWeek } from '../Objects/weatherWeek';
+import { Location } from '../Objects/location';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,7 @@ import { WeatherWeek } from '../Objects/weatherWeek';
 export class WeatherDataService {
 
   path: string;
+  pathRegistry: string;
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -18,8 +20,15 @@ export class WeatherDataService {
     })
   };
 
+  httpPlainTextHeader = {
+    headers: new HttpHeaders({
+      'Content-Type': 'text/plain'
+    })
+  };
+
   constructor(private http: HttpClient) {
     this.path = 'http://localhost:8080/rest/weather/';
+    this.pathRegistry = 'http://localhost:8080/rest/registry/location/';
   }
 
   private handleError(error: HttpErrorResponse) {
@@ -60,5 +69,22 @@ export class WeatherDataService {
   getWeatherWeek() {
     return this.http.get<WeatherWeek>(this.path + 'week', this.httpOptions).pipe(
       catchError(this.handleError));
+  }
+
+  /*
+    gets all loctaions from the registry
+  */
+  getAllLocations() {
+    return this.http.get<Location[]>(this.pathRegistry + 'all').pipe(
+      catchError(this.handleError));
+  }
+
+  /*
+  sends the selected location to amy
+  */
+  sendLocation(id: number) {
+    this.http.put(this.path + 'setLocation', String(id), this.httpPlainTextHeader).pipe(
+      catchError(this.handleError)).subscribe();
+
   }
 }
