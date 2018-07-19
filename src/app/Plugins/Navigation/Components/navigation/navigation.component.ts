@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { NavigationDataService } from '../../Services/navigation-data.service';
-import { NavPath } from '../../Objects/NavPath';
+import { NavPath } from '../../Objects/navPath';
 
 @Component({
   selector: 'app-navigation',
