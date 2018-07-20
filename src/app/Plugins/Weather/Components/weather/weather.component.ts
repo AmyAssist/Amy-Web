@@ -38,8 +38,8 @@ export class WeatherComponent implements OnInit {
 
   public onChange(event): void {
     console.log(event.value);
-    this.weatherService.sendLocation(event.value);
-
+    this.weatherService.sendLocation(event.value.id);
+    this.selectedLocation = event.value.name;
     if (this.today) { this.getWeatherToday(); }
     if (this.tommorow) { this.getWeatherTomorrow(); }
     if (this.week) { this.getWeatherWeek(); }
@@ -89,7 +89,7 @@ export class WeatherComponent implements OnInit {
       return weather.icon = 'assets/weather/snows.svg';
     }
     if (weather.precipType === 'rain') {
-      if (+weather.precipProbability.replace('%','') < 50) {
+      if (+weather.precipProbability.replace('%','') < 70) {
         return weather.icon = 'assets/weather/cloudy.svg';
       }
       return weather.icon = 'assets/weather/rain.svg';

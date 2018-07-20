@@ -5,8 +5,8 @@
 <mat-card>
   <div class="example-container">
     <mat-form-field>
-      <mat-select (selectionChange)="onChange($event)" placeholder="Select Location" [value]="selectedLocation">
-        <mat-option *ngFor="let location of locations" [value]="location.id">
+      <mat-select (selectionChange)="onChange($event)" placeholder="Select Location" [attr.selected]="selectedLocation">
+        <mat-option *ngFor="let location of locations" [value]="location">
           {{location.name}}
         </mat-option>
       </mat-select>
@@ -64,7 +64,7 @@
           <mat-card-content>
             <h2>{{weatherTomorrow.summary}}</h2>
             <br>
-            <p>Location: {{selectedLocation}}</p>
+            <p>location {{selectedLocation}}</p>
           </mat-card-content>
         </mat-grid-tile>
         <mat-grid-tile class="mat-card-tile" colspan="2" rowspan="1">
@@ -103,7 +103,7 @@
             <mat-card-content>
               <h2>{{weather.summary}}</h2>
               <br>
-              <p>Location: {{selectedLocation}}</p>
+              <p>location {{selectedLocation}}</p>
             </mat-card-content>
           </mat-grid-tile>
           <mat-grid-tile class="mat-card-tile" colspan="2" rowspan="1">
@@ -132,7 +132,7 @@
   </div>
 </mat-card>
 
-<div>Icons made by
+<div class="bottom-text">Icons made by
   <a href="https://www.flaticon.com/authors/vitaly-gorbachev" title="Vitaly Gorbachev">Vitaly Gorbachev</a> from
   <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by
   <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0"

@@ -18,3 +18,7 @@
 .dynamic-text {
     color: #5f6368;
 }
+
+.bottom-text {
+    bottom: 0;
+}
