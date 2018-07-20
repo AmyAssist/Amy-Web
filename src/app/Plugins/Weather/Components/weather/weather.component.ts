@@ -3,6 +3,7 @@ import { WeatherDataService } from '../../Services/weather-data.service';
 import { Weather } from '../../Objects/weather';
 import { WeatherWeek } from '../../Objects/weatherWeek';
 import { Location } from '../../Objects/location';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-weather',
@@ -52,7 +53,8 @@ export class WeatherComponent implements OnInit {
     this.weatherService.getWeatherToday()
       .subscribe((data: Weather) => {
         this.weatherToday = { ...data };
-        this.weatherToday.icon = this.getWeatherIcon(this.weatherToday);
+        this.weatherToday.iconSrc = this.getWeatherIcon(this.weatherToday);
+        this.weatherToday.time = this.convertTime(this.weatherToday.timestamp);
       });
   }
 
@@ -63,7 +65,8 @@ export class WeatherComponent implements OnInit {
     this.weatherService.getWeatherTomorrow()
       .subscribe((data: Weather) => {
         this.weatherTomorrow = { ...data };
-        this.weatherTomorrow.icon = this.getWeatherIcon(this.weatherTomorrow);
+        this.weatherTomorrow.iconSrc = this.getWeatherIcon(this.weatherTomorrow);
+        this.weatherTomorrow.time = this.convertTime(this.weatherTomorrow.timestamp);
       });
 
   }
@@ -76,22 +79,50 @@ export class WeatherComponent implements OnInit {
       .subscribe((data: WeatherWeek) => {
         this.weatherWeekData = { ...data };
         for (const weather of this.weatherWeekData.days) {
-          weather.icon = this.getWeatherIcon(weather);
+          weather.iconSrc = this.getWeatherIcon(weather);
+          weather.time = this.convertTime(weather.timestamp);
         }
       });
 
   }
 
   getWeatherIcon(weather: Weather): string {
-    if (weather.precipType === 'snow') {
-      return weather.icon = 'assets/weather/snows.svg';
-    }
-    if (weather.precipType === 'rain') {
-      if (+weather.precipProbability.replace('%', '') < 70) {
-        return weather.icon = 'assets/weather/cloudy.svg';
+    switch (weather.icon) {
+      case 'clear-day': {
+        return weather.iconSrc = 'assets/weather/sunny.svg';
       }
-      return weather.icon = 'assets/weather/rain.svg';
+      case 'clear-night': {
+        return weather.iconSrc = 'assets/weather/sunny.svg';
+      }
+      case 'sleet': {
+        return weather.iconSrc = 'assets/weather/rain.svg';
+      }
+      case 'rain': {
+        return weather.iconSrc = 'assets/weather/rain.svg';
+      }
+      case 'snow': {
+        return weather.iconSrc = 'assets/weather/snows.svg';
+      }
+      case 'wind': {
+        return weather.iconSrc = 'assets/weather/wind.svg';
+      }
+      case 'fog': {
+        return weather.iconSrc = 'assets/weather/hazy.svg';
+      }
+      case 'cloudy': {
+        return weather.iconSrc = 'assets/weather/cloudy.svg';
+      }
+      default: {
+        return weather.iconSrc = 'assets/weather/cloudy.svg';
+      }
     }
-    return weather.icon = 'assets/weather/sunny.svg';
+  }
+
+  convertTime(stamp: number): string {
+    console.log(stamp);
+    const datePipe = new DatePipe('en-US');
+    const test = datePipe.transform(stamp * 1000, 'EEEE, MMMM d');
+    console.log(test);
+    return test;
   }
 }

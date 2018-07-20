@@ -1,5 +1,5 @@
 <mat-toolbar>
-  <span>Wetter</span>
+  <span>Weather</span>
 </mat-toolbar>
 
 <mat-card>
@@ -13,28 +13,29 @@
     </mat-form-field>
   </div>
   <div>
-    <button mat-raised-button color="basic" (click)="getWeatherToday()">Heute</button>
-    <button mat-raised-button color="basic" (click)="getWeatherTomorrow()">Morgen</button>
-    <button mat-raised-button color="basic" (click)="getWeatherWeek()">Woche</button>
+    <button mat-raised-button color="basic" (click)="getWeatherToday()">Today</button>
+    <button mat-raised-button color="basic" (click)="getWeatherTomorrow()">Tomorrow</button>
+    <button mat-raised-button color="basic" (click)="getWeatherWeek()">Week</button>
   </div>
 
   <div *ngIf=today>
     <mat-card class="mat-card-weather">
       <mat-grid-list cols="2" row="2" rowHeight="2:1">
         <mat-grid-tile>
-          <img alt="image" style='height: 100%; width: 100%; object-fit: contain' [attr.src]="weatherToday.icon" type="image/svg+xml">
+          <img alt="image" style='height: 100%; width: 100%; object-fit: contain' [attr.src]="weatherToday.iconSrc" type="image/svg+xml">
         </mat-grid-tile>
         <mat-grid-tile style="white-space:pre-wrap;">
           <mat-card-content>
             <h2>{{weatherToday.summary}}</h2>
-            <br/>
+            <p>{{selectedLocation}}</p>
+            <p>date {{weatherToday.time}}</p>
           </mat-card-content>
         </mat-grid-tile>
         <mat-grid-tile class="mat-card-tile" colspan="2" rowspan="1">
           <mat-list role="list">
-            <mat-list-item role="listitem">temperature max
+            <mat-list-item role="listitem">temperature high
               <br/> {{weatherToday.temperatureMax}}</mat-list-item>
-            <mat-list-item role="listitem">temperature min
+            <mat-list-item role="listitem">temperature low
               <br/> {{weatherToday.temperatureMin}}</mat-list-item>
           </mat-list>
           <mat-list role="list">
@@ -58,20 +59,20 @@
     <mat-card class="mat-card-weather">
       <mat-grid-list cols="2" row="2" rowHeight="2:1">
         <mat-grid-tile>
-          <img alt="image" style='height: 100%; width: 100%; object-fit: contain' [attr.src]="weatherTomorrow.icon" type="image/svg+xml">
+          <img alt="image" style='height: 100%; width: 100%; object-fit: contain' [attr.src]="weatherTomorrow.iconSrc" type="image/svg+xml">
         </mat-grid-tile>
         <mat-grid-tile style="white-space:pre-wrap;">
           <mat-card-content>
             <h2>{{weatherTomorrow.summary}}</h2>
-            <br>
-            <p>location {{selectedLocation}}</p>
+            <p>{{selectedLocation}}</p>
+            <p>date {{weatherToday.time}}</p>
           </mat-card-content>
         </mat-grid-tile>
         <mat-grid-tile class="mat-card-tile" colspan="2" rowspan="1">
           <mat-list role="list">
-            <mat-list-item role="listitem">temperature max
+            <mat-list-item role="listitem">temperature high
               <br/> {{weatherTomorrow.temperatureMax}}</mat-list-item>
-            <mat-list-item role="listitem">temperature min
+            <mat-list-item role="listitem">temperature low
               <br/> {{weatherTomorrow.temperatureMin}}</mat-list-item>
           </mat-list>
           <mat-list role="list">
@@ -97,20 +98,20 @@
         class="mat-card-weather">
         <mat-grid-list cols="2" row="2" rowHeight="2:1">
           <mat-grid-tile>
-            <img alt="image" style='height: 100%; width: 100%; object-fit: contain' [attr.src]="weather.icon" type="image/svg+xml">
+            <img alt="image" style='height: 100%; width: 100%; object-fit: contain' [attr.src]="weather.iconSrc" type="image/svg+xml">
           </mat-grid-tile>
           <mat-grid-tile style="white-space:pre-wrap;">
             <mat-card-content>
               <h2>{{weather.summary}}</h2>
-              <br>
-              <p>location {{selectedLocation}}</p>
+              <p>{{selectedLocation}}</p>
+              <p>{{weather.time}}</p>
             </mat-card-content>
           </mat-grid-tile>
           <mat-grid-tile class="mat-card-tile" colspan="2" rowspan="1">
             <mat-list role="list">
-              <mat-list-item role="listitem">temperature max
+              <mat-list-item role="listitem">temperature high
                 <br/> {{weather.temperatureMax}}</mat-list-item>
-              <mat-list-item role="listitem">temperature min
+              <mat-list-item role="listitem">temperature low
                 <br/> {{weather.temperatureMin}}</mat-list-item>
             </mat-list>
             <mat-list role="list">
@@ -135,6 +136,5 @@
 <div class="bottom-text">Icons made by
   <a href="https://www.flaticon.com/authors/vitaly-gorbachev" title="Vitaly Gorbachev">Vitaly Gorbachev</a> from
   <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by
-  <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0"
-    target="_blank">CC 3.0 BY</a>
+  <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>
 </div>
