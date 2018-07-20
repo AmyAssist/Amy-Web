@@ -26,8 +26,8 @@ export class LocationRegistryComponent implements OnInit {
 
 
 
-    constructor(private readonly registryService: LocationRegistryDataService, private locationValidator: LocationValidatorService,
-                private geocoderService: GeocoderService) {
+    constructor(private readonly registryService: LocationRegistryDataService, private readonly locationValidator: LocationValidatorService,
+                private readonly geocoderService: GeocoderService) {
     }
 
     ngOnInit() {

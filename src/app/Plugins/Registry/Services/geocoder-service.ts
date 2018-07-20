@@ -13,7 +13,7 @@ import {GeocoderResponse} from '../Objects/geocoderresponse';
 export class GeocoderService {
     path: string;
 
-    constructor(private http: HttpClient) {
+    constructor(private readonly http: HttpClient) {
         this.path = 'http://maps.google.com/maps/api/geocode/json';
     }
 

@@ -33,7 +33,7 @@ export class LocationRegistryDataService {
         return r;
     }
 
-    constructor(private http: HttpClient) {
+    constructor(private readonly http: HttpClient) {
         this.path = 'http://localhost:8080/rest/registry/location/';
     }
 
