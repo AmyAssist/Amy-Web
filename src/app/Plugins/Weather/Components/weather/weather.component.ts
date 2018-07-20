@@ -52,7 +52,7 @@ export class WeatherComponent implements OnInit {
     this.weatherService.getWeatherToday()
       .subscribe((data: Weather) => {
         this.weatherToday = { ...data };
-        this.weatherToday.icon = this.getWeatherIcon(this.weatherToday);
+        this.weatherToday.iconSrc = this.getWeatherIcon(this.weatherToday);
       });
   }
 
@@ -63,7 +63,7 @@ export class WeatherComponent implements OnInit {
     this.weatherService.getWeatherTomorrow()
       .subscribe((data: Weather) => {
         this.weatherTomorrow = { ...data };
-        this.weatherTomorrow.icon = this.getWeatherIcon(this.weatherTomorrow);
+        this.weatherTomorrow.iconSrc = this.getWeatherIcon(this.weatherTomorrow);
       });
 
   }
@@ -76,22 +76,41 @@ export class WeatherComponent implements OnInit {
       .subscribe((data: WeatherWeek) => {
         this.weatherWeekData = { ...data };
         for (const weather of this.weatherWeekData.days) {
-          weather.icon = this.getWeatherIcon(weather);
+          weather.iconSrc = this.getWeatherIcon(weather);
         }
       });
 
   }
 
   getWeatherIcon(weather: Weather): string {
-    if (weather.precipType === 'snow') {
-      return weather.icon = 'assets/weather/snows.svg';
-    }
-    if (weather.precipType === 'rain') {
-      if (+weather.precipProbability.replace('%', '') < 70) {
-        return weather.icon = 'assets/weather/cloudy.svg';
+    switch(weather.icon){
+      case "clear-day":{
+        //fall through
       }
-      return weather.icon = 'assets/weather/rain.svg';
+      case "clear-night":{
+        return weather.iconSrc = 'assets/weather/sunny.svg';
+      }
+      case "sleet":{
+        //fall through
+      }
+      case "rain":{
+        return weather.iconSrc = 'assets/weather/rain.svg';
+      }
+      case "snow":{
+        return weather.iconSrc = 'assets/weather/snows.svg';
+      }
+      case "wind":{
+        return weather.iconSrc = 'assets/weather/wind.svg';
+      }
+      case "fog":{
+        return weather.iconSrc = 'assets/weather/hazy.svg';
+      }
+      case "cloudy":{
+        return weather.iconSrc = 'assets/weather/cloudy.svg';
+      }
+      default: {
+        return weather.iconSrc = 'assets/weather/cloudy.svg';
+      }
     }
-    return weather.icon = 'assets/weather/sunny.svg';
   }
 }

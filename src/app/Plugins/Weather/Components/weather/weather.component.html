@@ -22,7 +22,7 @@
     <mat-card class="mat-card-weather">
       <mat-grid-list cols="2" row="2" rowHeight="2:1">
         <mat-grid-tile>
-          <img alt="image" style='height: 100%; width: 100%; object-fit: contain' [attr.src]="weatherToday.icon" type="image/svg+xml">
+          <img alt="image" style='height: 100%; width: 100%; object-fit: contain' [attr.src]="weatherToday.iconSrc" type="image/svg+xml">
         </mat-grid-tile>
         <mat-grid-tile style="white-space:pre-wrap;">
           <mat-card-content>
@@ -58,7 +58,7 @@
     <mat-card class="mat-card-weather">
       <mat-grid-list cols="2" row="2" rowHeight="2:1">
         <mat-grid-tile>
-          <img alt="image" style='height: 100%; width: 100%; object-fit: contain' [attr.src]="weatherTomorrow.icon" type="image/svg+xml">
+          <img alt="image" style='height: 100%; width: 100%; object-fit: contain' [attr.src]="weatherTomorrow.iconSrc" type="image/svg+xml">
         </mat-grid-tile>
         <mat-grid-tile style="white-space:pre-wrap;">
           <mat-card-content>
@@ -97,7 +97,7 @@
         class="mat-card-weather">
         <mat-grid-list cols="2" row="2" rowHeight="2:1">
           <mat-grid-tile>
-            <img alt="image" style='height: 100%; width: 100%; object-fit: contain' [attr.src]="weather.icon" type="image/svg+xml">
+            <img alt="image" style='height: 100%; width: 100%; object-fit: contain' [attr.src]="weather.iconSrc" type="image/svg+xml">
           </mat-grid-tile>
           <mat-grid-tile style="white-space:pre-wrap;">
             <mat-card-content>
