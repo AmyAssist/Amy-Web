@@ -3,6 +3,8 @@ import {LocationRegistryDataService} from '../../Services/location-registry-data
 import {Location} from '../../Objects/location';
 import {TableDataSource, TableElement, ValidatorService} from 'angular4-material-table';
 import {LocationValidatorService} from './location-validator.service';
+import {GeocoderService} from '../../Services/geocoder-service';
+import {GeocoderResponse} from '../../Objects/geocoderresponse';
 
 /**
  * @author Benno Krauß
@@ -12,7 +14,7 @@ import {LocationValidatorService} from './location-validator.service';
     templateUrl: './location-registry.component.html',
     styleUrls: ['./location-registry.component.css'],
     providers: [
-        LocationValidatorService
+        LocationValidatorService, GeocoderService
     ]
 })
 export class LocationRegistryComponent implements OnInit {
@@ -24,7 +26,8 @@ export class LocationRegistryComponent implements OnInit {
 
 
 
-    constructor(private readonly registryService: LocationRegistryDataService, private locationValidator: LocationValidatorService) {
+    constructor(private readonly registryService: LocationRegistryDataService, private locationValidator: LocationValidatorService,
+                private geocoderService: GeocoderService) {
     }
 
     ngOnInit() {
@@ -84,16 +87,27 @@ export class LocationRegistryComponent implements OnInit {
     }
 
     createLocation(l: Location) {
-        this.registryService.post(l).subscribe((newLocation: Location) => {
-            console.log('Sent new location to server');
-            // Refresh locations to get new primary key
-            this.refreshLocations();
+        this.geocoderService.geocode(l.getAddressString()).subscribe(r => {
+            // set coordinates on location object
+            l.latitude = r.results[0].geometry.location.lat;
+            l.longitude = r.results[0].geometry.location.lng;
+
+            this.registryService.post(l).subscribe((newLocation: Location) => {
+                console.log('Sent new location to server');
+                // Refresh locations to get new primary key
+                this.refreshLocations();
+            });
         });
     }
 
     updateLocation(l: Location) {
-        this.registryService.post(l).subscribe((newLocation: Location) => {
-            console.log('Sent update to server');
+        this.geocoderService.geocode(l.getAddressString()).subscribe(r => {
+            // set coordinates on location object
+            l.latitude = r.results[0].geometry.location.lat;
+            l.longitude = r.results[0].geometry.location.lng;
+            this.registryService.post(l).subscribe((newLocation: Location) => {
+                console.log('Sent update to server');
+            });
         });
     }
 
