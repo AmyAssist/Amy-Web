@@ -54,8 +54,6 @@ export class WeatherComponent implements OnInit {
         this.weatherToday = { ...data };
         this.weatherToday.icon = this.getWeatherIcon(this.weatherToday);
       });
-    console.log(this.weatherToday.icon);
-
   }
 
   getWeatherTomorrow() {
@@ -77,7 +75,7 @@ export class WeatherComponent implements OnInit {
     this.weatherService.getWeatherWeek()
       .subscribe((data: WeatherWeek) => {
         this.weatherWeekData = { ...data };
-        for (let weather of this.weatherWeekData.days) {
+        for (const weather of this.weatherWeekData.days) {
           weather.icon = this.getWeatherIcon(weather);
         }
       });
