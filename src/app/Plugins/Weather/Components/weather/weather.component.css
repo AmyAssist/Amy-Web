@@ -1,0 +1,15 @@
+.mat-card-weather{
+    width: 30%;
+    margin: 0.1%;
+
+}
+
+.mat-card-tile{
+    left:5px;
+}
+
+.card-list {
+    display:flex;
+    flex-flow:row wrap;
+
+}
