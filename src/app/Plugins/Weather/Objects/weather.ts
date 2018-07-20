@@ -8,8 +8,8 @@ export class Weather {
     temperatureMax: number;
     sunriseTime: string;
     sunsetTime: string;
-    icon: string = "assets/weather/cloudy.svg";
+    icon = 'assets/weather/cloudy.svg';
 
-    constructor() { 
+    constructor() {
     }
 }

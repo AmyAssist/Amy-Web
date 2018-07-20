@@ -51,7 +51,7 @@ export class WeatherComponent implements OnInit {
     this.week = false;
     this.weatherService.getWeatherToday()
       .subscribe((data: Weather) => {
-        this.weatherToday = { ...data }
+        this.weatherToday = { ...data };
         this.weatherToday.icon = this.getWeatherIcon(this.weatherToday);
       });
     console.log(this.weatherToday.icon);
@@ -64,10 +64,10 @@ export class WeatherComponent implements OnInit {
     this.week = false;
     this.weatherService.getWeatherTomorrow()
       .subscribe((data: Weather) => {
-        this.weatherTomorrow = { ...data }
+        this.weatherTomorrow = { ...data };
         this.weatherTomorrow.icon = this.getWeatherIcon(this.weatherTomorrow);
       });
-    
+
   }
 
   getWeatherWeek() {
@@ -75,25 +75,25 @@ export class WeatherComponent implements OnInit {
     this.tommorow = false;
     this.week = true;
     this.weatherService.getWeatherWeek()
-      .subscribe((data: WeatherWeek) =>{
-       this.weatherWeekData = { ...data }
-       for(let weather of this.weatherWeekData.days){
-        weather.icon = this.getWeatherIcon(weather);
-      }
+      .subscribe((data: WeatherWeek) => {
+        this.weatherWeekData = { ...data };
+        for (let weather of this.weatherWeekData.days) {
+          weather.icon = this.getWeatherIcon(weather);
+        }
       });
-    
+
   }
 
   getWeatherIcon(weather: Weather): string {
-    if(weather.precipType == 'snow'){
-      return weather.icon = "assets/weather/snows.svg";
+    if (weather.precipType === 'snow') {
+      return weather.icon = 'assets/weather/snows.svg';
     }
-    if(weather.precipType == 'rain'){
-      if(+weather.precipProbability < 0.5){
-        return weather.icon = "assets/weather/cloudy.svg";
+    if (weather.precipType === 'rain') {
+      if (+weather.precipProbability.replace('%','') < 50) {
+        return weather.icon = 'assets/weather/cloudy.svg';
       }
-      return weather.icon = "assets/weather/rain.svg";
+      return weather.icon = 'assets/weather/rain.svg';
     }
-    return weather.icon = "assets/weather/sunny.svg";
+    return weather.icon = 'assets/weather/sunny.svg';
   }
 }
