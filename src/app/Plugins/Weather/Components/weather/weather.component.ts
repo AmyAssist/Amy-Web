@@ -87,29 +87,29 @@ export class WeatherComponent implements OnInit {
   }
 
   getWeatherIcon(weather: Weather): string {
-    switch(weather.icon){
-      case "clear-day":{
+    switch (weather.icon) {
+      case "clear-day": {
         //fall through
       }
-      case "clear-night":{
+      case "clear-night": {
         return weather.iconSrc = 'assets/weather/sunny.svg';
       }
-      case "sleet":{
+      case "sleet": {
         //fall through
       }
-      case "rain":{
+      case "rain": {
         return weather.iconSrc = 'assets/weather/rain.svg';
       }
-      case "snow":{
+      case "snow": {
         return weather.iconSrc = 'assets/weather/snows.svg';
       }
-      case "wind":{
+      case "wind": {
         return weather.iconSrc = 'assets/weather/wind.svg';
       }
-      case "fog":{
+      case "fog": {
         return weather.iconSrc = 'assets/weather/hazy.svg';
       }
-      case "cloudy":{
+      case "cloudy": {
         return weather.iconSrc = 'assets/weather/cloudy.svg';
       }
       default: {
@@ -121,7 +121,7 @@ export class WeatherComponent implements OnInit {
   convertTime(stamp: number): string {
     console.log(stamp);
     const datePipe = new DatePipe('en-US');
-    const test = datePipe.transform(stamp*1000, 'EEEE, MMMM d');
+    const test = datePipe.transform(stamp * 1000, 'EEEE, MMMM d');
     console.log(test);
     return test;
   }
