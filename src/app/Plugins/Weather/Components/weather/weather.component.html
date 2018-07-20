@@ -26,22 +26,21 @@
             </mat-grid-tile>
             <mat-grid-tile style="white-space:pre-wrap;">
               <mat-card-content>
-                <h3>{{weatherToday.summary}}</h3> <br/>
-                <p>Location: {{selectedLocation}}</p>
+                <h2>{{weatherToday.summary}}</h2> <br/>
               </mat-card-content>
             </mat-grid-tile>
             <mat-grid-tile class="mat-card-tile" colspan="2" rowspan="1">
               <mat-list role="list">
-                <mat-list-item role="listitem">Temperatur Max: {{weatherToday.temperatureMax}}</mat-list-item>
-                <mat-list-item role="listitem">Temperatur Min: {{weatherToday.temperatureMin}}</mat-list-item>
+                <mat-list-item role="listitem">temperature max <br/> {{weatherToday.temperatureMax}}</mat-list-item>
+                <mat-list-item role="listitem">temperature min <br/> {{weatherToday.temperatureMin}}</mat-list-item>
               </mat-list>
               <mat-list role="list">
-                <mat-list-item role="listitem">Niederschlags-Wahrsch.: {{weatherToday.precipProbability}}</mat-list-item>
-                <mat-list-item role="listitem">Niederschlags-Art: {{weatherToday.precipType}}</mat-list-item>
+                <mat-list-item role="listitem">precipitation chance <br/> {{weatherToday.precipProbability}}</mat-list-item>
+                <mat-list-item role="listitem">precipitation type <br/> {{weatherToday.precipType}}</mat-list-item>
               </mat-list>
               <mat-list role="list">
-                <mat-list-item role="listitem">Sonnenaufgang: {{weatherToday.sunriseTime}}</mat-list-item>
-                <mat-list-item role="listitem">Sonnenuntergang: {{weatherToday.sunsetTime}}</mat-list-item>
+                <mat-list-item role="listitem">sunrise <br/> {{weatherToday.sunriseTime}}</mat-list-item>
+                <mat-list-item role="listitem">sunset <br/> {{weatherToday.sunsetTime}}</mat-list-item>
               </mat-list></mat-grid-tile>
         </mat-grid-list>
     </mat-card>
@@ -55,22 +54,22 @@
               </mat-grid-tile>
               <mat-grid-tile style="white-space:pre-wrap;">
                 <mat-card-content>
-                  <h3>{{weatherTomorrow.summary}}</h3> <br>
+                  <h2>{{weatherTomorrow.summary}}</h2> <br>
                   <p>Location: {{selectedLocation}}</p>
                 </mat-card-content>
               </mat-grid-tile>
               <mat-grid-tile class="mat-card-tile" colspan="2" rowspan="1">
                 <mat-list role="list">
-                  <mat-list-item role="listitem">Temperatur Max: {{weatherTomorrow.temperatureMax}}</mat-list-item>
-                  <mat-list-item role="listitem">Temperatur Min: {{weatherTomorrow.temperatureMin}}</mat-list-item>
+                  <mat-list-item role="listitem">temperature max <br/> {{weatherTomorrow.temperatureMax}}</mat-list-item>
+                  <mat-list-item role="listitem">temperature min <br/> {{weatherTomorrow.temperatureMin}}</mat-list-item>
                 </mat-list>
                 <mat-list role="list">
-                  <mat-list-item role="listitem">Niederschlags-Wahrsch.: {{weatherTomorrow.precipProbability}}</mat-list-item>
-                  <mat-list-item role="listitem">Niederschlags-Art: {{weatherTomorrow.precipType}}</mat-list-item>
+                  <mat-list-item role="listitem">precipitation chance <br/> {{weatherTomorrow.precipProbability}}</mat-list-item>
+                  <mat-list-item role="listitem">precipitation type <br/> {{weatherTomorrow.precipType}}</mat-list-item>
                 </mat-list>
                 <mat-list role="list">
-                  <mat-list-item role="listitem">Sonnenaufgang: {{weatherTomorrow.sunriseTime}}</mat-list-item>
-                  <mat-list-item role="listitem">Sonnenuntergang: {{weatherTomorrow.sunsetTime}}</mat-list-item>
+                  <mat-list-item role="listitem">sunrise <br/> {{weatherTomorrow.sunriseTime}}</mat-list-item>
+                  <mat-list-item role="listitem">sunset <br/> {{weatherTomorrow.sunsetTime}}</mat-list-item>
                 </mat-list></mat-grid-tile>
           </mat-grid-list>
       </mat-card>
@@ -85,22 +84,22 @@
               </mat-grid-tile>
               <mat-grid-tile style="white-space:pre-wrap;">
                 <mat-card-content>
-                  <h3>{{weather.summary}}</h3> <br>
+                  <h2>{{weather.summary}}</h2> <br>
                   <p>Location: {{selectedLocation}}</p>
                 </mat-card-content>
               </mat-grid-tile>
               <mat-grid-tile class="mat-card-tile" colspan="2" rowspan="1">
                 <mat-list role="list">
-                  <mat-list-item role="listitem">Temperatur Max: {{weather.temperatureMax}}</mat-list-item>
-                  <mat-list-item role="listitem">Temperatur Min: {{weather.temperatureMin}}</mat-list-item>
+                  <mat-list-item role="listitem">temperature max <br/> {{weather.temperatureMax}}</mat-list-item>
+                  <mat-list-item role="listitem">temperature min <br/> {{weather.temperatureMin}}</mat-list-item>
                 </mat-list>
                 <mat-list role="list">
-                  <mat-list-item role="listitem">Niederschlags-Wahrsch.: {{weather.precipProbability}}</mat-list-item>
-                  <mat-list-item role="listitem">Niederschlags-Art: {{weather.precipType}}</mat-list-item>
+                  <mat-list-item role="listitem">precipitation chance <br/> {{weather.precipProbability}}</mat-list-item>
+                  <mat-list-item role="listitem">precipitation type <br/> {{weather.precipType}}</mat-list-item>
                 </mat-list>
                 <mat-list role="list">
-                  <mat-list-item role="listitem">Sonnenaufgang: {{weather.sunriseTime}}</mat-list-item>
-                  <mat-list-item role="listitem">Sonnenuntergang: {{weather.sunsetTime}}</mat-list-item>
+                  <mat-list-item role="listitem">sunrise <br/> {{weather.sunriseTime}}</mat-list-item>
+                  <mat-list-item role="listitem">sunset <br/> {{weather.sunsetTime}}</mat-list-item>
                 </mat-list></mat-grid-tile>
           </mat-grid-list>
       </mat-card>

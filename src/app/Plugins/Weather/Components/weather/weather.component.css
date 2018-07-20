@@ -1,5 +1,5 @@
 .mat-card-weather{
-    width: 30%;
+    width:26%;
     margin: 0.1%;
 
 }
@@ -11,5 +11,10 @@
 .card-list {
     display:flex;
     flex-flow:row wrap;
+    margin-left: auto;
+    margin-right: auto;
+}
 
+.dynamic-text {
+    color: #5f6368;
 }
