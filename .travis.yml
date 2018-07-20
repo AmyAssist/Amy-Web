@@ -19,7 +19,6 @@ jobs:
       name: "Build"
       if: branch = master
       script: ng build --prod --no-progress --base-href=/Amy-Web/
-      -Docker
       deploy:
         provider: pages
         skip_cleanup: true
