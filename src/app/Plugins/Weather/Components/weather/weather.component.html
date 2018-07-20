@@ -2,40 +2,53 @@
   <span>Wetter</span>
 </mat-toolbar>
 
-<div>
-  <button mat-raised-button color="basic" (click)="getWeatherToday()">Heute</button>
-  <button mat-raised-button color="basic" (click)="getWeatherTomorrow()">Morgen</button>
-  <button mat-raised-button color="basic" (click)="getWeatherWeek()">Woche</button>
-</div>
-
-<div *ngIf=today>
-  <mat-list role="list">
-    <mat-list-item role="listitem">Temperatur Max: {{weatherToday.temperatureMax}}</mat-list-item>
-    <mat-list-item role="listitem">Temperatur Min: {{weatherToday.temperatureMin}}</mat-list-item>
-    <mat-list-item role="listitem">Niederschlags-Wahrsch.: {{weatherToday.precipProbability}}</mat-list-item>
-    <mat-list-item role="listitem">Niederschlags-Art: {{weatherToday.precipType}}</mat-list-item>
-    <mat-list-item role="listitem">Sonnenaufgang: {{weatherToday.sunriseTime}}</mat-list-item>
-    <mat-list-item role="listitem">Sonnenuntergang: {{weatherToday.sunsetTime}}</mat-list-item>
-  </mat-list>
-</div>
-<div *ngIf=tommorow>
-  <mat-list role="list">
-    <mat-list-item role="listitem">Temperatur Max: {{weatherTomorrow.temperatureMax}}</mat-list-item>
-    <mat-list-item role="listitem">Temperatur Min: {{weatherTomorrow.temperatureMin}}</mat-list-item>
-    <mat-list-item role="listitem">Niederschlags-Wahrsch.: {{weatherTomorrow.precipProbability}}</mat-list-item>
-    <mat-list-item role="listitem">Niederschlags-Art: {{weatherTomorrow.precipType}}</mat-list-item>
-    <mat-list-item role="listitem">Sonnenaufgang: {{weatherTomorrow.sunriseTime}}</mat-list-item>
-    <mat-list-item role="listitem">Sonnenuntergang: {{weatherTomorrow.sunsetTime}}</mat-list-item>
-  </mat-list>
-</div>
-<div *ngIf=week>
-  <div *ngFor="let weather of weatherWeekData.days; let i = index">
-    <mat-list-item role="listitem">Tag {{i +1}}</mat-list-item>
-    <mat-list-item role="listitem">Temperatur Max: {{weather.temperatureMax}}</mat-list-item>
-    <mat-list-item role="listitem">Temperatur Min: {{weather.temperatureMin}}</mat-list-item>
-    <mat-list-item role="listitem">Niederschlags-Wahrsch.: {{weather.precipProbability}}</mat-list-item>
-    <mat-list-item role="listitem">Niederschlags-Art: {{weather.precipType}}</mat-list-item>
-    <mat-list-item role="listitem">Sonnenaufgang: {{weather.sunriseTime}}</mat-list-item>
-    <mat-list-item role="listitem">Sonnenuntergang: {{weather.sunsetTime}}</mat-list-item>
+<mat-card>
+  <div class="example-container">
+    <mat-form-field>
+      <mat-select (selectionChange)="onChange($event)" placeholder="Select Location" [value]="selectedLocation">
+        <mat-option *ngFor="let location of locations" [value]="location.id">
+          {{location.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
   </div>
-</div>
+
+  <div>
+    <button mat-raised-button color="basic" (click)="getWeatherToday()">Heute</button>
+    <button mat-raised-button color="basic" (click)="getWeatherTomorrow()">Morgen</button>
+    <button mat-raised-button color="basic" (click)="getWeatherWeek()">Woche</button>
+  </div>
+
+  <div *ngIf=today>
+    <mat-list role="list">
+      <mat-list-item role="listitem">Temperatur Max: {{weatherToday.temperatureMax}}</mat-list-item>
+      <mat-list-item role="listitem">Temperatur Min: {{weatherToday.temperatureMin}}</mat-list-item>
+      <mat-list-item role="listitem">Niederschlags-Wahrsch.: {{weatherToday.precipProbability}}</mat-list-item>
+      <mat-list-item role="listitem">Niederschlags-Art: {{weatherToday.precipType}}</mat-list-item>
+      <mat-list-item role="listitem">Sonnenaufgang: {{weatherToday.sunriseTime}}</mat-list-item>
+      <mat-list-item role="listitem">Sonnenuntergang: {{weatherToday.sunsetTime}}</mat-list-item>
+    </mat-list>
+  </div>
+  <div *ngIf=tommorow>
+    <mat-list role="list">
+      <mat-list-item role="listitem">Temperatur Max: {{weatherTomorrow.temperatureMax}}</mat-list-item>
+      <mat-list-item role="listitem">Temperatur Min: {{weatherTomorrow.temperatureMin}}</mat-list-item>
+      <mat-list-item role="listitem">Niederschlags-Wahrsch.: {{weatherTomorrow.precipProbability}}</mat-list-item>
+      <mat-list-item role="listitem">Niederschlags-Art: {{weatherTomorrow.precipType}}</mat-list-item>
+      <mat-list-item role="listitem">Sonnenaufgang: {{weatherTomorrow.sunriseTime}}</mat-list-item>
+      <mat-list-item role="listitem">Sonnenuntergang: {{weatherTomorrow.sunsetTime}}</mat-list-item>
+    </mat-list>
+  </div>
+  <div *ngIf=week>
+    <div *ngFor="let weather of weatherWeekData.days; let i = index">
+      <mat-list-item role="listitem">Tag {{i +1}}</mat-list-item>
+      <mat-list-item role="listitem">Temperatur Max: {{weather.temperatureMax}}</mat-list-item>
+      <mat-list-item role="listitem">Temperatur Min: {{weather.temperatureMin}}</mat-list-item>
+      <mat-list-item role="listitem">Niederschlags-Wahrsch.: {{weather.precipProbability}}</mat-list-item>
+      <mat-list-item role="listitem">Niederschlags-Art: {{weather.precipType}}</mat-list-item>
+      <mat-list-item role="listitem">Sonnenaufgang: {{weather.sunriseTime}}</mat-list-item>
+      <mat-list-item role="listitem">Sonnenuntergang: {{weather.sunsetTime}}</mat-list-item>
+    </div>
+  </div>
+
+</mat-card>
