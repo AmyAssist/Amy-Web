@@ -24,13 +24,13 @@ export class DatabaseService {
     };
 
     constructor(private http: HttpClient) {
-        this.path = 'http://localhost:8080/rest/home/';
+        this.path = 'http://localhost:8080/rest/';
     }
 
     /**
      * Function to send typed commands to the backend and receive the response
      */
     sendCommand(commandData: Command) {
-        return this.http.post(this.path + 'console', commandData.value, this.httpOptions);
+        return this.http.post(this.path + 'home/console', commandData.value, this.httpOptions);
     }
 }
