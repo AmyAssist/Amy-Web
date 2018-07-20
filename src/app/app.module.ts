@@ -32,6 +32,9 @@ import { WeatherComponent } from './Plugins/Weather/Components/weather/weather.c
 import { HomeComponent } from './Components/home/home.component';
 import { CalendarComponent } from './Plugins/Calendar/Components/calendar/calendar.component';
 import { NavigationComponent } from './Plugins/Navigation/Components/navigation/navigation.component';
+import { LoginComponent } from './login/login.component';
+import { AuthService } from './auth.service';
+import { AuthGuard } from './auth.guard';
 
 /*
     Routing of the components to the respective links
@@ -39,24 +42,38 @@ import { NavigationComponent } from './Plugins/Navigation/Components/navigation/
 const routes: Routes = [
   {
     path: '',
-    component: HomeComponent
+    component: HomeComponent,
+    canActivate: [AuthGuard]
+  },
+  { 
+    path: 'home', 
+    component: HomeComponent, 
+    canActivate: [AuthGuard]
   },
   {
     path: 'music',
-    component: MusicComponent
+    component: MusicComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'clock',
-    component: ClockComponent
+    component: ClockComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'weather',
-    component: WeatherComponent
+    component: WeatherComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'navigation',
-    component: NavigationComponent
-  }
+    component: NavigationComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'login',
+    component: LoginComponent
+  },
 ];
 
 @NgModule({
@@ -68,6 +85,7 @@ const routes: Routes = [
     HomeComponent,
     CalendarComponent,
     NavigationComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -91,10 +109,11 @@ const routes: Routes = [
     MatDividerModule,
     MatIconModule,
     HttpClientModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    FormsModule,
   ],
   exports: [RouterModule],
-  providers: [],
+  providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
