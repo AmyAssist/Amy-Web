@@ -89,13 +89,13 @@ export class WeatherComponent implements OnInit {
   getWeatherIcon(weather: Weather): string {
     switch (weather.icon) {
       case 'clear-day': {
-        //fall through
+        return weather.iconSrc = 'assets/weather/sunny.svg';
       }
       case 'clear-night': {
         return weather.iconSrc = 'assets/weather/sunny.svg';
       }
       case 'sleet': {
-        //fall through
+        return weather.iconSrc = 'assets/weather/rain.svg';
       }
       case 'rain': {
         return weather.iconSrc = 'assets/weather/rain.svg';
