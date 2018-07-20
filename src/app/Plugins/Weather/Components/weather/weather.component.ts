@@ -3,6 +3,7 @@ import { WeatherDataService } from '../../Services/weather-data.service';
 import { Weather } from '../../Objects/weather';
 import { WeatherWeek } from '../../Objects/weatherWeek';
 import { Location } from '../../Objects/location';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-weather',
@@ -53,6 +54,7 @@ export class WeatherComponent implements OnInit {
       .subscribe((data: Weather) => {
         this.weatherToday = { ...data };
         this.weatherToday.iconSrc = this.getWeatherIcon(this.weatherToday);
+        this.weatherToday.time = this.convertTime(this.weatherToday.timestamp);
       });
   }
 
@@ -64,6 +66,7 @@ export class WeatherComponent implements OnInit {
       .subscribe((data: Weather) => {
         this.weatherTomorrow = { ...data };
         this.weatherTomorrow.iconSrc = this.getWeatherIcon(this.weatherTomorrow);
+        this.weatherTomorrow.time = this.convertTime(this.weatherTomorrow.timestamp);
       });
 
   }
@@ -77,6 +80,7 @@ export class WeatherComponent implements OnInit {
         this.weatherWeekData = { ...data };
         for (const weather of this.weatherWeekData.days) {
           weather.iconSrc = this.getWeatherIcon(weather);
+          weather.time = this.convertTime(weather.timestamp);
         }
       });
 
@@ -112,5 +116,13 @@ export class WeatherComponent implements OnInit {
         return weather.iconSrc = 'assets/weather/cloudy.svg';
       }
     }
+  }
+
+  convertTime(stamp: number): string {
+    console.log(stamp);
+    const datePipe = new DatePipe('en-US');
+    const test = datePipe.transform(stamp*1000, 'EEEE, MMMM d');
+    console.log(test);
+    return test;
   }
 }
