@@ -87,7 +87,7 @@ export class WeatherComponent implements OnInit {
       return weather.icon = 'assets/weather/snows.svg';
     }
     if (weather.precipType === 'rain') {
-      if (+weather.precipProbability.replace('%','') < 70) {
+      if (+weather.precipProbability.replace('%', '') < 70) {
         return weather.icon = 'assets/weather/cloudy.svg';
       }
       return weather.icon = 'assets/weather/rain.svg';
