@@ -1,5 +1,5 @@
 <mat-toolbar>
-  <span>Wetter</span>
+  <span>Weather</span>
 </mat-toolbar>
 
 <mat-card>
@@ -13,9 +13,9 @@
     </mat-form-field>
   </div>
   <div>
-    <button mat-raised-button color="basic" (click)="getWeatherToday()">Heute</button>
-    <button mat-raised-button color="basic" (click)="getWeatherTomorrow()">Morgen</button>
-    <button mat-raised-button color="basic" (click)="getWeatherWeek()">Woche</button>
+    <button mat-raised-button color="basic" (click)="getWeatherToday()">Today</button>
+    <button mat-raised-button color="basic" (click)="getWeatherTomorrow()">Tomorrow</button>
+    <button mat-raised-button color="basic" (click)="getWeatherWeek()">Week</button>
   </div>
 
   <div *ngIf=today>
@@ -27,15 +27,15 @@
         <mat-grid-tile style="white-space:pre-wrap;">
           <mat-card-content>
             <h2>{{weatherToday.summary}}</h2>
-            <p>location {{selectedLocation}}</p>
+            <p>{{selectedLocation}}</p>
             <p>date {{weatherToday.time}}</p>
           </mat-card-content>
         </mat-grid-tile>
         <mat-grid-tile class="mat-card-tile" colspan="2" rowspan="1">
           <mat-list role="list">
-            <mat-list-item role="listitem">temperature max
+            <mat-list-item role="listitem">temperature high
               <br/> {{weatherToday.temperatureMax}}</mat-list-item>
-            <mat-list-item role="listitem">temperature min
+            <mat-list-item role="listitem">temperature low
               <br/> {{weatherToday.temperatureMin}}</mat-list-item>
           </mat-list>
           <mat-list role="list">
@@ -64,15 +64,15 @@
         <mat-grid-tile style="white-space:pre-wrap;">
           <mat-card-content>
             <h2>{{weatherTomorrow.summary}}</h2>
-            <p>location {{selectedLocation}}</p>
+            <p>{{selectedLocation}}</p>
             <p>date {{weatherToday.time}}</p>
           </mat-card-content>
         </mat-grid-tile>
         <mat-grid-tile class="mat-card-tile" colspan="2" rowspan="1">
           <mat-list role="list">
-            <mat-list-item role="listitem">temperature max
+            <mat-list-item role="listitem">temperature high
               <br/> {{weatherTomorrow.temperatureMax}}</mat-list-item>
-            <mat-list-item role="listitem">temperature min
+            <mat-list-item role="listitem">temperature low
               <br/> {{weatherTomorrow.temperatureMin}}</mat-list-item>
           </mat-list>
           <mat-list role="list">
@@ -103,15 +103,15 @@
           <mat-grid-tile style="white-space:pre-wrap;">
             <mat-card-content>
               <h2>{{weather.summary}}</h2>
-              <p>location {{selectedLocation}}</p>
+              <p>{{selectedLocation}}</p>
               <p>{{weather.time}}</p>
             </mat-card-content>
           </mat-grid-tile>
           <mat-grid-tile class="mat-card-tile" colspan="2" rowspan="1">
             <mat-list role="list">
-              <mat-list-item role="listitem">temperature max
+              <mat-list-item role="listitem">temperature high
                 <br/> {{weather.temperatureMax}}</mat-list-item>
-              <mat-list-item role="listitem">temperature min
+              <mat-list-item role="listitem">temperature low
                 <br/> {{weather.temperatureMin}}</mat-list-item>
             </mat-list>
             <mat-list role="list">
