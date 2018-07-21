@@ -9,7 +9,7 @@ import { Device } from '../Objects/device';
 /*
   service for exchanging data between the spotify plugin and the music component
 
-  @author: Tobias Siemonsen
+  @author: Tobias Siemonsen, Lars Buttgereit
 */
 @Injectable({
   providedIn: 'root'
@@ -54,17 +54,17 @@ export class MusicDataService {
     params = params.append('clientID', clientID);
     params = params.append('clientSecret', clientSecret);
 
-    return this.http.post(this.path + 'init', null, { params: params }).pipe(
+    return this.http.post(`${this.path}init`, null, { params }).pipe(
       catchError(this.handleError));
   }
 
   setToken(token: string) {
-    return this.http.post(this.path + 'token/' + token, null).pipe(
+    return this.http.post(`${this.path}token/` + token, null).pipe(
       catchError(this.handleError));
   }
 
   getDevices() {
-    return this.http.get<Device[]>(this.path + 'getDevices', this.httpOptions).pipe(
+    return this.http.get<Device[]>(`${this.path}getDevices`, this.httpOptions).pipe(
       catchError(this.handleError));
   }
 
@@ -72,7 +72,16 @@ export class MusicDataService {
     Returns the device that is selected
   */
   setDevice(deviceId: string) {
-    return this.http.post(this.path + 'setDevice/' + deviceId.toString(), null).pipe(
+    return this.http.post(`${this.path}setDevice/` + deviceId, null).pipe(
+      catchError(this.handleError));
+  }
+
+  setDeviceName(deviceUri: string, deviceName: string) {
+    let params = new HttpParams();
+    params = params.append('uri', deviceUri);
+    params = params.append('newName', deviceName);
+
+    return this.http.post(`${this.path}setDeviceName`, null, { params }).pipe(
       catchError(this.handleError));
   }
 
@@ -80,14 +89,14 @@ export class MusicDataService {
     Getting the current Song.
   */
   getCurrentSong() {
-    return this.http.get<Music>(this.path + 'currentSong', this.httpOptions).pipe(
+    return this.http.get<Music>(`${this.path}currentSong`, this.httpOptions).pipe(
       catchError(this.handleError));
   }
 
-  search(searchValue: string, searchType: string) {
+  search(searchValue: string, searchType: string, limit: string) {
     const params = new HttpParams().set('type', searchType);
-
-    return this.http.post(this.path + 'search/' + searchValue, null, { params: params }).pipe(
+    params.append('limit', limit);
+    return this.http.post(`${this.path}search/` + searchValue, null, { params }).pipe(
       catchError(this.handleError));
   }
 
@@ -97,24 +106,24 @@ export class MusicDataService {
   playSong(musicData: Music): Observable<Music> {
     const params = new HttpParams().set('type', 'track');
 
-    return this.http.post<Music>(this.path + 'play', musicData, { params: params }).pipe(
+    return this.http.post<Music>(`${this.path}play`, musicData, { params }).pipe(
       catchError(this.handleError));
   }
 
   /*
     giving a command to play a playlist.
   */
-  playPlaylist(playlistData: Number, playlistType: string): Observable<Playlist> {
+  playPlaylist(playlistData: number, playlistType: string): Observable<Playlist> {
     let params = new HttpParams();
     params = params.append('songNumber', playlistData.toString());
     params = params.append('type', playlistType);
 
-    return this.http.post<Playlist>(this.path + 'play', null, { params: params }).pipe(
+    return this.http.post<Playlist>(`${this.path}play`, null, { params }).pipe(
       catchError(this.handleError));
   }
 
   resume() {
-    return this.http.post<Playlist>(this.path + 'resume', null).pipe(
+    return this.http.post<Playlist>(`${this.path}resume`, null).pipe(
       catchError(this.handleError));
   }
 
@@ -135,6 +144,11 @@ export class MusicDataService {
 
   setVolume(volumeData: number) {
     return this.http.post<Playlist>(this.path + 'volume/' + volumeData, null).pipe(
+      catchError(this.handleError));
+  }
+
+  getVolume() {
+    return this.http.get<number>(this.path + 'getVolume', this.httpOptions).pipe(
       catchError(this.handleError));
   }
 
