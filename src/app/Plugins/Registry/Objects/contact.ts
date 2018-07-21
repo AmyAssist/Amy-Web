@@ -4,7 +4,7 @@
  * @author Benno Krauß
  */
 export class Contact {
-    id?: number;
+    persistentId?: number;
     firstName?: string;
     lastName?: string;
     important?: boolean;
