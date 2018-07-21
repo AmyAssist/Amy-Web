@@ -13,6 +13,7 @@
       </mat-panel-description>
     </mat-expansion-panel-header>
 
+    <p>leave blank if config file exists</p>
     <div *ngIf=!setupStage2>
       <mat-form-field>
         <input matInput #clientID placeholder="ClientID">
@@ -33,22 +34,6 @@
 
       <button mat-button color="primary" (click)="setToken(accessToken.value)">Send</button>
     </div>
-  </mat-expansion-panel>
-
-  <mat-expansion-panel>
-
-
-    <mat-form-field>
-      <input matInput #artist placeholder="Artist">
-    </mat-form-field>
-
-    <mat-form-field>
-      <input matInput #song placeholder="Song">
-    </mat-form-field>
-
-    <button mat-icon-button color="primary" (click)="playSong(artist.value, song.value)">
-      <mat-icon>play_arrow</mat-icon>
-    </button>
   </mat-expansion-panel>
 
   <mat-expansion-panel>
@@ -185,7 +170,7 @@
   <mat-slider [max]="volumeMax" [min]="volumeMin" [step]="volumeStep" [(ngModel)]="volumeValue" (change)="changeVolume(volumeValue)">
   </mat-slider>
 </div>
-<div *ngIf=song>
+<div>
   <mat-list role="list">
     <mat-list-item role="listitem">Artist: {{musicData.artist}}</mat-list-item>
     <mat-list-item role="listitem">Title: {{musicData.title}}</mat-list-item>
@@ -195,7 +180,7 @@
   <mat-list-item role="listitem">Playlist: {{musicPlaylistData.name}}</mat-list-item>
   <mat-list>
     <mat-list-item *ngFor="let music of playlistSongs; let i = index">
-      <p matLine>Trakc: {{i +1}}</p>
+      <p matLine>Track: {{i +1}}</p>
       <p matLine>Artist: {{music.artist}}</p>
       <p matLine>Title: {{music.title}}</p>
     </mat-list-item>

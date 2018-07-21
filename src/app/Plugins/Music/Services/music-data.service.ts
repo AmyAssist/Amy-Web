@@ -9,7 +9,7 @@ import { Device } from '../Objects/device';
 /*
   service for exchanging data between the spotify plugin and the music component
 
-  @author: Tobias Siemonsen
+  @author: Tobias Siemonsen, Lars Buttgereit
 */
 @Injectable({
   providedIn: 'root'
@@ -54,7 +54,7 @@ export class MusicDataService {
     params = params.append('clientID', clientID);
     params = params.append('clientSecret', clientSecret);
 
-    return this.http.post(this.path + 'init', null, { params: params }).pipe(
+    return this.http.post(this.path + 'init', null, { params }).pipe(
       catchError(this.handleError));
   }
 
@@ -81,7 +81,7 @@ export class MusicDataService {
     params = params.append('uri', deviceUri);
     params = params.append('newName', deviceName);
 
-    return this.http.post(this.path + 'setDeviceName', null, { params: params }).pipe(
+    return this.http.post(this.path + 'setDeviceName', null, { params }).pipe(
       catchError(this.handleError));
   }
 
@@ -96,7 +96,7 @@ export class MusicDataService {
   search(searchValue: string, searchType: string, limit: string) {
     const params = new HttpParams().set('type', searchType);
     params.append('limit', limit);
-    return this.http.post(this.path + 'search/' + searchValue, null, { params: params }).pipe(
+    return this.http.post(this.path + 'search/' + searchValue, null, { params }).pipe(
       catchError(this.handleError));
   }
 
@@ -106,7 +106,7 @@ export class MusicDataService {
   playSong(musicData: Music): Observable<Music> {
     const params = new HttpParams().set('type', 'track');
 
-    return this.http.post<Music>(this.path + 'play', musicData, { params: params }).pipe(
+    return this.http.post<Music>(this.path + 'play', musicData, { params }).pipe(
       catchError(this.handleError));
   }
 
@@ -118,7 +118,7 @@ export class MusicDataService {
     params = params.append('songNumber', playlistData.toString());
     params = params.append('type', playlistType);
 
-    return this.http.post<Playlist>(this.path + 'play', null, { params: params }).pipe(
+    return this.http.post<Playlist>(this.path + 'play', null, { params }).pipe(
       catchError(this.handleError));
   }
 
@@ -144,6 +144,11 @@ export class MusicDataService {
 
   setVolume(volumeData: number) {
     return this.http.post<Playlist>(this.path + 'volume/' + volumeData, null).pipe(
+      catchError(this.handleError));
+  }
+
+  getVolume() {
+    return this.http.get<number>(this.path + 'getVolume', this.httpOptions).pipe(
       catchError(this.handleError));
   }
 

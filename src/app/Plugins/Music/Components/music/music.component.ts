@@ -67,7 +67,7 @@ export class MusicComponent implements OnInit {
   volumeMax = 100;
   volumeMin = 0;
   volumeStep = 1;
-  volumeValue = 40;
+  volumeValue: number;
 
   constructor(private readonly musicService: MusicDataService) { }
 
@@ -90,6 +90,8 @@ export class MusicComponent implements OnInit {
     this.deviceAll = new Array<Device>();
 
     this.searchResults = new Array<Music>();
+
+    this.getVolume();
   }
 
 
@@ -152,6 +154,7 @@ export class MusicComponent implements OnInit {
   setSkip() {
     this.musicService.skip()
       .subscribe();
+      this.playing = true;
   }
 
   /*
@@ -160,6 +163,7 @@ export class MusicComponent implements OnInit {
   setBack() {
     this.musicService.back()
       .subscribe();
+      this.playing = true;
   }
 
   /*
@@ -170,6 +174,12 @@ export class MusicComponent implements OnInit {
       .subscribe();
   }
 
+  /*
+  get the volume
+  */
+getVolume() {
+  this.musicService.getVolume().subscribe((data: number) => this.volumeValue = data);
+}
   /*
     playing a single song typed in over the UI
   */
@@ -206,7 +216,7 @@ export class MusicComponent implements OnInit {
     if (playlistType === 'user') {
       this.musicPlaylistData = this.playlistAllUser[playlistNumber];
     }
-    else{
+    else {
       this.musicPlaylistData = this.playlistAllFeatured[playlistNumber];
     }
     this.playlistSongs = this.musicPlaylistData.songs;
