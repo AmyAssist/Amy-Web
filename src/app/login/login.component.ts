@@ -11,6 +11,7 @@ import { AuthService } from '../auth.service';
 export class LoginComponent implements OnInit {
 
   url: string;
+  inputText = '';
 
   constructor(
     private myRoute: Router,
@@ -20,10 +21,12 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
-  login () {
+  login() {
+    if (this.inputText != '') {
       console.log("login");
       this.auth.login();
       this.myRoute.navigate(["home"]);
+    }
   }
 
 }

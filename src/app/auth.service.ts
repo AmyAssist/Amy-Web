@@ -13,12 +13,13 @@ export class AuthService {
 
   isLoggednIn() {
 
-    return this.isLoggedIn = false;
+    return this.isLoggedIn;
 
   }
 
   login() {
       this.isLoggedIn = true;
+      this.myRoute.navigate(["home"]);
   }
 
   logout() {

@@ -1,13 +1,16 @@
+<mat-toolbar>
+    <span>Login</span>
+  </mat-toolbar>
+
 <mat-card>
-
-  <form>
+    Domain of Amy-Core
     <div class="form-group">
-      <label for="name">Name</label>
-      <input type="text" class="form-control" id="url" required>
+        <mat-form-field class="form-full-width">
+      <input matInput [(ngModel)]="inputText" type="text" class="form-control" id="url" placeholder="http://localhost:8080/rest/" required>
+      </mat-form-field>
     </div>
-  </form>
 
-  <button mat-raised-button type="submit" color="primary" (click)="login()">Login </button>
+  <button mat-raised-button type="submit" color="primary"  (click)="login()">Login </button>
 
 
 
