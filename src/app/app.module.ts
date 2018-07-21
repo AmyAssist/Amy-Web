@@ -34,6 +34,7 @@ import { NavigationComponent } from './Plugins/Navigation/Components/navigation/
 import { LocationRegistryComponent } from './Plugins/Registry/Components/location-registry/location-registry.component';
 import { ErrorDialogComponent } from './Components/error-dialog/error-dialog.component';
 import { RegistryContainerComponent } from './Plugins/Registry/Components/registry-container/registry-container.component';
+import { ContactRegistryComponent } from './Plugins/Registry/Components/contact-registry/contact-registry.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -77,6 +78,7 @@ const routes: Routes = [
     LocationRegistryComponent,
     ErrorDialogComponent,
     RegistryContainerComponent,
+    ContactRegistryComponent,
   ],
   imports: [
     MusicModule,
