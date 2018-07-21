@@ -93,9 +93,9 @@ export class MusicDataService {
       catchError(this.handleError));
   }
 
-  search(searchValue: string, searchType: string) {
+  search(searchValue: string, searchType: string, limit: string) {
     const params = new HttpParams().set('type', searchType);
-
+    params.append('limit', limit);
     return this.http.post(this.path + 'search/' + searchValue, null, { params: params }).pipe(
       catchError(this.handleError));
   }
@@ -113,7 +113,7 @@ export class MusicDataService {
   /*
     giving a command to play a playlist.
   */
-  playPlaylist(playlistData: Number, playlistType: string): Observable<Playlist> {
+  playPlaylist(playlistData: number, playlistType: string): Observable<Playlist> {
     let params = new HttpParams();
     params = params.append('songNumber', playlistData.toString());
     params = params.append('type', playlistType);

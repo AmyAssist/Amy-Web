@@ -9,7 +9,7 @@
         Setup
       </mat-panel-title>
       <mat-panel-description>
-        Richte deine Spotify-Verbindung ein.
+        Set up your spotify connection.
       </mat-panel-description>
     </mat-expansion-panel-header>
 
@@ -22,27 +22,21 @@
         <input matInput #clientSecret placeholder="ClientSecret">
       </mat-form-field>
 
-      <button mat-button color="primary" (click)="setInit(clientID.value, clientSecret.value)">Absenden</button>
+      <button mat-button color="primary" (click)="setInit(clientID.value, clientSecret.value)">Send</button>
     </div>
     <div *ngIf=setupStage2>
-      <mat-card>Authentifikations-Link: {{spotifyLink}}</mat-card>
+      <mat-card>authentication link: {{spotifyLink}}</mat-card>
 
       <mat-form-field>
         <input matInput #accessToken placeholder="Access Token">
       </mat-form-field>
 
-      <button mat-button color="primary" (click)="setToken(accessToken.value)">Absenden</button>
+      <button mat-button color="primary" (click)="setToken(accessToken.value)">Send</button>
     </div>
   </mat-expansion-panel>
+
   <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        Play Song
-      </mat-panel-title>
-      <mat-panel-description>
-        Gib einen Song zum abspielen ein
-      </mat-panel-description>
-    </mat-expansion-panel-header>
+
 
     <mat-form-field>
       <input matInput #artist placeholder="Artist">
@@ -56,13 +50,50 @@
       <mat-icon>play_arrow</mat-icon>
     </button>
   </mat-expansion-panel>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Search and Play something
+      </mat-panel-title>
+      <mat-panel-description>
+        Search item an play
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <mat-form-field>
+      <input matInput #input placeholder="Search item">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select [(value)]="activeType" placeholder="Choose type">
+        <mat-option value="track">Track</mat-option>
+        <mat-option value="artist">Artist</mat-option>
+        <mat-option value="album">Album</mat-option>
+        <mat-option value="playlist">Playlist</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-tab-group>
+      <mat-tab label="Search results">
+        <div *ngFor="let playlist of searchResults; let i = index">
+          <mat-list-item role="listitem">
+            <mat-label>{{searchResults[i].name + " (from " + searchResults[i].artistName + ")"}}</mat-label>
+            <button mat-icon-button color="primary" (click)="playSearchResults(i)">
+              <mat-icon>play_circle_outline</mat-icon>
+            </button>
+          </mat-list-item>
+        </div>
+        <button mat-raised-button color="primary" (click)="search(input.value, activeType, '5')">Search</button>
+      </mat-tab>
+
+    </mat-tab-group>
+  </mat-expansion-panel>
+
   <mat-expansion-panel>
     <mat-expansion-panel-header>
       <mat-panel-title>
         Play Playlist
       </mat-panel-title>
       <mat-panel-description>
-        Wähle eine Playlist aus
+        Select a playlist
       </mat-panel-description>
     </mat-expansion-panel-header>
     <mat-tab-group>
@@ -75,10 +106,10 @@
             </button>
           </mat-list-item>
         </div>
-        <button mat-raised-button color="primary" (click)="getPlaylistFeatured()">Aktualisieren</button>
+        <button mat-raised-button color="primary" (click)="getPlaylistFeatured()">Refresh</button>
       </mat-tab>
 
-      <mat-tab label="Eigene Playlists">
+      <mat-tab label="Own Playlists">
         <div *ngFor="let playlist of playlistAllUser; let i = index">
           <mat-list-item role="listitem">
             <mat-label>{{playlistAllUser[i].name}}</mat-label>
@@ -87,7 +118,7 @@
             </button>
           </mat-list-item>
         </div>
-        <button mat-raised-button color="primary" (click)="getPlaylistUser()">Aktualisieren</button>
+        <button mat-raised-button color="primary" (click)="getPlaylistUser()">Refresh</button>
       </mat-tab>
     </mat-tab-group>
   </mat-expansion-panel>
@@ -98,13 +129,13 @@
         Devices
       </mat-panel-title>
       <mat-panel-description>
-        Wähle eine Gerät aus
+        Select a device
       </mat-panel-description>
     </mat-expansion-panel-header>
     <mat-tab-group>
-      <mat-tab label="Geräteauswahl">
+      <mat-tab label="device selection">
         <mat-form-field>
-          <mat-select [(value)]="activeDeviceID">
+          <mat-select [(value)]="activeDeviceID" placeholder="Choose device">
             <mat-option *ngFor="let device of deviceAll; let i = index" value={{deviceAll[i].id}}>
               {{device.name}}
             </mat-option>
@@ -116,9 +147,9 @@
         </button>
         <p>You selected: {{activeDeviceID}}</p>
       </mat-tab>
-      <mat-tab label="Gerät umbenennen">
+      <mat-tab label="Rename device">
         <mat-form-field>
-          <mat-select [(value)]="renameDeviceID">
+          <mat-select [(value)]="renameDeviceID" placeholder="Choose device">
             <mat-option *ngFor="let device of deviceAll; let i = index" value={{deviceAll[i].id}}>
               {{device.name}}
             </mat-option>
@@ -126,18 +157,18 @@
 
         </mat-form-field>
         <mat-form-field>
-          <input matInput #deviceName placeholder="Neuer Name">
+          <input matInput #deviceName placeholder="New name">
         </mat-form-field>
-        <button mat-raised-button color="basic" (click)="setDeviceName(renameDeviceID, deviceName.value)">Umbenennen</button>
+        <button mat-raised-button color="basic" (click)="setDeviceName(renameDeviceID, deviceName.value)">Rename</button>
       </mat-tab>
     </mat-tab-group>
 
-    <button mat-raised-button color="primary" (click)="getDevs()">Aktualisieren</button>
+    <button mat-raised-button color="primary" (click)="getDevs()">Refresh</button>
   </mat-expansion-panel>
 </mat-accordion>
 
 <div>
-  <button mat-raised-button color="primary" (click)="getCurrentSong()">Aktueller Song</button>
+  <button mat-raised-button color="primary" (click)="getCurrentSong()">Current song</button>
 
   <button mat-icon-button color="primary" (click)="setBack()">
     <mat-icon>fast_rewind</mat-icon>
@@ -156,17 +187,17 @@
 </div>
 <div *ngIf=song>
   <mat-list role="list">
-    <mat-list-item role="listitem">Interpret: {{musicData.artist}}</mat-list-item>
-    <mat-list-item role="listitem">Titel: {{musicData.title}}</mat-list-item>
+    <mat-list-item role="listitem">Artist: {{musicData.artist}}</mat-list-item>
+    <mat-list-item role="listitem">Title: {{musicData.title}}</mat-list-item>
   </mat-list>
 </div>
 <div *ngIf=playlist>
   <mat-list-item role="listitem">Playlist: {{musicPlaylistData.name}}</mat-list-item>
   <mat-list>
     <mat-list-item *ngFor="let music of playlistSongs; let i = index">
-      <p matLine>Song: {{i +1}}</p>
-      <p matLine>Interpret: {{music.artist}}</p>
-      <p matLine>Titel: {{music.title}}</p>
+      <p matLine>Trakc: {{i +1}}</p>
+      <p matLine>Artist: {{music.artist}}</p>
+      <p matLine>Title: {{music.title}}</p>
     </mat-list-item>
   </mat-list>
 </div>
