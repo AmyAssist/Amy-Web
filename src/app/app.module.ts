@@ -35,6 +35,7 @@ import { NavigationComponent } from './Plugins/Navigation/Components/navigation/
 import { LoginComponent } from './login/login.component';
 import { AuthService } from './auth.service';
 import { AuthGuard } from './auth.guard';
+import { CookieService } from 'angular2-cookie/services/cookies.service';
 
 /*
     Routing of the components to the respective links
@@ -45,9 +46,9 @@ const routes: Routes = [
     component: HomeComponent,
     canActivate: [AuthGuard]
   },
-  { 
-    path: 'home', 
-    component: HomeComponent, 
+  {
+    path: 'home',
+    component: HomeComponent,
     canActivate: [AuthGuard]
   },
   {
@@ -113,7 +114,7 @@ const routes: Routes = [
     FormsModule,
   ],
   exports: [RouterModule],
-  providers: [AuthService, AuthGuard],
+  providers: [AuthService, AuthGuard, CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

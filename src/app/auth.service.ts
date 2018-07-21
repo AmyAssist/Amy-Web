@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-
+import { CookieService } from 'angular2-cookie/core';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -8,24 +8,26 @@ import { Router } from '@angular/router';
 export class AuthService {
 
   isLoggedIn = false;
+  readonly COOKIE_KEY = "core-domain";
 
-  constructor(private myRoute: Router) { }
+  constructor(private myRoute: Router, private cookieService: CookieService) { }
 
-  isLoggednIn() {
-
-    return this.isLoggedIn;
-
+  loggedIn(): boolean {
+    console.log("test" + this.cookieService.get(this.COOKIE_KEY) != null);
+    this.isLoggedIn = this.cookieService.get(this.COOKIE_KEY) != null;
+    return this.isLoggedIn
   }
 
-  login() {
-      this.isLoggedIn = true;
-      this.myRoute.navigate(["home"]);
+  login(domain: string) {
+    this.cookieService.put(this.COOKIE_KEY, domain);
+    this.isLoggedIn = true;
+    this.myRoute.navigate(["home"]);
   }
 
   logout() {
-    this.isLoggedIn = true;
+    this.cookieService.remove(this.COOKIE_KEY);
+    this.isLoggedIn = false;
     this.myRoute.navigate(["login"]);
-
   }
 
 }
