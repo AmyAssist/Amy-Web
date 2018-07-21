@@ -1,12 +1,12 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {LocationRegistryDataService} from '../../Services/location-registry-data.service';
 import {Location} from '../../Objects/location';
-import {TableDataSource, TableElement, ValidatorService} from 'angular4-material-table';
 import {LocationValidatorService} from './location-validator.service';
 import {GeocoderService} from '../../Services/geocoder-service';
 import {GeocoderResponse} from '../../Objects/geocoderresponse';
 import {MatDialog} from '@angular/material';
 import {ErrorDialogComponent} from '../../../../Components/error-dialog/error-dialog.component';
+import {AsyncTableDataSource} from '../../AsyncTableDataSource';
 
 /**
  * @author Benno Krauß
@@ -21,7 +21,7 @@ import {ErrorDialogComponent} from '../../../../Components/error-dialog/error-di
 })
 export class LocationRegistryComponent implements OnInit {
 
-    dataSource: TableDataSource<Location>;
+    dataSource: AsyncTableDataSource<Location>;
     @Output() locationListChange = new EventEmitter<Location[]>();
 
     displayedColumns = ['name', 'street', 'houseNumber', 'zipCode', 'city', 'tag', 'actionsColumn'];
@@ -33,7 +33,10 @@ export class LocationRegistryComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.dataSource = new TableDataSource<Location>([], Location, this.locationValidator);
+        this.dataSource = new AsyncTableDataSource<Location>([], Location, this.locationValidator,
+            this.insertLocation.bind(this),
+            this.updateLocation.bind(this),
+            this.deleteLocation.bind(this));
         this.dataSource.datasourceSubject.subscribe(list => {
             console.log('Something changed: ', list);
             this.locationListChange.emit(list);
@@ -56,48 +59,48 @@ export class LocationRegistryComponent implements OnInit {
         });
     }
 
-    editCreateRow(row: TableElement<Location>) {
-        if (row.id === -1) {
-            // This is a new row
-            if (this.dataSource.confirmCreate(row)) {
-                console.log('Row created');
-                const newLocation = this.copyLocationObject(row.currentData);
-                this.convertToAttributes(newLocation);
+    async insertLocation(l: Location): Promise<boolean> {
+        console.log('My this should be LocationRegistryComponent and is:', this);
+        const newLocation = this.copyLocationObject(l);
+        this.convertToAttributes(newLocation);
 
-                this.createUpdateLocation(newLocation).then(() => {
-                    // Refresh locations to get new primary key
-                    this.refreshLocations();
-                    console.log('Success!!');
-                }).catch(error => {
-                    console.log('Some error occurred. Better show an error dialog.', error);
-                    this.showError(error.toString());
-                });
-            }
-        } else {
-            // This is an updated row
-            if (this.dataSource.confirmEdit(row)) {
-                console.log('Row updated');
-                const updatedLocation = this.copyLocationObject(row.currentData);
-                this.convertToAttributes(updatedLocation);
-                this.createUpdateLocation(updatedLocation).then(() => {
-                    // Do nothing
-                }).catch(error => {
-                    console.log('Some error occurred. Better show an error dialog.', error);
-                    this.showError(error.toString());
-                });
-            }
+        try {
+            await this.createUpdateLocation(newLocation);
+        } catch (error) {
+            this.showError(error.toString());
+            // Don't insert the new row
+            return false;
         }
+        // Dspatch reload
+        this.refreshLocations();
+
+        return true;
     }
 
+    async updateLocation(l: Location): Promise<boolean> {
+        console.log('My this should be LocationRegistryComponent and is:', this);
+        const newLocation = this.copyLocationObject(l);
+        this.convertToAttributes(newLocation);
 
-    cancelOrDelete(row: TableElement<Location>) {
-        if (row.id !== -1 && !row.editing) {
-            // Row was not new, we need to delete it from the server
-            this.registryService.deleteById(row.currentData.persistentId).subscribe(() => {
-                console.log('Delete entity from server');
-            });
+        try {
+            await this.createUpdateLocation(newLocation);
+        } catch (error) {
+            this.showError(error.toString());
+            // Don't insert the new row
+            return false;
         }
-        row.cancelOrDelete();
+        return true;
+    }
+
+    async deleteLocation(l: Location): Promise<boolean> {
+        try {
+            await this.registryService.deleteById(l.persistentId).toPromise();
+            return true;
+        } catch (error) {
+            this.showError(error.toString());
+            // Don't delete the row
+            return false;
+        }
     }
 
     copyLocationObject(l: Location): Location {
