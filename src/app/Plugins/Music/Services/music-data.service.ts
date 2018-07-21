@@ -5,7 +5,7 @@ import { map, catchError, retry } from 'rxjs/operators';
 import { Music } from '../Objects/music';
 import { Playlist } from '../Objects/playlist';
 import { Device } from '../Objects/device';
-import { DatabaseService } from '../../../Services/database.service'
+import { BackendResolver } from '../../../Services/backendResolver.service'
 
 /*
   service for exchanging data between the spotify plugin and the music component
@@ -40,8 +40,8 @@ export class MusicDataService {
     return throwError(
       'Something bad happened; please try again later.');
   }
-  constructor(private readonly databaseService: DatabaseService, private http: HttpClient) {
-    this.path = databaseService.path + 'music/';
+  constructor(private readonly backend: BackendResolver, private http: HttpClient) {
+    this.path = backend.backendPath + 'music/';
   }
 
   /*

@@ -4,6 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { map, retry } from 'rxjs/operators';
 
 import { Command } from '../Objects/command';
+import { BackendResolver } from '../Services/backendResolver.service'
 
 
 /*
@@ -14,8 +15,6 @@ import { Command } from '../Objects/command';
 })
 export class DatabaseService {
 
-    path: string;
-
     httpOptions = {
         headers: new HttpHeaders({
             'Content-Type': 'text/plain'
@@ -23,14 +22,12 @@ export class DatabaseService {
         responseType: 'text' as 'text'
     };
 
-    constructor(private http: HttpClient) {
-        this.path = 'http://localhost:8080/rest/';
-    }
+    constructor(private http: HttpClient, private backend: BackendResolver) {    }
 
     /**
      * Function to send typed commands to the backend and receive the response
      */
     sendCommand(commandData: Command) {
-        return this.http.post(this.path + 'home/console', commandData.value, this.httpOptions);
+        return this.http.post(this.backend.backendPath + 'home/console', commandData.value, this.httpOptions);
     }
 }

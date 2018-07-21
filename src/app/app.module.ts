@@ -19,7 +19,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatSliderModule } from '@angular/material/slider';
 
-
 import { HttpClientModule } from '@angular/common/http';
 import { Routes, RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -33,6 +32,7 @@ import { HomeComponent } from './Components/home/home.component';
 import { CalendarComponent } from './Plugins/Calendar/Components/calendar/calendar.component';
 import { NavigationComponent } from './Plugins/Navigation/Components/navigation/navigation.component';
 import { LoginComponent } from './login/login.component';
+
 import { AuthService } from './auth.service';
 import { AuthGuard } from './auth.guard';
 import { CookieService } from 'angular2-cookie/services/cookies.service';

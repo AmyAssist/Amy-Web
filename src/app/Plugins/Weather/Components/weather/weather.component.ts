@@ -3,7 +3,7 @@ import { WeatherDataService } from '../../Services/weather-data.service';
 import { Weather } from '../../Objects/weather';
 import { WeatherWeek } from '../../Objects/weatherWeek';
 import { Location } from '../../Objects/location';
-import { DatabaseService } from '../../../../Services/database.service'
+import { BackendResolver } from '../../../../Services/backendResolver.service'
 import { DatePipe } from '@angular/common';
 
 @Component({
@@ -22,8 +22,8 @@ export class WeatherComponent implements OnInit {
   locations: Location[];
   selectedLocation: string;
 
-  constructor(private readonly databaseService: DatabaseService, private weatherService: WeatherDataService) {
-      this.weatherService.path = databaseService.path;
+  constructor(private readonly databaseService: BackendResolver, private weatherService: WeatherDataService) {
+      this.weatherService.path = databaseService.backendPath;
    }
 
   ngOnInit() {
