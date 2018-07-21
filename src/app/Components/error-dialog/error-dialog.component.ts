@@ -16,7 +16,7 @@ export class ErrorDialogComponent implements OnInit {
   ngOnInit() {
   }
 
-  constructor(private dialogRef: MatDialogRef<ErrorDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {
+  constructor(private readonly dialogRef: MatDialogRef<ErrorDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {
 
   }
 
