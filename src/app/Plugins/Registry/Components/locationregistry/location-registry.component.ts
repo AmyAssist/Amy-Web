@@ -5,6 +5,8 @@ import {TableDataSource, TableElement, ValidatorService} from 'angular4-material
 import {LocationValidatorService} from './location-validator.service';
 import {GeocoderService} from '../../Services/geocoder-service';
 import {GeocoderResponse} from '../../Objects/geocoderresponse';
+import {MatDialog} from '@angular/material';
+import {ErrorDialogComponent} from '../../../../Components/error-dialog/error-dialog.component';
 
 /**
  * @author Benno Krauß
@@ -27,7 +29,7 @@ export class LocationRegistryComponent implements OnInit {
 
 
     constructor(private readonly registryService: LocationRegistryDataService, private readonly locationValidator: LocationValidatorService,
-                private readonly geocoderService: GeocoderService) {
+                private readonly geocoderService: GeocoderService, private readonly dialog: MatDialog) {
     }
 
     ngOnInit() {
@@ -61,7 +63,15 @@ export class LocationRegistryComponent implements OnInit {
                 console.log('Row created');
                 const newLocation = this.copyLocationObject(row.currentData);
                 this.convertToAttributes(newLocation);
-                this.createLocation(newLocation);
+
+                this.createUpdateLocation(newLocation).then(() => {
+                    // Refresh locations to get new primary key
+                    this.refreshLocations();
+                    console.log('Success!!');
+                }).catch(error => {
+                    console.log('Some error occurred. Better show an error dialog.', error);
+                    this.showError(error.toString());
+                });
             }
         } else {
             // This is an updated row
@@ -69,10 +79,16 @@ export class LocationRegistryComponent implements OnInit {
                 console.log('Row updated');
                 const updatedLocation = this.copyLocationObject(row.currentData);
                 this.convertToAttributes(updatedLocation);
-                this.updateLocation(updatedLocation);
+                this.createUpdateLocation(updatedLocation).then(() => {
+                    // Do nothing
+                }).catch(error => {
+                    console.log('Some error occurred. Better show an error dialog.', error);
+                    this.showError(error.toString());
+                });
             }
         }
     }
+
 
     cancelOrDelete(row: TableElement<Location>) {
         if (row.id !== -1 && !row.editing) {
@@ -88,29 +104,18 @@ export class LocationRegistryComponent implements OnInit {
         return Object.assign(new Location(), l);
     }
 
-    createLocation(l: Location) {
-        this.geocoderService.geocode(l.getAddressString()).subscribe(r => {
-            // set coordinates on location object
-            l.latitude = r.results[0].geometry.location.lat;
-            l.longitude = r.results[0].geometry.location.lng;
+    async createUpdateLocation(l: Location) {
+        const geo: GeocoderResponse = await this.geocoderService.geocode(l.getAddressString()).toPromise();
+        if (geo.status !== 'OK' || !geo.results || geo.results.length <= 0) {
+            throw new Error('Address doesn\'t appear to be valid: ' + geo.status);
+        }
+        // set coordinates on location object
+        l.latitude = geo.results[0].geometry.location.lat;
+        l.longitude = geo.results[0].geometry.location.lng;
 
-            this.registryService.post(l).subscribe((newLocation: Location) => {
-                console.log('Sent new location to server');
-                // Refresh locations to get new primary key
-                this.refreshLocations();
-            });
-        });
-    }
-
-    updateLocation(l: Location) {
-        this.geocoderService.geocode(l.getAddressString()).subscribe(r => {
-            // set coordinates on location object
-            l.latitude = r.results[0].geometry.location.lat;
-            l.longitude = r.results[0].geometry.location.lng;
-            this.registryService.post(l).subscribe((newLocation: Location) => {
-                console.log('Sent update to server');
-            });
-        });
+        const newLocation: Location = await this.registryService.post(l).toPromise();
+        console.log('Sent new location to server');
+        return newLocation;
     }
 
     /**
@@ -150,5 +155,12 @@ export class LocationRegistryComponent implements OnInit {
         l.work = work;
 
         delete l.tag;
+    }
+
+    showError(message: string) {
+        this.dialog.open(ErrorDialogComponent, {
+            data: { errorMsg: message },
+            width: '500px'
+        });
     }
 }
