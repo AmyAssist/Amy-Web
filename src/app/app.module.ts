@@ -9,7 +9,8 @@ import {
   MatMenuModule,
   MatListModule,
   MatDividerModule,
-  MatTableModule
+  MatTableModule,
+  MatDialogModule
 } from '@angular/material';
 
 import { MatIconModule } from '@angular/material/icon';
@@ -32,6 +33,7 @@ import { HomeComponent } from './Components/home/home.component';
 import { CalendarComponent } from './Plugins/Calendar/Components/calendar/calendar.component';
 import { NavigationComponent } from './Plugins/Navigation/Components/navigation/navigation.component';
 import { LocationRegistryComponent } from './Plugins/Registry/Components/locationregistry/location-registry.component';
+import { ErrorDialogComponent } from './Components/error-dialog/error-dialog.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -73,6 +75,7 @@ const routes: Routes = [
     CalendarComponent,
     NavigationComponent,
     LocationRegistryComponent,
+    ErrorDialogComponent,
   ],
   imports: [
     MusicModule,
@@ -88,11 +91,13 @@ const routes: Routes = [
     MatDividerModule,
     MatIconModule,
     MatTableModule,
+    MatDialogModule,
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule.forRoot(routes)
   ],
   exports: [RouterModule],
+  entryComponents: [ErrorDialogComponent],
   providers: [],
   bootstrap: [AppComponent]
 })
