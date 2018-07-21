@@ -7,10 +7,10 @@ export class LocationValidatorService implements ValidatorService {
     getRowValidator(): FormGroup {
         return new FormGroup({
             'name': new FormControl(null, Validators.required),
-            'houseNumber': new FormControl(),
-            'street': new FormControl(),
-            'zipCode': new FormControl(),
-            'city': new FormControl(),
+            'houseNumber': new FormControl(null, Validators.required),
+            'street': new FormControl(null, Validators.required),
+            'zipCode': new FormControl(null, Validators.required),
+            'city': new FormControl(null, Validators.required),
             'tag': new FormControl()
         });
     }
