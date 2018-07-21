@@ -54,17 +54,17 @@ export class MusicDataService {
     params = params.append('clientID', clientID);
     params = params.append('clientSecret', clientSecret);
 
-    return this.http.post(this.path + 'init', null, { params }).pipe(
+    return this.http.post(`${this.path}init`, null, { params }).pipe(
       catchError(this.handleError));
   }
 
   setToken(token: string) {
-    return this.http.post(this.path + 'token/' + token, null).pipe(
+    return this.http.post(`${this.path}token/` + token, null).pipe(
       catchError(this.handleError));
   }
 
   getDevices() {
-    return this.http.get<Device[]>(this.path + 'getDevices', this.httpOptions).pipe(
+    return this.http.get<Device[]>(`${this.path}getDevices`, this.httpOptions).pipe(
       catchError(this.handleError));
   }
 
@@ -72,7 +72,7 @@ export class MusicDataService {
     Returns the device that is selected
   */
   setDevice(deviceId: string) {
-    return this.http.post(this.path + 'setDevice/' + deviceId, null).pipe(
+    return this.http.post(`${this.path}setDevice/` + deviceId, null).pipe(
       catchError(this.handleError));
   }
 
@@ -81,7 +81,7 @@ export class MusicDataService {
     params = params.append('uri', deviceUri);
     params = params.append('newName', deviceName);
 
-    return this.http.post(this.path + 'setDeviceName', null, { params }).pipe(
+    return this.http.post(`${this.path}setDeviceName`, null, { params }).pipe(
       catchError(this.handleError));
   }
 
@@ -89,14 +89,14 @@ export class MusicDataService {
     Getting the current Song.
   */
   getCurrentSong() {
-    return this.http.get<Music>(this.path + 'currentSong', this.httpOptions).pipe(
+    return this.http.get<Music>(`${this.path}currentSong`, this.httpOptions).pipe(
       catchError(this.handleError));
   }
 
   search(searchValue: string, searchType: string, limit: string) {
     const params = new HttpParams().set('type', searchType);
     params.append('limit', limit);
-    return this.http.post(this.path + 'search/' + searchValue, null, { params }).pipe(
+    return this.http.post(`${this.path}search/` + searchValue, null, { params }).pipe(
       catchError(this.handleError));
   }
 
@@ -106,7 +106,7 @@ export class MusicDataService {
   playSong(musicData: Music): Observable<Music> {
     const params = new HttpParams().set('type', 'track');
 
-    return this.http.post<Music>(this.path + 'play', musicData, { params }).pipe(
+    return this.http.post<Music>(`${this.path}play`, musicData, { params }).pipe(
       catchError(this.handleError));
   }
 
@@ -118,12 +118,12 @@ export class MusicDataService {
     params = params.append('songNumber', playlistData.toString());
     params = params.append('type', playlistType);
 
-    return this.http.post<Playlist>(this.path + 'play', null, { params }).pipe(
+    return this.http.post<Playlist>(`${this.path}play`, null, { params }).pipe(
       catchError(this.handleError));
   }
 
   resume() {
-    return this.http.post<Playlist>(this.path + 'resume', null).pipe(
+    return this.http.post<Playlist>(`${this.path}resume`, null).pipe(
       catchError(this.handleError));
   }
 

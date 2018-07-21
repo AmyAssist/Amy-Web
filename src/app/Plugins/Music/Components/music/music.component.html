@@ -29,7 +29,7 @@
       <mat-card>authentication link: {{spotifyLink}}</mat-card>
 
       <mat-form-field>
-        <input matInput #accessToken placeholder="Access Token">
+        <input matInput #accessToken placeholder="Register token">
       </mat-form-field>
 
       <button mat-button color="primary" (click)="setToken(accessToken.value)">Send</button>
@@ -66,7 +66,7 @@
             </button>
           </mat-list-item>
         </div>
-        <button mat-raised-button color="primary" (click)="search(input.value, activeType, '5')">Search</button>
+        <button mat-raised-button color="primary" (click)="search(input.value, activeType)">Search</button>
       </mat-tab>
 
     </mat-tab-group>
@@ -172,8 +172,8 @@
 </div>
 <div>
   <mat-list role="list">
-    <mat-list-item role="listitem">Artist: {{musicData.artist}}</mat-list-item>
-    <mat-list-item role="listitem">Title: {{musicData.title}}</mat-list-item>
+    <mat-list-item role="listitem">Artist: {{musicData.artistName}}</mat-list-item>
+    <mat-list-item role="listitem">Title: {{musicData.name}}</mat-list-item>
   </mat-list>
 </div>
 <div *ngIf=playlist>
