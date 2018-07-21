@@ -23,7 +23,7 @@
 			<mat-header-cell *matHeaderCellDef>House Number</mat-header-cell>
 			<mat-cell *matCellDef="let row">
 				<mat-form-field floatLabel="{{ row.editing ? 'float' : 'never'}}">
-					<input matInput [formControl]="row.validator.controls['houseNumber']" [readonly]="!row.editing" placeholder="0" [(ngModel)]="row.currentData.houseNumber">
+					<input matInput [formControl]="row.validator.controls['houseNumber']" type="number" [readonly]="!row.editing" placeholder="0" [(ngModel)]="row.currentData.houseNumber">
 				</mat-form-field>
 			</mat-cell>
 		</ng-container>
