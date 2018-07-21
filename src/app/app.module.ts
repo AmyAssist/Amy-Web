@@ -2,15 +2,15 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import {
-  MatButtonModule,
-  MatCheckboxModule,
-  MatToolbarModule,
-  MatGridListModule,
-  MatMenuModule,
-  MatListModule,
-  MatDividerModule,
-  MatTableModule,
-  MatDialogModule
+    MatButtonModule,
+    MatCheckboxModule,
+    MatToolbarModule,
+    MatGridListModule,
+    MatMenuModule,
+    MatListModule,
+    MatDividerModule,
+    MatTableModule,
+    MatDialogModule, MatTabsModule
 } from '@angular/material';
 
 import { MatIconModule } from '@angular/material/icon';
@@ -19,7 +19,6 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { MatTabsModule } from '@angular/material/tabs';
 import { MatSliderModule } from '@angular/material/slider';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -32,8 +31,9 @@ import { WeatherComponent } from './Plugins/Weather/Components/weather/weather.c
 import { HomeComponent } from './Components/home/home.component';
 import { CalendarComponent } from './Plugins/Calendar/Components/calendar/calendar.component';
 import { NavigationComponent } from './Plugins/Navigation/Components/navigation/navigation.component';
-import { LocationRegistryComponent } from './Plugins/Registry/Components/locationregistry/location-registry.component';
+import { LocationRegistryComponent } from './Plugins/Registry/Components/location-registry/location-registry.component';
 import { ErrorDialogComponent } from './Components/error-dialog/error-dialog.component';
+import { RegistryContainerComponent } from './Plugins/Registry/Components/registry-container/registry-container.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -61,8 +61,8 @@ const routes: Routes = [
     component: NavigationComponent
   },
   {
-    path: 'locationRegistry',
-    component: LocationRegistryComponent
+    path: 'registry',
+    component: RegistryContainerComponent
   }
 ];
 
@@ -76,6 +76,7 @@ const routes: Routes = [
     NavigationComponent,
     LocationRegistryComponent,
     ErrorDialogComponent,
+    RegistryContainerComponent,
   ],
   imports: [
     MusicModule,
@@ -91,6 +92,7 @@ const routes: Routes = [
     MatDividerModule,
     MatIconModule,
     MatTableModule,
+    MatTabsModule,
     MatDialogModule,
     ReactiveFormsModule,
     HttpClientModule,
