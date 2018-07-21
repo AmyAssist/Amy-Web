@@ -56,6 +56,7 @@ export class LocationRegistryComponent implements OnInit {
 
     editCreateRow(row: TableElement<Location>) {
         if (row.id === -1) {
+            // This is a new row
             if (this.dataSource.confirmCreate(row)) {
                 console.log('Row created');
                 const newLocation = this.copyLocationObject(row.currentData);
@@ -63,6 +64,7 @@ export class LocationRegistryComponent implements OnInit {
                 this.createLocation(newLocation);
             }
         } else {
+            // This is an updated row
             if (this.dataSource.confirmEdit(row)) {
                 console.log('Row updated');
                 const updatedLocation = this.copyLocationObject(row.currentData);
