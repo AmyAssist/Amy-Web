@@ -4,6 +4,7 @@ import {LocationRegistryComponent} from './location-registry.component';
 import {
     MatButtonModule,
     MatCheckboxModule,
+    MatDialogModule,
     MatDividerModule,
     MatGridListModule,
     MatListModule,
@@ -57,6 +58,7 @@ describe('LocationRegistryComponent', () => {
         MatDividerModule,
         MatIconModule,
         MatTableModule,
+        MatDialogModule,
         ReactiveFormsModule,
         HttpClientModule,
         HttpClientTestingModule,
