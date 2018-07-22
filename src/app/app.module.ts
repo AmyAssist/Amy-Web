@@ -35,7 +35,6 @@ import { LoginComponent } from './login/login.component';
 
 import { AuthService } from './auth.service';
 import { AuthGuard } from './auth.guard';
-import { CookieService } from 'angular2-cookie/services/cookies.service';
 
 /*
     Routing of the components to the respective links
@@ -114,7 +113,7 @@ const routes: Routes = [
     FormsModule,
   ],
   exports: [RouterModule],
-  providers: [AuthService, AuthGuard, CookieService],
+  providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
