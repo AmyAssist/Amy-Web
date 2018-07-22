@@ -22,8 +22,7 @@ export class WeatherComponent implements OnInit {
   locations: Location[];
   selectedLocation: string;
 
-  constructor(private readonly databaseService: BackendResolver, private readonly weatherService: WeatherDataService) {
-    this.weatherService.path = databaseService.backendPath;
+  constructor(private readonly weatherService: WeatherDataService) {
   }
 
   ngOnInit() {

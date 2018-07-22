@@ -9,10 +9,8 @@ import { Injectable, ErrorHandler, Component, OnInit } from '@angular/core';
 export class BackendResolver {
 
     backendPath: string;
-    readonly cookieKey = 'core-domain';
 
     constructor() {
-        this.backendPath = localStorage.getItem(this.cookieKey);
     }
 
     setBackendPath(path: string) {

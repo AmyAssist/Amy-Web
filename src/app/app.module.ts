@@ -32,12 +32,12 @@ import { ErrorDialogComponent } from './Components/error-dialog/error-dialog.com
 import { RegistryContainerComponent } from './Plugins/Registry/Components/registry-container/registry-container.component';
 import { ContactRegistryComponent } from './Plugins/Registry/Components/contact-registry/contact-registry.component';
 import { LoginComponent } from './login/login.component';
-import { MusicComponent } from './Plugins/Music/Components/music/music.component';
 
 import { AuthService } from './auth.service';
 import { AuthGuard } from './auth.guard';
 
 import { MaterialModule } from './material.module';
+import {MusicModule} from './Plugins/Music/music.module';
 
 /*
     Routing of the components to the respective links
@@ -51,11 +51,6 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'music',
-    component: MusicComponent,
     canActivate: [AuthGuard]
   },
   {
@@ -75,7 +70,8 @@ const routes: Routes = [
   },
   {
     path: 'registry',
-    component: RegistryContainerComponent
+    component: RegistryContainerComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'login',
@@ -92,7 +88,6 @@ const routes: Routes = [
     HomeComponent,
     CalendarComponent,
     NavigationComponent,
-    MusicComponent,
     LoginComponent,
     LocationRegistryComponent,
     ErrorDialogComponent,
@@ -100,6 +95,7 @@ const routes: Routes = [
     ContactRegistryComponent,
   ],
   imports: [
+    MusicModule,
     MaterialModule,
     BrowserModule,
     FormsModule,

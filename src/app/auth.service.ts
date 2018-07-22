@@ -8,10 +8,13 @@ import { BackendResolver } from '../app/Services/backendResolver.service';
 export class AuthService {
 
   isLoggedIn = false;
-  readonly cookieKey: string;
+  readonly cookieKey = 'core-domain';
+
 
   constructor(private readonly myRoute: Router, private readonly backend: BackendResolver) {
-    this.cookieKey = backend.cookieKey;
+    if(this.loggedIn()){
+      backend.setBackendPath(localStorage.getItem(this.cookieKey));
+    }
   }
 
   loggedIn(): boolean {
