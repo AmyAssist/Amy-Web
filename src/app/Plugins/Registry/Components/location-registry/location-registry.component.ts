@@ -2,8 +2,6 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {LocationRegistryDataService} from '../../Services/location-registry-data.service';
 import {Location} from '../../Objects/location';
 import {LocationValidatorService} from './location-validator.service';
-import {GeocoderService} from '../../Services/geocoder-service';
-import {GeocoderResponse} from '../../Objects/geocoderresponse';
 import {MatDialog} from '@angular/material';
 import {ErrorDialogComponent} from '../../../../Components/error-dialog/error-dialog.component';
 import {AsyncTableDataSource} from '../../AsyncTableDataSource';
@@ -16,7 +14,7 @@ import {AsyncTableDataSource} from '../../AsyncTableDataSource';
     templateUrl: './location-registry.component.html',
     styleUrls: ['./location-registry.component.css'],
     providers: [
-        LocationValidatorService, GeocoderService
+        LocationValidatorService
     ]
 })
 export class LocationRegistryComponent implements OnInit {
@@ -29,7 +27,7 @@ export class LocationRegistryComponent implements OnInit {
 
 
     constructor(private readonly registryService: LocationRegistryDataService, private readonly locationValidator: LocationValidatorService,
-                private readonly geocoderService: GeocoderService, private readonly dialog: MatDialog) {
+                private readonly dialog: MatDialog) {
     }
 
     ngOnInit() {
@@ -105,14 +103,6 @@ export class LocationRegistryComponent implements OnInit {
     }
 
     async createUpdateLocation(l: Location) {
-        const geo: GeocoderResponse = await this.geocoderService.geocode(l.getAddressString()).toPromise();
-        if (geo.status !== 'OK' || !geo.results || geo.results.length <= 0) {
-            throw new Error('Address doesn\'t appear to be valid: ' + geo.status);
-        }
-        // set coordinates on location object
-        l.latitude = geo.results[0].geometry.location.lat;
-        l.longitude = geo.results[0].geometry.location.lng;
-
         const newLocation: Location = await this.registryService.post(l).toPromise();
         return newLocation;
     }
