@@ -12,7 +12,7 @@ export class AuthService {
 
 
   constructor(private readonly myRoute: Router, private readonly backend: BackendResolver) {
-    if(this.loggedIn()){
+    if (this.loggedIn()) {
       backend.setBackendPath(localStorage.getItem(this.cookieKey));
     }
   }

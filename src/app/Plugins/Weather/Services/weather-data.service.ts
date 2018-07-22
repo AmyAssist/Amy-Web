@@ -27,7 +27,7 @@ export class WeatherDataService {
     })
   };
 
-  constructor(private http: HttpClient, private readonly backend: BackendResolver) {
+  constructor(private readonly http: HttpClient, private readonly backend: BackendResolver) {
     this.path = backend.backendPath;
   }
 
