@@ -40,7 +40,7 @@ export class WeatherComponent implements OnInit {
   }
 
   public onChange(event): void {
-    this.weatherService.sendLocation(event.value.id);
+    this.weatherService.sendLocation(event.value.persistentId);
     this.selectedLocation = event.value.name;
     if (this.today) { this.getWeatherToday(); }
     if (this.tommorow) { this.getWeatherTomorrow(); }
