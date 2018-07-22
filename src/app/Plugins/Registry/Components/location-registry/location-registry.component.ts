@@ -2,8 +2,6 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {LocationRegistryDataService} from '../../Services/location-registry-data.service';
 import {Location} from '../../Objects/location';
 import {LocationValidatorService} from './location-validator.service';
-import {GeocoderService} from '../../Services/geocoder-service';
-import {GeocoderResponse} from '../../Objects/geocoderresponse';
 import {MatDialog} from '@angular/material';
 import {ErrorDialogComponent} from '../../../../Components/error-dialog/error-dialog.component';
 import {AsyncTableDataSource} from '../../AsyncTableDataSource';
@@ -16,7 +14,7 @@ import {AsyncTableDataSource} from '../../AsyncTableDataSource';
     templateUrl: './location-registry.component.html',
     styleUrls: ['./location-registry.component.css'],
     providers: [
-        LocationValidatorService, GeocoderService
+        LocationValidatorService
     ]
 })
 export class LocationRegistryComponent implements OnInit {
@@ -29,7 +27,7 @@ export class LocationRegistryComponent implements OnInit {
 
 
     constructor(private readonly registryService: LocationRegistryDataService, private readonly locationValidator: LocationValidatorService,
-                private readonly geocoderService: GeocoderService, private readonly dialog: MatDialog) {
+                private readonly dialog: MatDialog) {
     }
 
     ngOnInit() {
@@ -38,7 +36,6 @@ export class LocationRegistryComponent implements OnInit {
             this.updateLocation.bind(this),
             this.deleteLocation.bind(this));
         this.dataSource.datasourceSubject.subscribe(list => {
-            console.log('Something changed: ', list);
             this.locationListChange.emit(list);
         });
 
@@ -60,7 +57,6 @@ export class LocationRegistryComponent implements OnInit {
     }
 
     async insertLocation(l: Location): Promise<boolean> {
-        console.log('My this should be LocationRegistryComponent and is:', this);
         const newLocation = this.copyLocationObject(l);
         this.convertToAttributes(newLocation);
 
@@ -78,7 +74,6 @@ export class LocationRegistryComponent implements OnInit {
     }
 
     async updateLocation(l: Location): Promise<boolean> {
-        console.log('My this should be LocationRegistryComponent and is:', this);
         const newLocation = this.copyLocationObject(l);
         this.convertToAttributes(newLocation);
 
@@ -108,17 +103,7 @@ export class LocationRegistryComponent implements OnInit {
     }
 
     async createUpdateLocation(l: Location) {
-        const geo: GeocoderResponse = await this.geocoderService.geocode(l.getAddressString()).toPromise();
-        if (geo.status !== 'OK' || !geo.results || geo.results.length <= 0) {
-            throw new Error('Address doesn\'t appear to be valid: ' + geo.status);
-        }
-        // set coordinates on location object
-        l.latitude = geo.results[0].geometry.location.lat;
-        l.longitude = geo.results[0].geometry.location.lng;
-
-        const newLocation: Location = await this.registryService.post(l).toPromise();
-        console.log('Sent new location to server');
-        return newLocation;
+        return this.registryService.post(l).toPromise();
     }
 
     /**
