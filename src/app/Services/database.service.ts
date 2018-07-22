@@ -4,7 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { map, retry } from 'rxjs/operators';
 
 import { Command } from '../Objects/command';
-import { BackendResolver } from '../Services/backendResolver.service'
+import { BackendResolver } from '../Services/backendResolver.service';
 
 
 /*
@@ -22,7 +22,7 @@ export class DatabaseService {
         responseType: 'text' as 'text'
     };
 
-    constructor(private http: HttpClient, private backend: BackendResolver) {    }
+    constructor(private readonly http: HttpClient, private readonly backend: BackendResolver) {    }
 
     /**
      * Function to send typed commands to the backend and receive the response

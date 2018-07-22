@@ -14,20 +14,20 @@ export class LoginComponent implements OnInit {
   inputText = '';
 
   constructor(
-    private myRoute: Router,
-    private auth: AuthService) {
+    private readonly myRoute: Router,
+    private readonly auth: AuthService) {
   }
 
   ngOnInit() {
-    if(this.auth.loggedIn()){
-      this.myRoute.navigate(["home"]);
+    if (this.auth.loggedIn()) {
+      this.myRoute.navigate(['home']);
     }
   }
 
   login() {
-    if (this.inputText != '') {
+    if (this.inputText !== '') {
       this.auth.login(this.inputText);
-      this.myRoute.navigate(["home"]);
+      this.myRoute.navigate(['home']);
     }
   }
 

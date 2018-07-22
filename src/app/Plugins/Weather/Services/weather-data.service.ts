@@ -5,7 +5,6 @@ import { map, catchError, retry } from 'rxjs/operators';
 import { Weather } from '../Objects/weather';
 import { WeatherWeek } from '../Objects/weatherWeek';
 import { Location } from '../Objects/location';
-import { DatabaseService } from '../../../Services/database.service'
 
 @Injectable({
   providedIn: 'root'

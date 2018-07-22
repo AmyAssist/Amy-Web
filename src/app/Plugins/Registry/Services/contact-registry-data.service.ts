@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {catchError} from 'rxjs/operators';
 import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
+import { BackendResolver } from '../../../Services/backendResolver.service'
 import {throwError} from 'rxjs';
 import {Location} from '../Objects/location';
 import {Contact} from '../Objects/contact';
@@ -34,8 +35,8 @@ export class ContactRegistryDataService {
         return r;
     }
 
-    constructor(private readonly http: HttpClient) {
-        this.path = 'http://localhost:8080/rest/registry/contact/';
+    constructor(private readonly http: HttpClient, private readonly backend: BackendResolver) {
+        this.path = backend.backendPath + 'registry/contact/';
     }
 
 

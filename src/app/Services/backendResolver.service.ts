@@ -6,16 +6,16 @@ import { Injectable, ErrorHandler, Component, OnInit } from '@angular/core';
 @Injectable({
     providedIn: 'root'
 })
-export class BackendResolver { 
+export class BackendResolver {
 
     backendPath: string;
-    readonly COOKIE_KEY = "core-domain";
+    readonly cookieKey = 'core-domain';
 
     constructor() {
-        this.backendPath = localStorage.getItem(this.COOKIE_KEY);
+        this.backendPath = localStorage.getItem(this.cookieKey);
     }
 
-    setBackendPath(path: string){
+    setBackendPath(path: string) {
         this.backendPath = path;
     }
 }
