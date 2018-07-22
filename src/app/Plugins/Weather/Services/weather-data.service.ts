@@ -5,6 +5,7 @@ import { map, catchError, retry } from 'rxjs/operators';
 import { Weather } from '../Objects/weather';
 import { WeatherWeek } from '../Objects/weatherWeek';
 import { Location } from '../Objects/location';
+import { BackendResolver } from '../../../Services/backendResolver.service';
 
 @Injectable({
   providedIn: 'root'
@@ -26,9 +27,8 @@ export class WeatherDataService {
     })
   };
 
-  constructor(private http: HttpClient) {
-    this.path = 'http://localhost:8080/rest/weather/';
-    this.pathRegistry = 'http://localhost:8080/rest/registry/location/';
+  constructor(private readonly http: HttpClient, private readonly backend: BackendResolver) {
+    this.path = backend.backendPath;
   }
 
   private handleError(error: HttpErrorResponse) {
@@ -51,7 +51,7 @@ export class WeatherDataService {
     getting weather-Data for today.
   */
   getWeatherToday() {
-    return this.http.get<Weather>(this.path + 'today', this.httpOptions).pipe(
+    return this.http.get<Weather>(this.path + 'weather/today', this.httpOptions).pipe(
       catchError(this.handleError));
   }
 
@@ -59,7 +59,7 @@ export class WeatherDataService {
     getting weather-Data for tomorrow.
   */
   getWeatherTomorrow() {
-    return this.http.get<Weather>(this.path + 'tomorrow', this.httpOptions).pipe(
+    return this.http.get<Weather>(this.path + 'weather/tomorrow', this.httpOptions).pipe(
       catchError(this.handleError));
   }
 
@@ -67,7 +67,7 @@ export class WeatherDataService {
     getting weather-Data for the whole week.
   */
   getWeatherWeek() {
-    return this.http.get<WeatherWeek>(this.path + 'week', this.httpOptions).pipe(
+    return this.http.get<WeatherWeek>(this.path + 'weather/week', this.httpOptions).pipe(
       catchError(this.handleError));
   }
 
@@ -75,7 +75,7 @@ export class WeatherDataService {
     gets all loctaions from the registry
   */
   getAllLocations() {
-    return this.http.get<Location[]>(this.pathRegistry + 'all').pipe(
+    return this.http.get<Location[]>(this.path + 'registry/location/all').pipe(
       catchError(this.handleError));
   }
 
@@ -83,7 +83,7 @@ export class WeatherDataService {
   sends the selected location to amy
   */
   sendLocation(id: number) {
-    this.http.put(this.path + 'setLocation', String(id), this.httpPlainTextHeader).pipe(
+    this.http.put(this.path + 'weather/setLocation', String(id), this.httpPlainTextHeader).pipe(
       catchError(this.handleError)).subscribe();
 
   }

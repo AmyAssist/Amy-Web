@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { Clock } from '../Objects/clock';
 import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
+import { BackendResolver } from '../../../Services/backendResolver.service';
 
 @Injectable({
   providedIn: 'root'
@@ -33,8 +34,8 @@ export class ClockDataService {
       'Something bad happened; please try again later.');
   }
 
-  constructor(private http: HttpClient) {
-    this.path = 'http://localhost:8080/rest/clock/'; // Path for all Data concerning the clock-plugin
+  constructor(private readonly backend: BackendResolver, private readonly http: HttpClient) {
+    this.path = backend.backendPath + 'clock/'; // Path for all Data concerning the clock-plugin
   }
 
   /*

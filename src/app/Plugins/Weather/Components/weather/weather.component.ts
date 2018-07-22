@@ -3,6 +3,7 @@ import { WeatherDataService } from '../../Services/weather-data.service';
 import { Weather } from '../../Objects/weather';
 import { WeatherWeek } from '../../Objects/weatherWeek';
 import { Location } from '../../Objects/location';
+import { BackendResolver } from '../../../../Services/backendResolver.service';
 import { DatePipe } from '@angular/common';
 
 @Component({
@@ -21,7 +22,8 @@ export class WeatherComponent implements OnInit {
   locations: Location[];
   selectedLocation: string;
 
-  constructor(private weatherService: WeatherDataService) { }
+  constructor(private readonly weatherService: WeatherDataService) {
+  }
 
   ngOnInit() {
     this.weatherToday = new Weather();
@@ -38,7 +40,6 @@ export class WeatherComponent implements OnInit {
   }
 
   public onChange(event): void {
-    console.log(event.value);
     this.weatherService.sendLocation(event.value.id);
     this.selectedLocation = event.value.name;
     if (this.today) { this.getWeatherToday(); }
@@ -119,10 +120,7 @@ export class WeatherComponent implements OnInit {
   }
 
   convertTime(stamp: number): string {
-    console.log(stamp);
     const datePipe = new DatePipe('en-US');
-    const test = datePipe.transform(stamp * 1000, 'EEEE, MMMM d');
-    console.log(test);
-    return test;
+    return datePipe.transform(stamp * 1000, 'EEEE, MMMM d');
   }
 }
