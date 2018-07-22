@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { EmailDataService } from '../../Services/email-data.service';
 
 @Component({
   selector: 'app-email',
@@ -7,20 +8,36 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EmailComponent implements OnInit {
 
-  loggedIn = false;
+  unreadMessages = -1;
 
-  constructor() { }
+  output: String;
+
+  constructor(private emailService: EmailDataService) { }
 
   ngOnInit() {
   }
 
-  logIn(mailAddress: string, mailPassword: string) {
-    // TODO: implement
-    this.loggedIn = true;
+  hasNewMessages() {
+    var newMessages: Boolean;
+    this.emailService.hasUnreadMessages().subscribe((data: Boolean) => newMessages = data);
+    if (newMessages) {
+      this.output = 'You have new messages';
+    } else {
+      this.output = 'You do not have new messages';
+    }
   }
 
-  logOut() {
-    // TODO: implement
-    this.loggedIn = false;
+  amountNewMessages() {
+    this.emailService.amountNewMessages().subscribe((data: number) => this.unreadMessages = data);
+    this.output = 'You have ' + this.unreadMessages + ' new messages';
+  }
+
+  getImportantMails() {
+    this.emailService.getImportantMails().subscribe();
+    this.output = '';
+  }
+
+  getAllMails() {
+    this.emailService.getImportantMails().subscribe();
   }
 }

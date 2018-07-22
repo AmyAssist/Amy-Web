@@ -2,49 +2,16 @@
   <span>E-Mail</span>
 </mat-toolbar>
 
-<div *ngIf=loggedIn>
-  <span color='primary'>You are logged in!</span>
-  <button mat-raised-button color='primary' class='functButton' (click)=logOut()>Log Out</button>
-</div>
-<mat-accordion>
-  <mat-expansion-panel *ngIf=!loggedIn [expanded]=true>
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        Authentication
-      </mat-panel-title>
-      <mat-panel-description>
-        Enter your email credentials
-      </mat-panel-description>
-    </mat-expansion-panel-header>
+<p>
+  <button mat-raised-button color='primary' class='functButton' (click)='hasNewMessages()'>New messages</button>
+  <button mat-raised-button color='primary' class='functButton' (click)='amountNewMessages()'>How many new messages</button>
+</p>
 
-    <mat-form-field>
-      <input matInput #mailAddress placeholder="Mail adress">
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput #mailPassword placeholder="Password">
-    </mat-form-field>
-    <button mat-button color='primary' (click)="logIn(mailAddress.value, mailPassword.value)">Log in</button>
-  </mat-expansion-panel>
+<p>
+  <button mat-raised-button color='primary' class='functButton' (click)='getAllMails()'>Read all mails</button>
+  <button mat-raised-button color='primary' class='functButton' (click)='getImportantMails()'>Read important mails</button>
+</p>
 
-  <mat-expansion-panel [expanded]=true>
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        Read mails
-      </mat-panel-title>
-      <mat-panel-description>
-        Get mails from the inbox
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-
-    <button mat-raised-button color='primary'>Get most recent mails</button>
-    <mat-radio-group>
-      <mat-radio-button color='primary'>All</mat-radio-button>
-      <mat-radio-button color='primary' value='1'>Important</mat-radio-button>
-    </mat-radio-group>
-
-  </mat-expansion-panel>
-</mat-accordion>
-
-
-<button mat-raised-button color='primary' class='functButton'>New messages</button>
-<button mat-raised-button color='primary' class='functButton'>How many new messages</button>
+<p>
+  {{output}}
+</p>
