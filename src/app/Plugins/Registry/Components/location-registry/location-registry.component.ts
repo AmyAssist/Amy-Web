@@ -103,8 +103,7 @@ export class LocationRegistryComponent implements OnInit {
     }
 
     async createUpdateLocation(l: Location) {
-        const newLocation: Location = await this.registryService.post(l).toPromise();
-        return newLocation;
+        return await this.registryService.post(l).toPromise();
     }
 
     /**
