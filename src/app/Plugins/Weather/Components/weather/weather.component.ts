@@ -41,7 +41,6 @@ export class WeatherComponent implements OnInit {
   }
 
   public onChange(event): void {
-    console.log(event.value);
     this.weatherService.sendLocation(event.value.id);
     this.selectedLocation = event.value.name;
     if (this.today) { this.getWeatherToday(); }
@@ -122,10 +121,8 @@ export class WeatherComponent implements OnInit {
   }
 
   convertTime(stamp: number): string {
-    console.log(stamp);
     const datePipe = new DatePipe('en-US');
     const test = datePipe.transform(stamp * 1000, 'EEEE, MMMM d');
-    console.log(test);
     return test;
   }
 }

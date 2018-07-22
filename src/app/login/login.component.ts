@@ -19,7 +19,6 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.auth.loggedIn());
     if(this.auth.loggedIn()){
       this.myRoute.navigate(["home"]);
     }
@@ -27,7 +26,6 @@ export class LoginComponent implements OnInit {
 
   login() {
     if (this.inputText != '') {
-      console.log("login");
       this.auth.login(this.inputText);
       this.myRoute.navigate(["home"]);
     }
