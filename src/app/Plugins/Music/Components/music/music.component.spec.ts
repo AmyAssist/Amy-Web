@@ -23,7 +23,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MusicComponent } from './music.component';
 
 import { MusicDataService } from '../../Services/music-data.service';
-/*
+
 describe('MusicComponent', () => {
     let component: MusicComponent;
     let fixture: ComponentFixture<MusicComponent>;
@@ -32,7 +32,7 @@ describe('MusicComponent', () => {
         const spy = jasmine.createSpyObj('DatabaseService', ['getValue']);
         TestBed.configureTestingModule({
             declarations: [MusicComponent],
-            
+
             imports: [
                 MatExpansionModule,
                 MatIconModule,
@@ -52,15 +52,17 @@ describe('MusicComponent', () => {
                 MatGridListModule,
                 MatDividerModule,
                 BrowserAnimationsModule],
-                providers: [
-                    {provide: MusicDataService
-                        , useValue: spy
-                    }
-                ]
+            providers: [
+                {
+                    provide: MusicDataService
+                    , useValue: spy
+                }
+            ]
         }).compileComponents();
     }));
 
-    beforeEach(() => {
+    // this test doesn't do anything anyway (i think (lars)) 
+   /* beforeEach(() => {
         fixture = TestBed.createComponent(MusicComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
@@ -68,6 +70,5 @@ describe('MusicComponent', () => {
 
     it('should create', () => {
         expect(component).toBeTruthy();
-    });
+    });*/
 });
-*/
