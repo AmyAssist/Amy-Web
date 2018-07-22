@@ -38,7 +38,6 @@ export class LocationRegistryComponent implements OnInit {
             this.updateLocation.bind(this),
             this.deleteLocation.bind(this));
         this.dataSource.datasourceSubject.subscribe(list => {
-            console.log('Something changed: ', list);
             this.locationListChange.emit(list);
         });
 
@@ -60,7 +59,6 @@ export class LocationRegistryComponent implements OnInit {
     }
 
     async insertLocation(l: Location): Promise<boolean> {
-        console.log('My this should be LocationRegistryComponent and is:', this);
         const newLocation = this.copyLocationObject(l);
         this.convertToAttributes(newLocation);
 
@@ -78,7 +76,6 @@ export class LocationRegistryComponent implements OnInit {
     }
 
     async updateLocation(l: Location): Promise<boolean> {
-        console.log('My this should be LocationRegistryComponent and is:', this);
         const newLocation = this.copyLocationObject(l);
         this.convertToAttributes(newLocation);
 
@@ -117,7 +114,6 @@ export class LocationRegistryComponent implements OnInit {
         l.longitude = geo.results[0].geometry.location.lng;
 
         const newLocation: Location = await this.registryService.post(l).toPromise();
-        console.log('Sent new location to server');
         return newLocation;
     }
 
