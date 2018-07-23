@@ -5,5 +5,5 @@ export class BestTransportResult {
     mode: string;
     route: DirectionsRoute;
 
-    constructor() {}
+    constructor() { }
 }

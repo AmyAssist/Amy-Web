@@ -45,11 +45,7 @@ export class NavigationDataService {
   }
 
   when(wayData: NavPath) {
-    return this.http.post(this.path + 'when', wayData, {
-      headers: new HttpHeaders({
-        'Content-Type': 'text/plain'
-      })
-    }).pipe(
+    return this.http.post(this.path + 'when', wayData, this.httpOptions).pipe(
       catchError(this.handleError));
   }
 

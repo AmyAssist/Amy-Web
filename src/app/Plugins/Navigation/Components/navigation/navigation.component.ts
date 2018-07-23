@@ -71,7 +71,8 @@ export class NavigationComponent implements OnInit {
   searchWhen(from: string, to: string, date: string, hour: number, minute: number) {
     this.createRoute(from, to, date, hour, minute);
     this.navPathData.setTravelmode(this.travelMode2);
-    this.navigationService.when(this.navPathData).subscribe((data: string) => this.whenTime = data);
+    this.navigationService.when(this.navPathData).subscribe((data: any) => this.whenTime = data);
+    console.log(this.whenTime);
     this.whenTimeDate = new Date(this.whenTime);
     this.showWay = false;
     this.showWhen = true;
@@ -89,11 +90,10 @@ export class NavigationComponent implements OnInit {
     this.timeDate = new Date(date);
     this.timeDate.setHours(hour);
     this.timeDate.setMinutes(minute);
-    this.navPathData.setTime(this.timeDate);
+    this.navPathData.setTime(this.timeDate.toISOString());
   }
 
   calcResult() {
-    
     this.resultSummary = this.bestTransport.route.summary;
     if (this.bestTransport.mode.toString() === 'DRIVING') {
       this.resultMode = 'car';
@@ -104,8 +104,8 @@ export class NavigationComponent implements OnInit {
     }
     this.resultDistance = this.bestTransport.route.legs[0].distance.humanReadable;
     this.resultDuration = this.bestTransport.route.legs[0].duration.humanReadable;
-    this.resultArrivalTime = this.bestTransport.route.legs[0].arrivalTime;
-    this.resultDepartureTime = this.bestTransport.route.legs[0].departureTime;
+    this.resultArrivalTime = new Date(this.bestTransport.route.legs[0].arrivalTime);
+    this.resultDepartureTime = new Date(this.bestTransport.route.legs[0].departureTime);
     this.resultStartAddress = this.bestTransport.route.legs[0].startAddress;
     this.resultEndAddress = this.bestTransport.route.legs[0].endAddress;
   }
