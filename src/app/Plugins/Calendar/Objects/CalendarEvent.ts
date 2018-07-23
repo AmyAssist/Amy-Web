@@ -1,8 +1,8 @@
-export class Event {
+export class CalendarEvent {
 
     id: string;
-    start: Date;
-    end: Date;
+    start: string;
+    end: string;
     summary: string;
     location: string;
     description: string;

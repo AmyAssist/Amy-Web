@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { map, catchError, retry } from 'rxjs/operators';
-import { Event } from '../Objects/Event';
+import { throwError } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
+import { CalendarEvent } from '../Objects/CalendarEvent';
 import { BackendResolver } from '../../../Services/backendResolver.service';
 /*
   service for getting information from the calendar plugin
@@ -19,6 +19,7 @@ export class CalendarDataService {
       'Content-Type': 'application/json'
     })
   };
+
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.
@@ -39,8 +40,11 @@ export class CalendarDataService {
     this.path = backend.backendPath + 'calendar/';
    }
 
-   getEvents(date: Date){
-    return this.http.get<Event[]>(`${this.path}eventsAt/` + date, this.httpOptions).pipe(
-      catchError(this.handleError));
-   }
+   getEvents(date: string){
+    return this.http.get<CalendarEvent[]>(`${this.path}eventsAt/` + date, this.httpOptions).pipe(
+      catchError(this.handleError)).pipe(map((response: CalendarEvent[]) => {
+		response.forEach(l => Object.setPrototypeOf(l, new CalendarEvent()));
+		return response;
+	}));
+}
 }
