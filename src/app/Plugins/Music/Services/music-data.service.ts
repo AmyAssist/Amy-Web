@@ -5,6 +5,7 @@ import { map, catchError, retry } from 'rxjs/operators';
 import { Music } from '../Objects/music';
 import { Playlist } from '../Objects/playlist';
 import { Device } from '../Objects/device';
+import { BackendResolver } from '../../../Services/backendResolver.service';
 
 /*
   service for exchanging data between the spotify plugin and the music component
@@ -39,8 +40,8 @@ export class MusicDataService {
     return throwError(
       'Something bad happened; please try again later.');
   }
-  constructor(private http: HttpClient) {
-    this.path = 'http://localhost:8080/rest/music/';
+  constructor(private readonly backend: BackendResolver, private readonly http: HttpClient) {
+    this.path = backend.backendPath + 'music/';
   }
 
   /*

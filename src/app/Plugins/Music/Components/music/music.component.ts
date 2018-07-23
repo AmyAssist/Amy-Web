@@ -89,6 +89,7 @@ export class MusicComponent implements OnInit {
     this.playlistAllUser = new Array<Playlist>();
 
     this.deviceAll = new Array<Device>();
+    this.getDevs();
 
     this.searchResults = new Array<Music>();
 
@@ -120,7 +121,7 @@ export class MusicComponent implements OnInit {
   */
   getCurrentSong() {
     this.musicService.getCurrentSong()
-      .subscribe((data: Music) => this.musicData = { ...data });
+      .subscribe((data: Music) => this.musicData = {...data} );
   }
 
   /*
@@ -155,7 +156,7 @@ export class MusicComponent implements OnInit {
   setSkip() {
     this.musicService.skip()
       .subscribe();
-      this.playing = true;
+    this.playing = true;
   }
 
   /*
@@ -164,7 +165,7 @@ export class MusicComponent implements OnInit {
   setBack() {
     this.musicService.back()
       .subscribe();
-      this.playing = true;
+    this.playing = true;
   }
 
   /*
@@ -178,9 +179,9 @@ export class MusicComponent implements OnInit {
   /*
   get the volume
   */
-getVolume() {
-  this.musicService.getVolume().subscribe((data: number) => this.volumeValue = data);
-}
+  getVolume() {
+    this.musicService.getVolume().subscribe((data: number) => this.volumeValue = data);
+  }
   /*
     playing a single song typed in over the UI
   */

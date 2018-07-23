@@ -4,6 +4,8 @@ import {
     MatButtonModule,
     MatToolbarModule,
 } from '@angular/material';
+import { RouterTestingModule } from '@angular/router/testing';
+
 
 import { AppComponent } from './app.component';
 describe('AppComponent', () => {
@@ -11,11 +13,12 @@ describe('AppComponent', () => {
         TestBed.configureTestingModule({
             declarations: [
                 AppComponent,
-                RouterOutletStubComponent
+                RouterOutletStubComponent,
             ],
             imports: [
                 MatButtonModule,
-                MatToolbarModule
+                MatToolbarModule,
+                RouterTestingModule
             ]
         }).compileComponents();
     }));
