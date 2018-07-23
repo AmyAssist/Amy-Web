@@ -36,7 +36,11 @@ export class ContactRegistryDataService {
     }
 
     constructor(private readonly http: HttpClient, private readonly backend: BackendResolver) {
-        this.path = backend.backendPath + 'registry/contact/';
+        this.setupPath();
+    }
+
+    setupPath(){
+        this.path = this.backend.backendPath + 'registry/contact/';
     }
 
 
