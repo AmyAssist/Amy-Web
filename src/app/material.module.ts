@@ -8,7 +8,8 @@ import {
   MatGridListModule,
   MatMenuModule,
   MatListModule,
-  MatDividerModule
+  MatDividerModule,
+  MatNativeDateModule
 } from '@angular/material';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
@@ -22,7 +23,6 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-
 
 @NgModule({
   imports: [
@@ -45,7 +45,8 @@ import { HttpClientModule } from '@angular/common/http';
     MatDividerModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    MatNativeDateModule
   ],
   exports: [
     CommonModule,
@@ -67,7 +68,8 @@ import { HttpClientModule } from '@angular/common/http';
     MatDividerModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    MatNativeDateModule
   ],
   declarations: [],
   providers: []
