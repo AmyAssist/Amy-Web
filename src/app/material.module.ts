@@ -22,7 +22,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-
+import { MatNativeDateModule } from '@angular/material';
 
 @NgModule({
   imports: [
@@ -45,7 +45,8 @@ import { HttpClientModule } from '@angular/common/http';
     MatDividerModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    MatNativeDateModule
   ],
   exports: [
     CommonModule,
@@ -67,7 +68,8 @@ import { HttpClientModule } from '@angular/common/http';
     MatDividerModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    MatNativeDateModule
   ],
   declarations: [],
   providers: []

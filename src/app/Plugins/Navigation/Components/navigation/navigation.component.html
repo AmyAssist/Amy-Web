@@ -2,15 +2,189 @@
   <span>Navigation</span>
 </mat-toolbar>
 
-<mat-form-field>
-  <input matInput #from placeholder="From:">
-</mat-form-field>
+<mat-accordion>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Route planner
+      </mat-panel-title>
+      <mat-panel-description>
+        Best Way from A to B
+      </mat-panel-description>
+    </mat-expansion-panel-header>
 
-<mat-form-field>
-  <input matInput #to placeholder="To:">
-</mat-form-field>
+    <div>
+      <mat-form-field>
+        <input matInput #from1 placeholder="From:">
+      </mat-form-field>
 
-<button mat-raised-button color="primary" (click)="searchWay(from.value, to.value)">Search</button>
+      <mat-form-field>
+        <input matInput #to1 placeholder="To:">
+      </mat-form-field>
+    </div>
+
+    <mat-form-field>
+      <mat-select [(value)]="travelMode1" placeholder="Travel Mode">
+        <mat-option>None</mat-option>
+        <mat-option value="DRIVING">Car</mat-option>
+        <mat-option value="BICYCLING">Bicycle</mat-option>
+        <mat-option value="TRANSIT">Transit</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <p>Departure Time:</p>
+
+    <div>
+      <mat-form-field>
+        <input matInput #date1 [matDatepicker]="picker1" placeholder="Choose a date">
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </mat-form-field>
+      <form class="time-form">
+        <mat-form-field class="time-width">
+          <input matInput #hour1 placeholder="H">
+        </mat-form-field>
+        <mat-form-field class="time-width">
+          <input matInput #minute1 placeholder="M">
+        </mat-form-field>
+      </form>
+    </div>
+
+    <button mat-raised-button color="primary" (click)="fromToWay(from1.value, to1.value, date1.value, hour1.value, minute1.value)">Search</button>
+
+    <div *ngIf="showWay">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Route:</mat-card-title>
+        </mat-card-header>
+        <p>Summary: {{resultSummary}}</p>
+        <p>Travel Mode: {{resultMode}}</p>
+        <p>Distance: {{resultDistance}}</p>
+        <p>Duration: {{resultDuration}}</p>
+        <p>Start-address: {{resultStartAddress}}</p>
+        <p>End-address: {{resultEndAddress}}</p>
+        <p>Departure-time: {{ resultDepartureTime | date:'medium' }}</p>
+        <p>Arrival-time: {{ resultArrivalTime | date:'medium' }}</p>
+      </mat-card>
+    </div>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Departure planner
+      </mat-panel-title>
+      <mat-panel-description>
+        When do you have to leave to arrive at the given time
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <div>
+      <mat-form-field>
+        <input matInput #from2 placeholder="From:">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput #to2 placeholder="To:">
+      </mat-form-field>
+    </div>
+
+    <mat-form-field>
+      <mat-select [(value)]="travelMode2" placeholder="Travel Mode">
+        <mat-option>None</mat-option>
+        <mat-option value="DRIVING">Car</mat-option>
+        <mat-option value="BICYCLING">Bicycle</mat-option>
+        <mat-option value="TRANSIT">Transit</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <p>Arrival Time:</p>
+
+    <div>
+      <mat-form-field>
+        <input matInput #date2 [matDatepicker]="picker2" placeholder="Choose a date">
+        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+      </mat-form-field>
+      <form class="time-form">
+        <mat-form-field class="time-width">
+          <input matInput #hour2 placeholder="H">
+        </mat-form-field>
+        <mat-form-field class="time-width">
+          <input matInput #minute2 placeholder="M">
+        </mat-form-field>
+      </form>
+    </div>
+
+    <button mat-raised-button color="primary" (click)="searchWhen(from2.value, to2.value, date2.value, hour2.value, minute2.value)">Search</button>
+
+    <div *ngIf="showWhen">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Required departure time:</mat-card-title>
+        </mat-card-header>
+        <p>{{ whenTimeDate | date:'medium' }}</p>
+      </mat-card>
+    </div>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Travel-Mode
+      </mat-panel-title>
+      <mat-panel-description>
+        What is the best Travel-Mode for your route
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <div>
+      <mat-form-field>
+        <input matInput #from3 placeholder="From:">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput #to3 placeholder="To:">
+      </mat-form-field>
+    </div>
+
+    <p>Departure Time:</p>
+
+    <div>
+      <mat-form-field>
+        <input matInput #date3 [matDatepicker]="picker3" placeholder="Choose a date">
+        <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+        <mat-datepicker #picker3></mat-datepicker>
+      </mat-form-field>
+      <form class="time-form">
+        <mat-form-field class="time-width">
+          <input matInput #hour3 placeholder="H">
+        </mat-form-field>
+        <mat-form-field class="time-width">
+          <input matInput #minute3 placeholder="M">
+        </mat-form-field>
+      </form>
+    </div>
+
+    <button mat-raised-button color="primary" (click)="bestType(from3.value, to3.value, date3.value, hour3.value, minute3.value)">Search</button>
+
+    <div *ngIf="showMode">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Route:</mat-card-title>
+        </mat-card-header>
+        <p>Best Travel Mode: {{resultMode}}</p>
+        <p>Summary: {{resultSummary}}</p>
+        <p>Distance: {{resultDistance}}</p>
+        <p>Duration: {{resultDuration}}</p>
+        <p>Start-address: {{resultStartAddress}}</p>
+        <p>End-address: {{resultEndAddress}}</p>
+        <p>Departure-time: {{ resultDepartureTime | date:'medium' }}</p>
+        <p>Arrival-time: {{ resultArrivalTime | date:'medium' }}</p>
+      </mat-card>
+    </div>
+
+  </mat-expansion-panel>
+</mat-accordion>
+
 
 <div *ngIf="showWay">
   <mat-card>Weg: {{way}}</mat-card>
