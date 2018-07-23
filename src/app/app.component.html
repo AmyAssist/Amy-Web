@@ -1,18 +1,29 @@
 <mat-toolbar color="primary">
-  <span>
-    <a mat-button routerLink="">Home</a>
-    <a mat-button routerLink="music">Music</a>
-    <a mat-button routerLink="clock">Wecker</a>
-    <a mat-button routerLink="weather">Weather</a>
-    <a mat-button routerLink="navigation">Navigation</a>
-    <a mat-button routerLink="registry">Registry</a>
-  </span>
-  <span class="fill-remaining-space"></span>
-  <span>
-    <a mat-button *ngIf="!auth.loggedIn()" routerLink="login">Login</a>
-    <a mat-button *ngIf="auth.loggedIn()" (click)="auth.logout()">Logout</a>
-  </span>
-</mat-toolbar>
 
+  <button mat-button routerLink="">
+    <mat-icon>home</mat-icon>
+    Home</button>
+  <span class="fill-remaining-space"></span>
+  <div fxLayout="row" fxShow="false" fxShow.gt-sm>
+    <button mat-button routerLink="music">Music</button>
+    <button mat-button routerLink="clock">Alarm</button>
+    <button mat-button routerLink="weather">Weather</button>
+    <button mat-button routerLink="navigation">Navigation</button>
+    <button mat-button routerLink="registry">Registry</button>
+    <button mat-button *ngIf="!auth.loggedIn()" routerLink="login">Login</button>
+    <button mat-button *ngIf="auth.loggedIn()" (click)="auth.logout()">Logout</button>
+  </div>
+  <button mat-button [mat-menu-trigger-for]="menu" fxHide="false" fxHide.gt-sm>
+    <mat-icon>menu</mat-icon>
+  </button>
+
+</mat-toolbar>
+<mat-menu x-position="before" #menu="matMenu">
+  <button mat-button routerLink="music">Music</button>
+  <button mat-button routerLink="clock">Alarm</button>
+  <button mat-button routerLink="weather">Weather</button>
+  <button mat-button routerLink="navigation">Navigation</button>
+  <button mat-button routerLink="registry">Registry</button>
+</mat-menu>
 
 <router-outlet></router-outlet>
