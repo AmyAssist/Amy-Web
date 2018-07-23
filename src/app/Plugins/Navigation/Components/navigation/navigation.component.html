@@ -62,8 +62,8 @@
         <p>Duration: {{resultDuration}}</p>
         <p>Start-address: {{resultStartAddress}}</p>
         <p>End-address: {{resultEndAddress}}</p>
-        <p>Departure-time: {{ resultDepartureTime | date:'medium' }}</p>
-        <p>Arrival-time: {{ resultArrivalTime | date:'medium' }}</p>
+        <p>Departure-time: {{resultDepartureTime}}</p>
+        <p>Arrival-time: {{resultArrivalTime}}</p>
       </mat-card>
     </div>
   </mat-expansion-panel>
@@ -92,7 +92,6 @@
       <mat-select [(value)]="travelMode2" placeholder="Travel Mode">
         <mat-option>None</mat-option>
         <mat-option value="DRIVING">Car</mat-option>
-        <mat-option value="BICYCLING">Bicycle</mat-option>
         <mat-option value="TRANSIT">Transit</mat-option>
       </mat-select>
     </mat-form-field>
@@ -177,8 +176,8 @@
         <p>Duration: {{resultDuration}}</p>
         <p>Start-address: {{resultStartAddress}}</p>
         <p>End-address: {{resultEndAddress}}</p>
-        <p>Departure-time: {{ resultDepartureTime | date:'medium' }}</p>
-        <p>Arrival-time: {{ resultArrivalTime | date:'medium' }}</p>
+        <p>Departure-time: {{resultDepartureTime}}</p>
+        <p>Arrival-time: {{resultArrivalTime}}</p>
       </mat-card>
     </div>
 
