@@ -5,8 +5,10 @@ export class DirectionsLeg {
     distance: Distance;
     duration: Duration;
     durationInTraffic: Duration;
-    arrivalTime: string;
-    departureTime: string;
+    arrivalTime: Date;
+    departureTime: Date;
+    startLocation: any;
+    endLocation: any;
     startAddress: string;
     endAddress: string;
 

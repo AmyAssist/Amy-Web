@@ -47,22 +47,24 @@ export class NavigationComponent implements OnInit {
     this.bestTransport = new BestTransportResult();
   }
 
-  fromToWay(from: string, to: string, date: string, hour: number, minute: number) {
+  async fromToWay(from: string, to: string, date: string, hour: number, minute: number) {
     this.createRoute(from, to, date, hour, minute);
     this.navPathData.setTravelmode(this.travelMode1);
     this.navigationService.fromTo(this.navPathData).subscribe((data: BestTransportResult) => this.bestTransport = { ...data });
     this.showWay = true;
     this.showWhen = false;
     this.showMode = false;
+    await new Promise((resolve, reject) => setTimeout(resolve, 3000));
     this.calcResult();
   }
 
-  bestType(from: string, to: string, date: string, hour: number, minute: number) {
+  async bestType(from: string, to: string, date: string, hour: number, minute: number) {
     this.createRoute(from, to, date, hour, minute);
     this.navigationService.best(this.navPathData).subscribe((data: BestTransportResult) => this.bestTransport = { ...data });
     this.showWay = false;
     this.showWhen = false;
     this.showMode = true;
+    await new Promise((resolve, reject) => setTimeout(resolve, 3000));
     this.calcResult();
   }
 
@@ -71,7 +73,7 @@ export class NavigationComponent implements OnInit {
     this.navPathData.setTravelmode(this.travelMode2);
     this.navigationService.when(this.navPathData).subscribe((data: string) => this.whenTime = data);
     this.whenTimeDate = new Date(this.whenTime);
-    this.showWay = false
+    this.showWay = false;
     this.showWhen = true;
     this.showMode = false;
   }
@@ -91,18 +93,19 @@ export class NavigationComponent implements OnInit {
   }
 
   calcResult() {
+    
     this.resultSummary = this.bestTransport.route.summary;
-    if (this.bestTransport.mode.toString() == 'DRIVING') {
+    if (this.bestTransport.mode.toString() === 'DRIVING') {
       this.resultMode = 'car';
-    } else if (this.bestTransport.mode.toString() == 'TRANSIT') {
+    } else if (this.bestTransport.mode.toString() === 'TRANSIT') {
       this.resultMode = 'transit';
-    } else if (this.bestTransport.mode.toString() == 'BICYCLING') {
+    } else if (this.bestTransport.mode.toString() === 'BICYCLING') {
       this.resultMode = 'bicycle';
     }
     this.resultDistance = this.bestTransport.route.legs[0].distance.humanReadable;
     this.resultDuration = this.bestTransport.route.legs[0].duration.humanReadable;
-    this.resultArrivalTime = new Date(this.bestTransport.route.legs[0].arrivalTime);
-    this.resultDepartureTime = new Date(this.bestTransport.route.legs[0].departureTime);
+    this.resultArrivalTime = this.bestTransport.route.legs[0].arrivalTime;
+    this.resultDepartureTime = this.bestTransport.route.legs[0].departureTime;
     this.resultStartAddress = this.bestTransport.route.legs[0].startAddress;
     this.resultEndAddress = this.bestTransport.route.legs[0].endAddress;
   }

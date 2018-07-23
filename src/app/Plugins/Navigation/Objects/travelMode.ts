@@ -1,3 +1,3 @@
-export class TravelMode { 
+export class TravelMode {
     constructor() { }
 }
