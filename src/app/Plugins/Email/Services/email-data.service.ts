@@ -51,18 +51,14 @@ export class EmailDataService {
             catchError(this.handleError));
     }
 
-    getImportantMails(amount: number) {
+    getMails(amount: number, important: boolean) {
         let params = new HttpParams();
         params = params.append('amount', amount.toString());
-        return this.http.post(this.path + 'plains/important', { params: params }, this.httpOptions).pipe(
-            catchError(this.handleError));
-
-    }
-
-    getAllMails(amount: number) {
-        let params = new HttpParams();
-        params = params.append('amount', amount.toString());
-        return this.http.post(this.path + 'plains', { params: params }, this.httpOptions).pipe(
+        if (important) {
+            return this.http.post(this.path + 'plains/important', { params }, this.httpOptions).pipe(
+                catchError(this.handleError));
+        }
+        return this.http.post(this.path + 'plains', { params }, this.httpOptions).pipe(
             catchError(this.handleError));
     }
 }
