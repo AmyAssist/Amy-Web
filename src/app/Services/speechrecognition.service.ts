@@ -46,10 +46,10 @@ export class SpeechRecognitionService {
     private onresult(event: Result) {
         const last = event.results.length - 1;
         let text: string = event.results[last][0].transcript;
-        //this is only temporary. the grammars in the server don't allow : and .
-        text = text.replace(/:/g, " x ");
-        text = text.replace(/p.m./gi, "pm");
-        text = text.replace(/a.m./gi, "am");
+        // this is only temporary. the grammars in the server don't allow : and .
+        text = text.replace(/:/g, ' x ');
+        text = text.replace(/p.m./gi, 'pm');
+        text = text.replace(/a.m./gi, 'am');
         for (const callbackFunc of this.activeCallbacks) {
             callbackFunc(text);
         }
