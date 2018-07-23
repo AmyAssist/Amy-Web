@@ -1,7 +1,7 @@
 language: node_js
 node_js:
   - '8'
-  - '9'
+#  - '9'
   - '10'
 sudo: required
 addons:
@@ -16,6 +16,8 @@ script:
 jobs:
   include:
     - stage: deploy
+      name: "Build"
+      if: branch = master
       script: ng build --prod --no-progress --base-href=/Amy-Web/
       deploy:
         provider: pages
@@ -24,7 +26,8 @@ jobs:
         local_dir: dist/Amy-Webapp/
         on:
           branch: master
-    - script:
+    - name: "Static Code Analysis"
+      script:
       - ng test --no-progress --code-coverage --karma-config karma.conf.js
       - ng lint Amy-Webapp --format json > tsLintReport.json || true
       - sonar-scanner
@@ -32,6 +35,8 @@ jobs:
         sonarcloud:
           organization: "amyassist"
           token: $SONAR_TOKEN
+    - name: "Docker"
+      script: docker build . -t amy-web-ci
 notifications:
   slack:
     secure: zgJRTyEJvfnxv/J3wGECXb1DwchogD+suEN6OdjOK+VjzUZ96tpG959+Z6mVwsnh7UGacVSbA5BEMobpEd5EcG9Pv3PpJRAzkI0fu82EIYd57Nlh4aoovQvCQTZovEQh0jMxkRcPxRw9npeGAuHKP5EEYE8pbNEJgC0RwxV5qKIEo/sEFog9p0Mnbrxx9KPaS57AL/gEX+F7zvsPmffweSOVT4VvUKjCYskLD7OmHDHj7y3BllXGIyZpgYRViXsJUFCN70z8/7SAM4TyXx8u8OtaauLElwI4HINHxqoZLAqQNHGqJVXbncJfLtfLvOEkNY+tVwlBSCy+RNwvE5LwH0CeaJoYtQO2OZLFgk2EugouukVWFPuHvG1xF0Xk3EWZDjjFiGvDcbOaOQ1AwGdJQf1GDeC04/fDo0vvTuGeq4vilZ/OEbteb8bNcRpfUat+wz4OG5yTD2uF4p1YLBjeCsiU9RK8xsE1bjN97BOXF1ffpik1fkXcLp5Nove7j2urYOwLyR9aT9sWAA2bMyYRUfXmB9X1d0wYtr+rF5IRRQ2DNkpElouZqlJ90Y9n9e94B2G5+gZ4vP1UWcQGm3rwP49o7pwC8uNug0fQHuUKu6V5ykhucG3N81CkhcK9hsh0+OKrouCf4wirsft3GBZRHkydDaI8zAtXN7QHHTimWtU=

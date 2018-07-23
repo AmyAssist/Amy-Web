@@ -1,39 +1,45 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+
 import {
-  MatButtonModule,
   MatCheckboxModule,
-  MatToolbarModule,
-  MatGridListModule,
-  MatMenuModule,
-  MatListModule,
+  MatDialogModule,
   MatDividerModule,
+  MatGridListModule,
+  MatListModule,
   MatRadioModule,
-
+  MatMenuModule,
+  MatTableModule,
+  MatTabsModule,
+  MatToolbarModule
 } from '@angular/material';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatSelectModule } from '@angular/material/select';
-import { MatInputModule } from '@angular/material/input';
-import { MatCardModule } from '@angular/material/card';
-import { MatExpansionModule } from '@angular/material/expansion';
+
+
 import { MatIconModule } from '@angular/material/icon';
-import { MatTabsModule } from '@angular/material/tabs';
-import { MatSliderModule } from '@angular/material/slider';
-
-
-import { HttpClientModule } from '@angular/common/http';
-import { Routes, RouterModule } from '@angular/router';
+import { MatSelectModule } from '@angular/material/select';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { ClockComponent } from './Plugins/Clock/Components/clock/clock.component';
-import { MusicComponent } from './Plugins/Music/Components/music/music.component';
 import { WeatherComponent } from './Plugins/Weather/Components/weather/weather.component';
 import { HomeComponent } from './Components/home/home.component';
 import { CalendarComponent } from './Plugins/Calendar/Components/calendar/calendar.component';
 import { NavigationComponent } from './Plugins/Navigation/Components/navigation/navigation.component';
 import { EmailComponent } from './Plugins/Email/Components/email/email.component';
+import { LocationRegistryComponent } from './Plugins/Registry/Components/location-registry/location-registry.component';
+import { ErrorDialogComponent } from './Components/error-dialog/error-dialog.component';
+import { RegistryContainerComponent } from './Plugins/Registry/Components/registry-container/registry-container.component';
+import { ContactRegistryComponent } from './Plugins/Registry/Components/contact-registry/contact-registry.component';
+import { LoginComponent } from './login/login.component';
+
+import { AuthService } from './auth.service';
+import { AuthGuard } from './auth.guard';
+
+import { MaterialModule } from './material.module';
+import { MusicModule } from './Plugins/Music/music.module';
 
 /*
     Routing of the components to the respective links
@@ -41,53 +47,65 @@ import { EmailComponent } from './Plugins/Email/Components/email/email.component
 const routes: Routes = [
   {
     path: '',
-    component: HomeComponent
+    component: HomeComponent,
+    canActivate: [AuthGuard]
   },
   {
-    path: 'music',
-    component: MusicComponent
+    path: 'home',
+    component: HomeComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'clock',
-    component: ClockComponent
+    component: ClockComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'weather',
-    component: WeatherComponent
+    component: WeatherComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'navigation',
-    component: NavigationComponent
+    component: NavigationComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'email',
-    component: EmailComponent
+    component: EmailComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'registry',
+    component: RegistryContainerComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'login',
+    component: LoginComponent
   }
+
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
     ClockComponent,
-    MusicComponent,
     WeatherComponent,
     HomeComponent,
     CalendarComponent,
     NavigationComponent,
     EmailComponent,
+    LoginComponent,
+    LocationRegistryComponent,
+    ErrorDialogComponent,
+    RegistryContainerComponent,
+    ContactRegistryComponent,
   ],
   imports: [
+    MusicModule,
+    MaterialModule,
     BrowserModule,
-    MatFormFieldModule,
-    MatButtonModule,
-    MatInputModule,
-    MatCardModule,
-    MatExpansionModule,
-    MatIconModule,
-    MatTabsModule,
-    MatSliderModule,
-    FormsModule,
-    BrowserAnimationsModule,
     FormsModule,
     MatSelectModule,
     MatCheckboxModule,
@@ -97,12 +115,18 @@ const routes: Routes = [
     MatGridListModule,
     MatDividerModule,
     MatIconModule,
+    MatTableModule,
+    MatTabsModule,
+    MatDialogModule,
+    ReactiveFormsModule,
     HttpClientModule,
     RouterModule.forRoot(routes),
-    MatRadioModule
+    MatRadioModule,
+    FormsModule,
   ],
   exports: [RouterModule],
-  providers: [],
+  providers: [AuthService, AuthGuard],
+  entryComponents: [ErrorDialogComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

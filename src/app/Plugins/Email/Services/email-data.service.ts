@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { BackendResolver } from '../../../Services/backendResolver.service';
 
 @Injectable({
     providedIn: 'root'
@@ -12,15 +13,19 @@ export class EmailDataService {
     httpOptions = {
         headers: new HttpHeaders({
             'Content-Type': 'text/plain'
-        })
+        }),
+        responseType: 'text' as 'text'
     };
 
-    constructor(private http: HttpClient) {
-        this.path = 'http://localhost:8080/rest/email/';
+    constructor(private readonly backend: BackendResolver, private readonly http: HttpClient) {
+        this.setupPath();
+    }
+
+    setupPath() {
+        this.path = this.backend.backendPath + 'email/';
     }
 
     private handleError(error: HttpErrorResponse) {
-        /*
         if (error.error instanceof ErrorEvent) {
             // A client-side or network error occurred. Handle it accordingly.
             console.error('An error occurred:', error.error.message);
@@ -31,8 +36,6 @@ export class EmailDataService {
                 `Backend returned code ${error.status}, ` +
                 `body was: ${error.error}`);
         }
-        */
-        console.error(error);
         // return an observable with a user-facing error message
         return throwError(
             'Something bad happened; please try again later.');
@@ -51,7 +54,7 @@ export class EmailDataService {
     getImportantMails(amount: number) {
         let params = new HttpParams();
         params = params.append('amount', amount.toString());
-        return this.http.post(this.path + 'plains/important', null, { params: params }).pipe(
+        return this.http.post(this.path + 'plains/important', { params: params }, this.httpOptions).pipe(
             catchError(this.handleError));
 
     }
@@ -59,7 +62,7 @@ export class EmailDataService {
     getAllMails(amount: number) {
         let params = new HttpParams();
         params = params.append('amount', amount.toString());
-        return this.http.post(this.path + 'plains', null, { params: params }).pipe(
+        return this.http.post(this.path + 'plains', { params: params }, this.httpOptions).pipe(
             catchError(this.handleError));
     }
 }

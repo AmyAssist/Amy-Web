@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { WeatherDataService } from '../../Services/weather-data.service';
 import { Weather } from '../../Objects/weather';
 import { WeatherWeek } from '../../Objects/weatherWeek';
+import { Location } from '../../Objects/location';
+import { BackendResolver } from '../../../../Services/backendResolver.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-weather',
@@ -16,16 +19,33 @@ export class WeatherComponent implements OnInit {
   today: boolean;
   tommorow: boolean;
   week: boolean;
+  locations: Location[];
+  selectedLocation: string;
 
-  constructor(private weatherService: WeatherDataService) { }
+  constructor(private readonly weatherService: WeatherDataService) {
+  }
 
   ngOnInit() {
+    this.weatherService.setupPath();
     this.weatherToday = new Weather();
     this.weatherTomorrow = new Weather();
     this.weatherWeekData = new WeatherWeek();
     this.today = false;
     this.tommorow = false;
     this.week = false;
+    this.weatherService.getAllLocations()
+      .subscribe((data: Location[]) => {
+        this.locations = data;
+        this.selectedLocation = this.locations[0].name;
+      });
+  }
+
+  public onChange(event): void {
+    this.weatherService.sendLocation(event.value.persistentId);
+    this.selectedLocation = event.value.name;
+    if (this.today) { this.getWeatherToday(); }
+    if (this.tommorow) { this.getWeatherTomorrow(); }
+    if (this.week) { this.getWeatherWeek(); }
   }
 
   getWeatherToday() {
@@ -33,7 +53,11 @@ export class WeatherComponent implements OnInit {
     this.tommorow = false;
     this.week = false;
     this.weatherService.getWeatherToday()
-      .subscribe((data: Weather) => this.weatherToday = { ...data });
+      .subscribe((data: Weather) => {
+        this.weatherToday = { ...data };
+        this.weatherToday.iconSrc = this.getWeatherIcon(this.weatherToday);
+        this.weatherToday.time = this.convertTime(this.weatherToday.timestamp);
+      });
   }
 
   getWeatherTomorrow() {
@@ -41,7 +65,12 @@ export class WeatherComponent implements OnInit {
     this.tommorow = true;
     this.week = false;
     this.weatherService.getWeatherTomorrow()
-      .subscribe((data: Weather) => this.weatherTomorrow = { ...data });
+      .subscribe((data: Weather) => {
+        this.weatherTomorrow = { ...data };
+        this.weatherTomorrow.iconSrc = this.getWeatherIcon(this.weatherTomorrow);
+        this.weatherTomorrow.time = this.convertTime(this.weatherTomorrow.timestamp);
+      });
+
   }
 
   getWeatherWeek() {
@@ -49,6 +78,50 @@ export class WeatherComponent implements OnInit {
     this.tommorow = false;
     this.week = true;
     this.weatherService.getWeatherWeek()
-      .subscribe((data: WeatherWeek) => this.weatherWeekData = { ...data });
+      .subscribe((data: WeatherWeek) => {
+        this.weatherWeekData = { ...data };
+        for (const weather of this.weatherWeekData.days) {
+          weather.iconSrc = this.getWeatherIcon(weather);
+          weather.time = this.convertTime(weather.timestamp);
+        }
+      });
+
+  }
+
+  getWeatherIcon(weather: Weather): string {
+    switch (weather.icon) {
+      case 'clear-day': {
+        return weather.iconSrc = 'assets/weather/sunny.svg';
+      }
+      case 'clear-night': {
+        return weather.iconSrc = 'assets/weather/sunny.svg';
+      }
+      case 'sleet': {
+        return weather.iconSrc = 'assets/weather/rain.svg';
+      }
+      case 'rain': {
+        return weather.iconSrc = 'assets/weather/rain.svg';
+      }
+      case 'snow': {
+        return weather.iconSrc = 'assets/weather/snows.svg';
+      }
+      case 'wind': {
+        return weather.iconSrc = 'assets/weather/wind.svg';
+      }
+      case 'fog': {
+        return weather.iconSrc = 'assets/weather/hazy.svg';
+      }
+      case 'cloudy': {
+        return weather.iconSrc = 'assets/weather/cloudy.svg';
+      }
+      default: {
+        return weather.iconSrc = 'assets/weather/cloudy.svg';
+      }
+    }
+  }
+
+  convertTime(stamp: number): string {
+    const datePipe = new DatePipe('en-US');
+    return datePipe.transform(stamp * 1000, 'EEEE, MMMM d');
   }
 }

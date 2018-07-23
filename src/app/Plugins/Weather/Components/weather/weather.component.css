@@ -1,0 +1,24 @@
+.mat-card-weather{
+    width:26%;
+    margin: 0.1%;
+
+}
+
+.mat-card-tile{
+    left:5px;
+}
+
+.card-list {
+    display:flex;
+    flex-flow:row wrap;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.dynamic-text {
+    color: #5f6368;
+}
+
+.bottom-text {
+    bottom: 0;
+}
