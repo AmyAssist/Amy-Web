@@ -11,7 +11,7 @@ export class EmailDataService {
 
     httpOptions = {
         headers: new HttpHeaders({
-            'Content-Type': 'application/json'
+            'Content-Type': 'text/plain'
         })
     };
 
@@ -20,6 +20,7 @@ export class EmailDataService {
     }
 
     private handleError(error: HttpErrorResponse) {
+        /*
         if (error.error instanceof ErrorEvent) {
             // A client-side or network error occurred. Handle it accordingly.
             console.error('An error occurred:', error.error.message);
@@ -30,29 +31,35 @@ export class EmailDataService {
                 `Backend returned code ${error.status}, ` +
                 `body was: ${error.error}`);
         }
+        */
+        console.error(error);
         // return an observable with a user-facing error message
         return throwError(
             'Something bad happened; please try again later.');
     }
 
     amountNewMessages() {
-        return this.http.get<number>(this.path + 'new/count', this.httpOptions).pipe(
+        return this.http.get(this.path + 'new/count').pipe(
             catchError(this.handleError));
     }
 
     hasUnreadMessages() {
-        return this.http.get<Boolean>(this.path + 'unread', this.httpOptions).pipe(
+        return this.http.get(this.path + 'unread').pipe(
             catchError(this.handleError));
     }
 
-    getImportantMails() {
-        return this.http.post<String>(this.path + 'plains/important', this.httpOptions).pipe(
+    getImportantMails(amount: number) {
+        let params = new HttpParams();
+        params = params.append('amount', amount.toString());
+        return this.http.post(this.path + 'plains/important', null, { params: params }).pipe(
             catchError(this.handleError));
-        
+
     }
 
-    getAllMails() {
-        return this.http.post<String>(this.path + 'plains', this.httpOptions).pipe(
+    getAllMails(amount: number) {
+        let params = new HttpParams();
+        params = params.append('amount', amount.toString());
+        return this.http.post(this.path + 'plains', null, { params: params }).pipe(
             catchError(this.handleError));
     }
 }

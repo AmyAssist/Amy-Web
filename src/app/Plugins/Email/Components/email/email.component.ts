@@ -8,19 +8,22 @@ import { EmailDataService } from '../../Services/email-data.service';
 })
 export class EmailComponent implements OnInit {
 
-  unreadMessages = -1;
+  unreadMessages: number;
 
-  output: String;
+  newMessages: boolean;
 
-  constructor(private emailService: EmailDataService) { }
+  output: string;
+
+  constructor(private readonly emailService: EmailDataService) { }
 
   ngOnInit() {
+    this.unreadMessages = -1;
+    this.newMessages = false;
   }
 
   hasNewMessages() {
-    var newMessages: Boolean;
-    this.emailService.hasUnreadMessages().subscribe((data: Boolean) => newMessages = data);
-    if (newMessages) {
+    this.emailService.hasUnreadMessages().subscribe((data: boolean) => this.newMessages = data);
+    if (this.newMessages) {
       this.output = 'You have new messages';
     } else {
       this.output = 'You do not have new messages';
@@ -33,11 +36,10 @@ export class EmailComponent implements OnInit {
   }
 
   getImportantMails() {
-    this.emailService.getImportantMails().subscribe();
-    this.output = '';
+    this.emailService.getImportantMails(-1).subscribe((data: string) => this.output = data);
   }
 
   getAllMails() {
-    this.emailService.getImportantMails().subscribe();
+    this.emailService.getAllMails(1).subscribe((data: string) => this.output = data);
   }
 }
