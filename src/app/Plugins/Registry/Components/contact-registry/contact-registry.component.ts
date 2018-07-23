@@ -25,7 +25,6 @@ export class ContactRegistryComponent implements OnInit {
 
     ngOnInit() {
         this.registryService.setupPath();
-        
         this.dataSource = new AsyncTableDataSource<Location>([], Location, this.validatorService,
             this.insertContact.bind(this),
             this.updateContact.bind(this),
