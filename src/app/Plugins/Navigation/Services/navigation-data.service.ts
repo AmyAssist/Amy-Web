@@ -4,6 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { map, catchError, retry } from 'rxjs/operators';
 import { NavPath } from '../Objects/navPath';
 import { BackendResolver } from '../../../Services/backendResolver.service';
+import { ResponseType } from '@angular/http';
 
 
 @Injectable({
@@ -24,6 +25,7 @@ export class NavigationDataService {
       'Content-Type': 'application/json'
     }),
     responseType: 'text' as 'text'
+
   };
 
   private handleError(error: HttpErrorResponse) {

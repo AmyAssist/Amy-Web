@@ -111,7 +111,7 @@ export class NavigationComponent implements OnInit {
     this.resultDistance = this.bestTransport.route.legs[0].distance.humanReadable;
     this.resultDuration = this.bestTransport.route.legs[0].duration.humanReadable;
     if (this.transit) {
-      let blank = ' ';
+      const blank = ' ';
       this.resultArrivalTime = `${this.bestTransport.route.legs[0].arrivalTime.dayOfMonth}
         /${this.bestTransport.route.legs[0].arrivalTime.monthOfYear}
         /${this.bestTransport.route.legs[0].arrivalTime.year} ${blank}
