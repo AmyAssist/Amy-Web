@@ -41,7 +41,10 @@ export class MusicDataService {
       'Something bad happened; please try again later.');
   }
   constructor(private readonly backend: BackendResolver, private readonly http: HttpClient) {
-    this.path = backend.backendPath + 'music/';
+  }
+
+  setupPath() {
+    this.path = this.backend.backendPath + 'music/';
   }
 
   /*

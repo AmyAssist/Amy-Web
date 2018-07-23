@@ -79,6 +79,9 @@ export class MusicComponent implements OnInit {
     // this.playlist = false;
 
     console.log(this.musicService);
+
+    this.musicService.setupPath();
+
     this.musicData = new Music;
 
     // array of songs from the current playlist for display
@@ -121,7 +124,7 @@ export class MusicComponent implements OnInit {
   */
   getCurrentSong() {
     this.musicService.getCurrentSong()
-      .subscribe((data: Music) => this.musicData = {...data} );
+      .subscribe((data: Music) => this.musicData = { ...data });
   }
 
   /*
