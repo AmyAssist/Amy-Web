@@ -35,7 +35,11 @@ export class NavigationDataService {
   }
 
   constructor(private readonly backend: BackendResolver, private readonly http: HttpClient) {
-    this.path = backend.backendPath + 'navigation/';
+    this.setupPath();
+  }
+
+  setupPath(){
+    this.path = this.backend.backendPath + 'navigation/';
   }
 
   fromTo(wayData: NavPath) {
