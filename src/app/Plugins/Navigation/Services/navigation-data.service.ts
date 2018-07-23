@@ -38,7 +38,7 @@ export class NavigationDataService {
     this.setupPath();
   }
 
-  setupPath(){
+  setupPath() {
     this.path = this.backend.backendPath + 'navigation/';
   }
 
