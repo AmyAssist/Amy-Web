@@ -101,8 +101,8 @@ export class NavigationComponent implements OnInit {
     }
     this.resultDistance = this.bestTransport.route.legs[0].distance.humanReadable;
     this.resultDuration = this.bestTransport.route.legs[0].duration.humanReadable;
-    this.resultArrivalTime = this.bestTransport.route.legs[0].arrivalTime;
-    this.resultDepartureTime = this.bestTransport.route.legs[0].departureTime;
+    this.resultArrivalTime = new Date(this.bestTransport.route.legs[0].arrivalTime);
+    this.resultDepartureTime = new Date(this.bestTransport.route.legs[0].departureTime);
     this.resultStartAddress = this.bestTransport.route.legs[0].startAddress;
     this.resultEndAddress = this.bestTransport.route.legs[0].endAddress;
   }
