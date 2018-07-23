@@ -23,7 +23,7 @@ export class NavigationDataService {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
     }),
-    responseType: 'text' as 'text'
+    responseType: 'text'
   };
 
   private handleError(error: HttpErrorResponse) {

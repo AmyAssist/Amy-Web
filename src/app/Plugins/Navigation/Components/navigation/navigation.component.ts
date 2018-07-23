@@ -97,7 +97,6 @@ export class NavigationComponent implements OnInit {
   }
 
   calcResult() {
-    //this.resultSummary = this.bestTransport.route.summary;
     if (this.bestTransport.mode.toString() === 'DRIVING') {
       this.resultMode = 'car';
       this.transit = false;
@@ -112,16 +111,10 @@ export class NavigationComponent implements OnInit {
     this.resultDistance = this.bestTransport.route.legs[0].distance.humanReadable;
     this.resultDuration = this.bestTransport.route.legs[0].duration.humanReadable;
     if (this.transit) {
-      this.resultArrivalTime = this.bestTransport.route.legs[0].arrivalTime.dayOfMonth + '/' +
-        this.bestTransport.route.legs[0].arrivalTime.monthOfYear + '/' +
-        this.bestTransport.route.legs[0].arrivalTime.year + ' ' +
-        this.bestTransport.route.legs[0].arrivalTime.hourOfDay + ':' +
-        this.bestTransport.route.legs[0].arrivalTime.minuteOfHour;
-      this.resultDepartureTime = this.bestTransport.route.legs[0].departureTime.dayOfMonth + '/' +
-        this.bestTransport.route.legs[0].departureTime.monthOfYear + '/' +
-        this.bestTransport.route.legs[0].departureTime.year + ' ' +
-        this.bestTransport.route.legs[0].departureTime.hourOfDay + ':' +
-        this.bestTransport.route.legs[0].departureTime.minuteOfHour;
+      this.resultArrivalTime = `${this.bestTransport.route.legs[0].arrivalTime.dayOfMonth}/${this.bestTransport.route.legs[0].arrivalTime.monthOfYear}/${this.bestTransport.route.legs[0].arrivalTime.year} 
+        ${this.bestTransport.route.legs[0].arrivalTime.hourOfDay}:${this.bestTransport.route.legs[0].arrivalTime.minuteOfHour}`;
+      this.resultDepartureTime = `${this.bestTransport.route.legs[0].departureTime.dayOfMonth}/${this.bestTransport.route.legs[0].departureTime.monthOfYear}/${this.bestTransport.route.legs[0].departureTime.year} 
+      ${this.bestTransport.route.legs[0].departureTime.hourOfDay}:${this.bestTransport.route.legs[0].departureTime.minuteOfHour}`;
     }
     this.resultStartAddress = this.bestTransport.route.legs[0].startAddress;
     this.resultEndAddress = this.bestTransport.route.legs[0].endAddress;
