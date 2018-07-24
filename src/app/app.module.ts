@@ -7,6 +7,7 @@ import {
   MatDividerModule,
   MatGridListModule,
   MatListModule,
+  MatRadioModule,
   MatMenuModule,
   MatTableModule,
   MatTabsModule,
@@ -16,7 +17,6 @@ import {
 
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
@@ -27,6 +27,8 @@ import { WeatherComponent } from './Plugins/Weather/Components/weather/weather.c
 import { HomeComponent } from './Components/home/home.component';
 import { CalendarComponent } from './Plugins/Calendar/Components/calendar/calendar.component';
 import { NavigationComponent } from './Plugins/Navigation/Components/navigation/navigation.component';
+import { EmailComponent } from './Plugins/Email/Components/email/email.component';
+
 import { LocationRegistryComponent } from './Plugins/Registry/Components/location-registry/location-registry.component';
 import { ErrorDialogComponent } from './Components/error-dialog/error-dialog.component';
 import { RegistryContainerComponent } from './Plugins/Registry/Components/registry-container/registry-container.component';
@@ -69,6 +71,11 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: 'email',
+    component: EmailComponent,
+    canActivate: [AuthGuard]
+  },
+  {
     path: 'registry',
     component: RegistryContainerComponent,
     canActivate: [AuthGuard]
@@ -88,6 +95,7 @@ const routes: Routes = [
     HomeComponent,
     CalendarComponent,
     NavigationComponent,
+    EmailComponent,
     LoginComponent,
     LocationRegistryComponent,
     ErrorDialogComponent,
@@ -113,6 +121,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule.forRoot(routes),
+    MatRadioModule,
     FormsModule,
   ],
   exports: [RouterModule],
