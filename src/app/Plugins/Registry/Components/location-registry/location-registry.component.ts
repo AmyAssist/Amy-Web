@@ -1,10 +1,10 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {LocationRegistryDataService} from '../../Services/location-registry-data.service';
-import {Location} from '../../Objects/location';
-import {LocationValidatorService} from './location-validator.service';
-import {MatDialog} from '@angular/material';
-import {ErrorDialogComponent} from '../../../../Components/error-dialog/error-dialog.component';
-import {AsyncTableDataSource} from '../../AsyncTableDataSource';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { LocationRegistryDataService } from '../../Services/location-registry-data.service';
+import { Location } from '../../Objects/location';
+import { LocationValidatorService } from './location-validator.service';
+import { MatDialog } from '@angular/material';
+import { ErrorDialogComponent } from '../../../../Components/error-dialog/error-dialog.component';
+import { AsyncTableDataSource } from '../../AsyncTableDataSource';
 
 /**
  * @author Benno Krauß
@@ -27,10 +27,11 @@ export class LocationRegistryComponent implements OnInit {
 
 
     constructor(private readonly registryService: LocationRegistryDataService, private readonly locationValidator: LocationValidatorService,
-                private readonly dialog: MatDialog) {
+        private readonly dialog: MatDialog) {
     }
 
     ngOnInit() {
+        this.registryService.setupPath();
         this.dataSource = new AsyncTableDataSource<Location>([], Location, this.locationValidator,
             this.insertLocation.bind(this),
             this.updateLocation.bind(this),
