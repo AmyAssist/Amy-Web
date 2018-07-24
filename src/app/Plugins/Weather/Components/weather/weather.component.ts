@@ -26,6 +26,7 @@ export class WeatherComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.weatherService.setupPath();
     this.weatherToday = new Weather();
     this.weatherTomorrow = new Weather();
     this.weatherWeekData = new WeatherWeek();

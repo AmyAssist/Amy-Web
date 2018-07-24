@@ -35,7 +35,11 @@ export class ClockDataService {
   }
 
   constructor(private readonly backend: BackendResolver, private readonly http: HttpClient) {
-    this.path = backend.backendPath + 'clock/'; // Path for all Data concerning the clock-plugin
+    this.setupPath();
+  }
+
+  setupPath(){
+    this.path = this.backend.backendPath + 'clock/'; // Path for all Data concerning the clock-plugin
   }
 
   /*
