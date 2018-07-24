@@ -73,12 +73,7 @@ export class MusicComponent implements OnInit {
   constructor(private readonly musicService: MusicDataService) { }
 
   ngOnInit() {
-    // this.setup = true;
-    // this.setupStage2 = false;
-    // this.playing = false;
-    // this.playlist = false;
 
-    console.log(this.musicService);
 
     this.musicService.setupPath();
 
@@ -88,8 +83,10 @@ export class MusicComponent implements OnInit {
     this.playlistSongs = new Array<Music>();
 
     this.playlistAllFeatured = new Array<Playlist>();
+    this.getPlaylistFeatured();
 
     this.playlistAllUser = new Array<Playlist>();
+    this.getPlaylistUser();
 
     this.deviceAll = new Array<Device>();
     this.getDevs();
