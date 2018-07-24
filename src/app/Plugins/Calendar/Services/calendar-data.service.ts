@@ -16,7 +16,7 @@ export class CalendarDataService {
   
   httpOptions = {
     headers: new HttpHeaders({
-      'Content-Type': 'application/json'
+      'Content-Type': 'text/plain'
     })
   };
 
@@ -38,13 +38,25 @@ export class CalendarDataService {
 
   constructor(private readonly backend: BackendResolver, private readonly http: HttpClient) {
     this.path = backend.backendPath + 'calendar/';
-   }
+  }
 
-   getEvents(date: string){
-    return this.http.get<CalendarEvent[]>(`${this.path}eventsAt/` + date, this.httpOptions).pipe(
+  getEvents(date: string){
+    return this.http.get<CalendarEvent[]>(`${this.path}eventsAt/${date}`, this.httpOptions).pipe(
       catchError(this.handleError)).pipe(map((response: CalendarEvent[]) => {
-		response.forEach(l => Object.setPrototypeOf(l, new CalendarEvent()));
-		return response;
-	}));
-}
+		    response.forEach(l => Object.setPrototypeOf(l, new CalendarEvent()));
+		    return response;
+	    }));
+  }
+
+  getEventsAsString(date: string){
+    return this.http.get<string>(`${this.path}eventsAtString/${date}`, this.httpOptions).pipe(catchError(this.handleError));
+  }
+
+  getEventsToday(){
+    return this.http.get<string>(`${this.path}events/today`, this.httpOptions).pipe(catchError(this.handleError));
+  }
+
+  getEventsTomorrow(){
+    return this.http.get<string>(`${this.path}events/tomorrow`, this.httpOptions).pipe(catchError(this.handleError));
+  }
 }
