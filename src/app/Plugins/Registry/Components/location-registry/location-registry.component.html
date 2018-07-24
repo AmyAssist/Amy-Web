@@ -1,0 +1,86 @@
+<div>
+	<mat-table class="table-margin-bottom" #table [dataSource]="dataSource">
+
+		<ng-container matColumnDef="name">
+			<mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+			<mat-cell *matCellDef="let row">
+				<mat-form-field floatLabel="{{ row.editing ? 'float' : 'never'}}">
+					<input matInput [formControl]="row.validator.controls['name']" [readonly]="!row.editing" placeholder="Name" [(ngModel)]="row.currentData.name">
+				</mat-form-field>
+			</mat-cell>
+		</ng-container>
+
+		<ng-container matColumnDef="street">
+			<mat-header-cell *matHeaderCellDef>Street</mat-header-cell>
+			<mat-cell *matCellDef="let row">
+				<mat-form-field floatLabel="{{ row.editing ? 'float' : 'never'}}">
+					<input matInput [formControl]="row.validator.controls['street']" [readonly]="!row.editing" placeholder="Street" [(ngModel)]="row.currentData.street">
+				</mat-form-field>
+			</mat-cell>
+		</ng-container>
+
+		<ng-container matColumnDef="houseNumber">
+			<mat-header-cell *matHeaderCellDef>House Number</mat-header-cell>
+			<mat-cell *matCellDef="let row">
+				<mat-form-field floatLabel="{{ row.editing ? 'float' : 'never'}}">
+					<input matInput [formControl]="row.validator.controls['houseNumber']" type="number" [readonly]="!row.editing" placeholder="0" [(ngModel)]="row.currentData.houseNumber">
+				</mat-form-field>
+			</mat-cell>
+		</ng-container>
+
+		<ng-container matColumnDef="zipCode">
+			<mat-header-cell *matHeaderCellDef>ZIP</mat-header-cell>
+			<mat-cell *matCellDef="let row">
+				<mat-form-field floatLabel="{{ row.editing ? 'float' : 'never'}}">
+					<input matInput [formControl]="row.validator.controls['zipCode']" [readonly]="!row.editing" placeholder="00000" [(ngModel)]="row.currentData.zipCode">
+				</mat-form-field>
+			</mat-cell>
+		</ng-container>
+
+		<ng-container matColumnDef="city">
+			<mat-header-cell *matHeaderCellDef>City</mat-header-cell>
+			<mat-cell *matCellDef="let row">
+				<mat-form-field floatLabel="{{ row.editing ? 'float' : 'never'}}">
+					<input matInput [formControl]="row.validator.controls['city']" [readonly]="!row.editing" placeholder="City" [(ngModel)]="row.currentData.city">
+				</mat-form-field>
+			</mat-cell>
+		</ng-container>
+
+
+
+		<ng-container matColumnDef="tag">
+			<mat-header-cell *matHeaderCellDef>Tag</mat-header-cell>
+			<mat-cell *matCellDef="let row">
+				<mat-form-field floatLabel="never">
+					<mat-select [formControl]="row.validator.controls['tag']" placeholder="None" [(ngModel)]="row.currentData.tag">
+						<mat-option value="none">None</mat-option>
+						<mat-option value="home">Home</mat-option>
+						<mat-option value="work">Work</mat-option>
+					</mat-select>
+				</mat-form-field>
+			</mat-cell>
+		</ng-container>
+
+
+
+		<ng-container matColumnDef="actionsColumn">
+			<mat-header-cell *matHeaderCellDef>
+				<button mat-icon-button color="accent" (click)="dataSource.createNew()"><em class="fa fa-plus mat-icon"></em></button>
+			</mat-header-cell>
+			<mat-cell *matCellDef="let row">
+				<button *ngIf="!row.editing" mat-icon-button color="primary" focusable="false" (click)="row.startEdit()">
+					<em class="fa fa-pencil mat-icon"></em>
+				</button>
+				<button *ngIf="row.editing" mat-icon-button color="primary" focusable="false" (click)="dataSource.confirmHandler(row)">
+					<em class="fa fa-check mat-icon"></em>
+				</button>
+				<button mat-icon-button color="primary" focusable="false" (click)="dataSource.deleteOrCancelHandler(row)">
+					<em class="fa fa-times mat-icon"></em>
+				</button>
+			</mat-cell>
+		</ng-container>
+
+		<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+		<mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+	</mat-table>
+</div>

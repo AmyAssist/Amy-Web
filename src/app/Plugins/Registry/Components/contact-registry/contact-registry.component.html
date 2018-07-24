@@ -1,0 +1,59 @@
+<div>
+  <mat-table class="table-margin-bottom" #table [dataSource]="dataSource">
+
+    <ng-container matColumnDef="firstName">
+      <mat-header-cell *matHeaderCellDef>First name</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <mat-form-field floatLabel="{{ row.editing ? 'float' : 'never'}}">
+          <input matInput [formControl]="row.validator.controls['firstName']" [readonly]="!row.editing" placeholder="First name" [(ngModel)]="row.currentData.firstName">
+        </mat-form-field>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="lastName">
+      <mat-header-cell *matHeaderCellDef>Last name</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <mat-form-field floatLabel="{{ row.editing ? 'float' : 'never'}}">
+          <input matInput [formControl]="row.validator.controls['lastName']" [readonly]="!row.editing" placeholder="Last name" [(ngModel)]="row.currentData.lastName">
+        </mat-form-field>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="important">
+      <mat-header-cell *matHeaderCellDef>Important</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <mat-checkbox [disabled]="!row.editing" [(ngModel)]="row.currentData.important"></mat-checkbox>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+      <mat-header-cell *matHeaderCellDef>Email</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <mat-form-field floatLabel="{{ row.editing ? 'float' : 'never'}}">
+          <input matInput [formControl]="row.validator.controls['email']" [readonly]="!row.editing" placeholder="Email" [(ngModel)]="row.currentData.email">
+        </mat-form-field>
+      </mat-cell>
+    </ng-container>
+
+
+    <ng-container matColumnDef="actionsColumn">
+      <mat-header-cell *matHeaderCellDef>
+        <button mat-icon-button color="accent" (click)="dataSource.createNew()"><em class="fa fa-plus mat-icon"></em></button>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <button *ngIf="!row.editing" mat-icon-button color="primary" focusable="false" (click)="row.startEdit()">
+          <em class="fa fa-pencil mat-icon"></em>
+        </button>
+        <button *ngIf="row.editing" mat-icon-button color="primary" focusable="false" (click)="dataSource.confirmHandler(row)">
+          <em class="fa fa-check mat-icon"></em>
+        </button>
+        <button mat-icon-button color="primary" focusable="false" (click)="dataSource.deleteOrCancelHandler(row)">
+          <em class="fa fa-times mat-icon"></em>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</div>
