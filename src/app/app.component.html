@@ -24,6 +24,8 @@
   <button mat-button routerLink="weather">Weather</button>
   <button mat-button routerLink="navigation">Navigation</button>
   <button mat-button routerLink="registry">Registry</button>
+  <button mat-button *ngIf="!auth.loggedIn()" routerLink="login">Login</button>
+  <button mat-button *ngIf="auth.loggedIn()" (click)="auth.logout()">Logout</button>
 </mat-menu>
 
 <router-outlet></router-outlet>
