@@ -39,7 +39,7 @@ import { AuthService } from './auth.service';
 import { AuthGuard } from './auth.guard';
 
 import { MaterialModule } from './material.module';
-import {MusicModule} from './Plugins/Music/music.module';
+import { MusicModule } from './Plugins/Music/music.module';
 
 /*
     Routing of the components to the respective links

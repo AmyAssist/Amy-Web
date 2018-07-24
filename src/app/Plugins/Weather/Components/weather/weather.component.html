@@ -94,7 +94,7 @@
 
   <div *ngIf=week>
     <div class='card-list' layout="row" layout-wrap>
-      <mat-card fxLayout='row' fxLayoutWrap fxLayoutGap="2rem" fxLayoutAlign="center" *ngFor="let weather of weatherWeekData.days; let i = index"
+      <mat-card *ngFor="let weather of weatherWeekData.days; let i = index"
         class="mat-card-weather">
         <mat-grid-list cols="2" row="2" rowHeight="2:1">
           <mat-grid-tile>
