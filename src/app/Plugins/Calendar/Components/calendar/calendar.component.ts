@@ -20,12 +20,12 @@ export class CalendarComponent implements OnInit {
   ngOnInit() {
     this.onDate = false;
     var currentDate = new Date();
-    var currentDateISO = currentDate.toISOString();
+    var currentDateISO = currentDate.toISOString().slice(0,-1);
     this.calendarService.getEvents(currentDateISO).subscribe((data: CalendarEvent[]) => {
       this.eventsToday = { ...data };
     })
     currentDate.setDate(currentDate.getDate() + 1);
-    var tomorrow = currentDate.toISOString();
+    var tomorrow = currentDate.toISOString().slice(0,-1);
     this.calendarService.getEvents(tomorrow).subscribe((data: CalendarEvent[]) => {
       this.eventsTomorrow = { ...data };
     })

@@ -9,4 +9,12 @@ export class CalendarEvent {
     allDay: boolean;
 
     constructor() { }
+
+    getStartDate() : Date {
+		return new Date(this.start);
+    }
+    
+    getEndDate() : Date {
+        return new Date(this.end);
+    }
 }
