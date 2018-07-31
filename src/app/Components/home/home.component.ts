@@ -64,7 +64,7 @@ export class HomeComponent {
             this.response = null;
             this.errorStateMatcher.error = true;
             if (readResponse) {
-                this.speakCommand("I could not understand that")
+                this.speakCommand('I could not understand that');
             }
         });
     }
