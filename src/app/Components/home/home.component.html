@@ -3,7 +3,7 @@
     <mat-card-content>
         <section>
             <mat-form-field class="command-input-field">
-                <textarea matInput #command [(ngModel)]="commandTextValue" value="hello" placeholder="Command" [errorStateMatcher]="errorStateMatcher"></textarea>
+                <textarea matInput #command [(ngModel)]="commandTextValue" placeholder="Command" [errorStateMatcher]="errorStateMatcher"></textarea>
             </mat-form-field>
             <button mat-icon-button color="basic" [@srState]="srState" (click)="speechRecognition()">
                 <mat-icon>keyboard_voice</mat-icon>
