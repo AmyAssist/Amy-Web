@@ -75,6 +75,7 @@ export class HomeComponent {
         this.speechRecognitionService.recognize((result) => {
             this.commandTextValue = result;
             this.srState = 'inactive';
+            this.sendCommand(this.commandTextValue);
         });
     }
 }
