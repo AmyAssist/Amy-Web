@@ -1,3 +1,38 @@
 .fill-remaining-space {
     flex: 1 1 auto;
 }
+
+.main-content {
+    margin: auto;
+    width: 50%;
+}
+
+/* big desktop */
+@media (min-width: 1200px) and (max-width: 1920px){
+.main-content {
+    width: 1080px;
+}}
+
+/* small desktop */
+@media (min-width: 992px) and (max-width: 1199px){
+.main-content {
+    width: 770px;
+}}    
+
+/* large  tablet */
+@media (min-width: 769px) and (max-width: 991px){
+.main-content {
+    width: 770px;
+}}
+
+/* medium tablet */
+@media (min-width: 480px) and (max-width: 768px){
+ .main-content {
+       width: 480px;
+ }}
+
+ /* smartphone */
+@media (max-width: 479px){
+    .main-content {
+          width: 100%
+    }}

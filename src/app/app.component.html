@@ -31,4 +31,6 @@
   <button mat-button *ngIf="auth.loggedIn()" (click)="auth.logout()">Logout</button>
 </mat-menu>
 
-<router-outlet></router-outlet>
+<div class="main-content">
+  <router-outlet></router-outlet>
+</div>
