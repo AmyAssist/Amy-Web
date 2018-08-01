@@ -1,7 +1,8 @@
 .mat-card-weather{
-    width:26%;
+    width: 30%;
     margin: 0.1%;
-
+    min-width: 430px;
+    min-height: 200px;
 }
 
 .mat-card-tile{

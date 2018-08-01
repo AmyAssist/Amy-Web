@@ -1,3 +1,4 @@
+
 <mat-toolbar color="primary">
 
   <button mat-button routerLink="">
@@ -9,6 +10,7 @@
     <button mat-button routerLink="clock">Alarm</button>
     <button mat-button routerLink="weather">Weather</button>
     <button mat-button routerLink="navigation">Navigation</button>
+    <button mat-button routerLink="email">E-Mail</button>
     <button mat-button routerLink="registry">Registry</button>
     <button mat-button *ngIf="!auth.loggedIn()" routerLink="login">Login</button>
     <button mat-button *ngIf="auth.loggedIn()" (click)="auth.logout()">Logout</button>
@@ -23,6 +25,7 @@
   <button mat-button routerLink="clock">Alarm</button>
   <button mat-button routerLink="weather">Weather</button>
   <button mat-button routerLink="navigation">Navigation</button>
+  <button mat-button routerLink="email">E-Mail</button>
   <button mat-button routerLink="registry">Registry</button>
   <button mat-button *ngIf="!auth.loggedIn()" routerLink="login">Login</button>
   <button mat-button *ngIf="auth.loggedIn()" (click)="auth.logout()">Logout</button>
