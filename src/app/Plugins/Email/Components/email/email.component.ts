@@ -19,7 +19,7 @@ export class EmailComponent implements OnInit {
 
   ngOnInit() {
     this.emailService.setupPath();
-    this.getAllMails();
+    this.refresh();
   }
 
   getAllMails() {
@@ -34,5 +34,9 @@ export class EmailComponent implements OnInit {
         this.messages = null;
       }
     });
+  }
+
+  refresh() {
+    this.getAllMails();
   }
 }

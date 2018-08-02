@@ -1,17 +1,27 @@
-<mat-toolbar>
-  <span>E-Mail</span>
-</mat-toolbar>
-
-<p>
-  <button mat-raised-button color='primary' class='functButton'>New messages</button>
-  <button mat-raised-button color='primary' class='functButton'>How many new messages</button>
-</p>
-
-<p>
-  <button mat-raised-button color='primary' class='functButton' (click)='getAllMails()'>Read all mails</button>
-  <button mat-raised-button color='primary' class='functButton'>Read important mails</button>
-</p>
-
-<mat-list role="list">
-  <mat-list-item role="listitem">{{output}}</mat-list-item>
-</mat-list>
+<mat-card>
+  <mat-card-title>E-Mail</mat-card-title>
+  <mat-card-subtitle>
+    <p *ngIf=newMessages>You have got new mail!</p>
+    <p *ngIf=!newMessages>You do not have new mail</p>
+  </mat-card-subtitle>
+  <mat-card-content *ngIf=newMessages>
+    <div>
+      {{amount}} mails,
+      <b>{{amount}} are important</b>
+    </div>
+    <div *ngFor="let message of messages; let i = index">
+      <mat-card>
+        <mat-card-subtitle>
+          <p>From: {{messages[i].from}}</p>
+          <p>Subject: {{messages[i].subject}}</p>
+        </mat-card-subtitle>
+        <mat-card-content>
+          {{messages[i].content}}
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button (click)="refresh()">REFRESH</button>
+  </mat-card-actions>
+</mat-card>
