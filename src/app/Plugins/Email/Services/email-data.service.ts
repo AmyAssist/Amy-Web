@@ -3,6 +3,7 @@ import { HttpHeaders, HttpClient, HttpErrorResponse, HttpParams } from '@angular
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { BackendResolver } from '../../../Services/backendResolver.service';
+import { MessageDTO } from '../../Email/Objects/MessageDTO';
 
 @Injectable({
     providedIn: 'root'
@@ -12,9 +13,8 @@ export class EmailDataService {
 
     httpOptions = {
         headers: new HttpHeaders({
-            'Content-Type': 'text/plain'
+            'Content-Type': 'application/json'
         }),
-        responseType: 'text' as 'text'
     };
 
     constructor(private readonly backend: BackendResolver, private readonly http: HttpClient) {
@@ -41,14 +41,8 @@ export class EmailDataService {
             'Something bad happened; please try again later.');
     }
 
-    getMails(amount: number, important: boolean) {
-        let params = new HttpParams();
-        params = params.append('amount', amount.toString());
-        if (important) {
-            return this.http.post(this.path + 'plains/important', { params }, this.httpOptions).pipe(
-                catchError(this.handleError));
-        }
-        return this.http.post(this.path + 'plains', { params }, this.httpOptions).pipe(
+    getMails() {
+        return this.http.get<MessageDTO[]>(this.path + 'getMails', this.httpOptions).pipe(
             catchError(this.handleError));
     }
 }

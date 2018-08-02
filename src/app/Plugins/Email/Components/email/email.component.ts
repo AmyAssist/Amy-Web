@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EmailDataService } from '../../Services/email-data.service';
+import { MessageDTO } from '../../Objects/MessageDTO';
 
 @Component({
   selector: 'app-email',
@@ -8,21 +9,30 @@ import { EmailDataService } from '../../Services/email-data.service';
 })
 export class EmailComponent implements OnInit {
 
-  unreadMessages: number;
-
   newMessages: boolean;
 
-  output: string;
+  amount: number;
+
+  messages: MessageDTO[];
 
   constructor(private readonly emailService: EmailDataService) { }
 
   ngOnInit() {
     this.emailService.setupPath();
-    this.unreadMessages = -1;
-    this.newMessages = false;
+    this.getAllMails();
   }
 
   getAllMails() {
-    this.emailService.getMails(1, false).subscribe((data: string) => this.output = data);
+    this.emailService.getMails().subscribe((data: MessageDTO[]) => {
+      if (data) {
+        this.newMessages = true;
+        this.amount = data.length;
+        this.messages = data;
+      } else {
+        this.newMessages = false;
+        this.amount = 0;
+        this.messages = null;
+      }
+    });
   }
 }
