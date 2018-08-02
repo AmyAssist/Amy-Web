@@ -12,6 +12,7 @@ export class EmailComponent implements OnInit {
   newMessages: boolean;
 
   amount: number;
+  amountImportant;
 
   messages: MessageDTO[];
 
@@ -27,13 +28,27 @@ export class EmailComponent implements OnInit {
       if (data) {
         this.newMessages = true;
         this.amount = data.length;
-        this.messages = data;
+        // this.messages = data;
+        this.messages = [...data];
+        this.countImportantMails();
       } else {
         this.newMessages = false;
         this.amount = 0;
         this.messages = null;
       }
     });
+  }
+
+  countImportantMails() {
+    if (this.messages) {
+      let counter = 0;
+      for (let m of this.messages) {
+        if (m.important) {
+          counter++;
+        }
+      }
+      this.amountImportant = counter;
+    }
   }
 
   refresh() {

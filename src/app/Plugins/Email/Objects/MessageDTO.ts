@@ -1,7 +1,8 @@
 export class MessageDTO {
-    from: String;
-    subject: String;
-    content: String;
+    from: string;
+    subject: string;
+    content: string;
+    important: boolean;
 
     constructor() {
 

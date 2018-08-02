@@ -7,13 +7,16 @@
   <mat-card-content *ngIf=newMessages>
     <div>
       {{amount}} mails,
-      <b>{{amount}} are important</b>
+      <b>{{amountImportant}} are important</b>
     </div>
     <div *ngFor="let message of messages; let i = index">
       <mat-card>
+        <mat-card-title>
+            {{messages[i].subject}}
+        </mat-card-title>
         <mat-card-subtitle>
-          <p>From: {{messages[i].from}}</p>
-          <p>Subject: {{messages[i].subject}}</p>
+          From: {{messages[i].from}}
+          <p *ngIf='!messages[i].important'>IMPORTANT</p>
         </mat-card-subtitle>
         <mat-card-content>
           {{messages[i].content}}
