@@ -22,24 +22,6 @@ export class EmailComponent implements OnInit {
     this.newMessages = false;
   }
 
-  hasNewMessages() {
-    this.emailService.hasUnreadMessages().subscribe((data: boolean) => this.newMessages = data);
-    if (this.newMessages) {
-      this.output = 'You have new messages';
-    } else {
-      this.output = 'You do not have new messages';
-    }
-  }
-
-  amountNewMessages() {
-    this.emailService.amountNewMessages().subscribe((data: number) => this.unreadMessages = data);
-    this.output = `You have ${ this.unreadMessages } new messages`;
-  }
-
-  getImportantMails() {
-    this.emailService.getMails(-1, true).subscribe((data: string) => this.output = data);
-  }
-
   getAllMails() {
     this.emailService.getMails(1, false).subscribe((data: string) => this.output = data);
   }

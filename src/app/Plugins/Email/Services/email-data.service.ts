@@ -41,16 +41,6 @@ export class EmailDataService {
             'Something bad happened; please try again later.');
     }
 
-    amountNewMessages() {
-        return this.http.get(this.path + 'new/count').pipe(
-            catchError(this.handleError));
-    }
-
-    hasUnreadMessages() {
-        return this.http.get(this.path + 'unread').pipe(
-            catchError(this.handleError));
-    }
-
     getMails(amount: number, important: boolean) {
         let params = new HttpParams();
         params = params.append('amount', amount.toString());
