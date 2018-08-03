@@ -1,27 +1,83 @@
 <mat-card>
   <mat-card-title>E-Mail</mat-card-title>
   <mat-card-subtitle>
+    <p *ngIf=fetchingError>There was an error fetching the messages</p>
     <p *ngIf=newMessages>You have got new mail!</p>
     <p *ngIf=!newMessages>You do not have new mail</p>
   </mat-card-subtitle>
   <mat-card-content *ngIf=newMessages>
-    <div>
+    <div *ngIf="showAll">
       {{amount}} mails,
       <b>{{amountImportant}} are important</b>
     </div>
-    <div *ngFor="let message of messages; let i = index">
-      <mat-card>
-        <mat-card-title>
+    <div *ngIf="!showAll">
+      <b>{{amountImportant}} important mails</b>
+    </div>
+    <mat-grid-list cols="2" row="2" rowHeight="5:1">
+      <!--
+        grid list has 2 rows and 2 columns here because there will be stuff added in the future
+      -->
+      <mat-grid-tile colspan=2>
+        <mat-form-field style="width: 10%" style="margin-top: 1em">
+          <mat-select placeholder="Amount" [(ngModel)]="selectAmount">
+            <mat-option [value]=amount>
+              All
+            </mat-option>
+            <div *ngIf=showAll>
+              <mat-option *ngFor="let mail of messages; let i = index" [value]='i+1'>
+                {{i+1}}
+              </mat-option>
+            </div>
+            <div *ngIf=!showAll>
+              <mat-option *ngFor="let mail of importantMessages; let i = index" [value]='i+1'>
+                {{i+1}}
+              </mat-option>
+            </div>
+          </mat-select>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile colspan=2>
+        <mat-radio-group [(ngModel)]="showAll">
+          <mat-radio-button [value]=true>
+            All mails
+          </mat-radio-button>
+          <mat-radio-button [value]=false>
+            Important mails
+          </mat-radio-button>
+        </mat-radio-group>
+      </mat-grid-tile>
+    </mat-grid-list>
+    <div *ngIf=showAll>
+      <div *ngFor="let message of messages; let i = index">
+        <mat-card *ngIf="(!selectAmount || i < selectAmount)" class="mailCard">
+          <mat-card-title>
             {{messages[i].subject}}
-        </mat-card-title>
-        <mat-card-subtitle>
-          From: {{messages[i].from}}
-          <p *ngIf='!messages[i].important'>IMPORTANT</p>
-        </mat-card-subtitle>
-        <mat-card-content>
-          {{messages[i].content}}
-        </mat-card-content>
-      </mat-card>
+          </mat-card-title>
+          <mat-card-subtitle>
+            From: {{messages[i].from}}
+            <p *ngIf='messages[i].important'>IMPORTANT</p>
+          </mat-card-subtitle>
+          <mat-card-content>
+            {{messages[i].content}}
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+    <div *ngIf=!showAll>
+      <div *ngFor="let message of importantMessages; let i = index">
+        <mat-card *ngIf="(!selectAmount || i < selectAmount)" class="mailCard">
+          <mat-card-title>
+            {{importantMessages[i].subject}}
+          </mat-card-title>
+          <mat-card-subtitle>
+            From: {{importantMessages[i].from}}
+            <p>IMPORTANT</p>
+          </mat-card-subtitle>
+          <mat-card-content>
+            {{importantMessages[i].content}}
+          </mat-card-content>
+        </mat-card>
+      </div>
     </div>
   </mat-card-content>
   <mat-card-actions>

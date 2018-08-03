@@ -10,16 +10,20 @@ import { MessageDTO } from '../../Objects/MessageDTO';
 export class EmailComponent implements OnInit {
 
   newMessages: boolean;
+  showAll: boolean;
+  fetchingError: boolean;
 
   amount: number;
   amountImportant;
 
   messages: MessageDTO[];
+  importantMessages: MessageDTO[];
 
   constructor(private readonly emailService: EmailDataService) { }
 
   ngOnInit() {
     this.emailService.setupPath();
+    this.showAll = true;
     this.refresh();
   }
 
@@ -27,14 +31,14 @@ export class EmailComponent implements OnInit {
     this.emailService.getMails().subscribe((data: MessageDTO[]) => {
       if (data) {
         this.newMessages = true;
+        this.fetchingError = false;
         this.amount = data.length;
         // this.messages = data;
-        this.messages = [...data];
+        this.messages = data;
         this.countImportantMails();
       } else {
-        this.newMessages = false;
-        this.amount = 0;
-        this.messages = null;
+        // TODO: handle errors and null return values
+        this.fetchingError = true;
       }
     });
   }
@@ -42,8 +46,10 @@ export class EmailComponent implements OnInit {
   countImportantMails() {
     if (this.messages) {
       let counter = 0;
+      this.importantMessages = [];
       for (let m of this.messages) {
         if (m.important) {
+          this.importantMessages.push(m);
           counter++;
         }
       }
