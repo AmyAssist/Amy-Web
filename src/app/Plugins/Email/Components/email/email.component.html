@@ -1,9 +1,12 @@
 <mat-card>
   <mat-card-title>E-Mail</mat-card-title>
   <mat-card-subtitle>
-    <p *ngIf=fetchingError>There was an error fetching the messages</p>
-    <p *ngIf=newMessages>You have got new mail!</p>
-    <p *ngIf=!newMessages>You do not have new mail</p>
+    <p *ngIf=fetchingMails>Fetching mails...</p>
+    <div *ngIf=!fetchingMails>
+        <p *ngIf=fetchingError>There was an error fetching the messages</p>
+        <p *ngIf="newMessages && !fetchingError">You have got new mail!</p>
+        <p *ngIf="!newMessages && !fetchingError">You do not have new mail</p>
+    </div>
   </mat-card-subtitle>
   <mat-card-content *ngIf=newMessages>
     <div *ngIf="showAll">
@@ -55,6 +58,7 @@
           </mat-card-title>
           <mat-card-subtitle>
             From: {{messages[i].from}}
+            <p>Sent: {{messages[i].sentDate.replace("T", " ")}}</p>
             <p *ngIf='messages[i].important'>IMPORTANT</p>
           </mat-card-subtitle>
           <mat-card-content>
@@ -71,6 +75,7 @@
           </mat-card-title>
           <mat-card-subtitle>
             From: {{importantMessages[i].from}}
+            <p>Sent: {{importantMessages[i].sentDate.replace("T", " ")}}</p>
             <p>IMPORTANT</p>
           </mat-card-subtitle>
           <mat-card-content>
