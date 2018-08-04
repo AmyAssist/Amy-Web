@@ -1,22 +1,22 @@
 <mat-toolbar>
-  <span>Wecker</span>
+  <span>Alarm</span>
 </mat-toolbar>
 
 <div class="alarmSet-container">
   <mat-form-field>
-    <input matInput #hour placeholder="Stunde">
+    <input matInput #hour placeholder="Hour">
   </mat-form-field>
 
   <mat-form-field>
     <input matInput #minute placeholder="Minute">
   </mat-form-field>
 </div>
-<button mat-raised-button color="primary" (click)="setAlarm(hour.value, minute.value)">Speichern</button>
+<button mat-raised-button color="primary" (click)="setAlarm(hour.value, minute.value)">Save</button>
 
-<button mat-raised-button color="basic" (click)="getAlarms()">Wecker laden</button>
+<button mat-raised-button color="basic" (click)="getAlarms()">Load Alarms</button>
 <div *ngFor="let clock of clockData; let i = index">
   <mat-list role="list">
-    <mat-list-item role="listitem">Wecker {{i +1}}</mat-list-item>
+    <mat-list-item role="listitem">Alarm {{i +1}}</mat-list-item>
     <mat-list-item role="listitem">{{clock.hour}} : {{clock.minute}}</mat-list-item>
   </mat-list>
 </div>
