@@ -57,4 +57,8 @@ export class ClockDataService {
     return this.http.post<Clock>(this.path + 'alarms/new', clockData, this.httpOptions).pipe(
       catchError(this.handleError));
   }
+
+  editAlarms(clockData: Clock): Observable<Clock> {
+    return this.http.post<Clock>(this.path + 'alarms/edit', clockData, this.httpOptions).pipe(catchError(this.handleError));
+  }
 }

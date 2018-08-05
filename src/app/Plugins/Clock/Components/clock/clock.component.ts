@@ -46,4 +46,17 @@ export class ClockComponent implements OnInit {
     this.getAlarms();
   }
 
+  editAlarms(alarmnumber: number){
+    
+  }
+
+  showEditFields(){
+    var x = document.getElementById("editFields");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+  }
+
 }
