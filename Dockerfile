@@ -20,4 +20,6 @@ RUN set -x; ng build --output-path /usr/local/apache2/htdocs/
 
 COPY .docker/dockerize-templates/* /app/dockerize-templates/
 
+COPY .docker/.htaccess /usr/local/apache2/htdocs/
+
 CMD dockerize -template dockerize-templates/httpd.conf.tmpl:/usr/local/apache2/conf/httpd.conf httpd-foreground
