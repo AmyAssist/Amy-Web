@@ -1,8 +1,5 @@
 language: node_js
-node_js:
-#  - '8'
-#  - '9'
-  - '10'
+node_js: '10'
 sudo: required
 addons:
   chrome: stable
@@ -11,10 +8,11 @@ cache:
   - node_modules
 before_install:
   - npm i -g @angular/cli
-script:
-  - ng test --no-progress --karma-config karma.conf.js
 jobs:
   include:
+    - stage: test
+      name: "test"
+      script: ng test --no-progress --karma-config karma.conf.js
     - stage: deploy
       name: "Build"
       if: branch = master
