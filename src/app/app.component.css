@@ -3,6 +3,8 @@
 }
 
 .main-content {
+    box-sizing: border-box;
+    padding: 16px;
     margin: auto;
     width: 50%;
 }
@@ -34,5 +36,6 @@
  /* smartphone */
 @media (max-width: 479px){
     .main-content {
-          width: 100%
+          width: 100%;
+          padding: 8px;
     }}
