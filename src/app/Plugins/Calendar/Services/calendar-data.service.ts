@@ -13,7 +13,7 @@ import { BackendResolver } from '../../../Services/backendResolver.service';
 })
 export class CalendarDataService {
   path: string;
-  
+
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'text/plain'
@@ -21,16 +21,7 @@ export class CalendarDataService {
   };
 
   private handleError(error: HttpErrorResponse) {
-    if (error.error instanceof ErrorEvent) {
-      // A client-side or network error occurred. Handle it accordingly.
-      console.error('An error occurred:', error.error.message);
-    } else {
-      // The backend returned an unsuccessful response code.
-      // The response body may contain clues as to what went wrong,
-      console.error(
-        `Backend returned code ${error.status}, ` +
-        `body was: ${error.error}`);
-    }
+    console.error('An error occurred:', error);
     // return an observable with a user-facing error message
     return throwError(
       'Something bad happened; please try again later.');
@@ -40,23 +31,23 @@ export class CalendarDataService {
     this.path = backend.backendPath + 'calendar/';
   }
 
-  getEvents(date: string){
+  getEvents(date: string) {
     return this.http.get<CalendarEvent[]>(`${this.path}eventsAt/${date}`, this.httpOptions).pipe(
       catchError(this.handleError)).pipe(map((response: CalendarEvent[]) => {
-		    response.forEach(l => Object.setPrototypeOf(l, new CalendarEvent()));
-		    return response;
-	    }));
+        response.forEach(l => Object.setPrototypeOf(l, new CalendarEvent()));
+        return response;
+      }));
   }
 
-  getEventsAsString(date: string){
+  getEventsAsString(date: string) {
     return this.http.get<string>(`${this.path}eventsAtString/${date}`, this.httpOptions).pipe(catchError(this.handleError));
   }
 
-  getEventsToday(){
+  getEventsToday() {
     return this.http.get<string>(`${this.path}events/today`, this.httpOptions).pipe(catchError(this.handleError));
   }
 
-  getEventsTomorrow(){
+  getEventsTomorrow() {
     return this.http.get<string>(`${this.path}events/tomorrow`, this.httpOptions).pipe(catchError(this.handleError));
   }
 }
