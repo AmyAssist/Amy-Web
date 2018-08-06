@@ -33,16 +33,15 @@ export class EmailComponent implements OnInit {
     this.emailService.getMails().subscribe((data: MessageDTO[]) => {
       if (data) {
         this.newMessages = true;
-        this.fetchingError = false;
         this.amount = data.length;
         this.messages = [...data];
         this.importantMessages = data.filter(message => message.important);
         this.amountImportant = this.importantMessages.length;
-      } else {
-        // TODO: handle errors and null return values
-        this.fetchingError = true;
+        this.fetchingError = false;
+        this.fetchingMails = false;
       }
-      // is not executed in case of request failure
+    }, error => {
+      this.fetchingError = true;
       this.fetchingMails = false;
     });
   }
