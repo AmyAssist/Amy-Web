@@ -17,7 +17,7 @@ export class ContactRegistryComponent implements OnInit {
 
     dataSource: AsyncTableDataSource<Location>;
 
-    displayedColumns = ['firstName', 'lastName', 'important', 'email', 'actionsColumn'];
+    displayedColumns = ['firstName', 'lastName', 'email', 'tag', 'important', 'actionsColumn'];
 
     constructor(private readonly registryService: ContactRegistryDataService,
                 private readonly validatorService: ContactValidatorService,
