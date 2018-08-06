@@ -52,14 +52,20 @@ export class HomeComponent {
     /*
       Sending typed command to the backend-service for general functions.
     */
-    sendCommand(commandValue: string) {
+    sendCommand(commandValue: string, readResponse: boolean) {
         const commandData = new Command(commandValue);
         this.databaseService.sendCommand(commandData).subscribe(r => {
             this.response = r;
             this.errorStateMatcher.error = false;
+            if (readResponse) {
+                this.speakCommand(this.response);
+            }
         }, error => {
             this.response = null;
             this.errorStateMatcher.error = true;
+            if (readResponse) {
+                this.speakCommand('I could not understand that');
+            }
         });
     }
 
@@ -75,6 +81,7 @@ export class HomeComponent {
         this.speechRecognitionService.recognize((result) => {
             this.commandTextValue = result;
             this.srState = 'inactive';
+            this.sendCommand(result, true);
         });
     }
 }
