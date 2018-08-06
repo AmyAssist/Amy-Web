@@ -58,7 +58,17 @@ export class ClockDataService {
       catchError(this.handleError));
   }
 
+  /*
+    Get one specific Alarm
+  */
+  getSpecificAlarm(){
+    return this.http.get<Clock>(this.path + 'alarms/alarmnumber', this.httpOptions).pipe(catchError(this.handleError));
+  }
+
+  /*
+    AlarmId muss noch mitgegeben werden.
+  */
   editAlarms(clockData: Clock): Observable<Clock> {
-    return this.http.post<Clock>(this.path + 'alarms/edit', clockData, this.httpOptions).pipe(catchError(this.handleError));
+    return this.http.post<Clock>(this.path + 'alarms/alarmnumber', clockData, this.httpOptions).pipe(catchError(this.handleError));
   }
 }

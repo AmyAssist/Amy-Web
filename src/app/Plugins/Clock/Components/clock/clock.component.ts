@@ -15,6 +15,7 @@ import { Clock } from '../../Objects/clock';
 export class ClockComponent implements OnInit {
 
   clockData: Clock[];
+  oneClockData: Clock;
   newClockData: Clock;
 
   /*
@@ -36,6 +37,10 @@ export class ClockComponent implements OnInit {
       .subscribe((data: Clock[]) => this.clockData = [...data]);
   }
 
+  getSpecificAlarm() {
+    this.clockService.getSpecificAlarm().subscribe((data: Clock) => this.oneClockData = data);
+  }
+
   /*
     Sending a alarm to the service that sets it.
   */
@@ -46,8 +51,13 @@ export class ClockComponent implements OnInit {
     this.getAlarms();
   }
 
-  editAlarms(alarmnumber: number){
-    
+  editAlarm(edithour: number, editminute: number){
+    this.getSpecificAlarm();
+    this.newClockData.alarmNumber = this.oneClockData.alarmNumber;
+    this.newClockData.hour = edithour;
+    this.newClockData.minute = editminute;
+    this.clockService.editAlarms(this.newClockData).subscribe();
+    this.getAlarms();
   }
 
   showEditFields(){
