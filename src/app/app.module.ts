@@ -20,6 +20,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 
 import { AppComponent } from './app.component';
 import { ClockComponent } from './Plugins/Clock/Components/clock/clock.component';
@@ -123,6 +124,8 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     MatRadioModule,
     FormsModule,
+    OwlDateTimeModule, 
+    OwlNativeDateTimeModule,
   ],
   exports: [RouterModule],
   providers: [AuthService, AuthGuard],
