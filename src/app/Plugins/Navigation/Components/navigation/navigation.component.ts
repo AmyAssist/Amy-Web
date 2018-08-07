@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { NavigationDataService } from '../../Services/navigation-data.service';
 import { NavPath } from '../../Objects/navPath';
@@ -7,8 +7,9 @@ import { BestTransportResult } from '../../Objects/bestTransportResult';
 @Component({
   selector: 'app-navigation',
   templateUrl: './navigation.component.html',
-  styleUrls: ['./navigation.component.css']
-})
+  styleUrls: ['./navigation.component.css'], 
+  encapsulation: ViewEncapsulation.None,
+}) 
 export class NavigationComponent implements OnInit {
 
   navPathData: NavPath;

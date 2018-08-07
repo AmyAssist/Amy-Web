@@ -20,14 +20,12 @@ import { MatSelectModule } from '@angular/material/select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
-import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 
 import { AppComponent } from './app.component';
 import { ClockComponent } from './Plugins/Clock/Components/clock/clock.component';
 import { WeatherComponent } from './Plugins/Weather/Components/weather/weather.component';
 import { HomeComponent } from './Components/home/home.component';
 import { CalendarComponent } from './Plugins/Calendar/Components/calendar/calendar.component';
-import { NavigationComponent } from './Plugins/Navigation/Components/navigation/navigation.component';
 import { EmailComponent } from './Plugins/Email/Components/email/email.component';
 
 import { LocationRegistryComponent } from './Plugins/Registry/Components/location-registry/location-registry.component';
@@ -41,6 +39,7 @@ import { AuthGuard } from './auth.guard';
 
 import { MaterialModule } from './material.module';
 import { MusicModule } from './Plugins/Music/music.module';
+import { NavigationModule } from './Plugins/Navigation/navigation.module';
 
 /*
     Routing of the components to the respective links
@@ -67,11 +66,6 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'navigation',
-    component: NavigationComponent,
-    canActivate: [AuthGuard]
-  },
-  {
     path: 'email',
     component: EmailComponent,
     canActivate: [AuthGuard]
@@ -95,7 +89,6 @@ const routes: Routes = [
     WeatherComponent,
     HomeComponent,
     CalendarComponent,
-    NavigationComponent,
     EmailComponent,
     LoginComponent,
     LocationRegistryComponent,
@@ -105,6 +98,7 @@ const routes: Routes = [
   ],
   imports: [
     MusicModule,
+    NavigationModule,
     MaterialModule,
     BrowserModule,
     FormsModule,
@@ -123,9 +117,7 @@ const routes: Routes = [
     HttpClientModule,
     RouterModule.forRoot(routes),
     MatRadioModule,
-    FormsModule,
-    OwlDateTimeModule, 
-    OwlNativeDateTimeModule,
+    FormsModule
   ],
   exports: [RouterModule],
   providers: [AuthService, AuthGuard],

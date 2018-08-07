@@ -1,7 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
-/* Used by Navigation-Plugin to show date-time-picker */
-@import "~ng-pick-datetime/assets/style/picker.min.css";
 
 * {
     padding: 0;
