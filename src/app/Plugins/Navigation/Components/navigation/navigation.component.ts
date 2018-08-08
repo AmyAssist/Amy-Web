@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { MatToolbarModule } from '@angular/material/toolbar';
 import { NavigationDataService } from '../../Services/navigation-data.service';
 import { NavPath } from '../../Objects/navPath';
 import { BestTransportResult } from '../../Objects/bestTransportResult';
@@ -16,7 +15,6 @@ export class NavigationComponent implements OnInit {
   from: string;
   to: string;
   way: string;
-  timeString: string;
   timeDate: Date;
   travelMode1: string;
   travelMode2: string;
@@ -82,11 +80,6 @@ export class NavigationComponent implements OnInit {
     this.showWay = false;
     this.showWhen = true;
     this.showMode = false;
-  }
-
-  setDate(time: string) {
-    this.Time = time;
-    console.log(this.Time);
   }
 
   createRoute(from: string, to: string, date: string) {
