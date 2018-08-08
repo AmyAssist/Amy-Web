@@ -16,8 +16,8 @@
 <button mat-raised-button color="basic" (click)="getAlarms()">Load Alarms</button>
 <div *ngFor="let clock of clockData; let i = index">
   <mat-list role="list">
-    <mat-list-item role="listitem">Alarm {{i +1}}<button mat-raised-button color="basic" (click)="showEditFields()">Edit</button></mat-list-item>
-    <mat-list-item role="listitem">{{clock.hour}} : {{clock.minute}}</mat-list-item>
+    <mat-list-item role="listitem">Alarm {{this.clockData[i].id}}<button mat-raised-button color="basic" (click)="showEditFields()">Edit</button></mat-list-item>
+    <mat-list-item role="listitem">{{this.clockData[i].active}} : {{this.clockData[i].alarmTime.hour}} : {{this.clockData[i].alarmTime.minute}}</mat-list-item>
   </mat-list>
   <div id='editFields' style="display: none;">
       <mat-form-field>
