@@ -7,9 +7,9 @@ import { BestTransportResult } from '../../Objects/bestTransportResult';
 @Component({
   selector: 'app-navigation',
   templateUrl: './navigation.component.html',
-  styleUrls: ['./navigation.component.css'], 
+  styleUrls: ['./navigation.component.css'],
   encapsulation: ViewEncapsulation.None,
-}) 
+})
 export class NavigationComponent implements OnInit {
 
   navPathData: NavPath;
@@ -56,7 +56,7 @@ export class NavigationComponent implements OnInit {
     this.navPathData.setTravelmode(this.travelMode1);
     this.navigationService.fromTo(this.navPathData).subscribe((data: BestTransportResult) => this.bestTransport = { ...data });
     await new Promise((resolve, reject) => setTimeout(resolve, 3000));
-    this.calcResult(); 
+    this.calcResult();
     this.showWay = true;
     this.showWhen = false;
     this.showMode = false;
