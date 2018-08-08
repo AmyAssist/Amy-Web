@@ -9,6 +9,7 @@ export class ContactValidatorService implements ValidatorService {
             'firstName': new FormControl(null, Validators.required),
             'lastName': new FormControl(null, Validators.required),
             'important': new FormControl(),
+            'tag': new FormControl(),
             'email': new FormControl(null, Validators.required),
         });
     }
