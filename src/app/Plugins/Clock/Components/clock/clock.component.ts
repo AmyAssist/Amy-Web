@@ -35,11 +35,15 @@ export class ClockComponent implements OnInit {
   getAlarms() {
     this.clockService.getAlarms()
       .subscribe((data: Clock[]) => this.clockData = [...data]);
+
   }
 
   getSpecificAlarm() {
-    this.clockService.getSpecificAlarm().subscribe((data: Clock) => this.oneClockData = data);
+    this.clockService.getSpecificAlarm().subscribe((data: Clock) => { this.oneClockData = data });
   }
+
+
+
 
   /*
     Sending a alarm to the service that sets it.
@@ -51,21 +55,21 @@ export class ClockComponent implements OnInit {
     this.getAlarms();
   }
 
-  editAlarm(edithour: number, editminute: number){
+  editAlarm(edithour: number, editminute: number) {
     this.getSpecificAlarm();
-    this.newClockData.alarmNumber = this.oneClockData.alarmNumber;
+    this.newClockData.id = this.oneClockData.id;
     this.newClockData.hour = edithour;
     this.newClockData.minute = editminute;
     this.clockService.editAlarms(this.newClockData).subscribe();
     this.getAlarms();
   }
 
-  showEditFields(){
+  showEditFields() {
     var x = document.getElementById("editFields");
     if (x.style.display === "none") {
-        x.style.display = "block";
+      x.style.display = "block";
     } else {
-        x.style.display = "none";
+      x.style.display = "none";
     }
   }
 

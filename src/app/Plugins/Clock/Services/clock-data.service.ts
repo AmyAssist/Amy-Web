@@ -66,6 +66,7 @@ export class ClockDataService {
   }
 
   /*
+  Edit Alarms
     AlarmId muss noch mitgegeben werden.
   */
   editAlarms(clockData: Clock): Observable<Clock> {
