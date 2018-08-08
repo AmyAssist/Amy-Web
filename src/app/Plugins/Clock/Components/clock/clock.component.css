@@ -2,7 +2,8 @@
     display: flex;
     flex-direction: column;
   }
-  
-  .musicSearch-container > * {
-    width: 100%;
-  }
+.alarmList-container {
+  display: flex;
+  flex-direction: column;
+}
+
