@@ -73,4 +73,12 @@ export class ClockDataService {
     this.alarmid = clockData[alarmnumber].id.toString;
     return this.http.post<Clock[]>(this.path + 'alarms/'+alarmnumber, clockData[alarmnumber], this.httpOptions).pipe(catchError(this.handleError));
   }
+
+  /*
+    Activate and Deactivate Alarms
+  */
+ activatedeactivateAlarm(alarmnumber: number, clockData: Clock[]): Observable<Clock[]> {
+  this.alarmid = clockData[alarmnumber].id.toString;
+  return this.http.post<Clock[]>(this.path + 'alarms/de.activate/'+alarmnumber, clockData[alarmnumber], this.httpOptions).pipe(catchError(this.handleError));
+}
 }

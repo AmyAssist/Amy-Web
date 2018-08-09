@@ -17,8 +17,8 @@
 <div class="alarmList-container">
   <mat-list role="list" *ngFor="let clock of clockData; let i = index">
     <mat-list-item role="listitem">
-      <mat-icon mat-list-icon *ngIf="clock.active">alarm_on</mat-icon>
-      <mat-icon mat-list-icon *ngIf="!clock.active">alarm_off</mat-icon>
+      <button mat-icon-button *ngIf="clock.active" (click)="activatedeactivateAlarm(clock.id)"><mat-icon>alarm_on</mat-icon></button>
+      <button mat-icon-button *ngIf="!clock.active" (click)="activatedeactivateAlarm(clock.id)"><mat-icon>alarm_off</mat-icon></button>
       <button mat-icon-button (click)="showEditFields(clock)"><mat-icon>edit</mat-icon></button>
       <h4 mat-line>Alarm {{clock.id}}</h4>
       <h4 mat-line> {{clock.alarmTime}} </h4>
