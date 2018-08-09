@@ -67,8 +67,7 @@ export class ClockDataService {
   }
 
   /*
-  Edit Alarms
-    AlarmId muss noch mitgegeben werden.
+    Edit Alarms
   */
   editAlarm(alarmnumber: number, clockData: Clock[]): Observable<Clock[]> {
     this.alarmid = clockData[alarmnumber].id.toString;

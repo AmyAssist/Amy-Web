@@ -47,8 +47,10 @@ export class ClockComponent implements OnInit {
   */
   setAlarm(hour: number, minute: number) {
     this.newClockData.alarmTime = hour + ":" + minute;
-    this.clockService.setNewAlarm(this.newClockData).subscribe();
+    this.clockService.setNewAlarm(this.newClockData).subscribe(data => {
     this.getAlarms();
+    });
+    
   }
 
   editAlarm(id: number, edithour: number, editminute: number) {
