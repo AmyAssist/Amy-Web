@@ -46,17 +46,17 @@ export class ClockComponent implements OnInit {
     Sending a alarm to the service that sets it.
   */
   setAlarm(hour: number, minute: number) {
-    this.newClockData.hour = hour;
-    this.newClockData.minute = minute;
+    this.newClockData.alarmTime = hour + ":" + minute;
     this.clockService.setNewAlarm(this.newClockData).subscribe();
     this.getAlarms();
   }
 
   editAlarm(id: number, edithour: number, editminute: number) {
-    this.clockData[id].hour = edithour;
-    this.clockData[id].minute = editminute;
-    this.clockService.editAlarm(id , this.clockData).subscribe();
-    this.getAlarms();
+    this.clockData[id].alarmTime = edithour + ":" + editminute;
+    this.clockService.editAlarm(id, this.clockData).subscribe(data => {
+      this.getAlarms();
+    });
+
   }
 
   showEditFields(clock: Clock) {

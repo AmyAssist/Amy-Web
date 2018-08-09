@@ -2,9 +2,10 @@
     clock-object for sending and recieving data from REST-backend
 */
 export class Clock {
-    id: String;
-    hour: number; 
-    minute: number;
+    id: number;
+    //encoded like HH:mm - see Java LocalTime.toString()
+    alarmTime: String;
+    active: boolean;
 
     constructor() { }
 }

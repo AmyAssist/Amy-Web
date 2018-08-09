@@ -17,6 +17,7 @@ export class ClockDataService {
       'Content-Type': 'application/json'
     })
   };
+  alarmid: () => string;
 
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
@@ -38,7 +39,7 @@ export class ClockDataService {
     this.setupPath();
   }
 
-  setupPath(){
+  setupPath() {
     this.path = this.backend.backendPath + 'clock/'; // Path for all Data concerning the clock-plugin
   }
 
@@ -61,7 +62,7 @@ export class ClockDataService {
   /*
     Get one specific Alarm
   */
-  getSpecificAlarm(){
+  getSpecificAlarm() {
     return this.http.get<Clock>(this.path + 'alarms/alarmnumber', this.httpOptions).pipe(catchError(this.handleError));
   }
 
@@ -69,7 +70,8 @@ export class ClockDataService {
   Edit Alarms
     AlarmId muss noch mitgegeben werden.
   */
-  editAlarms(clockData: Clock): Observable<Clock> {
-    return this.http.post<Clock>(this.path + 'alarms/alarmnumber', clockData, this.httpOptions).pipe(catchError(this.handleError));
+  editAlarm(alarmnumber: number, clockData: Clock[]): Observable<Clock[]> {
+    this.alarmid = clockData[alarmnumber].id.toString;
+    return this.http.post<Clock[]>(this.path + 'alarms/'+alarmnumber, clockData[alarmnumber], this.httpOptions).pipe(catchError(this.handleError));
   }
 }
