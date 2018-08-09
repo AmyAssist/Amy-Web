@@ -21,8 +21,7 @@
       <mat-icon mat-list-icon *ngIf="!clock.active">alarm_off</mat-icon>
       <button mat-icon-button (click)="showEditFields(clock)"><mat-icon>edit</mat-icon></button>
       <h4 mat-line>Alarm {{clock.id}}</h4>
-      <h4 mat-line> {{clock.alarmTime.hour}} : {{clock.alarmTime.minute}} </h4>
-      <mat-divider></mat-divider>
+      <h4 mat-line> {{clock.alarmTime}} </h4>
       <div class="alarmEdit-container" id='editFields' [hidden]="clock!==this.selectedClock">
         <mat-form-field>
           <input matInput #edithour placeholder="Hour">
@@ -30,8 +29,9 @@
         <mat-form-field>
           <input matInput #editminute placeholder="Minute">
         </mat-form-field>
-        <button mat-raised-button color="primary" (click)="editAlarm(i, edithour.value, editminute.value)">Save</button>
+        <button mat-raised-button color="primary" (click)="editAlarm(clock.id, edithour.value, editminute.value)">Save</button>
       </div>
+      <mat-divider></mat-divider>
     </mat-list-item>
   </mat-list>
 </div>
