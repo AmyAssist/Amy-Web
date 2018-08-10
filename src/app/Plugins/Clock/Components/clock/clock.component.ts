@@ -54,7 +54,6 @@ export class ClockComponent implements OnInit {
   }
 
   editAlarm(id: number, edithour: number, editminute: number) {
-    this.getAlarms();
     this.clockData[id].alarmTime = edithour + ":" + editminute;
     this.clockService.editAlarm(id, this.clockData).subscribe(data => {
       this.getAlarms();
@@ -64,6 +63,12 @@ export class ClockComponent implements OnInit {
 
   activatedeactivateAlarm(id: number) {
     this.clockService.activatedeactivateAlarm(id, this.clockData).subscribe(data => {
+      this.getAlarms();
+    });
+  }
+
+  deleteAlarm(id: number) {
+    this.clockService.deleteAlarm(id).subscribe(data => {
       this.getAlarms();
     });
   }

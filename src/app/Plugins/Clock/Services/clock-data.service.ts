@@ -71,14 +71,22 @@ export class ClockDataService {
   */
   editAlarm(alarmnumber: number, clockData: Clock[]): Observable<Clock[]> {
     this.alarmid = clockData[alarmnumber].id.toString;
-    return this.http.post<Clock[]>(this.path + 'alarms/'+alarmnumber, clockData[alarmnumber], this.httpOptions).pipe(catchError(this.handleError));
+    return this.http.post<Clock[]>(this.path + 'alarms/' + alarmnumber, clockData[alarmnumber], this.httpOptions).pipe(catchError(this.handleError));
   }
 
   /*
     Activate and Deactivate Alarms
   */
- activatedeactivateAlarm(alarmnumber: number, clockData: Clock[]): Observable<Clock[]> {
-  this.alarmid = clockData[alarmnumber].id.toString;
-  return this.http.post<Clock[]>(this.path + 'alarms/de.activate/'+alarmnumber, clockData[alarmnumber], this.httpOptions).pipe(catchError(this.handleError));
-}
+  activatedeactivateAlarm(alarmnumber: number, clockData: Clock[]): Observable<Clock[]> {
+    this.alarmid = clockData[alarmnumber].id.toString;
+    return this.http.post<Clock[]>(this.path + 'alarms/de.activate/' + alarmnumber, clockData[alarmnumber], this.httpOptions).pipe(catchError(this.handleError));
+  }
+
+  /*
+    Delete Alarms
+  */
+  deleteAlarm(alarmnumber: number): Observable<Clock[]> {
+    return this.http.post<Clock[]>(this.path + 'alarms/delete/' + alarmnumber, this.httpOptions).pipe(catchError(this.handleError));
+  }
+
 }
