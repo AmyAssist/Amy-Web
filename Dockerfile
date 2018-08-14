@@ -1,6 +1,25 @@
-FROM neumantm/httpd-npm:2.4.34-v8.11.3
+# source environment
+FROM scratch AS source
+
+COPY .docker/ /.docker/
+COPY angular.json package.json package-lock.json tsconfig.json /app/
+COPY src /app/src
+
+# build environment
+FROM node:10 AS builder
 
 RUN set -x; npm i -g @angular/cli
+
+COPY --from=source /app/ /app/
+
+WORKDIR /app
+
+RUN set -x; npm ci
+
+RUN set -x; ng build --output-path /dist/
+
+# production
+FROM httpd:2.4.34-alpine
 
 RUN apk add --no-cache openssl
 
@@ -9,15 +28,10 @@ RUN wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSI
     && tar -C /usr/local/bin -xzvf dockerize-alpine-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
     && rm dockerize-alpine-linux-amd64-$DOCKERIZE_VERSION.tar.gz
 
-COPY angular.json package.json package-lock.json tsconfig.json /app/
-COPY src /app/src
+COPY --from=source .docker/dockerize-templates/* /etc/dockerize-templates/
 
-WORKDIR /app
+COPY --from=source .docker/.htaccess /usr/local/apache2/htdocs/
 
-RUN set -x; npm install
+COPY --from=builder /dist/ /usr/local/apache2/htdocs/
 
-RUN set -x; ng build --output-path /usr/local/apache2/htdocs/
-
-COPY .docker/dockerize-templates/* /app/dockerize-templates/
-
-CMD dockerize -template dockerize-templates/httpd.conf.tmpl:/usr/local/apache2/conf/httpd.conf httpd-foreground
+CMD dockerize -template /etc/dockerize-templates/httpd.conf.tmpl:/usr/local/apache2/conf/httpd.conf httpd-foreground
