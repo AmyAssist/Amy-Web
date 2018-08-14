@@ -1,3 +1,57 @@
-<p>
-  current-song works!
-</p>
+<mat-card style="height: 400px;">
+
+  <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+
+  <mat-card-content>
+    <!--
+    <mat-list>
+      <mat-list-item>
+        <p mat-line>Artist: {{musicData.artist}}</p>
+      </mat-list-item>
+      <mat-list-item>
+        <p mat-line>Title: {{musicData.title}}</p>
+      </mat-list-item>
+    </mat-list>
+    -->
+
+    <p mat-line>Artist: {{musicData.artist}}</p>
+    <p mat-line>Title: {{musicData.title}}</p>
+  </mat-card-content>
+
+  <mat-card-actions style="justify-content: center">
+    <!--
+      <button mat-raised-button color="primary" (click)="getCurrentSong()">Current song</button>
+      -->
+
+    <button mat-icon-button color="primary" (click)="setBack()">
+      <mat-icon>skip_previous</mat-icon>
+    </button>
+    <button mat-icon-button *ngIf=!playing color="primary" (click)="setResume()">
+      <mat-icon>play_circle_outline</mat-icon>
+    </button>
+    <button mat-icon-button *ngIf=playing color="primary" (click)="setPause()">
+      <mat-icon>pause_circle_outline</mat-icon>
+    </button>
+    <button mat-icon-button color="primary" (click)="setSkip()">
+      <mat-icon>skip_next</mat-icon>
+    </button>
+
+    <mat-slider [max]="volumeMax" [min]="volumeMin" [step]="volumeStep" [(ngModel)]="volumeValue" (change)="changeVolume(volumeValue)">
+    </mat-slider>
+  </mat-card-actions>
+</mat-card>
+
+
+<!--
+<div *ngIf=playlist>
+  <mat-list-item role="listitem">Playlist: {{musicPlaylistData.name}}</mat-list-item>
+  <mat-list>
+    <mat-list-item *ngFor="let music of playlistSongs; let i = index">
+      <p matLine>Track: {{i +1}}</p>
+      <p matLine>Artist: {{music.artist}}</p>
+      <p matLine>Title: {{music.title}}</p>
+    </mat-list-item>
+  </mat-list>
+</div>
+
+-->

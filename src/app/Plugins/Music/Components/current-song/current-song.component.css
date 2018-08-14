@@ -1,0 +1,35 @@
+mat-slider {
+    width: 200px;
+  }
+
+p {
+  margin: 10px;
+  font-size: 15px;
+}
+
+  .inline {
+    display:inline-block;
+    margin-right:5px;
+ }
+
+ .floated {
+  float:left;
+  margin-right:5px;
+}
+
+.currentSong-container {
+  font-size: 20%;
+}
+
+.current-Song-Info {
+  text-align: left;
+  top: 0px;
+  width: 200px;
+}
+
+.controll-Buttons {
+  align-content: center;
+  display: flex;
+  justify-content: center;
+  width: 200px;
+}

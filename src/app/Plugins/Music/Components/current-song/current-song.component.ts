@@ -39,6 +39,7 @@ export class CurrentSongComponent implements OnInit {
     this.musicData = new Music;
 
     this.getVolume();
+    this.getCurrentSong();
   }
 
   /*
