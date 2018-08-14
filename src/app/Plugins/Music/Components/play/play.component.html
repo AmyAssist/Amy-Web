@@ -1,3 +1,52 @@
-<p>
-  play works!
-</p>
+<mat-card>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Search and Play something
+        </mat-panel-title>
+        <mat-panel-description>
+          Search item an play
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Play Playlist
+        </mat-panel-title>
+        <mat-panel-description>
+          Select a playlist
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <mat-tab-group>
+        <mat-tab label="Featured Playlists">
+          
+          <button mat-raised-button color="primary" (click)="getPlaylistFeatured()">Refresh</button>
+        </mat-tab>
+
+        <mat-tab label="Own Playlists">
+          
+          <button mat-raised-button color="primary" (click)="getPlaylistUser()">Refresh</button>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Devices
+        </mat-panel-title>
+        <mat-panel-description>
+          Select a device
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      
+
+      <button mat-raised-button color="primary" (click)="getDevs()">Refresh</button>
+    </mat-expansion-panel>
+  </mat-accordion>
+</mat-card>

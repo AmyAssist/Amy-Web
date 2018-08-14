@@ -1,3 +1,36 @@
-<p>
-  authentication works!
-</p>
+<mat-card>
+  <mat-accordion>
+    <mat-expansion-panel *ngIf=setup>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Setup
+        </mat-panel-title>
+        <mat-panel-description>
+          Set up your spotify connection.
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <p>leave blank if config file exists</p>
+      <div *ngIf=!setupStage2>
+        <mat-form-field>
+          <input matInput #clientID placeholder="ClientID">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput #clientSecret placeholder="ClientSecret">
+        </mat-form-field>
+
+        <button mat-button color="primary" (click)="setInit(clientID.value, clientSecret.value)">Send</button>
+      </div>
+      <div *ngIf=setupStage2>
+        <mat-card>authentication link: {{spotifyLink}}</mat-card>
+
+        <mat-form-field>
+          <input matInput #accessToken placeholder="Register token">
+        </mat-form-field>
+
+        <button mat-button color="primary" (click)="setToken(accessToken.value)">Send</button>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</mat-card>

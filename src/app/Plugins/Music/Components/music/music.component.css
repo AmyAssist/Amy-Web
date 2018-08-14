@@ -1,12 +1,50 @@
 .musicSearch-container {
-    display: flex;
-    flex-direction: column;
-  }
+  display: flex;
+  flex-direction: column;
+}
   
-  .musicSearch-container > * {
-    width: 100%;
-  }
+.musicSearch-container > * {
+  width: 100%;
+}
 
-  mat-slider {
-    width: 300px;
-  }
+mat-slider {
+  width: 300px;
+}
+
+.sidebar-container {
+  display: flex;
+  flex-direction: column;
+}
+  
+.sidebar-container > * {
+  width: 300px;
+}
+  
+.card-container {
+  display: flex;
+  align-items: flex-start;
+}
+
+.music-Site {
+  display: flex;
+  flex-direction: row;
+  height: 700px;
+}
+
+.music-Content {
+  width: 100%;
+}
+
+.music-Sidebar-Playlist {
+  flex: 0 0;
+  width: 300px;
+}
+
+.music-Sidebar-Song-Dev {
+  flex: 0 0;
+  width: 500px;
+}
+
+.music-Footer {
+  clear: both;
+}
