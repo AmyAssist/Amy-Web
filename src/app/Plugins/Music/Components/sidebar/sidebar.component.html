@@ -1,0 +1,29 @@
+<mat-card style="height: 100%;">
+  <div style="left: 0; text-align:left;">
+    <mat-list>
+      <h3 mat-subheader>User Playlists</h3>
+
+      <div *ngFor="let playlist of playlistAllUser; let i = index">
+        <mat-list-item role="listitem">
+          <mat-label>{{playlistAllUser[i].name}}</mat-label>
+          <button mat-icon-button color="primary" (click)="playPlaylistUser(i)">
+            <mat-icon>play_arrow</mat-icon>
+          </button>
+        </mat-list-item>
+      </div>
+
+      <mat-divider></mat-divider>
+      <h3 mat-subheader>Featured Playlists</h3>
+
+      <div *ngFor="let playlist of playlistAllFeatured; let i = index">
+        <mat-list-item role="listitem">
+          <mat-label>{{playlistAllFeatured[i].name}}</mat-label>
+          <button mat-icon-button color="primary" (click)="playPlaylistFeatured(i)">
+            <mat-icon>play_arrow</mat-icon>
+          </button>
+        </mat-list-item>
+      </div>
+
+    </mat-list>
+  </div>
+</mat-card>
