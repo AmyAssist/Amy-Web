@@ -26,6 +26,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 @NgModule({
   imports: [
@@ -52,7 +53,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatNativeDateModule,
     BrowserModule,
     RouterModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatSidenavModule
   ],
   exports: [
     CommonModule,
@@ -78,7 +80,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatNativeDateModule,
     BrowserModule,
     RouterModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatSidenavModule
   ],
   declarations: [],
   providers: []

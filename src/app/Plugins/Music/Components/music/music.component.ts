@@ -17,9 +17,21 @@ import { Device } from '../../Objects/device';
 })
 export class MusicComponent implements OnInit {
 
-  constructor(private readonly musicService: MusicDataService) { }
+  isMobileView: boolean;
+  screenWidth: number;
+
+  constructor(private readonly musicService: MusicDataService) {
+    this.musicService.setupPath();
+    this.screenWidth = window.innerWidth;
+    window.onresize = () => {
+      // set screenWidth on screen size change
+      this.screenWidth = window.innerWidth;
+    };
+  }
 
   ngOnInit() {
-    this.musicService.setupPath();
+    this.screenWidth = window.innerWidth;
   }
+
+
 }

@@ -1,8 +1,60 @@
 <mat-toolbar>
-  <span>Music</span>
+  <div [ngStyle]="{'display' : (screenWidth > 1200) ? 'none' : 'block'}">
+    <button mat-icon-button color="primary" (click)="sidenavleft.toggle()">
+      <mat-icon>list</mat-icon>
+    </button>
+  </div>
+  <span>Amy Spotify</span>
+  <span class="fill-space"></span>
+  <div [ngStyle]="{'display' : (screenWidth > 770) ? 'none' : 'block'}">
+    <button mat-icon-button color="primary" (click)="sidenavright.toggle()">
+        <mat-icon>library_music</mat-icon>
+    </button>
+  </div>
 </mat-toolbar>
 
-<div class="music-Site">
+
+<mat-sidenav-container class="testtest-container">
+  <mat-sidenav #sidenavleft [opened]="screenWidth > 1200" [mode]="(screenWidth > 1200) ? 'side' : 'over'" position="start"
+    class="music-Sidebar-Playlist-t">
+    <app-sidebar></app-sidebar>
+  </mat-sidenav>
+
+  <mat-sidenav-content class="music-Content-t">
+    <app-content></app-content>
+  </mat-sidenav-content>
+
+  <mat-sidenav #sidenavright [opened]="screenWidth > 770" [mode]="(screenWidth > 770) ? 'side' : 'over'" position="end" class="music-Sidebar-Song-Dev-t">
+    <app-current-song></app-current-song>
+    <app-devices></app-devices>
+  </mat-sidenav>
+
+  <router-outlet></router-outlet>
+</mat-sidenav-container>
+
+
+<!-- 
+<mat-sidenav-container>
+  <mat-sidenav #sidenav [opened]="screenWidth > 840" [mode]="(screenWidth > 840) ? 'side' : 'over'">
+    <p>test</p>
+
+  </mat-sidenav>
+
+
+
+  <router-outlet></router-outlet>
+
+  </mat-sidenav-container>
+-->
+
+
+<!--
+  style="width: 100%; height: 500px;"
+
+  style="width: 100%; height: 500px;"
+
+
+  <div class="music-Site">
   <div class="music-Sidebar-Playlist">
     <app-sidebar></app-sidebar>
   </div>
@@ -16,9 +68,4 @@
     <app-devices></app-devices>
   </div>
 </div>
-
-<!--
-  style="width: 100%; height: 500px;"
-
-  style="width: 100%; height: 500px;"
 -->

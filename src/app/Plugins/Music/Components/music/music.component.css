@@ -48,3 +48,27 @@ mat-slider {
 .music-Footer {
   clear: both;
 }
+
+.music-Sidebar-Playlist-t {
+  width: 250px;
+}
+
+.music-Sidebar-Song-Dev-t {
+  width: 400px;
+}
+
+.music-Content-t {
+  width: 100%;
+}
+
+
+.testtest-container {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+}
+
+.fill-space {
+  flex: 1 1 auto;
+}
