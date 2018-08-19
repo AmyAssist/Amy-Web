@@ -3,129 +3,190 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { NavigationDataService } from '../../Services/navigation-data.service';
 import { NavPath } from '../../Objects/navPath';
 import { BestTransportResult } from '../../Objects/bestTransportResult';
+import {combineLatest, Observable} from 'rxjs';
+import {FormControl} from '@angular/forms';
+import {map, startWith} from 'rxjs/operators';
+
+class Tag {
+    constructor(readonly name: string) {}
+}
 
 @Component({
-  selector: 'app-navigation',
-  templateUrl: './navigation.component.html',
-  styleUrls: ['./navigation.component.css']
+    selector: 'app-navigation',
+    templateUrl: './navigation.component.html',
+    styleUrls: ['./navigation.component.css']
 })
 export class NavigationComponent implements OnInit {
 
-  navPathData: NavPath;
-  from: string;
-  to: string;
-  way: string;
-  timeString: string;
-  timeDate: Date;
-  travelMode1: string;
-  travelMode2: string;
-  showWay: boolean;
-  showMode: boolean;
-  showWhen: boolean;
-  whenTime: string;
-  whenTimeDate: Date;
-  bestTransport: BestTransportResult;
-  Time: string;
+    navPathData: NavPath;
+    from: string;
+    to: string;
+    timeDate: Date;
+    travelMode1: string;
+    travelMode2: string;
+    showWay: boolean;
+    showMode: boolean;
+    showWhen: boolean;
+    whenTime: string;
+    whenTimeDate: Date;
+    bestTransport: BestTransportResult;
+    Time: string;
 
-  transit: boolean;
-  resultSummary: string;
-  resultMode: string;
-  resultDistance: string;
-  resultDuration: string;
-  resultArrivalTime: string;
-  resultDepartureTime: string;
-  resultStartAddress: string;
-  resultEndAddress: string;
+    transit: boolean;
+    resultMode: string;
+    resultDistance: string;
+    resultDuration: string;
+    resultArrivalTime: string;
+    resultDepartureTime: string;
+    resultStartAddress: string;
+    resultEndAddress: string;
 
-  constructor(private readonly navigationService: NavigationDataService) { }
 
-  ngOnInit() {
-    console.log(this.navigationService);
-    this.navigationService.setupPath();
-    this.showWay = false;
-    this.showWhen = false;
-    this.showMode = false;
-    this.transit = false;
-    this.navPathData = new NavPath();
-    this.bestTransport = new BestTransportResult();
-  }
+    tags: Observable<Tag[]>;
+    originFilteredTags: Observable<Tag[]>;
+    destinationFilteredTags: Observable<Tag[]>;
 
-  async fromToWay(from: string, to: string, date: string, hour: number, minute: number) {
-    this.createRoute(from, to, date, hour, minute);
-    this.navPathData.setTravelmode(this.travelMode1);
-    this.navigationService.fromTo(this.navPathData).subscribe((data: BestTransportResult) => this.bestTransport = { ...data });
-    await new Promise((resolve, reject) => setTimeout(resolve, 3000));
-    this.calcResult();
-    this.showWay = true;
-    this.showWhen = false;
-    this.showMode = false;
-  }
+    originField = new FormControl();
+    destinationField = new FormControl();
 
-  async bestType(from: string, to: string, date: string, hour: number, minute: number) {
-    this.createRoute(from, to, date, hour, minute);
-    this.navigationService.best(this.navPathData).subscribe((data: BestTransportResult) => this.bestTransport = { ...data });
-    await new Promise((resolve, reject) => setTimeout(resolve, 3000));
-    this.calcResult();
-    this.showWay = false;
-    this.showWhen = false;
-    this.showMode = true;
-  }
-
-  async searchWhen(from: string, to: string, date: string, hour: number, minute: number) {
-    this.createRoute(from, to, date, hour, minute);
-    this.navPathData.setTravelmode(this.travelMode2);
-    this.navigationService.when(this.navPathData).subscribe((data: string) => this.whenTime = data);
-    await new Promise((resolve, reject) => setTimeout(resolve, 3000));
-    console.log(this.whenTime);
-    this.whenTimeDate = new Date(this.whenTime);
-    this.showWay = false;
-    this.showWhen = true;
-    this.showMode = false;
-  }
-
-  setDate(time: string) {
-    this.Time = time;
-    console.log(this.Time);
-  }
-
-  createRoute(from: string, to: string, date: string, hour: number, minute: number) {
-    this.navPathData.setOrigin(from);
-    this.navPathData.setDestination(to);
-    this.timeDate = new Date(date);
-    this.timeDate.setHours(hour);
-    this.timeDate.setMinutes(minute);
-    this.navPathData.setTime(this.timeDate.toISOString());
-  }
-
-  calcResult() {
-    if (this.bestTransport.mode.toString() === 'DRIVING') {
-      this.resultMode = 'car';
-      this.transit = false;
-    } else if (this.bestTransport.mode.toString() === 'TRANSIT') {
-      this.resultMode = 'transit';
-      this.transit = true;
-    } else if (this.bestTransport.mode.toString() === 'BICYCLING') {
-      this.resultMode = 'bicycle';
-      this.transit = false;
+    getTagDisplayName(t: Tag) {
+        return t ? t.name : '';
     }
 
-    this.resultDistance = this.bestTransport.route.legs[0].distance.humanReadable;
-    this.resultDuration = this.bestTransport.route.legs[0].duration.humanReadable;
-    if (this.transit) {
-      const blank = ' ';
-      this.resultArrivalTime = `${this.bestTransport.route.legs[0].arrivalTime.dayOfMonth}
-        /${this.bestTransport.route.legs[0].arrivalTime.monthOfYear}
-        /${this.bestTransport.route.legs[0].arrivalTime.year} ${blank}
-        ${this.bestTransport.route.legs[0].arrivalTime.hourOfDay}
-        :${this.bestTransport.route.legs[0].arrivalTime.minuteOfHour}`;
-      this.resultDepartureTime = `${this.bestTransport.route.legs[0].departureTime.dayOfMonth}
-        /${this.bestTransport.route.legs[0].departureTime.monthOfYear}
-        /${this.bestTransport.route.legs[0].departureTime.year} ${blank}
-        ${this.bestTransport.route.legs[0].departureTime.hourOfDay}
-        :${this.bestTransport.route.legs[0].departureTime.minuteOfHour}`;
+    constructor(private readonly navigationService: NavigationDataService) { }
+
+    ngOnInit() {
+        console.log(this.navigationService);
+        this.navigationService.setupPath();
+        this.showWay = false;
+        this.showWhen = false;
+        this.showMode = false;
+        this.transit = false;
+        this.navPathData = new NavPath();
+        this.bestTransport = new BestTransportResult();
+
+        this.loadTags();
     }
-    this.resultStartAddress = this.bestTransport.route.legs[0].startAddress;
-    this.resultEndAddress = this.bestTransport.route.legs[0].endAddress;
-    console.log(this.transit);
-  }
+
+    loadTags() {
+        this.tags = this.navigationService.getTags().pipe(map(tags => tags.map(t => new Tag(t))));
+
+        this.originFilteredTags = combineLatest(
+            this.originField.valueChanges.pipe(startWith('')) as Observable<string | Tag>,
+            this.tags.pipe(startWith([]))
+        ).pipe(
+            map(([text, tags]) => tags.filter(tag => {
+                let searchText: string;
+                if (text instanceof Tag) {
+                    searchText = text.name;
+                } else {
+                    searchText = text;
+                }
+                return tag.name.toLowerCase().indexOf(searchText.toLowerCase()) === 0;
+            })
+        ));
+
+        this.destinationFilteredTags = combineLatest(
+            this.destinationField.valueChanges.pipe(startWith('')) as Observable<string | Tag>,
+            this.tags.pipe(startWith([]))
+        ).pipe(
+            map(([text, tags]) => tags.filter(tag => {
+                let searchText: string;
+                if (text instanceof Tag) {
+                    searchText = text.name;
+                } else {
+                    searchText = text;
+                }
+                return tag.name.toLowerCase().indexOf(searchText.toLowerCase()) === 0;
+            })
+        ));
+    }
+
+    async fromToWay(from: string | Tag, to: string | Tag, date: string, hour: number, minute: number) {
+        this.createRoute(from, to, date, hour, minute);
+        this.navPathData.travelmode = this.travelMode1;
+        this.navigationService.fromTo(this.navPathData).subscribe((data: BestTransportResult) => {
+            this.bestTransport = { ...data };
+            this.calcResult();
+            this.showWay = true;
+            this.showWhen = false;
+            this.showMode = false;
+        });
+    }
+
+    async bestType(from: string, to: string, date: string, hour: number, minute: number) {
+        this.createRoute(from, to, date, hour, minute);
+        this.navigationService.best(this.navPathData).subscribe((data: BestTransportResult) => this.bestTransport = { ...data });
+        await new Promise((resolve, reject) => setTimeout(resolve, 3000));
+        this.calcResult();
+        this.showWay = false;
+        this.showWhen = false;
+        this.showMode = true;
+    }
+
+    async searchWhen(from: string | Tag, to: string | Tag, date: string, hour: number, minute: number) {
+        this.createRoute(from, to, date, hour, minute);
+        this.navPathData.travelmode = this.travelMode2;
+        this.navigationService.when(this.navPathData).subscribe((data: string) => this.whenTime = data);
+        await new Promise((resolve, reject) => setTimeout(resolve, 3000));
+        console.log(this.whenTime);
+        this.whenTimeDate = new Date(this.whenTime);
+        this.showWay = false;
+        this.showWhen = true;
+        this.showMode = false;
+    }
+
+    setDate(time: string) {
+        this.Time = time;
+        console.log(this.Time);
+    }
+
+    createRoute(from: string | Tag, to: string | Tag, date: string, hour: number, minute: number) {
+        if (from instanceof Tag) {
+            this.navPathData.originTag = from.name;
+        } else {
+            this.navPathData.origin = from;
+        }
+        if (to instanceof Tag) {
+            this.navPathData.destinationTag = to.name;
+        } else {
+            this.navPathData.destination = to;
+        }
+        this.timeDate = new Date(date);
+        this.timeDate.setHours(hour);
+        this.timeDate.setMinutes(minute);
+        this.navPathData.time = this.timeDate.toISOString();
+    }
+
+    calcResult() {
+        if (this.bestTransport.mode.toString() === 'DRIVING') {
+            this.resultMode = 'car';
+            this.transit = false;
+        } else if (this.bestTransport.mode.toString() === 'TRANSIT') {
+            this.resultMode = 'transit';
+            this.transit = true;
+        } else if (this.bestTransport.mode.toString() === 'BICYCLING') {
+            this.resultMode = 'bicycle';
+            this.transit = false;
+        }
+
+        this.resultDistance = this.bestTransport.route.legs[0].distance.humanReadable;
+        this.resultDuration = this.bestTransport.route.legs[0].duration.humanReadable;
+        if (this.transit) {
+            const blank = ' ';
+            this.resultArrivalTime = `${this.bestTransport.route.legs[0].arrivalTime.dayOfMonth}
+                /${this.bestTransport.route.legs[0].arrivalTime.monthOfYear}
+                /${this.bestTransport.route.legs[0].arrivalTime.year} ${blank}
+                ${this.bestTransport.route.legs[0].arrivalTime.hourOfDay}
+                :${this.bestTransport.route.legs[0].arrivalTime.minuteOfHour}`;
+            this.resultDepartureTime = `${this.bestTransport.route.legs[0].departureTime.dayOfMonth}
+                /${this.bestTransport.route.legs[0].departureTime.monthOfYear}
+                /${this.bestTransport.route.legs[0].departureTime.year} ${blank}
+                ${this.bestTransport.route.legs[0].departureTime.hourOfDay}
+                :${this.bestTransport.route.legs[0].departureTime.minuteOfHour}`;
+        }
+        this.resultStartAddress = this.bestTransport.route.legs[0].startAddress;
+        this.resultEndAddress = this.bestTransport.route.legs[0].endAddress;
+        console.log(this.transit);
+    }
 }

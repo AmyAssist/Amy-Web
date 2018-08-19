@@ -56,4 +56,8 @@ export class NavigationDataService {
     return this.http.post(this.path + 'best', wayData, this.httpOptions).pipe(
       catchError(this.handleError));
   }
+
+  getTags(): Observable<string[]> {
+    return this.http.get<string[]>(this.path + 'tags', this.httpOptions).pipe(catchError(this.handleError));
+  }
 }

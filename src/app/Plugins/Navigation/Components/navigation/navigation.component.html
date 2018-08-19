@@ -15,11 +15,21 @@
 
     <div>
       <mat-form-field>
-        <input matInput #from1 placeholder="From:">
+        <input matInput placeholder="From:" [formControl]="originField" [matAutocomplete]="originAuto">
+        <mat-autocomplete autoActiveFirstOption #originAuto="matAutocomplete" [displayWith]="getTagDisplayName">
+          <mat-option *ngFor="let option of originFilteredTags | async" [value]="option">
+            {{option.name}}
+          </mat-option>
+        </mat-autocomplete>
       </mat-form-field>
 
       <mat-form-field>
-        <input matInput #to1 placeholder="To:">
+        <input matInput placeholder="To:" [formControl]="destinationField" [matAutocomplete]="destinationAuto">
+        <mat-autocomplete autoActiveFirstOption #destinationAuto="matAutocomplete" [displayWith]="getTagDisplayName">
+          <mat-option *ngFor="let option of destinationFilteredTags | async" [value]="option">
+            {{option.name}}
+          </mat-option>
+        </mat-autocomplete>
       </mat-form-field>
     </div>
 
@@ -49,7 +59,7 @@
       </form>
     </div>
 
-    <button mat-raised-button color="primary" (click)="fromToWay(from1.value, to1.value, date1.value, hour1.value, minute1.value)">Search</button>
+    <button mat-raised-button color="primary" (click)="fromToWay(originField.value, destinationField.value, date1.value, hour1.value, minute1.value)">Search</button>
 
     <div *ngIf="showWay">
       <div *ngIf="!transit">

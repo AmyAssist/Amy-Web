@@ -9,7 +9,8 @@ import {
   MatMenuModule,
   MatListModule,
   MatDividerModule,
-  MatNativeDateModule
+  MatNativeDateModule,
+  MatAutocompleteModule
 } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -52,7 +53,9 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatNativeDateModule,
     BrowserModule,
     RouterModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    ReactiveFormsModule,
+    MatAutocompleteModule
   ],
   exports: [
     CommonModule,

@@ -11,7 +11,8 @@ import {
   MatMenuModule,
   MatTableModule,
   MatTabsModule,
-  MatToolbarModule
+  MatToolbarModule,
+  MatAutocompleteModule
 } from '@angular/material';
 
 
@@ -123,6 +124,8 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     MatRadioModule,
     FormsModule,
+    ReactiveFormsModule,
+    MatAutocompleteModule
   ],
   exports: [RouterModule],
   providers: [AuthService, AuthGuard],
