@@ -1,12 +1,12 @@
 .alarmSet-container {
+    padding: 16px;
     display: flex;
     flex-direction: column;
   }
 .alarmList-container {
-  display: flex;
-  flex-direction: column;
+  margin-top: 16px;
 }
 .alarmEdit-container {
-
-  flex-direction: row;
+  margin-top: 16px;
+  padding: 16px;
 }
