@@ -19,7 +19,10 @@ export class ClockComponent implements OnInit {
   newClockData: Clock;
   selectedClock: Clock;
   d: Date;
-  day: String;
+  tomorrow: Date;
+  alarmMonth: String;
+  alarmDay: String;
+
 
   /*
     Providing the data-service for the clock-component
@@ -30,7 +33,6 @@ export class ClockComponent implements OnInit {
     this.clockData = new Array<Clock>();
     this.newClockData = new Clock;
     this.clockService.setupPath();
-    this.d = new Date();
   }
 
   /*
@@ -48,8 +50,36 @@ export class ClockComponent implements OnInit {
   /*
     Sending a alarm to the service that sets it.
   */
-  setAlarm(hour: number, minute: number) {
-    this.newClockData.alarmTime = hour + ":" + minute;
+  setAlarm(day: number, hour: number, minute: number) {
+    this.d = new Date();
+
+    if (day == -1) {
+      if (this.d.getMonth().toString().length < 2) {
+        this.alarmMonth = "0" + this.d.getMonth().toString();
+      } else {
+        this.alarmMonth = this.d.getMonth().toString();
+      }
+      if (this.d.getDate().toString().length < 2) {
+        this.alarmDay = "0" + this.d.getDate().toString();
+      } else {
+        this.alarmDay = this.d.getDate().toString();
+      }
+      this.newClockData.alarmTime = this.d.getFullYear().toString() + "-" + this.alarmMonth + "-" + this.alarmDay + "T" + hour + ":" + minute;
+    } else {
+      this.tomorrow = new Date();
+      this.tomorrow.setDate(this.d.getDate() + 1);
+      if (this.tomorrow.getMonth().toString().length < 2) {
+        this.alarmMonth = "0" + this.tomorrow.getMonth().toString();
+      } else {
+        this.alarmMonth = this.tomorrow.getMonth().toString();
+      }
+      if (this.tomorrow.getDate().toString().length < 2) {
+        this.alarmDay = "0" + this.tomorrow.getDate().toString();
+      } else {
+        this.alarmDay = this.tomorrow.getDate().toString();
+      }
+      this.newClockData.alarmTime = this.d.getFullYear().toString() + "-" + this.alarmMonth + "-" + this.alarmDay + "T" + hour + ":" + minute;
+    }
     this.clockService.setNewAlarm(this.newClockData).subscribe(data => {
       this.getAlarms();
     });
@@ -57,10 +87,33 @@ export class ClockComponent implements OnInit {
   }
 
   editAlarm(id: number, day: number, edithour: number, editminute: number) {
-    if(day == -1){
-      this.clockData[id].alarmTime = this.d.getFullYear.toString + "-" + this.d.getMonth.toString +"-" + this.d.getDate.toString + "T" + edithour + ":" + editminute;
-    } else{
-      this.clockData[id].alarmTime = this.d.getFullYear.toString + "-" + this.d.getMonth.toString +"-" + "00" + "T" + edithour + ":" + editminute;
+    this.d = new Date();
+    if (day == -1) {
+      if (this.d.getMonth().toString().length < 2) {
+        this.alarmMonth = "0" + this.d.getMonth().toString();
+      } else {
+        this.alarmMonth = this.d.getMonth().toString();
+      }
+      if (this.d.getDate().toString().length < 2) {
+        this.alarmDay = "0" + this.d.getDate().toString();
+      } else {
+        this.alarmDay = this.d.getDate().toString();
+      }
+      this.clockData[id].alarmTime = this.d.getFullYear().toString() + "-" + this.alarmMonth + "-" + this.alarmDay + "T" + edithour + ":" + editminute;
+    } else {
+      this.tomorrow = new Date();
+      this.tomorrow.setDate(this.d.getDate() + 1);
+      if (this.tomorrow.getMonth().toString().length < 2) {
+        this.alarmMonth = "0" + this.tomorrow.getMonth().toString();
+      } else {
+        this.alarmMonth = this.tomorrow.getMonth().toString();
+      }
+      if (this.tomorrow.getDate().toString().length < 2) {
+        this.alarmDay = "0" + this.tomorrow.getDate().toString();
+      } else {
+        this.alarmDay = this.tomorrow.getDate().toString();
+      }
+      this.clockData[id].alarmTime = this.d.getFullYear().toString() + "-" + this.alarmMonth + "-" + this.alarmDay + "T" + edithour + ":" + editminute;
     }
     this.clockService.editAlarm(id, this.clockData).subscribe(data => {
       this.getAlarms();

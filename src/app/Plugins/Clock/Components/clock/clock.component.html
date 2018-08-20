@@ -10,8 +10,16 @@
   <mat-form-field>
     <input matInput #minute placeholder="Minute">
   </mat-form-field>
+  <mat-button-toggle-group #group="matButtonToggleGroup">
+      <mat-button-toggle value="-1">
+      Today
+      </mat-button-toggle>
+      <mat-button-toggle value="1">
+      Tomorrow
+      </mat-button-toggle>
+    </mat-button-toggle-group>
 </div>
-<button mat-raised-button color="primary" (click)="setAlarm(hour.value, minute.value)">Save</button>
+<button mat-raised-button color="primary" (click)="setAlarm(group.value, hour.value, minute.value)">Save</button>
 
 <button mat-raised-button color="basic" (click)="getAlarms()">Load Alarms</button>
 <div class="alarmList-container">
