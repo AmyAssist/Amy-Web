@@ -87,7 +87,9 @@ export class ClockComponent implements OnInit {
   }
 
   editAlarm(id: number, day: number, edithour: number, editminute: number) {
+    const alarm = new Clock();
     this.d = new Date();
+    alarm.id = id;
     if (day == -1) {
       if (this.d.getMonth().toString().length < 2) {
         this.alarmMonth = "0" + this.d.getMonth().toString();
@@ -99,7 +101,7 @@ export class ClockComponent implements OnInit {
       } else {
         this.alarmDay = this.d.getDate().toString();
       }
-      this.clockData[id].alarmTime = this.d.getFullYear().toString() + "-" + this.alarmMonth + "-" + this.alarmDay + "T" + edithour + ":" + editminute;
+      alarm.alarmTime = this.d.getFullYear().toString() + "-" + this.alarmMonth + "-" + this.alarmDay + "T" + edithour + ":" + editminute;
     } else {
       this.tomorrow = new Date();
       this.tomorrow.setDate(this.d.getDate() + 1);
@@ -113,16 +115,16 @@ export class ClockComponent implements OnInit {
       } else {
         this.alarmDay = this.tomorrow.getDate().toString();
       }
-      this.clockData[id].alarmTime = this.d.getFullYear().toString() + "-" + this.alarmMonth + "-" + this.alarmDay + "T" + edithour + ":" + editminute;
+      alarm.alarmTime = this.d.getFullYear().toString() + "-" + this.alarmMonth + "-" + this.alarmDay + "T" + edithour + ":" + editminute;
     }
-    this.clockService.editAlarm(id, this.clockData).subscribe(data => {
+    this.clockService.editAlarm(id, alarm).subscribe(data => {
       this.getAlarms();
     });
 
   }
 
-  activatedeactivateAlarm(id: number) {
-    this.clockService.activatedeactivateAlarm(id, this.clockData).subscribe(data => {
+  activatedeactivateAlarm(alarm: Clock) {
+    this.clockService.activatedeactivateAlarm(alarm.id, alarm).subscribe(data => {
       this.getAlarms();
     });
   }
