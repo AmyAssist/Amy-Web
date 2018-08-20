@@ -18,6 +18,8 @@ export class ClockComponent implements OnInit {
   oneClockData: Clock;
   newClockData: Clock;
   selectedClock: Clock;
+  d: Date;
+  day: String;
 
   /*
     Providing the data-service for the clock-component
@@ -28,6 +30,7 @@ export class ClockComponent implements OnInit {
     this.clockData = new Array<Clock>();
     this.newClockData = new Clock;
     this.clockService.setupPath();
+    this.d = new Date();
   }
 
   /*
@@ -53,8 +56,12 @@ export class ClockComponent implements OnInit {
 
   }
 
-  editAlarm(id: number, edithour: number, editminute: number) {
-    this.clockData[id].alarmTime = edithour + ":" + editminute;
+  editAlarm(id: number, day: number, edithour: number, editminute: number) {
+    if(day == -1){
+      this.clockData[id].alarmTime = this.d.getFullYear.toString + "-" + this.d.getMonth.toString +"-" + this.d.getDate.toString + "T" + edithour + ":" + editminute;
+    } else{
+      this.clockData[id].alarmTime = this.d.getFullYear.toString + "-" + this.d.getMonth.toString +"-" + "00" + "T" + edithour + ":" + editminute;
+    }
     this.clockService.editAlarm(id, this.clockData).subscribe(data => {
       this.getAlarms();
     });
@@ -75,14 +82,6 @@ export class ClockComponent implements OnInit {
 
   showEditFields(clock: Clock) {
     this.selectedClock = clock;
-    /*
-    var x = document.getElementById("editFields");
-    if (x.style.display === "none") {
-      x.style.display = "block";
-    } else {
-      x.style.display = "none";
-    }
-    */
   }
 
 }

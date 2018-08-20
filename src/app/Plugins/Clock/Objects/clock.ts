@@ -3,7 +3,7 @@
 */
 export class Clock {
     id: number;
-    //encoded like HH:mm - see Java LocalTime.toString()
+    //encoded like 2007-12-03T10:15 - see Java LocalTime.toString()
     alarmTime: String;
     active: boolean;
 
