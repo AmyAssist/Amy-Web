@@ -1,0 +1,9 @@
+.main{
+    position: fixed;
+    bottom: 2%;
+    right: 3%;
+}
+
+.command-input-field{
+    height: 15px;
+}
