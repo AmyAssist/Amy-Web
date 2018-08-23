@@ -4,6 +4,8 @@ import { MusicDataService } from '../../Services/music-data.service';
 import { Music } from '../../Objects/music';
 import { Playlist } from '../../Objects/playlist';
 import { Device } from '../../Objects/device';
+import { FlexLayoutModule } from "@angular/flex-layout";
+
 
 /*
   Component for controlling the spotify plugin. It recieves data from the REST-backend with a custom music-dataservice.

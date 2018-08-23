@@ -1,3 +1,4 @@
+<!--
 <mat-toolbar>
   <div [ngStyle]="{'display' : (screenWidth > 1200) ? 'none' : 'block'}">
     <button mat-icon-button color="primary" (click)="sidenavleft.toggle()">
@@ -12,8 +13,61 @@
     </button>
   </div>
 </mat-toolbar>
+-->
 
 
+<div class="music-Content-Row" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="10px" fxLayoutGap.xs="10px">
+  <div fxFlex="60%">
+
+
+    <div class="contentClass">
+      <app-content></app-content>
+    </div>
+    <div class="playlistClass">
+      <app-sidebar></app-sidebar>
+    </div>
+
+
+  </div>
+  <div fxFlex="40%">
+
+
+    <div class="currentSongClass">
+      <app-current-song></app-current-song>
+    </div>
+    <div class="devicesClass">
+      <app-devices></app-devices>
+    </div>
+
+
+  </div>
+</div>
+
+
+
+
+
+
+<!--
+<mat-grid-list cols="12" rowHeight="100px">
+  <mat-grid-tile [colspan]="2" [rowspan]="6" [style.background]="'lightpink'">
+
+
+  </mat-grid-tile>
+  <mat-grid-tile [colspan]="6" [rowspan]="6" [style.background]="'lightblue'">
+
+  </mat-grid-tile>
+  <mat-grid-tile [colspan]="4" [rowspan]="3" [style.background]="'lightgreen'">
+
+  </mat-grid-tile>
+  <mat-grid-tile [colspan]="4" [rowspan]="3" [style.background]="'lightblue'">
+
+  </mat-grid-tile>
+
+</mat-grid-list>
+-->
+
+<!-- 
 <mat-sidenav-container class="testtest-container">
   <mat-sidenav #sidenavleft [opened]="screenWidth > 1200" [mode]="(screenWidth > 1200) ? 'side' : 'over'" position="start"
     class="music-Sidebar-Playlist-t">
@@ -31,7 +85,7 @@
 
   <router-outlet></router-outlet>
 </mat-sidenav-container>
-
+-->
 
 <!-- 
 <mat-sidenav-container>

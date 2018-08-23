@@ -11,6 +11,8 @@
     </mat-select>
   </mat-form-field>
 
+  <button mat-raised-button color="primary" (click)="search(input.value, activeType)">Search</button>
+
   <h4 mat-subheader>Search results</h4>
   <div *ngFor="let playlist of searchResults; let i = index">
     <mat-list-item role="listitem">
@@ -20,10 +22,5 @@
       </button>
     </mat-list-item>
   </div>
-  <button mat-raised-button color="primary" (click)="search(input.value, activeType)">Search</button>
-
-  <mat-divider></mat-divider>
-
-  <h4 mat-subheader>Content</h4>
-
+  
 </mat-card>
