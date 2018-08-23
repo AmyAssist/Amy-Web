@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { DatabaseService } from '../../Services/database.service';
-import { TTSService } from '../../Services/tts.service';
-import { SpeechRecognitionService } from '../../Services/speechrecognition.service';
-import { Command } from '../../Objects/command';
-import { CHAT_DISPLAY_BUTTON_ACTIVE, CHAT_DISPLAY_BUTTON_INACTIVE, AMY_UNKNOWN_COMMAND_RESPONSE, COMMAND_INPUT_PLACEHOLDER } from './strings';
-import { Message } from './message';
-import { trigger, state, style, animate, transition} from '@angular/animations';
-import { ErrorStateMatcher } from '@angular/material/core';
+import {Component, NgZone, OnInit} from '@angular/core';
+import {DatabaseService} from '../../Services/database.service';
+import {TTSService} from '../../Services/tts.service';
+import {SpeechRecognitionService} from '../../Services/speechrecognition.service';
+import {Command} from '../../Objects/command';
+import {AMY_UNKNOWN_COMMAND_RESPONSE, CHAT_DISPLAY_BUTTON_ACTIVE, CHAT_DISPLAY_BUTTON_INACTIVE, COMMAND_INPUT_PLACEHOLDER} from './strings';
+import {Message} from './message';
+import {animate, state, style, transition, trigger} from '@angular/animations';
+import {ErrorStateMatcher} from '@angular/material/core';
 
 export class CommandErrorStateMatcher implements ErrorStateMatcher {
   error = false;
@@ -37,7 +37,7 @@ export class CommandErrorStateMatcher implements ErrorStateMatcher {
 export class AmyChatComponent implements OnInit {
 
   messages: Message[] = [];
-
+  zone = new NgZone({enableLongStackTrace: false});
   language = 0;
 
   buttonName: string = CHAT_DISPLAY_BUTTON_INACTIVE[this.language];
@@ -118,7 +118,9 @@ export class AmyChatComponent implements OnInit {
    * Speak the command wiith the TTSService
    */
   private responseMessage(responseValue: string, readResponse: boolean) {
-    this.addMessage('amy', responseValue);
+    this.zone.run(() => {
+        this.addMessage('amy', responseValue);
+    });
     if (readResponse) {
       this.ttsService.speak(responseValue);
     }
