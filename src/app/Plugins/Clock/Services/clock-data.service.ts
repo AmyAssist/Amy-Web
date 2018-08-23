@@ -35,7 +35,7 @@ export class ClockDataService {
     Getting all from Rest-Backend Alarms.
   */
   getAlarms() {
-    return this.http.get<Clock[]>(this.path + 'alarms', this.httpOptions).pipe(
+    return this.http.get<Clock[]>(`${this.path}alarms`, this.httpOptions).pipe(
       catchError(this.handleError));
   }
 
@@ -43,7 +43,7 @@ export class ClockDataService {
     Sending a new Alarm to the REST-Backend.
   */
   setNewAlarm(clockData: Clock): Observable<Clock> {
-    return this.http.post<Clock>(this.path + 'alarms/new', clockData, this.httpOptions).pipe(
+    return this.http.post<Clock>(`${this.path}alarms/new`, clockData, this.httpOptions).pipe(
       catchError(this.handleError));
   }
 
@@ -51,28 +51,28 @@ export class ClockDataService {
     Get one specific Alarm
   */
   getSpecificAlarm() {
-    return this.http.get<Clock>(this.path + 'alarms/alarmnumber', this.httpOptions).pipe(catchError(this.handleError));
+    return this.http.get<Clock>(`${this.path}alarms/alarmnumber`, this.httpOptions).pipe(catchError(this.handleError));
   }
 
   /*
     Edit Alarms
   */
   editAlarm(alarmnumber: number, clockData: Clock): Observable<Clock> {
-    return this.http.post<Clock>(this.path + 'alarms/' + alarmnumber, clockData, this.httpOptions).pipe(catchError(this.handleError));
+    return this.http.post<Clock>(`${this.path}alarms/${alarmnumber}`, clockData, this.httpOptions).pipe(catchError(this.handleError));
   }
 
   /*
     Activate and Deactivate Alarms
   */
   activatedeactivateAlarm(alarmnumber: number, clockData: Clock): Observable<Clock> {
-    return this.http.post<Clock>(this.path + 'alarms/de.activate/' + alarmnumber, clockData, this.httpOptions).pipe(catchError(this.handleError));
+    return this.http.post<Clock>(`${this.path}alarms/de.activate/${alarmnumber}`, clockData, this.httpOptions).pipe(catchError(this.handleError));
   }
 
   /*
     Delete Alarms
   */
   deleteAlarm(alarmnumber: number): Observable<Clock[]> {
-    return this.http.post<Clock[]>(this.path + 'alarms/delete/' + alarmnumber, this.httpOptions).pipe(catchError(this.handleError));
+    return this.http.post<Clock[]>(`${this.path}'alarms/delete/'${alarmnumber}`, this.httpOptions).pipe(catchError(this.handleError));
   }
 
 }

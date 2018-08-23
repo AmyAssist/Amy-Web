@@ -64,7 +64,7 @@ export class ClockComponent implements OnInit {
       } else {
         this.alarmDay = this.d.getDate().toString();
       }
-      this.newClockData.alarmTime = this.d.getFullYear().toString() + '-' + this.alarmMonth + '-' + this.alarmDay + 'T' + hour + ':' + minute;
+      this.newClockData.alarmTime = `${this.d.getFullYear().toString()}-${this.alarmMonth}-${this.alarmDay}T${hour}:${minute}`;
     } else {
       this.tomorrow = new Date();
       this.tomorrow.setDate(this.d.getDate() + 1);
@@ -78,7 +78,7 @@ export class ClockComponent implements OnInit {
       } else {
         this.alarmDay = this.tomorrow.getDate().toString();
       }
-      this.newClockData.alarmTime = this.d.getFullYear().toString() + '-' + this.alarmMonth + '-' + this.alarmDay + 'T' + hour + ':' + minute;
+      this.newClockData.alarmTime = `${this.d.getFullYear().toString()}-${this.alarmMonth}-${this.alarmDay}T${hour}:${minute}`;
     }
     this.clockService.setNewAlarm(this.newClockData).subscribe(data => {
       this.getAlarms();
@@ -101,7 +101,7 @@ export class ClockComponent implements OnInit {
       } else {
         this.alarmDay = this.d.getDate().toString();
       }
-      alarm.alarmTime = this.d.getFullYear().toString() + '-' + this.alarmMonth + '-' + this.alarmDay + 'T' + edithour + ':' + editminute;
+      alarm.alarmTime = `${this.d.getFullYear().toString()}-${this.alarmMonth}-${this.alarmDay}T${edithour}:${editminute}`;
     } else {
       this.tomorrow = new Date();
       this.tomorrow.setDate(this.d.getDate() + 1);
@@ -115,7 +115,7 @@ export class ClockComponent implements OnInit {
       } else {
         this.alarmDay = this.tomorrow.getDate().toString();
       }
-      alarm.alarmTime = this.d.getFullYear().toString() + '-' + this.alarmMonth + '-' + this.alarmDay + 'T' + edithour + ':' + editminute;
+      alarm.alarmTime = `${this.d.getFullYear().toString()}-${this.alarmMonth}-${this.alarmDay}T${edithour}:${editminute}`;
     }
     this.clockService.editAlarm(id, alarm).subscribe(data => {
       this.getAlarms();
