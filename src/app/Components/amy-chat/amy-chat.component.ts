@@ -5,13 +5,7 @@ import { SpeechRecognitionService } from '../../Services/speechrecognition.servi
 import { Command } from '../../Objects/command';
 import { CHAT_DISPLAY_BUTTON_ACTIVE, CHAT_DISPLAY_BUTTON_INACTIVE } from "./strings";
 import { Message } from "./message";
-import {
-  trigger,
-  state,
-  style,
-  animate,
-  transition
-} from '@angular/animations';
+import { trigger, state, style, animate, transition} from '@angular/animations';
 import { ErrorStateMatcher } from '@angular/material/core';
 
 export class CommandErrorStateMatcher implements ErrorStateMatcher {
@@ -54,8 +48,6 @@ export class AmyChatComponent implements OnInit {
   commandTextValue = '';
   response: string;
 
-  ignoreSRcount = 0;
-
   errorStateMatcher = new CommandErrorStateMatcher();
 
   constructor(private readonly databaseService: DatabaseService, private readonly ttsService: TTSService,
@@ -64,8 +56,14 @@ export class AmyChatComponent implements OnInit {
   ngOnInit() {
   }
 
+  /**
+   * Add a Message to the Visible Chat
+   * @param name Name of the Message Source
+   * @param value String of the Message
+   */
   private addMessage(name: string, value: string) {
-    this.messages.push({ name: name, value: value });
+    var message = { name: name, value: value };
+    this.messages.push(message);
   }
 
   /**
@@ -126,26 +124,32 @@ export class AmyChatComponent implements OnInit {
     }
   }
 
+  /**
+   * Send the srResponse to Backend and Chat
+   * @param name Name of the Message Source
+   * @param command String of the Command
+   * @param readResponse Boolean that describes if the Message should be read
+   */
   private srResponse(name: string, command: string, readResponse: boolean) {
-    if (this.ignoreSRcount > 0) {
-      this.ignoreSRcount--;
-    } else {
+    if (this.srState == 'active') {
       this.addMessage(name, command);
       this.sendCommand(command, true);
     }
   }
 
+  /**
+   * Activate/Deactivate the SR
+   */
   triggerSR() {
     if (this.srState != 'active') {
       this.srState = 'active';
       this.speechRecognitionService.recognize((result) => {
-        this.srState = 'inactive';
         this.srResponse('user', result, true);
+        this.srState = 'inactive';
       });
     } else {
-      this.ignoreSRcount++;
-      this.speechRecognitionService.cancelRecognition();
       this.srState = 'inactive';
+      this.speechRecognitionService.cancelRecognition();
     }
   }
 }
