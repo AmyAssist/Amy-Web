@@ -3,8 +3,8 @@ import { DatabaseService } from '../../Services/database.service';
 import { TTSService } from '../../Services/tts.service';
 import { SpeechRecognitionService } from '../../Services/speechrecognition.service';
 import { Command } from '../../Objects/command';
-import { CHAT_DISPLAY_BUTTON_ACTIVE, CHAT_DISPLAY_BUTTON_INACTIVE } from "./strings";
-import { Message } from "./message";
+import { CHAT_DISPLAY_BUTTON_ACTIVE, CHAT_DISPLAY_BUTTON_INACTIVE } from './strings';
+import { Message } from './message';
 import { trigger, state, style, animate, transition} from '@angular/animations';
 import { ErrorStateMatcher } from '@angular/material/core';
 
@@ -41,7 +41,7 @@ export class AmyChatComponent implements OnInit {
   language = 0;
 
   buttonName: string = CHAT_DISPLAY_BUTTON_INACTIVE[this.language];
-  displayChat: boolean = false;
+  displayChat = false;
 
   srState = 'inactive';
 
@@ -62,8 +62,7 @@ export class AmyChatComponent implements OnInit {
    * @param value String of the Message
    */
   private addMessage(name: string, value: string) {
-    var message = { name: name, value: value };
-    this.messages.push(message);
+    this.messages.push({ name, value });
   }
 
   /**
@@ -76,10 +75,10 @@ export class AmyChatComponent implements OnInit {
   }
 
   /**
-   * Trigger the displayal of the chat window 
+   * Trigger the displayal of the chat window
    */
   changeDisplayState() {
-    if (this.displayChat == false) {
+    if (!this.displayChat) {
       this.displayChat = true;
       this.buttonName = CHAT_DISPLAY_BUTTON_ACTIVE[this.language];
     } else {
@@ -131,7 +130,7 @@ export class AmyChatComponent implements OnInit {
    * @param readResponse Boolean that describes if the Message should be read
    */
   private srResponse(name: string, command: string, readResponse: boolean) {
-    if (this.srState == 'active') {
+    if (this.srState === 'active') {
       this.addMessage(name, command);
       this.sendCommand(command, true);
     }
@@ -141,7 +140,7 @@ export class AmyChatComponent implements OnInit {
    * Activate/Deactivate the SR
    */
   triggerSR() {
-    if (this.srState != 'active') {
+    if (this.srState !== 'active') {
       this.srState = 'active';
       this.speechRecognitionService.recognize((result) => {
         this.srResponse('user', result, true);
