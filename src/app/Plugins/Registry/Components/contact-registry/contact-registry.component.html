@@ -35,6 +35,15 @@
       </mat-cell>
     </ng-container>
 
+    <ng-container matColumnDef="tag">
+      <mat-header-cell *matHeaderCellDef>Tag</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <mat-form-field floatLabel="{{ row.editing ? 'float' : 'never'}}">
+          <input matInput [formControl]="row.validator.controls['tag']" [readonly]="!row.editing" placeholder="Tag" [(ngModel)]="row.currentData.tag">
+        </mat-form-field>
+      </mat-cell>
+    </ng-container>
+
 
     <ng-container matColumnDef="actionsColumn">
       <mat-header-cell *matHeaderCellDef>

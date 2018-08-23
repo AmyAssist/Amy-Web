@@ -49,7 +49,6 @@ export class LocationRegistryComponent implements OnInit {
             const result: Location[] = [];
             for (const loc of value) {
                 const l: Location = this.copyLocationObject(loc);
-                this.convertToTag(l);
                 result.push(l);
             }
             console.log('got locations', result);
@@ -59,7 +58,6 @@ export class LocationRegistryComponent implements OnInit {
 
     async insertLocation(l: Location): Promise<boolean> {
         const newLocation = this.copyLocationObject(l);
-        this.convertToAttributes(newLocation);
 
         try {
             await this.createUpdateLocation(newLocation);
@@ -76,7 +74,6 @@ export class LocationRegistryComponent implements OnInit {
 
     async updateLocation(l: Location): Promise<boolean> {
         const newLocation = this.copyLocationObject(l);
-        this.convertToAttributes(newLocation);
 
         try {
             await this.createUpdateLocation(newLocation);
@@ -105,45 +102,6 @@ export class LocationRegistryComponent implements OnInit {
 
     async createUpdateLocation(l: Location) {
         return this.registryService.post(l).toPromise();
-    }
-
-    /**
-     * Translate the two boolean attributes `home` and `work` to the appropriate `tag` attribute
-     * @param {Location} l
-     */
-    convertToTag(l: Location) {
-        let tag;
-        if (l.home) {
-            tag = 'home';
-        } else if (l.work) {
-            tag = 'work';
-        } else {
-            tag = 'none';
-        }
-        l.tag = tag;
-    }
-
-    /**
-     * Translate the `tag` attribute to the two boolean attributes `home` and `work` appropriately
-     * @param {Location} l
-     */
-    convertToAttributes(l: Location) {
-        let work = false;
-        let home = false;
-        switch (l.tag) {
-            case 'none':
-                break;
-            case 'work':
-                work = true;
-                break;
-            case 'home':
-                home = true;
-                break;
-        }
-        l.home = home;
-        l.work = work;
-
-        delete l.tag;
     }
 
     showError(message: string) {
