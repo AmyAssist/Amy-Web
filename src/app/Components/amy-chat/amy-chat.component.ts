@@ -3,7 +3,7 @@ import { DatabaseService } from '../../Services/database.service';
 import { TTSService } from '../../Services/tts.service';
 import { SpeechRecognitionService } from '../../Services/speechrecognition.service';
 import { Command } from '../../Objects/command';
-import { CHAT_DISPLAY_BUTTON_ACTIVE, CHAT_DISPLAY_BUTTON_INACTIVE } from './strings';
+import { CHAT_DISPLAY_BUTTON_ACTIVE, CHAT_DISPLAY_BUTTON_INACTIVE, AMY_UNKNOWN_COMMAND_RESPONSE, COMMAND_INPUT_PLACEHOLDER } from './strings';
 import { Message } from './message';
 import { trigger, state, style, animate, transition} from '@angular/animations';
 import { ErrorStateMatcher } from '@angular/material/core';
@@ -41,6 +41,7 @@ export class AmyChatComponent implements OnInit {
   language = 0;
 
   buttonName: string = CHAT_DISPLAY_BUTTON_INACTIVE[this.language];
+  commandInputPlaceholder: string = COMMAND_INPUT_PLACEHOLDER[this.language];
   displayChat = false;
 
   srState = 'inactive';
@@ -108,7 +109,7 @@ export class AmyChatComponent implements OnInit {
     }, error => {
       this.response = null;
       this.errorStateMatcher.error = true;
-      this.responseMessage('I could not understand that', readResponse);
+      this.responseMessage(AMY_UNKNOWN_COMMAND_RESPONSE[this.language], readResponse);
 
     });
   }

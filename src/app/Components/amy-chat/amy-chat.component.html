@@ -7,7 +7,7 @@
       </div>
     </mat-card-content>
     <mat-form-field class="command-input-field">
-      <input (keydown.enter)="sendTextFieldMessage()" matInput #command [(ngModel)]="commandTextValue" placeholder="Command">
+      <input (keydown.enter)="sendTextFieldMessage()" matInput #command [(ngModel)]="commandTextValue" [placeholder]="commandInputPlaceholder">
     </mat-form-field>
     <button mat-icon-button color="primary" (click)="sendTextFieldMessage()">
       <mat-icon>send</mat-icon>
