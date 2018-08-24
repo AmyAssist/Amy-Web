@@ -31,17 +31,17 @@ export class DatabaseService {
         let params = new HttpParams();
         params = params.append('langInput', commandData.value);
         params = params.append('clientUUID', uuid);
-        return this.http.post(this.backend.backendPath + 'home/console', null, {params});
+        return this.http.post(this.backend.backendPath + 'chat/input', null, {params});
     }
 
     registerChat() {
-        return this.http.post(this.backend.backendPath + 'home/register', null , this.httpOptions);
+        return this.http.post(this.backend.backendPath + 'chat/register', null , this.httpOptions);
     }
 
     checkForResponses(uuid : string) {
         let params = new HttpParams();
         params = params.append('clientUUID', uuid);
-        return this.http.post(this.backend.backendPath + 'home/response', uuid, this.httpOptions)
+        return this.http.post(this.backend.backendPath + 'chat/response', uuid, this.httpOptions)
     }
 }
 
