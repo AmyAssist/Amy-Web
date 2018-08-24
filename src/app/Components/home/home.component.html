@@ -1,25 +1,6 @@
 <mat-card>
     <mat-card-title>Home</mat-card-title>
     <mat-card-content>
-        <section>
-            <mat-form-field class="command-input-field">
-                <textarea matInput #command [(ngModel)]="commandTextValue" placeholder="Command" [errorStateMatcher]="errorStateMatcher"></textarea>
-            </mat-form-field>
-            <button mat-icon-button color="basic" [@srState]="srState" (click)="speechRecognition()">
-                <mat-icon>keyboard_voice</mat-icon>
-            </button>
-        </section>
-        <section *ngIf="response">
-            <label>Response:</label>
-            <p>
-                {{response}}
-            </p>
-            <button mat-icon-button color="basic" (click)="speakCommand(response)">
-                <mat-icon aria-label="Read answer out loud">volume_up</mat-icon>
-            </button>
-        </section>
+        Welcome to Amy Web!
     </mat-card-content>
-    <mat-card-actions>
-        <button mat-button color="basic" (click)="sendCommand(command.value, false)">SEND COMMAND</button>
-    </mat-card-actions>
 </mat-card>

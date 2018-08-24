@@ -95,7 +95,7 @@ export class AmyChatComponent implements OnInit {
    * Send the Text which is currently in the command Text Box
    */
   sendTextFieldMessage() {
-    this.addMessage('user', this.commandTextValue);
+    this.addMessage('you', this.commandTextValue);
     this.sendCommand(this.commandTextValue, false);
     this.commandTextValue = '';
   }
@@ -128,9 +128,7 @@ export class AmyChatComponent implements OnInit {
   private sendCommand(commandValue: string, readResponse: boolean) {
     const commandData = new Command(commandValue);
     this.databaseService.sendCommand(commandData, this.uuid).subscribe(r => {
-      //this.response = r;
       this.errorStateMatcher.error = false;
-      //this.responseMessage(this.response, readResponse);
     }, error => {
       this.response = null;
       this.errorStateMatcher.error = true;
@@ -172,7 +170,7 @@ export class AmyChatComponent implements OnInit {
       this.srState = 'active';
       this.speechRecognitionService.recognize((result) => {
         this.srResponse('user', result, true);
-        this.srState = 'inactive';
+        this.srState = 'active';
       });
     } else {
       this.srState = 'inactive';
