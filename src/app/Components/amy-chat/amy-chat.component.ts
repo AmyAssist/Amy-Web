@@ -3,13 +3,12 @@ import { DatabaseService } from '../../Services/database.service';
 import { TTSService } from '../../Services/tts.service';
 import { SpeechRecognitionService } from '../../Services/speechrecognition.service';
 import { Command } from '../../Objects/command';
-import {AMY_UNKNOWN_COMMAND_RESPONSE, CHAT_DISPLAY_BUTTON_ACTIVE, CHAT_DISPLAY_BUTTON_INACTIVE, COMMAND_INPUT_PLACEHOLDER} from './strings';
+import { AMY_UNKNOWN_COMMAND_RESPONSE, CHAT_DISPLAY_BUTTON_ACTIVE, CHAT_DISPLAY_BUTTON_INACTIVE, COMMAND_INPUT_PLACEHOLDER} from './strings';
 import { Message } from "./message";
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import { interval } from 'rxjs';
 import {mergeMap} from 'rxjs/operators';
 import {ErrorStateMatcher} from '@angular/material/core';
-import { ErrorStateMatcher } from '@angular/material/core';
 
 export class CommandErrorStateMatcher implements ErrorStateMatcher {
   error = false;
