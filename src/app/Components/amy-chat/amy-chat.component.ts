@@ -60,22 +60,32 @@ export class AmyChatComponent implements OnInit {
 
   errorStateMatcher = new CommandErrorStateMatcher();
 
+  uuid: string;
+
+  test: string;
+
+
   constructor(private readonly databaseService: DatabaseService, private readonly ttsService: TTSService,
     private readonly speechRecognitionService: SpeechRecognitionService) { }
 
   ngOnInit() {
     this.databaseService.registerChat().subscribe(r => {
       if(r){
-        this.startCheckingForResponses();
+        this.uuid = r;
+        this.startCheckingForResponses(this.uuid);
       }
     });
   }
 
-  startCheckingForResponses(){
-    interval(100).pipe(mergeMap(() => this.databaseService.checkForResponses())).subscribe(data => {
+  startCheckingForResponses(uuid : string){
+    interval(1000).pipe(mergeMap(() => this.databaseService.checkForResponses(uuid))).subscribe(data => {
+      console.log(data);
       if(data){
         this.responseMessage(data, false);
       }
+      
+  }, error => {
+      console.log("failed to fetch");
   });
   }
 
@@ -119,7 +129,7 @@ export class AmyChatComponent implements OnInit {
    */
   private sendCommand(commandValue: string, readResponse: boolean) {
     const commandData = new Command(commandValue);
-    this.databaseService.sendCommand(commandData).subscribe(r => {
+    this.databaseService.sendCommand(commandData, this.uuid).subscribe(r => {
       //this.response = r;
       this.errorStateMatcher.error = false;
       //this.responseMessage(this.response, readResponse);
