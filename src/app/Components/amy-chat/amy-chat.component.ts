@@ -1,19 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, NgZone, OnInit} from '@angular/core';
 import { DatabaseService } from '../../Services/database.service';
 import { TTSService } from '../../Services/tts.service';
 import { SpeechRecognitionService } from '../../Services/speechrecognition.service';
 import { Command } from '../../Objects/command';
-import { CHAT_DISPLAY_BUTTON_ACTIVE, CHAT_DISPLAY_BUTTON_INACTIVE } from "./strings";
+import {AMY_UNKNOWN_COMMAND_RESPONSE, CHAT_DISPLAY_BUTTON_ACTIVE, CHAT_DISPLAY_BUTTON_INACTIVE, COMMAND_INPUT_PLACEHOLDER} from './strings';
 import { Message } from "./message";
+import {animate, state, style, transition, trigger} from '@angular/animations';
 import { interval } from 'rxjs';
 import {mergeMap} from 'rxjs/operators';
-import {
-  trigger,
-  state,
-  style,
-  animate,
-  transition
-} from '@angular/animations';
+import {ErrorStateMatcher} from '@angular/material/core';
 import { ErrorStateMatcher } from '@angular/material/core';
 
 export class CommandErrorStateMatcher implements ErrorStateMatcher {
@@ -45,18 +40,17 @@ export class CommandErrorStateMatcher implements ErrorStateMatcher {
 export class AmyChatComponent implements OnInit {
 
   messages: Message[] = [];
-
+  zone = new NgZone({enableLongStackTrace: false});
   language = 0;
 
   buttonName: string = CHAT_DISPLAY_BUTTON_INACTIVE[this.language];
-  displayChat: boolean = false;
+  commandInputPlaceholder: string = COMMAND_INPUT_PLACEHOLDER[this.language];
+  displayChat = false;
 
   srState = 'inactive';
 
   commandTextValue = '';
   response: string;
-
-  ignoreSRcount = 0;
 
   errorStateMatcher = new CommandErrorStateMatcher();
 
@@ -89,8 +83,13 @@ export class AmyChatComponent implements OnInit {
   });
   }
 
+  /**
+   * Add a Message to the Visible Chat
+   * @param name Name of the Message Source
+   * @param value String of the Message
+   */
   private addMessage(name: string, value: string) {
-    this.messages.push({ name: name, value: value });
+    this.messages.push({ name, value });
   }
 
   /**
@@ -103,10 +102,10 @@ export class AmyChatComponent implements OnInit {
   }
 
   /**
-   * Trigger the displayal of the chat window 
+   * Trigger the displayal of the chat window
    */
   changeDisplayState() {
-    if (this.displayChat == false) {
+    if (!this.displayChat) {
       this.displayChat = true;
       this.buttonName = CHAT_DISPLAY_BUTTON_ACTIVE[this.language];
     } else {
@@ -136,7 +135,7 @@ export class AmyChatComponent implements OnInit {
     }, error => {
       this.response = null;
       this.errorStateMatcher.error = true;
-      this.responseMessage('I could not understand that', readResponse);
+      this.responseMessage(AMY_UNKNOWN_COMMAND_RESPONSE[this.language], readResponse);
 
     });
   }
@@ -145,32 +144,40 @@ export class AmyChatComponent implements OnInit {
    * Speak the command wiith the TTSService
    */
   private responseMessage(responseValue: string, readResponse: boolean) {
-    this.addMessage('amy', responseValue);
+    this.zone.run(() => {
+        this.addMessage('amy', responseValue);
+    });
     if (readResponse) {
       this.ttsService.speak(responseValue);
     }
   }
 
+  /**
+   * Send the srResponse to Backend and Chat
+   * @param name Name of the Message Source
+   * @param command String of the Command
+   * @param readResponse Boolean that describes if the Message should be read
+   */
   private srResponse(name: string, command: string, readResponse: boolean) {
-    if (this.ignoreSRcount > 0) {
-      this.ignoreSRcount--;
-    } else {
+    if (this.srState === 'active') {
       this.addMessage(name, command);
       this.sendCommand(command, true);
     }
   }
 
+  /**
+   * Activate/Deactivate the SR
+   */
   triggerSR() {
-    if (this.srState != 'active') {
+    if (this.srState !== 'active') {
       this.srState = 'active';
       this.speechRecognitionService.recognize((result) => {
-        this.srState = 'inactive';
         this.srResponse('user', result, true);
+        this.srState = 'inactive';
       });
     } else {
-      this.ignoreSRcount++;
-      this.speechRecognitionService.cancelRecognition();
       this.srState = 'inactive';
+      this.speechRecognitionService.cancelRecognition();
     }
   }
 }
