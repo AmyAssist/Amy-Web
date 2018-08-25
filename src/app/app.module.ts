@@ -40,7 +40,8 @@ import { AuthGuard } from './auth.guard';
 
 import { MaterialModule } from './material.module';
 import { MusicModule } from './Plugins/Music/music.module';
-import { AmyChatComponent } from './Components/amy-chat/amy-chat.component';
+import { AmyChatComponent } from './Components/bottom-bar/Components/amy-chat/amy-chat.component';
+import { BottomBarComponent } from './Components/bottom-bar/bottom-bar.component';
 
 /*
     Routing of the components to the respective links
@@ -103,6 +104,7 @@ const routes: Routes = [
     RegistryContainerComponent,
     ContactRegistryComponent,
     AmyChatComponent,
+    BottomBarComponent,
   ],
   imports: [
     MusicModule,

@@ -1,0 +1,18 @@
+<mat-card class="main">
+  <div *ngIf="displayChat()">
+    <app-amy-chat></app-amy-chat>
+  </div>
+  <mat-card-actions>
+
+    <button mat-button *ngIf="!displayChat" (click)="changeDisplayState()">{{buttonName}}</button>
+    <button mat-button *ngIf="displayChat" (click)="changeDisplayState()">{{buttonName}}</button>
+
+    <button mat-icon-button color="basic" [@srState]="srState" (click)="triggerSR()">
+      <mat-icon>keyboard_voice</mat-icon>
+    </button>
+
+    <button mat-icon-button color="basic" (click)="stopOutput()">
+      <mat-icon>volume_off</mat-icon>
+    </button>
+  </mat-card-actions>
+</mat-card>

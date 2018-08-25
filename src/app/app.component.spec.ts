@@ -9,13 +9,16 @@ import { MaterialModule } from './material.module';
 
 
 import { AppComponent } from './app.component';
-import { AmyChatComponent } from './Components/amy-chat/amy-chat.component';
+import { BottomBarComponent } from './Components/bottom-bar/bottom-bar.component';
+import { AmyChatComponent } from './Components/bottom-bar/Components/amy-chat/amy-chat.component';
+
 describe('AppComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [
                 AppComponent,
                 RouterOutletStubComponent,
+                BottomBarComponent,
                 AmyChatComponent
             ],
             imports: [
