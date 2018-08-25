@@ -1,6 +1,4 @@
 export class MessageDTO {
-    // fromAddress: string;
-    // fromPersonal: string;
     from: string;
     subject: string;
     content: string;

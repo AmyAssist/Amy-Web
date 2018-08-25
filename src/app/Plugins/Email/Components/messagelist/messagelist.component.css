@@ -1,5 +1,5 @@
-mat-accordion .mat-expansion-panel-header-title,
-mat-accordion .mat-expansion-panel-header-description {
+.mat-expansion-panel-header-title,
+.mat-expansion-panel-header-description {
     flex-basis: 0;
 }
 

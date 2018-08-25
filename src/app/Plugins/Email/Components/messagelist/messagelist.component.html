@@ -19,7 +19,7 @@
                 </mat-panel-title>
 
                 <mat-panel-description>
-                    <b *ngIf=!message.seen>{{message.subject}}</b>
+                    <strong *ngIf=!message.seen>{{message.subject}}</strong>
                     <span *ngIf=message.seen>{{message.subject}}</span>
                 </mat-panel-description>
             </mat-expansion-panel-header>
