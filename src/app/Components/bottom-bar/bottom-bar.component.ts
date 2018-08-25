@@ -54,14 +54,6 @@ export class BottomBarComponent implements OnInit {
         return this.options.shallDisplayChat();
     }
 
-    muteGlobally(){
-        this.options.muteSound;
-    }
-
-    unmuteGlobally(){
-        this.options.unmuteSound;
-    }
-
     /**
      * Trigger the displayal of the chat window
      */
