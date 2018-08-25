@@ -11,22 +11,23 @@ import { CommandHandlerService } from '../../Services/command-handler.service';
 })
 export class AmyChatComponent implements OnInit {
 
-
-  
   commandInputPlaceholder: string = COMMAND_INPUT_PLACEHOLDER[this.options.getLanguage()];
 
   commandTextValue = '';
 
-  constructor(private options: OptionsService, private chat: ChatService, private commandHandler: CommandHandlerService) { }
+  constructor(
+    private readonly options: OptionsService,
+    private readonly chat: ChatService,
+    private readonly commandHandler: CommandHandlerService) { }
 
   ngOnInit() {
   }
 
-  getMessages(){
+  getMessages() {
     return this.chat.getMessages();
   }
 
-  sendTextFieldMessage(){
+  sendTextFieldMessage() {
     this.chat.addMessage(USER_CHAT_NAME[this.options.getLanguage()], this.commandTextValue, false);
     this.commandHandler.sendCommand(this.commandTextValue, false);
     this.commandTextValue = '';

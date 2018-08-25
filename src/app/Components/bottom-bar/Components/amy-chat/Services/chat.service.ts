@@ -1,5 +1,5 @@
 import { Injectable, NgZone } from '@angular/core';
-import { Message } from "../Objects/message";
+import { Message } from '../Objects/message';
 import { TTSService } from '../../../../../Services/tts.service';
 
 @Injectable({
@@ -7,11 +7,12 @@ import { TTSService } from '../../../../../Services/tts.service';
 })
 export class ChatService {
 
-  private zone = new NgZone({ enableLongStackTrace: false });
+  private readonly zone = new NgZone({ enableLongStackTrace: false });
 
-  constructor(private readonly ttsService: TTSService) { }
+  constructor(
+    private readonly ttsService: TTSService) { }
 
-  private messages: Message[] = [];
+  private readonly messages: Message[] = [];
 
   /**
      * Add a Message to the Visible Chat

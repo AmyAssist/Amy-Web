@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SpeechRecognitionService } from '../../Services/speechrecognition.service';
-import { TTSService } from "../../Services/tts.service";
-import { CHAT_DISPLAY_BUTTON_ACTIVE, CHAT_DISPLAY_BUTTON_INACTIVE, COMMAND_INPUT_PLACEHOLDER, USER_CHAT_NAME } from '../../Constants/strings';
+import { TTSService } from '../../Services/tts.service';
+import { CHAT_DISPLAY_BUTTON_ACTIVE, CHAT_DISPLAY_BUTTON_INACTIVE, USER_CHAT_NAME } from '../../Constants/strings';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { CommandHandlerService } from './Services/command-handler.service';
 import { ChatService } from './Components/amy-chat/Services/chat.service';
@@ -42,9 +42,9 @@ export class BottomBarComponent implements OnInit {
     constructor(
         private readonly speechRecognitionService: SpeechRecognitionService,
         private readonly ttsService: TTSService,
-        private options: OptionsService,
-        private commandHandler: CommandHandlerService,
-        private chat: ChatService) { }
+        private readonly options: OptionsService,
+        private readonly commandHandler: CommandHandlerService,
+        private readonly chat: ChatService) { }
 
 
     ngOnInit() {
@@ -52,6 +52,14 @@ export class BottomBarComponent implements OnInit {
 
     displayChat(){
         return this.options.shallDisplayChat();
+    }
+
+    muteGlobally(){
+        this.options.muteSound;
+    }
+
+    unmuteGlobally(){
+        this.options.unmuteSound;
     }
 
     /**

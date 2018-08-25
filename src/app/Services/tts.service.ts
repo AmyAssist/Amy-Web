@@ -11,7 +11,8 @@ export class TTSService {
 
     private readonly synth: SpeechSynthesis;
 
-    constructor(private options: OptionsService) {
+    constructor(
+        private readonly options: OptionsService) {
         this.synth = window.speechSynthesis;
     }
 
@@ -19,7 +20,7 @@ export class TTSService {
      * Function to send typed commands to the backend
      */
     speak(text: string) {
-        if(this.options.isSoundEnabled()){
+        if (this.options.isSoundEnabled()) {
             const utterance = new SpeechSynthesisUtterance(text);
             utterance.lang = 'en-US';
             this.synth.speak(utterance);
@@ -29,11 +30,11 @@ export class TTSService {
     /**
      * Stop the current Voice Output
      */
-    stop(){
+    stop() {
         this.synth.cancel();
     }
 
-    isCurrentlyOutputting(){
+    isCurrentlyOutputting() {
         return this.synth.speaking;
     }
 }

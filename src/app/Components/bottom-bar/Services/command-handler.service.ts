@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { DatabaseService } from '../../../Services/database.service';
 import { Command } from '../../../Objects/command';
 import { interval } from 'rxjs';
@@ -19,13 +19,18 @@ export class CommandErrorStateMatcher implements ErrorStateMatcher {
 @Injectable({
   providedIn: 'root'
 })
-export class CommandHandlerService {
+export class CommandHandlerService implements OnInit{
 
   response: string;
 
-  private errorStateMatcher = new CommandErrorStateMatcher();
+  private readonly errorStateMatcher = new CommandErrorStateMatcher();
 
   private uuid: string;
+
+  constructor(
+    private readonly databaseService: DatabaseService,
+    private readonly chat: ChatService,
+    private readonly options: OptionsService) { }
 
   ngOnInit() {
     this.databaseService.registerChat().subscribe(r => {
@@ -44,11 +49,9 @@ export class CommandHandlerService {
       }
 
     }, error => {
-      console.log("failed to fetch");
+      console.log('failed to fetch');
     });
   }
-
-  constructor(private readonly databaseService: DatabaseService, private chat: ChatService, private options: OptionsService) { }
 
   /**
    * Sending typed command to the backend-service for general functions.
