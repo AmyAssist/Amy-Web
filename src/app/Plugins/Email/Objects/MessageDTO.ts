@@ -1,9 +1,12 @@
 export class MessageDTO {
+    // fromAddress: string;
+    // fromPersonal: string;
     from: string;
     subject: string;
     content: string;
-    sentDate: string; // cut seconds and get rid of T
+    sentDate: string;
     important: boolean;
+    seen: boolean;
 
     constructor() {
 
