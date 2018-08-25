@@ -39,8 +39,6 @@ export class DatabaseService {
     }
 
     checkForResponses(uuid: string) {
-        let params = new HttpParams();
-        params = params.append('clientUUID', uuid);
         return this.http.post(this.backend.backendPath + 'chat/response', uuid, this.httpOptions);
     }
 }

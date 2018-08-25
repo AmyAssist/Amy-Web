@@ -19,7 +19,7 @@ export class CommandErrorStateMatcher implements ErrorStateMatcher {
 @Injectable({
   providedIn: 'root'
 })
-export class CommandHandlerService implements OnInit{
+export class CommandHandlerService {
 
   response: string;
 
@@ -30,16 +30,14 @@ export class CommandHandlerService implements OnInit{
   constructor(
     private readonly databaseService: DatabaseService,
     private readonly chat: ChatService,
-    private readonly options: OptionsService) { }
-
-  ngOnInit() {
-    this.databaseService.registerChat().subscribe(r => {
-      if (r) {
-        this.uuid = r;
-        this.startCheckingForResponses(this.uuid);
-      }
-    });
-  }
+    private readonly options: OptionsService) {
+      this.databaseService.registerChat().subscribe(r => {
+        if (r) {
+          this.uuid = r;
+          this.startCheckingForResponses(this.uuid);
+        }
+      });
+     }
 
   private startCheckingForResponses(uuid: string) {
     interval(1000).pipe(mergeMap(() => this.databaseService.checkForResponses(uuid))).subscribe(data => {
