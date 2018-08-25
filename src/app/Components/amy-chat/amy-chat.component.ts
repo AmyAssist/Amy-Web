@@ -3,7 +3,7 @@ import { DatabaseService } from '../../Services/database.service';
 import { TTSService } from '../../Services/tts.service';
 import { SpeechRecognitionService } from '../../Services/speechrecognition.service';
 import { Command } from '../../Objects/command';
-import { AMY_UNKNOWN_COMMAND_RESPONSE, CHAT_DISPLAY_BUTTON_ACTIVE, CHAT_DISPLAY_BUTTON_INACTIVE, COMMAND_INPUT_PLACEHOLDER} from './strings';
+import { AMY_UNKNOWN_COMMAND_RESPONSE, CHAT_DISPLAY_BUTTON_ACTIVE, CHAT_DISPLAY_BUTTON_INACTIVE, COMMAND_INPUT_PLACEHOLDER, USER_CHAT_NAME, AMY_CHAT_NAME} from './strings';
 import { Message } from "./message";
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import { interval } from 'rxjs';
@@ -95,7 +95,7 @@ export class AmyChatComponent implements OnInit {
    * Send the Text which is currently in the command Text Box
    */
   sendTextFieldMessage() {
-    this.addMessage('you', this.commandTextValue);
+    this.addMessage(USER_CHAT_NAME[this.language], this.commandTextValue);
     this.sendCommand(this.commandTextValue, false);
     this.commandTextValue = '';
   }
@@ -142,7 +142,7 @@ export class AmyChatComponent implements OnInit {
    */
   private responseMessage(responseValue: string, readResponse: boolean) {
     this.zone.run(() => {
-        this.addMessage('amy', responseValue);
+        this.addMessage(AMY_CHAT_NAME[this.language], responseValue);
     });
     if (readResponse) {
       this.ttsService.speak(responseValue);
@@ -151,13 +151,11 @@ export class AmyChatComponent implements OnInit {
 
   /**
    * Send the srResponse to Backend and Chat
-   * @param name Name of the Message Source
    * @param command String of the Command
-   * @param readResponse Boolean that describes if the Message should be read
    */
-  private srResponse(name: string, command: string, readResponse: boolean) {
+  private srResponse(command: string) {
     if (this.srState === 'active') {
-      this.addMessage(name, command);
+      this.addMessage(USER_CHAT_NAME[this.language], command);
       this.sendCommand(command, true);
     }
   }
@@ -169,8 +167,8 @@ export class AmyChatComponent implements OnInit {
     if (this.srState !== 'active') {
       this.srState = 'active';
       this.speechRecognitionService.recognize((result) => {
-        this.srResponse('user', result, true);
-        this.srState = 'active';
+        this.srResponse(result);
+        this.srState = 'inactive';
       });
     } else {
       this.srState = 'inactive';
