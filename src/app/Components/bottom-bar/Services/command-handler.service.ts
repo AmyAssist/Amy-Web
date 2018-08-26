@@ -31,6 +31,12 @@ export class CommandHandlerService {
     private readonly databaseService: DatabaseService,
     private readonly chat: ChatService,
     private readonly options: OptionsService) {
+    this.databaseService.registerChat().subscribe(r => {
+      if (r) {
+        this.uuid = r;
+        this.startCheckingForResponses(this.uuid);
+      }
+    });
   }
 
   private startCheckingForResponses(uuid: string) {
@@ -51,29 +57,14 @@ export class CommandHandlerService {
    * @param readResponse Boolean that describes if the response shoudl be read out loud
    */
   public sendCommand(commandValue: string, readResponse: boolean) {
-    if (this.connectionExists()) {
-      const commandData = new Command(commandValue);
-      this.databaseService.sendCommand(commandData, this.uuid).subscribe(r => {
-        this.errorStateMatcher.error = false;
-      }, error => {
-        this.response = null;
-        this.errorStateMatcher.error = true;
-        this.chat.addMessage(AMY_CHAT_NAME[this.options.getLanguage()], AMY_UNKNOWN_COMMAND_RESPONSE[this.options.getLanguage()], readResponse);
+    const commandData = new Command(commandValue);
+    this.databaseService.sendCommand(commandData, this.uuid).subscribe(r => {
+      this.errorStateMatcher.error = false;
+    }, error => {
+      this.response = null;
+      this.errorStateMatcher.error = true;
+      this.chat.addMessage(AMY_CHAT_NAME[this.options.getLanguage()], AMY_UNKNOWN_COMMAND_RESPONSE[this.options.getLanguage()], readResponse);
 
-      });
-    }
+    });
   }
-
-  private connectionExists(){
-    if(this.uuid === null){
-      this.databaseService.registerChat().subscribe(r => {
-        if (r) {
-          this.uuid = r;
-          this.startCheckingForResponses(this.uuid);
-        }
-      });
-    }
-    return true;
-  }
-
 }
