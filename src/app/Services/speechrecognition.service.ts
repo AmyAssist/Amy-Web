@@ -31,7 +31,7 @@ export class SpeechRecognitionService {
 
     constructor(private readonly ref: ApplicationRef) {
         if (!this.isSupported()) {
-            console.log("Speech Recognition is not supported by this browser!");
+            console.log('Speech Recognition is not supported by this browser!');
             this.sr = null;
             return;
         }
@@ -77,7 +77,7 @@ export class SpeechRecognitionService {
 
     private assertSupported() {
         if (!this.isSupported()) {
-            throw new Error("Speech Recognition is not supported by this browser!");
+            throw new Error('Speech Recognition is not supported by this browser!');
         }
     }
 }
