@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BackendResolver } from '../app/Services/backendResolver.service';
+import { BackendResolver } from './backendResolver.service';
 
 @Injectable({
   providedIn: 'root',

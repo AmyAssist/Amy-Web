@@ -1,0 +1,10 @@
+<mat-card>
+  <mat-card-title>Login</mat-card-title>
+  <mat-card-content fxLayout="column" fxLayoutAlign="start start">
+    <mat-form-field class="form-full-width">
+      <mat-label>Domain of Amy-Core</mat-label>
+      <input matInput [(ngModel)]="inputText" type="text" id="url" placeholder="http://localhost:8080/rest/" required>
+    </mat-form-field>
+    <button mat-raised-button type="submit" color="primary" (click)="login()">Login</button>
+  </mat-card-content>
+</mat-card>

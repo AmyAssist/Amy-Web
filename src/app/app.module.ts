@@ -30,12 +30,13 @@ import { NavigationComponent } from './Plugins/Navigation/Components/navigation/
 import { EmailComponent } from './Plugins/Email/Components/email/email.component';
 
 import { LocationRegistryComponent } from './Plugins/Registry/Components/location-registry/location-registry.component';
-import { ErrorDialogComponent } from './Components/error-dialog/error-dialog.component';
 import { RegistryContainerComponent } from './Plugins/Registry/Components/registry-container/registry-container.component';
 import { ContactRegistryComponent } from './Plugins/Registry/Components/contact-registry/contact-registry.component';
-import { LoginComponent } from './login/login.component';
 
-import { AuthService } from './auth.service';
+import { ErrorDialogComponent } from './Components/error-dialog/error-dialog.component';
+import { LoginComponent } from './Components/login/login.component';
+
+import { AuthService } from './Services/auth.service';
 import { AuthGuard } from './auth.guard';
 
 import { MaterialModule } from './material.module';
