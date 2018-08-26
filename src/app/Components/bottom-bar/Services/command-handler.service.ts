@@ -43,7 +43,7 @@ export class CommandHandlerService {
     interval(1000).pipe(mergeMap(() => this.databaseService.checkForResponses(uuid))).subscribe(data => {
       console.log(data);
       if (data) {
-        this.chat.addMessage(AMY_CHAT_NAME[this.options.getLanguage()], data, false);
+        this.chat.addMessage(AMY_CHAT_NAME[this.options.getLanguage()], data, true);
       }
 
     }, error => {
