@@ -6,6 +6,9 @@ export class CalendarEvent {
     summary: string;
     location: string;
     description: string;
+    reminderType: string;
+    reminderTime: number;
+    recurrence: string;
     allDay: boolean;
 
     constructor() { }
