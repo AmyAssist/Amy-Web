@@ -5,13 +5,17 @@ import { MatCardModule, MatFormFieldModule, MatInputModule, MatButtonModule, Mat
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommandHandlerService } from '../../Services/command-handler.service';
+import { OptionsService } from '../../../../Services/options.service';
+import { ChatService } from './Services/chat.service';
 
 describe('AmyChatComponent', () => {
   let component: AmyChatComponent;
   let fixture: ComponentFixture<AmyChatComponent>;
 
   beforeEach(async(() => {
-    const spy = jasmine.createSpyObj('CommandHandlerService', ['getValue']);
+    const optionsSpy = jasmine.createSpyObj('OptionsService', ['getLanguage']);
+    const commandHandlerSpy = jasmine.createSpyObj('CommandHandlerService', ['sendCommand']);
+    const chatSpy = jasmine.createSpyObj('ChatService', ['getMessages', 'addMessage']);
     TestBed.configureTestingModule({
       declarations: [AmyChatComponent],
       imports: [
@@ -24,7 +28,9 @@ describe('AmyChatComponent', () => {
         BrowserAnimationsModule
       ],
       providers: [
-        { provide: CommandHandlerService, useValue: spy }
+        { provide: OptionsService, useValue: optionsSpy },
+        { provide: CommandHandlerService, useValue: commandHandlerSpy },
+        { provide: ChatService, useValue: chatSpy }
       ]
     })
       .compileComponents();

@@ -2,16 +2,22 @@ import { TestBed, inject } from '@angular/core/testing';
 
 import { CommandHandlerService } from './command-handler.service';
 import { DatabaseService } from '../../../Services/database.service';
-import { HttpClient } from '@angular/common/http';
+import { ChatService } from '../Components/amy-chat/Services/chat.service';
+import { OptionsService } from '../../../Services/options.service';
+import { Observable } from 'rxjs';
 
 describe('CommandHandlerService', () => {
   beforeEach(() => {
-    const spy = jasmine.createSpyObj('DatabaseService', ['getValue']);
-    const httpClientSpy = jasmine.createSpyObj('HttpClient', ['get']);
+    const databaseSpy = jasmine.createSpyObj('DatabaseService', ['registerChat', 'checkForResponses', 'sendCommand']);
+    const observableSpy = jasmine.createSpyObj('Observable', ['subscribe']);
+    const chatSpy = jasmine.createSpyObj('ChatService', ['addMessage']);
+    const optionsSpy = jasmine.createSpyObj('OptionsService', ['getLanguage']);
     TestBed.configureTestingModule({
       providers: [CommandHandlerService,
-        { provide: DatabaseService, useValue: spy },
-        { provide: HttpClient, useValue: httpClientSpy }]
+        { provide: DatabaseService, useValue: databaseSpy },
+        { provide: Observable, useValue: observableSpy },
+        { provide: ChatService, useValue: chatSpy },
+        { provide: OptionsService, useValue: optionsSpy }]
     });
   });
 
