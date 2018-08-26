@@ -43,6 +43,10 @@ export class SpeechRecognitionService {
         this.sr.start();
     }
 
+    cancelRecognition(){
+        this.sr.stop();
+    }
+
     private onresult(event: Result) {
         const last = event.results.length - 1;
         let text: string = event.results[last][0].transcript;

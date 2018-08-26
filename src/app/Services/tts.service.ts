@@ -22,4 +22,11 @@ export class TTSService {
         utterance.lang = 'en-US';
         this.synth.speak(utterance);
     }
+
+    /**
+     * Stop the current Voice Output
+     */
+    stop(){
+        this.synth.cancel();
+    }
 }

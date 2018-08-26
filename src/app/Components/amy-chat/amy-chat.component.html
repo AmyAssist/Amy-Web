@@ -1,0 +1,29 @@
+<mat-card class="main">
+  <div *ngIf="displayChat">
+    <mat-card-content class="chat" #scrollMe [scrollTop]="scrollMe.scrollHeight">
+      <div *ngFor="let message of messages">
+        <h4>{{message.name}}</h4>
+        <div class="text" >{{message.value}}</div>
+      </div>
+    </mat-card-content>
+    <mat-form-field class="command-input-field">
+      <input (keydown.enter)="sendTextFieldMessage()" matInput #command [(ngModel)]="commandTextValue" [placeholder]="commandInputPlaceholder">
+    </mat-form-field>
+    <button mat-icon-button color="primary" (click)="sendTextFieldMessage()">
+      <mat-icon>send</mat-icon>
+    </button>
+  </div>
+  <mat-card-actions>
+
+    <button mat-button *ngIf="!displayChat" (click)="changeDisplayState()">{{buttonName}}</button>
+    <button mat-button *ngIf="displayChat" (click)="changeDisplayState()">{{buttonName}}</button>
+
+    <button mat-icon-button color="basic" [@srState]="srState" (click)="triggerSR()">
+      <mat-icon>keyboard_voice</mat-icon>
+    </button>
+
+    <button mat-icon-button color="basic" (click)="stopOutput()">
+      <mat-icon>volume_off</mat-icon>
+    </button>
+  </mat-card-actions>
+</mat-card>
