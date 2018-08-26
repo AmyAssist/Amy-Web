@@ -1,5 +1,6 @@
 .main{
     position: fixed;
+    max-width: 90%;
     bottom: 0%;
     right: 0%;
 }
