@@ -1,17 +1,7 @@
-<mat-toolbar>
-  <span>E-Mail</span>
-</mat-toolbar>
+<section class="mat-typography">
 
-<p>
-  <button mat-raised-button color='primary' class='functButton' (click)='hasNewMessages()'>New messages</button>
-  <button mat-raised-button color='primary' class='functButton' (click)='amountNewMessages()'>How many new messages</button>
-</p>
+  <h1 class='mat-display-1 header'>E-Mail</h1>
 
-<p>
-  <button mat-raised-button color='primary' class='functButton' (click)='getAllMails()'>Read all mails</button>
-  <button mat-raised-button color='primary' class='functButton' (click)='getImportantMails()'>Read important mails</button>
-</p>
+  <app-email-messagelist></app-email-messagelist>
 
-<mat-list role="list">
-  <mat-list-item role="listitem">{{output}}</mat-list-item>
-</mat-list>
+</section>

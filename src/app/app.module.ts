@@ -11,7 +11,8 @@ import {
   MatMenuModule,
   MatTableModule,
   MatTabsModule,
-  MatToolbarModule
+  MatToolbarModule,
+  MatProgressSpinnerModule
 } from '@angular/material';
 
 
@@ -34,6 +35,7 @@ import { ErrorDialogComponent } from './Components/error-dialog/error-dialog.com
 import { RegistryContainerComponent } from './Plugins/Registry/Components/registry-container/registry-container.component';
 import { ContactRegistryComponent } from './Plugins/Registry/Components/contact-registry/contact-registry.component';
 import { LoginComponent } from './login/login.component';
+import { MessageListComponent } from './Plugins/Email/Components/messagelist/messagelist.component';
 
 import { AuthService } from './auth.service';
 import { AuthGuard } from './auth.guard';
@@ -102,6 +104,7 @@ const routes: Routes = [
     ErrorDialogComponent,
     RegistryContainerComponent,
     ContactRegistryComponent,
+    MessageListComponent,
     AmyChatComponent,
   ],
   imports: [
@@ -125,6 +128,7 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     MatRadioModule,
     FormsModule,
+    MatProgressSpinnerModule
   ],
   exports: [RouterModule],
   providers: [AuthService, AuthGuard],
