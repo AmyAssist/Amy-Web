@@ -14,6 +14,7 @@ export class EmailComponent implements OnInit {
   readonly serverKey = 'mail_server';
 
   credentialsExist = false;
+  connecting = false;
   connected = false;
   connectionError = false;
 
@@ -31,6 +32,7 @@ export class EmailComponent implements OnInit {
 
   connect(username: string, password: string, imapServer: string) {
     const credentials = new EMailCredentials(username, password, imapServer);
+    this.connecting = true;
     this.emailService.connect(credentials).subscribe((data: boolean) => {
       if (data === true) {
         localStorage.setItem(this.usernameKey, username);
@@ -43,10 +45,12 @@ export class EmailComponent implements OnInit {
         this.connected = false;
         this.connectionError = true;
       }
+      this.connecting = false;
     }, error => {
       console.log(error);
       this.connected = false;
       this.connectionError = true;
+      this.connecting = false;
     });
   }
 
