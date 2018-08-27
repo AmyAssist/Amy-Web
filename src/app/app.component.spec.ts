@@ -9,12 +9,14 @@ import { MaterialModule } from './material.module';
 
 
 import { AppComponent } from './app.component';
+import { AmyChatComponent } from './Components/amy-chat/amy-chat.component';
 describe('AppComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [
                 AppComponent,
                 RouterOutletStubComponent,
+                AmyChatComponent
             ],
             imports: [
                 MaterialModule,
