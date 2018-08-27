@@ -51,7 +51,7 @@ export class CalendarDataService {
     return this.http.get<string>(`${this.path}events/tomorrow`, this.httpOptions).pipe(catchError(this.handleError));
   }
 
-  setNewEvent(eventData : CalendarEvent) {
+  setNewEvent(eventData: CalendarEvent) {
     return this.http.post<CalendarEvent>(`${this.path}events/set`, this.httpOptions).pipe(catchError(this.handleError));
   }
 }
