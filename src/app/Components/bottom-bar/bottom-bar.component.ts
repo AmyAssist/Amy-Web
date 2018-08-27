@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SpeechRecognitionService } from '../../Services/speechrecognition.service';
 import { TTSService } from '../../Services/tts.service';
-import { CHAT_DISPLAY_BUTTON_ACTIVE, CHAT_DISPLAY_BUTTON_INACTIVE, USER_CHAT_NAME } from '../../Constants/strings';
+import { USER_CHAT_NAME } from '../../Constants/strings';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { CommandHandlerService } from './Services/command-handler.service';
 import { ChatService } from './Components/amy-chat/Services/chat.service';
@@ -30,15 +30,11 @@ import { OptionsService } from '../../Services/options.service';
 })
 export class BottomBarComponent implements OnInit {
 
-
-
-    buttonName: string = CHAT_DISPLAY_BUTTON_INACTIVE[this.options.language];
-    private display = true;
+    private _displayBar = true;
 
     srState = 'inactive';
 
     test: string;
-
 
     constructor(
         private readonly speechRecognitionService: SpeechRecognitionService,
@@ -55,26 +51,26 @@ export class BottomBarComponent implements OnInit {
         return this.options.soundEnabled;
     }
 
-    get displayChat(){
-        return this.options.displayChat;
+    get srSupported(){
+        return this.speechRecognitionService.isSupported();
     }
 
     get displayBar(){
-        return this.display;
+        return this._displayBar;
     }
 
-    get srSupported(){
-        return this.speechRecognitionService.isSupported();
+    get displayChat(){
+        return this.options.displayChat;
     }
 
     /**
      * Trigger the displayal of the bottom Bar
      */
     changeBarDisplayal() {
-        if (!this.displayBar) {
-            this.display = true;
+        if (this.displayBar) {
+            this._displayBar = false;;
         } else {
-            this.display = false;
+            this._displayBar = true;
         }
     }
 
@@ -82,12 +78,10 @@ export class BottomBarComponent implements OnInit {
      * Trigger the displayal of the chat window
      */
     changeChatDisplayal() {
-        if (!this.displayChat) {
+        if (this.displayChat) {
             this.options.displayChat = true;
-            this.buttonName = CHAT_DISPLAY_BUTTON_ACTIVE[this.options.language];
         } else {
             this.options.displayChat = false;
-            this.buttonName = CHAT_DISPLAY_BUTTON_INACTIVE[this.options.language];
         }
     }
 
