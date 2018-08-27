@@ -154,4 +154,8 @@ export class AmyChatComponent implements OnInit {
       this.speechRecognitionService.cancelRecognition();
     }
   }
+
+  isSRSupported() {
+    return this.speechRecognitionService.isSupported();
+  }
 }

@@ -27,7 +27,6 @@ import { ClockComponent } from './Plugins/Clock/Components/clock/clock.component
 import { WeatherComponent } from './Plugins/Weather/Components/weather/weather.component';
 import { HomeComponent } from './Components/home/home.component';
 import { CalendarComponent } from './Plugins/Calendar/Components/calendar/calendar.component';
-import { NavigationComponent } from './Plugins/Navigation/Components/navigation/navigation.component';
 import { EmailComponent } from './Plugins/Email/Components/email/email.component';
 
 import { LocationRegistryComponent } from './Plugins/Registry/Components/location-registry/location-registry.component';
@@ -42,6 +41,7 @@ import { AuthGuard } from './auth.guard';
 
 import { MaterialModule } from './material.module';
 import { MusicModule } from './Plugins/Music/music.module';
+import { NavigationModule } from './Plugins/Navigation/navigation.module';
 import { AmyChatComponent } from './Components/amy-chat/amy-chat.component';
 
 /*
@@ -69,11 +69,6 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'navigation',
-    component: NavigationComponent,
-    canActivate: [AuthGuard]
-  },
-  {
     path: 'email',
     component: EmailComponent,
     canActivate: [AuthGuard]
@@ -97,7 +92,6 @@ const routes: Routes = [
     WeatherComponent,
     HomeComponent,
     CalendarComponent,
-    NavigationComponent,
     EmailComponent,
     LoginComponent,
     LocationRegistryComponent,
@@ -109,6 +103,7 @@ const routes: Routes = [
   ],
   imports: [
     MusicModule,
+    NavigationModule,
     MaterialModule,
     BrowserModule,
     FormsModule,
@@ -128,7 +123,7 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     MatRadioModule,
     FormsModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
   ],
   exports: [RouterModule],
   providers: [AuthService, AuthGuard],

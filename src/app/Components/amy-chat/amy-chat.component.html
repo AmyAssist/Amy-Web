@@ -18,7 +18,7 @@
     <button mat-button *ngIf="!displayChat" (click)="changeDisplayState()">{{buttonName}}</button>
     <button mat-button *ngIf="displayChat" (click)="changeDisplayState()">{{buttonName}}</button>
 
-    <button mat-icon-button color="basic" [@srState]="srState" (click)="triggerSR()">
+    <button mat-icon-button *ngIf="isSRSupported()" [@srState]="srState" (click)="triggerSR()">
       <mat-icon>keyboard_voice</mat-icon>
     </button>
 
