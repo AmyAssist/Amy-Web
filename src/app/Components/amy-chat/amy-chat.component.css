@@ -1,0 +1,20 @@
+.main{
+    position: fixed;
+    bottom: 8px;
+    right: 8px;
+}
+
+.command-input-field{
+    height: 15px;
+}
+
+.chat{
+    max-height: 300px;
+    max-width: 200px;
+    overflow: auto;
+    scroll-behavior: auto;
+}
+
+.text{
+    word-wrap: break-word;
+}
