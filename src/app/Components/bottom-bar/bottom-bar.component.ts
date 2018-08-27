@@ -33,6 +33,7 @@ export class BottomBarComponent implements OnInit {
 
 
     buttonName: string = CHAT_DISPLAY_BUTTON_INACTIVE[this.options.language];
+    private display = true;
 
     srState = 'inactive';
 
@@ -58,10 +59,25 @@ export class BottomBarComponent implements OnInit {
         return this.options.displayChat;
     }
 
+    get displayBar(){
+        return this.display;
+    }
+
+    /**
+     * Trigger the displayal of the bottom Bar
+     */
+    changeBarDisplayal() {
+        if (!this.displayBar) {
+            this.display = true;
+        } else {
+            this.display = false;
+        }
+    }
+
     /**
      * Trigger the displayal of the chat window
      */
-    changeDisplayState() {
+    changeChatDisplayal() {
         if (!this.displayChat) {
             this.options.displayChat = true;
             this.buttonName = CHAT_DISPLAY_BUTTON_ACTIVE[this.options.language];

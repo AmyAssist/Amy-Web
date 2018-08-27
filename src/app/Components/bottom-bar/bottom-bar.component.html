@@ -1,17 +1,24 @@
 <mat-card class="main">
-  <div *ngIf="displayChat">
+  <div *ngIf="displayChat && displayBar">
     <app-amy-chat></app-amy-chat>
   </div>
   <mat-card-actions>
 
-    <button mat-button *ngIf="!displayChat" (click)="changeDisplayState()">{{buttonName}}</button>
-    <button mat-button *ngIf="displayChat" (click)="changeDisplayState()">{{buttonName}}</button>
-
-    <button mat-icon-button color="basic" [@srState]="srState" (click)="triggerSR()">
-      <mat-icon>keyboard_voice</mat-icon>
+    <button mat-icon-button color="basic" (click)="changeBarDisplayal()">
+      <mat-icon *ngIf="!displayBar" >chevron_left</mat-icon>
+      <mat-icon *ngIf="displayBar" >chevron_right</mat-icon>
     </button>
 
-    <button mat-icon-button color="basic" (click)="triggerSound()">
+    
+    <button mat-button *ngIf="displayBar" (click)="changeChatDisplayal()">
+      {{buttonName}}
+    </button>
+    
+    <button mat-icon-button *ngIf="displayBar" color="basic" [@srState]="srState" (click)="triggerSR()">
+      <mat-icon>keyboard_voice</mat-icon>
+    </button>
+    
+    <button mat-icon-button *ngIf="displayBar" color="basic" (click)="triggerSound()">
       <mat-icon *ngIf="soundEnabled" >volume_up</mat-icon>
       <mat-icon *ngIf="!soundEnabled" >volume_off</mat-icon>
     </button>
