@@ -14,7 +14,7 @@
       {{buttonName}}
     </button>
     
-    <button mat-icon-button *ngIf="displayBar" color="basic" [@srState]="srState" (click)="triggerSR()">
+    <button mat-icon-button *ngIf="displayBar && srSupported" color="basic" [@srState]="srState" (click)="triggerSR()">
       <mat-icon>keyboard_voice</mat-icon>
     </button>
     

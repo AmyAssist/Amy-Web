@@ -63,6 +63,10 @@ export class BottomBarComponent implements OnInit {
         return this.display;
     }
 
+    get srSupported(){
+        return this.speechRecognitionService.isSupported();
+    }
+
     /**
      * Trigger the displayal of the bottom Bar
      */

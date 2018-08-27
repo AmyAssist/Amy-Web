@@ -54,6 +54,7 @@ export class SpeechRecognitionService {
         this.activeCallbacks = [];
         this.sr.stop();
     }
+
     /**
      * @return true if the current browser supports the Speech Recognition feature
      */

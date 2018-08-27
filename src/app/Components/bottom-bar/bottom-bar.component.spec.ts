@@ -16,7 +16,7 @@ describe('BottomBarComponent', () => {
   let fixture: ComponentFixture<BottomBarComponent>;
 
   beforeEach(async(() => {
-    const sttSpy = jasmine.createSpyObj('SpeechRecognitionService', ['recognize', 'cancelRecognition']);
+    const sttSpy = jasmine.createSpyObj('SpeechRecognitionService', ['recognize', 'cancelRecognition', 'isSRSupported']);
     const ttsSpy = jasmine.createSpyObj('TTSService', ['stop']);
     const optionsSpy = jasmine.createSpyObj('OptionsService', ['getLanguage', 'shallDisplayChat', 'setDisplayChat']);
     const commandHandlerSpy = jasmine.createSpyObj('CommandHandlerService', ['sendCommand']);
