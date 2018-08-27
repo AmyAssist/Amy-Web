@@ -41,6 +41,8 @@ import { AuthGuard } from './auth.guard';
 import { MaterialModule } from './material.module';
 import { MusicModule } from './Plugins/Music/music.module';
 import { AmyChatComponent } from './Components/amy-chat/amy-chat.component';
+import { EventsDayComponent } from './Plugins/Calendar/Components/events-day/events-day.component';
+import { NewEventComponent } from './Plugins/Calendar/Components/new-event/new-event.component';
 
 /*
     Routing of the components to the respective links
@@ -108,6 +110,8 @@ const routes: Routes = [
     RegistryContainerComponent,
     ContactRegistryComponent,
     AmyChatComponent,
+    EventsDayComponent,
+    NewEventComponent,
   ],
   imports: [
     MusicModule,
