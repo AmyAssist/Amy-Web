@@ -13,11 +13,10 @@ export class CalendarEvent {
 
     constructor() { }
 
-    getStartDate() : Date {
-		return new Date(this.start);
+    getStartDate(): Date {
+        return new Date(this.start);
     }
-    
-    getEndDate() : Date {
+    getEndDate(): Date {
         return new Date(this.end);
     }
 }
