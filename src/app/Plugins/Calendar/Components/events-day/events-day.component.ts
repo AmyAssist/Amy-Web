@@ -32,8 +32,6 @@ export class EventsDayComponent implements OnInit {
     this.calendarService.getEvents(tomorrow).subscribe((data: CalendarEvent[]) => {
       this.eventsTomorrow = { ...data };
     });
-    this.calendarService.getEventsToday().subscribe((data: string) =>
-      this.eventsTodayString = data);
   }
 
   public onChange(event): void {

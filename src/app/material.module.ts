@@ -12,6 +12,7 @@ import {
   MatNativeDateModule
 } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
@@ -32,6 +33,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     CommonModule,
     MatFormFieldModule,
     MatButtonModule,
+    MatButtonToggleModule,
     MatInputModule,
     MatCardModule,
     MatExpansionModule,
@@ -58,6 +60,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     CommonModule,
     MatFormFieldModule,
     MatButtonModule,
+    MatButtonToggleModule,
     MatInputModule,
     MatCardModule,
     MatExpansionModule,
