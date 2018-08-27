@@ -81,7 +81,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatNativeDateModule,
     BrowserModule,
     RouterModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatAutocompleteModule
   ],
   declarations: [],
   providers: []

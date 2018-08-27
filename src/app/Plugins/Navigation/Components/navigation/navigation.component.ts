@@ -112,6 +112,7 @@ export class NavigationComponent implements OnInit {
             this.showWhen = false;
             this.showMode = false;
         });
+    }
 
     async bestType(from: string, to: string, date: string) {
         this.createRoute(from, to, date);
@@ -133,11 +134,6 @@ export class NavigationComponent implements OnInit {
         this.showWay = false;
         this.showWhen = true;
         this.showMode = false;
-    }
-
-    setDate(time: string) {
-        this.Time = time;
-        console.log(this.Time);
     }
 
     createRoute(from: string | Tag, to: string | Tag, date: string) {
