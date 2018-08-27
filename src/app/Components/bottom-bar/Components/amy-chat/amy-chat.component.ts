@@ -11,7 +11,7 @@ import { CommandHandlerService } from '../../Services/command-handler.service';
 })
 export class AmyChatComponent implements OnInit {
 
-  commandInputPlaceholder: string = COMMAND_INPUT_PLACEHOLDER[this.options.getLanguage()];
+  commandInputPlaceholder: string = COMMAND_INPUT_PLACEHOLDER[this.options.language];
 
   commandTextValue = '';
 
@@ -28,7 +28,7 @@ export class AmyChatComponent implements OnInit {
   }
 
   sendTextFieldMessage() {
-    this.chat.addMessage(USER_CHAT_NAME[this.options.getLanguage()], this.commandTextValue, false);
+    this.chat.addMessage(USER_CHAT_NAME[this.options.language], this.commandTextValue, false);
     this.commandHandler.sendCommand(this.commandTextValue, false);
     this.commandTextValue = '';
   }

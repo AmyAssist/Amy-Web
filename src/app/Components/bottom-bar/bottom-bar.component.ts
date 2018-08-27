@@ -32,7 +32,7 @@ export class BottomBarComponent implements OnInit {
 
 
 
-    buttonName: string = CHAT_DISPLAY_BUTTON_INACTIVE[this.options.getLanguage()];
+    buttonName: string = CHAT_DISPLAY_BUTTON_INACTIVE[this.options.language];
 
     srState = 'inactive';
 
@@ -42,7 +42,7 @@ export class BottomBarComponent implements OnInit {
     constructor(
         private readonly speechRecognitionService: SpeechRecognitionService,
         private readonly ttsService: TTSService,
-        private readonly options: OptionsService,
+        private options: OptionsService,
         private readonly commandHandler: CommandHandlerService,
         private readonly chat: ChatService) { }
 
@@ -50,28 +50,40 @@ export class BottomBarComponent implements OnInit {
     ngOnInit() {
     }
 
-    displayChat(){
-        return this.options.shallDisplayChat();
+    get soundEnabled(){
+        return this.options.soundEnabled;
+    }
+
+    get displayChat(){
+        return this.options.displayChat;
     }
 
     /**
      * Trigger the displayal of the chat window
      */
     changeDisplayState() {
-        if (!this.displayChat()) {
-            this.options.setDisplayChat(true);
-            this.buttonName = CHAT_DISPLAY_BUTTON_ACTIVE[this.options.getLanguage()];
+        if (!this.displayChat) {
+            this.options.displayChat = true;
+            this.buttonName = CHAT_DISPLAY_BUTTON_ACTIVE[this.options.language];
         } else {
-            this.options.setDisplayChat(false);
-            this.buttonName = CHAT_DISPLAY_BUTTON_INACTIVE[this.options.getLanguage()];
+            this.options.displayChat = false;
+            this.buttonName = CHAT_DISPLAY_BUTTON_INACTIVE[this.options.language];
         }
     }
 
     /**
      * Stop the current tts
      */
-    stopOutput() {
-        this.ttsService.stop();
+    triggerSound() {
+        if(this.options.soundEnabled){
+            if(this.ttsService.currentlyOutputting){
+                this.ttsService.stop();
+            }else{
+                this.options.mute();
+            }
+        }else{
+            this.options.unmute();
+        }
     }
 
     /**
@@ -80,7 +92,7 @@ export class BottomBarComponent implements OnInit {
      */
     private srResponse(command: string) {
         if (this.srState === 'active') {
-            this.chat.addMessage(USER_CHAT_NAME[this.options.getLanguage()], command, false);
+            this.chat.addMessage(USER_CHAT_NAME[this.options.language], command, false);
             this.commandHandler.sendCommand(command, true);
         }
     }

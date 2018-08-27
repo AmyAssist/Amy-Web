@@ -43,7 +43,7 @@ export class CommandHandlerService {
     interval(1000).pipe(mergeMap(() => this.databaseService.checkForResponses(uuid))).subscribe(data => {
       console.log(data);
       if (data) {
-        this.chat.addMessage(AMY_CHAT_NAME[this.options.getLanguage()], data, true);
+        this.chat.addMessage(AMY_CHAT_NAME[this.options.language], data, true);
       }
 
     }, error => {
@@ -63,7 +63,7 @@ export class CommandHandlerService {
     }, error => {
       this.response = null;
       this.errorStateMatcher.error = true;
-      this.chat.addMessage(AMY_CHAT_NAME[this.options.getLanguage()], AMY_UNKNOWN_COMMAND_RESPONSE[this.options.getLanguage()], readResponse);
+      this.chat.addMessage(AMY_CHAT_NAME[this.options.language], AMY_UNKNOWN_COMMAND_RESPONSE[this.options.language], readResponse);
 
     });
   }

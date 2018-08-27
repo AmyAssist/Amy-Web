@@ -1,5 +1,5 @@
 <mat-card class="main">
-  <div *ngIf="displayChat()">
+  <div *ngIf="displayChat">
     <app-amy-chat></app-amy-chat>
   </div>
   <mat-card-actions>
@@ -11,8 +11,9 @@
       <mat-icon>keyboard_voice</mat-icon>
     </button>
 
-    <button mat-icon-button color="basic" (click)="stopOutput()">
-      <mat-icon>volume_off</mat-icon>
+    <button mat-icon-button color="basic" (click)="triggerSound()">
+      <mat-icon *ngIf="soundEnabled" >volume_up</mat-icon>
+      <mat-icon *ngIf="!soundEnabled" >volume_off</mat-icon>
     </button>
   </mat-card-actions>
 </mat-card>

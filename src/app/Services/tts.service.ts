@@ -20,7 +20,7 @@ export class TTSService {
      * Function to send typed commands to the backend
      */
     speak(text: string) {
-        if (this.options.isSoundEnabled()) {
+        if (this.options.soundEnabled) {
             const utterance = new SpeechSynthesisUtterance(text);
             utterance.lang = 'en-US';
             this.synth.speak(utterance);
@@ -34,7 +34,7 @@ export class TTSService {
         this.synth.cancel();
     }
 
-    isCurrentlyOutputting() {
+    get currentlyOutputting() {
         return this.synth.speaking;
     }
 }
