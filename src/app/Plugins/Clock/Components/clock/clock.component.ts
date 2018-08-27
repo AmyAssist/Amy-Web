@@ -52,8 +52,7 @@ export class ClockComponent implements OnInit {
   */
   setAlarm(day: number, hour: number, minute: number) {
     this.d = new Date();
-
-    if (day === -1) {
+    if (day == -1) {
       if (this.d.getMonth().toString().length < 2) {
         this.alarmMonth = '0' + this.d.getMonth().toString();
       } else {
@@ -90,7 +89,7 @@ export class ClockComponent implements OnInit {
     const alarm = new Clock();
     this.d = new Date();
     alarm.id = id;
-    if (day === -1) {
+    if (day == -1) {
       if (this.d.getMonth().toString().length < 2) {
         this.alarmMonth = '0' + this.d.getMonth().toString();
       } else {
@@ -120,7 +119,6 @@ export class ClockComponent implements OnInit {
     this.clockService.editAlarm(id, alarm).subscribe(data => {
       this.getAlarms();
     });
-
   }
 
   activatedeactivateAlarm(alarm: Clock) {

@@ -72,7 +72,7 @@ export class ClockDataService {
     Delete Alarms
   */
   deleteAlarm(alarmnumber: number): Observable<Clock[]> {
-    return this.http.post<Clock[]>(`${this.path}'alarms/delete/'${alarmnumber}`, this.httpOptions).pipe(catchError(this.handleError));
+    return this.http.post<Clock[]>(`${this.path}alarms/delete/${alarmnumber}`, this.httpOptions).pipe(catchError(this.handleError));
   }
 
 }
