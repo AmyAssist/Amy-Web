@@ -1,36 +1,32 @@
-<mat-card>
-  <mat-accordion>
-    <mat-expansion-panel *ngIf=setup>
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          Setup
-        </mat-panel-title>
-        <mat-panel-description>
-          Set up your spotify connection.
-        </mat-panel-description>
-      </mat-expansion-panel-header>
+<div *ngIf=setup>
+  <mat-card>
+    <mat-card-title>
+      Setup
+    </mat-card-title>
+    <mat-card-subtitle>
+      Set up your spotify connection.
+    </mat-card-subtitle>
 
-      <p>leave blank if config file exists</p>
-      <div *ngIf=!setupStage2>
-        <mat-form-field>
-          <input matInput #clientID placeholder="ClientID">
-        </mat-form-field>
+    <p>leave blank if config file exists</p>
+    <div *ngIf=!setupStage2>
+      <mat-form-field>
+        <input matInput #clientID placeholder="ClientID">
+      </mat-form-field>
 
-        <mat-form-field>
-          <input matInput #clientSecret placeholder="ClientSecret">
-        </mat-form-field>
+      <mat-form-field style="margin-left: 5px">
+        <input matInput #clientSecret placeholder="ClientSecret">
+      </mat-form-field>
 
-        <button mat-button color="primary" (click)="setInit(clientID.value, clientSecret.value)">Send</button>
-      </div>
-      <div *ngIf=setupStage2>
-        <mat-card>authentication link: {{spotifyLink}}</mat-card>
+      <button mat-button color="primary" (click)="setInit(clientID.value, clientSecret.value)">Send</button>
+    </div>
+    <div *ngIf=setupStage2>
+      <a href="{{spotifyLink}}">authentication link</a>
 
-        <mat-form-field>
-          <input matInput #accessToken placeholder="Register token">
-        </mat-form-field>
+      <mat-form-field style="margin-left: 5px">
+        <input matInput #accessToken placeholder="Register token">
+      </mat-form-field>
 
-        <button mat-button color="primary" (click)="setToken(accessToken.value)">Send</button>
-      </div>
-    </mat-expansion-panel>
-  </mat-accordion>
-</mat-card>
+      <button mat-button color="primary" (click)="setToken(accessToken.value)">Send</button>
+    </div>
+  </mat-card>
+</div>

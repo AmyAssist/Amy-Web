@@ -55,8 +55,7 @@ export class SidebarComponent implements OnInit {
 
     this.playlistAllUser = new Array<Playlist>();
 
-    this.getPlaylistFeatured();
-    this.getPlaylistUser();
+    this.getPlaylists();
   }
 
   /*
@@ -84,6 +83,11 @@ export class SidebarComponent implements OnInit {
     this.playlistSongs = this.musicPlaylistData.songs;
     this.playlist = true;
     this.playing = true;
+  }
+
+  getPlaylists() {
+    this.getPlaylistFeatured();
+    this.getPlaylistUser();
   }
 
   /*

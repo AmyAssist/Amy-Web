@@ -27,6 +27,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatStepperModule } from '@angular/material/stepper';
+
 
 @NgModule({
   imports: [
@@ -54,7 +56,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     BrowserModule,
     RouterModule,
     FlexLayoutModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatStepperModule
   ],
   exports: [
     CommonModule,
@@ -81,7 +84,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     BrowserModule,
     RouterModule,
     FlexLayoutModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatStepperModule
   ],
   declarations: [],
   providers: []
