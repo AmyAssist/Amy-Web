@@ -41,6 +41,6 @@ export class CalendarComponent implements OnInit {
     this.onDate = true;
     this.calendarService.getEvents(this.selectedDate).subscribe((data: CalendarEvent[]) => {
       this.events = { ...data };
-    })
+    });
   }
 }

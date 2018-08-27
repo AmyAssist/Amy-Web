@@ -43,6 +43,7 @@ import { MusicModule } from './Plugins/Music/music.module';
 import { AmyChatComponent } from './Components/amy-chat/amy-chat.component';
 import { EventsDayComponent } from './Plugins/Calendar/Components/events-day/events-day.component';
 import { NewEventComponent } from './Plugins/Calendar/Components/new-event/new-event.component';
+import { UpcomingEventsComponent } from './Plugins/Calendar/Components/upcoming-events/upcoming-events.component';
 
 /*
     Routing of the components to the respective links
@@ -112,6 +113,7 @@ const routes: Routes = [
     AmyChatComponent,
     EventsDayComponent,
     NewEventComponent,
+    UpcomingEventsComponent,
   ],
   imports: [
     MusicModule,
