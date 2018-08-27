@@ -19,7 +19,6 @@ export class MessageListComponent implements OnInit {
     constructor(private readonly emailService: EmailDataService) { }
 
     ngOnInit() {
-        this.emailService.setupPath();
         this.refresh();
     }
 

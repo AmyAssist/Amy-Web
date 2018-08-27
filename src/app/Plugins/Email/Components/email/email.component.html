@@ -2,6 +2,36 @@
 
   <h1 class='mat-display-1 header'>E-Mail</h1>
 
-  <app-email-messagelist></app-email-messagelist>
+  <mat-card *ngIf=!credentialsExist>
+
+    <mat-card-title>
+      Log-In
+    </mat-card-title>
+    <mat-card-subtitle>
+      <p>Please enter your email credentials</p>
+      <i>Leave everything blank to connect to Amy Mail</i>
+    </mat-card-subtitle>
+    <div>
+      <mat-form-field class="form-full-width">
+        <input matInput #username type="text" id="url" placeholder="EMail Address">
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field class="form-full-width">
+        <input matInput #password type="text" id="url" placeholder="Password">
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field class="form-full-width">
+        <input matInput #imapServer type="text" id="url" placeholder="IMAP Server">
+      </mat-form-field>
+    </div>
+    <button mat-raised-button color="primary" (click)="connect(username.value, password.value, imapServer.value)">Connect</button>
+    <p *ngIf=connectionError class="errorMessage">Couldn't connect to mail server</p>
+  </mat-card>
+  <div *ngIf=connected>
+    <button mat-raised-button color="primary" style="float: right" (click)="disconnect()">Log Out</button>
+    <app-email-messagelist></app-email-messagelist>
+  </div>
 
 </section>

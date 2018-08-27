@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
-import { throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
 import { BackendResolver } from '../../../Services/backendResolver.service';
 import { MessageDTO } from '../../Email/Objects/MessageDTO';
+import { EMailCredentials } from '../../Email/Objects/EMailCredentials';
 
 @Injectable({
     providedIn: 'root'
@@ -25,7 +24,15 @@ export class EmailDataService {
         this.path = this.backend.backendPath + 'email/';
     }
 
+    connect(credentials: EMailCredentials) {
+        return this.http.post(this.path + 'connect', credentials, this.httpOptions);
+    }
+
     getMails() {
-        return this.http.get<MessageDTO[]>(this.path + 'getMails', this.httpOptions);
+        return this.http.get<MessageDTO[]>(this.path + 'getMails/20');
+    }
+
+    disconnect() {
+        return this.http.post(this.path + 'disconnect', this.httpOptions);
     }
 }
