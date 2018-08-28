@@ -79,9 +79,9 @@ export class BottomBarComponent implements OnInit {
      */
     changeChatDisplayal() {
         if (this.displayChat) {
-            this.options.displayChat = true;
-        } else {
             this.options.displayChat = false;
+        } else {
+            this.options.displayChat = true;
         }
     }
 

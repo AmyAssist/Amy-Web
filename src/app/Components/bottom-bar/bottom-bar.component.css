@@ -1,17 +1,8 @@
 .main{
-    max-width: 90%;
-}
-
-.bar{
     position: fixed;
     bottom: 8px;
     right: 8px;
-}
-
-.chat{
-    position: fixed;
-    bottom: 0px;
-    right: 0px;
+    max-width: 90%;
 }
 
 .myButton{

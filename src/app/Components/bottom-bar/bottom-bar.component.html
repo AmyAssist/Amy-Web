@@ -1,4 +1,4 @@
-<div class="main">
+<mat-card class="main">
 
   <!--Open Bottom Bar Button-->
   <button *ngIf="!displayBar" mat-icon-button class="myButton" class="bar" (click)="changeBarDisplayal()">
@@ -7,51 +7,39 @@
 
   <!--Bottom Bar-->
   <div *ngIf="displayBar">
+    <!--Chat-->
+    <app-amy-chat *ngIf="displayChat"></app-amy-chat>
 
-    <!--Bottom Bar while chat closed-->
-    <div *ngIf="!displayChat" class="bar">
+    <!--Bottom Bar Buttons-->
+    <mat-card-actions>
 
+      <!--Hide Bottom Bar button-->
       <button mat-icon-button color="primary" class="myButton" (click)="changeBarDisplayal()">
         <mat-icon>navigate_next</mat-icon>
       </button>
 
-      <button mat-icon-button class="myButton" (click)="changeChatDisplayal()">
+      <!--Chat Button-->
+
+      <!--Show-->
+      <button *ngIf="displayChat" mat-icon-button color="primary" class="myButton" (click)="changeChatDisplayal()">
+        <mat-icon>chat</mat-icon>
+      </button>
+      <!--Hide-->
+      <button *ngIf="!displayChat" mat-icon-button class="myButton" (click)="changeChatDisplayal()">
         <mat-icon>chat</mat-icon>
       </button>
 
+      <!--SR Buttom-->
       <button mat-icon-button *ngIf="srSupported" [@srState]="srState" class="myButton" (click)="triggerSR()">
         <mat-icon>keyboard_voice</mat-icon>
       </button>
 
+      <!--Sound Button - Mute/Unmute & Cancel current Voice Output-->
       <button mat-icon-button class="myButton" (click)="triggerSound()">
         <mat-icon *ngIf="soundEnabled">volume_up</mat-icon>
         <mat-icon *ngIf="!soundEnabled">volume_off</mat-icon>
       </button>
-    </div>
 
-    <!--Bottom Bar while chat open-->
-    <mat-card *ngIf="displayChat" class="chat">
-      <app-amy-chat></app-amy-chat>
-      <mat-card-actions>
-
-        <button mat-icon-button color="primary" class="myButton" (click)="changeBarDisplayal()">
-          <mat-icon>navigate_next</mat-icon>
-        </button>
-
-        <button mat-icon-button color="primary" class="myButton" (click)="changeChatDisplayal()">
-          <mat-icon>chat</mat-icon>
-        </button>
-
-        <button mat-icon-button *ngIf="srSupported" [@srState]="srState" class="myButton" (click)="triggerSR()">
-          <mat-icon>keyboard_voice</mat-icon>
-        </button>
-
-        <button mat-icon-button class="myButton" (click)="triggerSound()">
-          <mat-icon *ngIf="soundEnabled">volume_up</mat-icon>
-          <mat-icon *ngIf="!soundEnabled">volume_off</mat-icon>
-        </button>
-      </mat-card-actions>
-    </mat-card>
-
+    </mat-card-actions>
   </div>
-</div>
+</mat-card>
