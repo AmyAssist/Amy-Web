@@ -26,7 +26,7 @@ export class ClockComponent implements OnInit {
 
   ngOnInit() {
     this.clockData = new Array<Clock>();
-    this.clockService.setupPath();
+    this.getAlarms();
   }
 
   /*

@@ -9,26 +9,24 @@ import { BackendResolver } from '../../../Services/backendResolver.service';
   providedIn: 'root'
 })
 export class ClockDataService {
-
-  path: string;
+  /**
+   * Path for all Data concerning the clock-plugin
+   */
+  get path() {
+    return this.backend.backendPath + 'clock/';
+  }
 
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
     })
   };
-  alarmid: () => string;
 
   private handleError(error: HttpErrorResponse) {
     return throwError(error);
   }
 
   constructor(private readonly backend: BackendResolver, private readonly http: HttpClient) {
-    this.setupPath();
-  }
-
-  setupPath() {
-    this.path = this.backend.backendPath + 'clock/'; // Path for all Data concerning the clock-plugin
   }
 
   /*
