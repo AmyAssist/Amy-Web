@@ -23,9 +23,10 @@ export class EventsDayComponent implements OnInit {
     this.getEventsToday();
   }
 
-  setToday(): void {    
+  setToday(): void {
     const currentDate = new Date();
     this.dateToday = currentDate.toISOString().slice(0, -1);
+    this.selectedDate = this.dateToday;
   }
 
   setTomorrow(): void {
@@ -34,57 +35,66 @@ export class EventsDayComponent implements OnInit {
     this.dateTomorrow = currentDate.toISOString().slice(0, -1);
   }
 
-  public getEventsToday(): void {    
+  public getEventsToday(): void {
     this.today = true;
     this.tomorrow = false;
     this.onDate = false;
     this.setToday();
     this.calendarService.getEvents(this.dateToday).subscribe((data: CalendarEvent[]) => {
-      this.events = [ ...data ];
+      this.events = [...data];
     });
   }
 
-  public getEventsTomorrow(): void {       
+  public getEventsTomorrow(): void {
     this.today = false;
     this.tomorrow = true;
-    this.onDate = false; 
-    this.setTomorrow(); 
+    this.onDate = false;
+    this.setTomorrow();
     this.calendarService.getEvents(this.dateTomorrow).subscribe((data: CalendarEvent[]) => {
-      this.events = [ ...data ];
+      this.events = [...data];
     });
   }
 
   public chosenDate(date): void {
-    this.selectedDate = date.value.name;
+    const makeDate = new Date(date);
+    makeDate.setDate(makeDate.getDate() + 1);
+    this.selectedDate = makeDate.toISOString().slice(0, -1);
     this.getEventsOnDate();
   }
 
-  public getEventsOnDate(): void {  
+  public getEventsOnDate(): void {
     this.today = false;
     this.tomorrow = false;
     this.onDate = true;
     this.calendarService.getEvents(this.selectedDate).subscribe((data: CalendarEvent[]) => {
-      this.events = [ ...data ];
+      this.events = [...data];
     });
   }
 
   public refresh(): void {
-    if(this.today){
+    if (this.today) {
       this.getEventsToday();
-    } else if(this.tomorrow) {
+    } else if (this.tomorrow) {
       this.getEventsTomorrow();
-    } else if(this.onDate) {
+    } else if (this.onDate) {
       this.getEventsOnDate();
     }
   }
 
   public getTime(event): string {
-    var options = {hour: '2-digit', minute: "2-digit"}
-    const startDate = event.getStartDate();
-    startDate.setFullYear(undefined);
-    const start = startDate.toLocaleDateString('de-DE', options);
-    const end = event.getEndDate().toLocaleDateString('de-DE', options);
+    const startHour = this.checkTime(event.getStartDate().getHours());
+    const startMinute = this.checkTime(event.getStartDate().getMinutes());
+    const endHour = this.checkTime(event.getEndDate().getHours());
+    const endMinute = this.checkTime(event.getEndDate().getMinutes());
+    const start = startHour + ":" + startMinute;
+    const end = endHour + ":" + endMinute;
     return start + " - " + end;
   }
 
+  checkTime(time): string {
+    if (time < 10) {
+      return "0" + time;
+    }
+    return time;
+  }
 }

@@ -5,17 +5,25 @@
             <mat-button-toggle value="tomorrow" (click)="getEventsTomorrow()">Tomorrow</mat-button-toggle>
             <mat-button-toggle value="other-day" (click)="getEventsOnDate()">Other day</mat-button-toggle>
         </mat-button-toggle-group>
+        <button mat-icon-button  color="primary" (click)="refresh()">
+            <mat-icon>cached</mat-icon>
+        </button>
         <mat-form-field *ngIf="onDate" class="calendar-date-picker">
-            <input matInput [matDatepicker]="eventDatePicker" placeholder="Choose a date">
+            <input matInput #eventDate [matDatepicker]="eventDatePicker" placeholder="Choose a date" disabled (dateInput)="chosenDate(eventDate.value)"
+                (dateChange)="chosenDate(eventDate.value)">
             <mat-datepicker-toggle matSuffix [for]="eventDatePicker"></mat-datepicker-toggle>
-            <mat-datepicker #eventDatePicker></mat-datepicker>
+            <mat-datepicker #eventDatePicker disabled="false"></mat-datepicker>
         </mat-form-field>
     </div>
     <mat-divider></mat-divider>
     <mat-list *ngFor="let event of events">
         <mat-list-item>
-            <h4 mat-line>{{event.summary}}: {{getTime(event)}}</h4>
+            <h4 mat-line *ngIf="event.allDay; else thenBlock">{{event.summary}}</h4>
+            <ng-template #thenBlock>
+                <h4 mat-line>{{event.summary}}: {{getTime(event)}}</h4>
+            </ng-template>
             <p *ngIf="event.description" mat-line>{{event.description}}</p>
+            <p *ngIf="event.location" mat-line>{{event.location}}</p>
             <mat-divider></mat-divider>
         </mat-list-item>
     </mat-list>
