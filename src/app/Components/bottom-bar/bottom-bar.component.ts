@@ -6,7 +6,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { CommandHandlerService } from './Services/command-handler.service';
 import { ChatService } from './Components/amy-chat/Services/chat.service';
 import { OptionsService } from '../../Services/options.service';
-
+import { BackendResolver } from '../../Services/backendResolver.service';
 
 
 @Component({
@@ -33,6 +33,8 @@ export class BottomBarComponent implements OnInit {
     private _displayBar = true;
 
     srState = 'inactive';
+    
+    backendSoundMuted = false;
 
     test: string;
 
@@ -41,7 +43,8 @@ export class BottomBarComponent implements OnInit {
         private readonly ttsService: TTSService,
         private options: OptionsService,
         private readonly commandHandler: CommandHandlerService,
-        private readonly chat: ChatService) { }
+        private readonly chat: ChatService,
+        private readonly backend : BackendResolver) { }
 
 
     ngOnInit() {
@@ -101,6 +104,17 @@ export class BottomBarComponent implements OnInit {
     }
 
     /**
+     * Mute/Unmute the sound output of the backend
+     */
+    triggerBackendSound() {
+        if(this.backend.checkBackendSoundState()){
+            this.backend.mute().subscribe();
+        }else{
+            this.backend.unmute().subscribe();
+        }
+    }
+
+    /**
      * Send the srResponse to Backend and Chat
      * @param command String of the Command
      */
@@ -117,12 +131,24 @@ export class BottomBarComponent implements OnInit {
     triggerSR() {
         if (this.srState !== 'active') {
             this.srState = 'active';
+            if (this.backend.checkBackendSoundState()) {
+                this.backendSoundMuted = true;
+                this.backend.mute().subscribe();
+            }
             this.speechRecognitionService.recognize((result) => {
                 this.srResponse(result);
                 this.srState = 'inactive';
+                if (this.backendSoundMuted) {
+                    this.backendSoundMuted = false;
+                    this.backend.unmute().subscribe();
+                }
             });
         } else {
             this.srState = 'inactive';
+            if (this.backendSoundMuted) {
+                this.backendSoundMuted = false;
+                this.backend.unmute().subscribe();
+            }
             this.speechRecognitionService.cancelRecognition();
         }
     }

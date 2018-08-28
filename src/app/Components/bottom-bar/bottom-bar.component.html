@@ -37,7 +37,13 @@
       <!--Sound Button - Mute/Unmute & Cancel current Voice Output-->
       <button mat-icon-button class="myButton" (click)="triggerSound()">
         <mat-icon *ngIf="soundEnabled">volume_up</mat-icon>
-        <mat-icon *ngIf="!soundEnabled">volume_off</mat-icon>
+        <mat-icon class="mat-icons color_red" *ngIf="!soundEnabled">volume_off</mat-icon>
+      </button>
+  
+      <!--Backend Sound Button - Mute/Unmute Sound Output of the Backend-->
+      <button mat-icon-button color="" (click)="triggerBackendSound()">
+        <mat-icon *ngIf="backend.checkBackendSoundState()" >music_note</mat-icon>
+        <mat-icon class="mat-icons color_red" *ngIf="!backend.checkBackendSoundState()" >music_off</mat-icon>
       </button>
 
     </mat-card-actions>
