@@ -1,4 +1,22 @@
-<mat-card>
-
-
-</mat-card>
+<div class="mat-elevation-z2">
+    <div class="calendar-date-toolbar">
+        <mat-button-toggle-group name="fontStyle" aria-label="Font Style" value="today">
+            <mat-button-toggle value="today" (click)="getEventsToday()">Today</mat-button-toggle>
+            <mat-button-toggle value="tomorrow" (click)="getEventsTomorrow()">Tomorrow</mat-button-toggle>
+            <mat-button-toggle value="other-day" (click)="getEventsOnDate()">Other day</mat-button-toggle>
+        </mat-button-toggle-group>
+        <mat-form-field *ngIf="onDate" class="calendar-date-picker">
+            <input matInput [matDatepicker]="eventDatePicker" placeholder="Choose a date">
+            <mat-datepicker-toggle matSuffix [for]="eventDatePicker"></mat-datepicker-toggle>
+            <mat-datepicker #eventDatePicker></mat-datepicker>
+        </mat-form-field>
+    </div>
+    <mat-divider></mat-divider>
+    <mat-list *ngFor="let event of events">
+        <mat-list-item>
+            <h4 mat-line>{{event.summary}}: {{getTime(event)}}</h4>
+            <p *ngIf="event.description" mat-line>{{event.description}}</p>
+            <mat-divider></mat-divider>
+        </mat-list-item>
+    </mat-list>
+</div>
