@@ -14,22 +14,25 @@
 
     <div>
       <mat-form-field class="form-full-width">
-        <input matInput #username type="text" id="url" placeholder="EMail Address">
+        <mat-label>EMail Address</mat-label>
+        <input matInput #username type="text" placeholder="email@example.com">
       </mat-form-field>
     </div>
 
     <div>
       <mat-form-field class="form-full-width">
-        <input matInput #imapServer type="text" id="url" placeholder="IMAP Server">
+        <mat-label>IMAP Server</mat-label>
+        <input matInput #imapServer type="text" placeholder="imap.gmail.com">
       </mat-form-field>
     </div>
 
     <div>
       <mat-form-field class="form-full-width">
-        <input matInput #password type="password" id="url" placeholder="Password">
+        <mat-label>Password</mat-label>
+        <input matInput #password type="password">
       </mat-form-field>
     </div>
-    
+
     <button mat-raised-button color="primary" (click)="connect(username.value, password.value, imapServer.value)">Connect</button>
     <p *ngIf=connecting style="margin-top: 1em">Connecting...</p>
     <p *ngIf='connectionError && !connecting' class="errorMessage">Couldn't connect to mail server</p>
