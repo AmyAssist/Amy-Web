@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { ClockDataService } from '../../Services/clock-data.service';
 import { Clock } from '../../Objects/clock';
+import { LocalDateTime } from '../../../../Objects/LocalDateTime';
 
 /*
   Component for the clock-plugin. It recieves data from the backend with a custom clock-dataservices and displays the data over
@@ -16,13 +17,7 @@ export class ClockComponent implements OnInit {
 
   clockData: Clock[];
   oneClockData: Clock;
-  newClockData: Clock;
   selectedClock: Clock;
-  d: Date;
-  tomorrow: Date;
-  alarmMonth: string;
-  alarmDay: string;
-
 
   /*
     Providing the data-service for the clock-component
@@ -31,7 +26,6 @@ export class ClockComponent implements OnInit {
 
   ngOnInit() {
     this.clockData = new Array<Clock>();
-    this.newClockData = new Clock;
     this.clockService.setupPath();
   }
 
@@ -50,75 +44,32 @@ export class ClockComponent implements OnInit {
   /*
     Sending a alarm to the service that sets it.
   */
-  setAlarm(day: number, hour: number, minute: number) {
-    this.d = new Date();
-    if (day == -1) {
-      if (this.d.getMonth().toString().length < 2) {
-        this.alarmMonth = '0' + this.d.getMonth().toString();
-      } else {
-        this.alarmMonth = this.d.getMonth().toString();
-      }
-      if (this.d.getDate().toString().length < 2) {
-        this.alarmDay = '0' + this.d.getDate().toString();
-      } else {
-        this.alarmDay = this.d.getDate().toString();
-      }
-      this.newClockData.alarmTime = `${this.d.getFullYear().toString()}-${this.alarmMonth}-${this.alarmDay}T${hour}:${minute}`;
-    } else {
-      this.tomorrow = new Date();
-      this.tomorrow.setDate(this.d.getDate() + 1);
-      if (this.tomorrow.getMonth().toString().length < 2) {
-        this.alarmMonth = '0' + this.tomorrow.getMonth().toString();
-      } else {
-        this.alarmMonth = this.tomorrow.getMonth().toString();
-      }
-      if (this.tomorrow.getDate().toString().length < 2) {
-        this.alarmDay = '0' + this.tomorrow.getDate().toString();
-      } else {
-        this.alarmDay = this.tomorrow.getDate().toString();
-      }
-      this.newClockData.alarmTime = `${this.d.getFullYear().toString()}-${this.alarmMonth}-${this.alarmDay}T${hour}:${minute}`;
-    }
-    this.clockService.setNewAlarm(this.newClockData).subscribe(data => {
+  setAlarm(day: string, hour: number, minute: number) {
+    const alarmClock = new Clock();
+    alarmClock.alarmTime = this.toLocalDateTime(day, hour, minute).toString();
+
+    this.clockService.setNewAlarm(alarmClock).subscribe(data => {
       this.getAlarms();
     });
-
   }
 
-  editAlarm(id: number, day: number, edithour: number, editminute: number) {
-    const alarm = new Clock();
-    this.d = new Date();
-    alarm.id = id;
-    if (day == -1) {
-      if (this.d.getMonth().toString().length < 2) {
-        this.alarmMonth = '0' + this.d.getMonth().toString();
-      } else {
-        this.alarmMonth = this.d.getMonth().toString();
-      }
-      if (this.d.getDate().toString().length < 2) {
-        this.alarmDay = '0' + this.d.getDate().toString();
-      } else {
-        this.alarmDay = this.d.getDate().toString();
-      }
-      alarm.alarmTime = `${this.d.getFullYear().toString()}-${this.alarmMonth}-${this.alarmDay}T${edithour}:${editminute}`;
-    } else {
-      this.tomorrow = new Date();
-      this.tomorrow.setDate(this.d.getDate() + 1);
-      if (this.tomorrow.getMonth().toString().length < 2) {
-        this.alarmMonth = '0' + this.tomorrow.getMonth().toString();
-      } else {
-        this.alarmMonth = this.tomorrow.getMonth().toString();
-      }
-      if (this.tomorrow.getDate().toString().length < 2) {
-        this.alarmDay = '0' + this.tomorrow.getDate().toString();
-      } else {
-        this.alarmDay = this.tomorrow.getDate().toString();
-      }
-      alarm.alarmTime = `${this.d.getFullYear().toString()}-${this.alarmMonth}-${this.alarmDay}T${edithour}:${editminute}`;
-    }
-    this.clockService.editAlarm(id, alarm).subscribe(data => {
+  editAlarm(id: number, day: string, edithour: number, editminute: number) {
+    const alarmClock = new Clock();
+    alarmClock.alarmTime = this.toLocalDateTime(day, edithour, editminute).toString();
+    alarmClock.id = id;
+
+    this.clockService.editAlarm(id, alarmClock).subscribe(data => {
       this.getAlarms();
     });
+  }
+
+  private toLocalDateTime(day: string, hour: number, minute: number) {
+    const date = new Date();
+    if (day === 'tomorrow') {
+      date.setDate(date.getDate() + 1);
+    }
+
+    return new LocalDateTime(date.getFullYear(), date.getMonth(), date.getDate(), hour, minute);
   }
 
   activatedeactivateAlarm(alarm: Clock) {
