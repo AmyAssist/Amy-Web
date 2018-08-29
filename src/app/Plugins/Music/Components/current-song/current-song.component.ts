@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MusicDataService } from '../../Services/music-data.service';
+import { MusicDataTransferService } from '../../Services/music-data-transfer.service';
 import { Music } from '../../Objects/music';
 import { Playlist } from '../../Objects/playlist';
+import { Url } from 'url';
 
 /*
   Component for controlling the current-song functionality of the spotify plugin. It recieves data from the REST-backend with a custom music-dataservice.
@@ -26,18 +28,23 @@ export class CurrentSongComponent implements OnInit {
 
   // music-object for the play-function
   musicData: Music;
+  //musicCoverUrl: string;
 
+  musicCoverUrl: string;
   // bool for showing the current playlist
   playlist = false;
 
+  currentArtist: string;
+  currentTitle: string;
 
-  constructor(private readonly musicService: MusicDataService) { }
+  constructor(private readonly musicService: MusicDataService, private musicTransService: MusicDataTransferService) { }
 
   ngOnInit() {
     this.musicService.setupPath();
 
     this.musicData = new Music;
 
+    this.musicCoverUrl = 'assets/music/defaultMusicCover.png';
     this.getVolume();
     this.getCurrentSong();
   }
@@ -47,7 +54,16 @@ export class CurrentSongComponent implements OnInit {
   */
   getCurrentSong() {
     this.musicService.getCurrentSong()
-      .subscribe((data: Music) => this.musicData = { ...data });
+      .subscribe((data: Music) => {
+        this.musicData = { ...data };
+        this.currentArtist = this.musicData.artists[0].toString();
+        this.currentTitle = this.musicData.name;
+      }
+      );
+    if (this.musicTransService.getImageChanged) {
+      this.musicCoverUrl = this.musicTransService.getImageUrl();
+      this.musicTransService.setImageChanged(false);
+    }
   }
   /*
       resuming the paused song

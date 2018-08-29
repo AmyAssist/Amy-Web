@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MusicDataService } from '../../Services/music-data.service';
+import { MusicDataTransferService } from '../../Services/music-data-transfer.service';
 import { Music } from '../../Objects/music';
 import { Playlist } from '../../Objects/playlist';
 import { Device } from '../../Objects/device';
@@ -39,7 +40,7 @@ export class SidebarComponent implements OnInit {
   // user spotify-playlists
   playlistAllUser: Playlist[];
 
-  constructor(private readonly musicService: MusicDataService) { }
+  constructor(private readonly musicService: MusicDataService, private musicTransService: MusicDataTransferService) { }
 
   ngOnInit() {
     console.log(this.musicService);
@@ -63,11 +64,15 @@ export class SidebarComponent implements OnInit {
   */
   playPlaylistUser(id: number) {
     this.playPlaylist(id, 'user');
+    this.musicTransService.setImageUrl(this.playlistAllUser[id].imageUrl);
+    this.musicTransService.imageChanged = true;
     // this.getCurrentSong();
   }
 
   playPlaylistFeatured(id: number) {
     this.playPlaylist(id, 'featured');
+    this.musicTransService.setImageUrl(this.playlistAllFeatured[id].imageUrl);
+    this.musicTransService.imageChanged = true;
     // this.getCurrentSong();
   }
 
@@ -80,9 +85,6 @@ export class SidebarComponent implements OnInit {
     else {
       this.musicPlaylistData = this.playlistAllFeatured[playlistNumber];
     }
-    this.playlistSongs = this.musicPlaylistData.songs;
-    this.playlist = true;
-    this.playing = true;
   }
 
   getPlaylists() {

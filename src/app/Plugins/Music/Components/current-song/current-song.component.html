@@ -1,6 +1,6 @@
 <mat-card>
 
-  <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+  <img mat-card-image src={{musicCoverUrl}} alt="Songcover missing">
 
   <mat-card-content>
     <!--
@@ -14,8 +14,8 @@
     </mat-list>
     -->
 
-    <p mat-line>Artist: {{musicData.artist}}</p>
-    <p mat-line>Title: {{musicData.title}}</p>
+    <p mat-line>Artist: {{currentArtist}}</p>
+    <p mat-line>Title: {{currentTitle}}</p>
   </mat-card-content>
 
   <mat-card-actions style="justify-content: center">

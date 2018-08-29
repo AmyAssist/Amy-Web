@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MusicDataService } from '../../Services/music-data.service';
+import { MusicDataTransferService } from '../../Services/music-data-transfer.service';
 import { Music } from '../../Objects/music';
 import { Album } from '../../Objects/album';
 import { Artist } from '../../Objects/artist';
@@ -43,7 +44,7 @@ export class ContentComponent implements OnInit {
   searchResultPlaylist: Playlist[];
 
 
-  constructor(private readonly musicService: MusicDataService) { }
+  constructor(private readonly musicService: MusicDataService, private musicTransService: MusicDataTransferService) { }
 
   ngOnInit() {
     console.log(this.musicService);
@@ -100,12 +101,20 @@ export class ContentComponent implements OnInit {
   playSearchResults(id: number) {
     if (this.searchType == 'track') {
       this.musicService.playSong(id).subscribe();
+      this.musicTransService.setImageUrl("assets/music/defaultMusicCover.png");
+      this.musicTransService.imageChanged = true;
     } else if (this.searchType == 'artist') {
       this.musicService.playArtist(id).subscribe();
+      this.musicTransService.setImageUrl(this.searchResults[id].imageUrl);
+      this.musicTransService.imageChanged = true;
     } else if (this.searchType == 'album') {
       this.musicService.playAlbum(id).subscribe();
+      this.musicTransService.setImageUrl(this.searchResults[id].imageUrl);
+      this.musicTransService.imageChanged = true;
     } else if (this.searchType == 'playlist') {
       this.musicService.playPlaylist(id, 'search').subscribe();
+      this.musicTransService.setImageUrl(this.searchResults[id].imageUrl);
+      this.musicTransService.imageChanged = true;
     }
   }
 }
