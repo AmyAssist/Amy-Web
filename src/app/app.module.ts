@@ -25,7 +25,6 @@ import { AppComponent } from './app.component';
 import { ClockComponent } from './Plugins/Clock/Components/clock/clock.component';
 import { WeatherComponent } from './Plugins/Weather/Components/weather/weather.component';
 import { HomeComponent } from './Components/home/home.component';
-import { CalendarComponent } from './Plugins/Calendar/Components/calendar/calendar.component';
 import { NavigationComponent } from './Plugins/Navigation/Components/navigation/navigation.component';
 import { EmailComponent } from './Plugins/Email/Components/email/email.component';
 
@@ -40,10 +39,8 @@ import { AuthGuard } from './auth.guard';
 
 import { MaterialModule } from './material.module';
 import { MusicModule } from './Plugins/Music/music.module';
+import { CalendarModule } from './Plugins/Calendar/calendar.module';
 import { AmyChatComponent } from './Components/amy-chat/amy-chat.component';
-import { EventsDayComponent } from './Plugins/Calendar/Components/events-day/events-day.component';
-import { NewEventComponent } from './Plugins/Calendar/Components/new-event/new-event.component';
-import { UpcomingEventsComponent } from './Plugins/Calendar/Components/upcoming-events/upcoming-events.component';
 
 /*
     Routing of the components to the respective links
@@ -67,11 +64,6 @@ const routes: Routes = [
   {
     path: 'weather',
     component: WeatherComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'calendar',
-    component: CalendarComponent,
     canActivate: [AuthGuard]
   },
   {
@@ -102,7 +94,6 @@ const routes: Routes = [
     ClockComponent,
     WeatherComponent,
     HomeComponent,
-    CalendarComponent,
     NavigationComponent,
     EmailComponent,
     LoginComponent,
@@ -110,13 +101,11 @@ const routes: Routes = [
     ErrorDialogComponent,
     RegistryContainerComponent,
     ContactRegistryComponent,
-    AmyChatComponent,
-    EventsDayComponent,
-    NewEventComponent,
-    UpcomingEventsComponent,
+    AmyChatComponent
   ],
   imports: [
     MusicModule,
+    CalendarModule,
     MaterialModule,
     BrowserModule,
     FormsModule,
