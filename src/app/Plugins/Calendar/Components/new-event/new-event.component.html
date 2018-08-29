@@ -11,17 +11,17 @@
       <mat-datepicker #eventStartPicker disabled="false"></mat-datepicker>
     </mat-form-field>
     <mat-form-field *ngIf="!allDay">
-      <input matInput placeholder="Time">
+      <input matInput #startTime type="time" [(ngModel)]="startTime2" (change)="setStart()">
     </mat-form-field>
   </div>
-  <div class="new-event-field">
-    <mat-form-field *ngIf="startChoosen">
+  <div class="new-event-field" *ngIf="startChoosen">
+    <mat-form-field>
       <input matInput #eventEnd [min]="minDate" [matDatepicker]="eventEndPicker" placeholder="End" disabled>
       <mat-datepicker-toggle matSuffix [for]="eventEndPicker"></mat-datepicker-toggle>
       <mat-datepicker #eventEndPicker disabled="false"></mat-datepicker>
     </mat-form-field>
     <mat-form-field *ngIf="!allDay">
-      <input matInput placeholder="Time">
+      <input matInput #endTime type="time" [(ngModel)]="endTime2" (change)="setEnd()">
     </mat-form-field>
   </div>
 

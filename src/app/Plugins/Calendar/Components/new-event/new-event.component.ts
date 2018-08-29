@@ -29,6 +29,8 @@ export class NewEventComponent implements OnInit {
   reminderType: string;
   startChoosen: boolean;
   minDate: Date;
+  startTime2: string;
+  endTime2: string;
 
   constructor(private readonly calendarService: CalendarDataService) { }
 
@@ -37,6 +39,18 @@ export class NewEventComponent implements OnInit {
     this.startChoosen = false;
     this.minDate = null;
     this.resetValues();
+  }
+
+  setStart(): void {
+    if(this.startTime2 === ''){
+      this.startTime2 = "00:00";
+    }
+  }
+  
+  setEnd(): void {
+    if(this.endTime2 === ''){
+      this.endTime2 = "23:59";
+    }
   }
 
   setAllDay() {
@@ -56,8 +70,12 @@ export class NewEventComponent implements OnInit {
     if (this.allDay) {
       endDate.setDate(endDate.getDate() + 1);
     }
-    const start = new LocalDateTime(startDate.getFullYear(), startDate.getMonth(), startDate.getDate(), 0, 0);
-    const end = new LocalDateTime(endDate.getFullYear(), endDate.getMonth(), endDate.getDate(), 23, 59);
+    const startHour = this.startTime2.split(':')[0];
+    const startMinute = this.startTime2.split(':')[1];
+    const endHour = this.endTime2.split(':')[0];
+    const endMinute = this.endTime2.split(':')[1];
+    const start = new LocalDateTime(startDate.getFullYear(), startDate.getMonth(), startDate.getDate(), parseInt(startHour), parseInt(startMinute));
+    const end = new LocalDateTime(endDate.getFullYear(), endDate.getMonth(), endDate.getDate(), parseInt(endHour), parseInt(endMinute));
     if (this.timeUnit === 'minutes') {
       this.reminderTime = timeValue;
     } else if (this.timeUnit === 'hours') {
@@ -84,6 +102,8 @@ export class NewEventComponent implements OnInit {
     this.city = '';
     this.postalCode = '';
     this.country = '';
+    this.startTime2 = "00:00";
+    this.endTime2 = "23:59";
   }
 
   // this method makes sure that the location is displayed the right way
