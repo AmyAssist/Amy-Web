@@ -9,11 +9,12 @@
             <mat-icon>cached</mat-icon>
         </button>
 
-        <mat-form-field *ngIf="onDate">
-            <input matInput #eventdt #eventDate [owlDateTime]="eventdt" [owlDateTimeTrigger]="eventdt" readonly placeholder="Choose a date">
-            <owl-date-time [pickerType]="'calendar'" #eventdt></owl-date-time>
+        <mat-form-field *ngIf="onDate" class="calendar-date-picker">
+            <input matInput #eventDate [matDatepicker]="eventDatePicker" placeholder="Choose a date" disabled (dateChange)="chosenDate(eventDate.value)">
+            <mat-datepicker-toggle matSuffix [for]="eventDatePicker"></mat-datepicker-toggle>
+            <mat-datepicker #eventDatePicker disabled="false"></mat-datepicker>
         </mat-form-field>
-        <button mat-icon-button *ngIf="onDate" color="primary" (click)="chosenDate(eventDate.value)">
+        <button mat-icon-button *ngIf="onDate" color="primary" (click)="refresh()">
             <mat-icon>cached</mat-icon>
         </button>
     </div>

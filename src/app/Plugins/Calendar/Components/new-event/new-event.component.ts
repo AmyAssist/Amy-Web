@@ -40,8 +40,11 @@ export class NewEventComponent implements OnInit {
     this.location = address;
     const startDate = new Date(startDateInput);
     const endDate = new Date(endDateInput);
-    const start = new LocalDateTime(startDate.getFullYear(), startDate.getMonth(), startDate.getDay(), 0, 0);
-    const end = new LocalDateTime(endDate.getFullYear(), endDate.getMonth(), endDate.getDay(), 23, 59);
+    if(this.allDay){
+      endDate.setDate(endDate.getDate() + 1);
+    }
+    const start = new LocalDateTime(startDate.getFullYear(), startDate.getMonth(), startDate.getDate(), 0, 0);
+    const end = new LocalDateTime(endDate.getFullYear(), endDate.getMonth(), endDate.getDate(), 23, 59);
     if (postalCode != "") {
       this.location += ", " + postalCode;
       if (city != "") {

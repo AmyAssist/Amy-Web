@@ -40,7 +40,6 @@ export class EventsDayComponent implements OnInit {
     const currentDate = new Date(Date.now() - tzoffset);
     currentDate.setDate(currentDate.getDate() + 1);
     this.dateTomorrow = currentDate.toISOString().slice(0, -1);
-    console.log(this.dateTomorrow);
   }
 
   public getEventsToday(): void {
@@ -86,16 +85,6 @@ export class EventsDayComponent implements OnInit {
       this.getEventsTomorrow();
     } else if (this.onDate) {
       this.getEventsOnDate();
-    }
-  }
-
-  public refreshOnDate(eventDate: string): void {
-    if (this.today) {
-      this.getEventsToday();
-    } else if (this.tomorrow) {
-      this.getEventsTomorrow();
-    } else if (this.onDate) {
-      this.chosenDate(eventDate);
     }
   }
 
