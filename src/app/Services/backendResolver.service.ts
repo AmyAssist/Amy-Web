@@ -19,7 +19,7 @@ export class BackendResolver {
     private handleError(error: HttpErrorResponse) {
         console.error(error);
         return throwError('Something bad happened; please try again later.');
-  }
+    }
 
     setBackendPath(path: string) {
         this.backendPath = path;
@@ -27,10 +27,10 @@ export class BackendResolver {
 
     /*
      * Check current sound output state
-     */ 
-    checkBackendSoundState() : boolean {
+     */
+    checkBackendSoundState(): boolean {
         return this.backendSoundEnabled;
-      }
+    }
 
     /*
      * Mute the sound output of the backend
@@ -40,7 +40,7 @@ export class BackendResolver {
         return this.http.post(this.backendPath + 'home/mute', null).pipe(
             catchError(this.handleError));
     }
-    
+
     /*
      * Unmute the sound output of the backend
      */

@@ -64,7 +64,7 @@ export class SpeechRecognitionService {
 
     private onresult(event: Result) {
         const last = event.results.length - 1;
-        let text: string = event.results[last][0].transcript;
+        const text: string = event.results[last][0].transcript;
         for (const callbackFunc of this.activeCallbacks) {
             callbackFunc(text);
         }

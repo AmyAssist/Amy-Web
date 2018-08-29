@@ -41,7 +41,7 @@ export class BottomBarComponent implements OnInit {
     constructor(
         private readonly speechRecognitionService: SpeechRecognitionService,
         private readonly ttsService: TTSService,
-        private options: OptionsService,
+        private readonly options: OptionsService,
         private readonly commandHandler: CommandHandlerService,
         private readonly chat: ChatService,
         private readonly backend : BackendResolver) { }
@@ -71,7 +71,7 @@ export class BottomBarComponent implements OnInit {
      */
     changeBarDisplayal() {
         if (this.displayBar) {
-            this._displayBar = false;;
+            this._displayBar = false;
         } else {
             this._displayBar = true;
         }

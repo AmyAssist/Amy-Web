@@ -5,33 +5,33 @@ import { Injectable } from '@angular/core';
 })
 export class OptionsService {
 
-  private _language = 0;
+  private readonly _language = 0;
   private _soundEnabled = true;
   private _displayChat = false;
 
   constructor() { }
 
-  get language(){
+  get language() {
     return this._language;
   }
 
-  get soundEnabled(){
+  get soundEnabled() {
     return this._soundEnabled;
   }
 
-  mute(){
+  mute() {
     this._soundEnabled = false;
   }
 
-  unmute(){
+  unmute() {
     this._soundEnabled = true;
   }
 
-  get displayChat(){
+  get displayChat() {
     return this._displayChat;
   }
 
-  set displayChat(newState: boolean){
+  set displayChat(newState: boolean) {
     this._displayChat = newState;
   }
 }
