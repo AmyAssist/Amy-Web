@@ -1,10 +1,10 @@
 <div class="mat-elevation-z2">
   <mat-form-field class="new-event-field">
-    <input matInput [(ngModel)]="title" placeholder="Title">
+    <input matInput #title placeholder="Choose a title to continue!" (change)="setTitle(title.value)">
   </mat-form-field>
 
-  
-  <div class="new-event-field">
+
+  <div class="new-event-field" *ngIf="titleChoosen">
     <mat-form-field>
       <input matInput #eventStart [matDatepicker]="eventStartPicker" placeholder="Start" disabled (dateChange)="startDateChoosen(eventStart.value)">
       <mat-datepicker-toggle matSuffix [for]="eventStartPicker"></mat-datepicker-toggle>
@@ -24,8 +24,9 @@
       <input matInput #endTime type="time" [(ngModel)]="endTime2" (change)="setEnd()">
     </mat-form-field>
   </div>
-
-  <mat-checkbox class="new-event-field" (change)="setAllDay()">All day</mat-checkbox>
+  <div class="new-event-field" *ngIf="titleChoosen">
+    <mat-checkbox (change)="setAllDay()">All day</mat-checkbox>
+  </div>
 
 
 
@@ -72,9 +73,9 @@
         <mat-option value="weeks">Weeks</mat-option>
       </mat-select>
     </mat-form-field>
-    <div class="mat-icons color_red" *ngIf="!missingInputs"><font color="red" font size="4">Enter missing information!</font></div>
+
   </div>
-  <div class="create-event-button">
+  <div class="create-event-button" *ngIf="endChoosen && titleChoosen">
     <button mat-raised-button color="primary" (click)="createEvent(timeValue.value)">Create</button>
   </div>
 
