@@ -1,6 +1,6 @@
 <div class="mat-elevation-z2">
   <mat-form-field class="new-event-field">
-    <input matInput #title placeholder="Title">
+    <input matInput [(ngModel)]="title" placeholder="Title">
   </mat-form-field>
 
   
@@ -31,26 +31,26 @@
 
   <div class="new-event-field">
     <mat-form-field>
-      <textarea matInput #description placeholder="Description"></textarea>
+      <textarea matInput [(ngModel)]="description" placeholder="Description"></textarea>
     </mat-form-field>
   </div>
 
   <div class="new-event-field">
     <mat-form-field>
-      <textarea matInput #address placeholder="Address"></textarea>
+      <textarea matInput [(ngModel)]="address" placeholder="Address"></textarea>
     </mat-form-field>
   </div>
 
   <div>
     <mat-form-field class="new-event-field">
-      <input matInput #city placeholder="City">
+      <input matInput [(ngModel)]="city" placeholder="City">
     </mat-form-field>
     <mat-form-field class="new-event-field">
-      <input matInput #country placeholder="Country">
+      <input matInput [(ngModel)]="country" placeholder="Country">
     </mat-form-field>
     <mat-form-field class="new-event-field">
-      <input matInput #postalCode maxlength="5" placeholder="Postal Code">
-      <mat-hint align="end">{{postalCode.value.length}} / 5</mat-hint>
+      <input matInput #postalCodeLength [(ngModel)]="postalCode" maxlength="5" placeholder="Postal Code">
+      <mat-hint align="end">{{postalCodeLength.value.length}} / 5</mat-hint>
     </mat-form-field>
   </div>
 
@@ -74,7 +74,7 @@
     </mat-form-field>
   </div>
   <div class="create-event-button">
-    <button mat-raised-button color="primary" (click)="createEvent(title.value, eventStart.value, eventEnd.value, description.value, address.value, city.value, country.value, postalCode.value, timeValue.value)">Create</button>
+    <button mat-raised-button color="primary" (click)="createEvent(eventStart.value, eventEnd.value, timeValue.value)">Create</button>
   </div>
 
 
