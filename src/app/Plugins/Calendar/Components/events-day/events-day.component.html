@@ -9,7 +9,7 @@
             <mat-icon>cached</mat-icon>
         </button>
         <mat-form-field *ngIf="onDate" class="calendar-date-picker">
-            <input matInput #eventDate [matDatepicker]="eventDatePicker" placeholder="Choose a date" disabled (dateInput)="chosenDate(eventDate.value)"
+            <input matInput #eventDate [matDatepicker]="eventDatePicker" placeholder="Choose a date" disabled
                 (dateChange)="chosenDate(eventDate.value)">
             <mat-datepicker-toggle matSuffix [for]="eventDatePicker"></mat-datepicker-toggle>
             <mat-datepicker #eventDatePicker disabled="false"></mat-datepicker>

@@ -11,7 +11,17 @@ export class CalendarEvent {
     recurrence: string;
     allDay: boolean;
 
-    constructor() { }
+    constructor(title, start, end, description, location, reminderType, reminderTime, recurrence, allDay) {
+        this.summary = title;
+        this.start = start;
+        this.end = end;
+        this.description = description;
+        this.location = location;
+        this.reminderType = reminderType;
+        this.reminderTime = reminderTime;
+        this.recurrence = recurrence;
+        this.allDay = allDay;
+     }
 
     getStartDate(): Date {
         return new Date(this.start);

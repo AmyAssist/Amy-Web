@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { CalendarEvent } from '../../Objects/CalendarEvent';
 import { CalendarDataService } from '../../Services/calendar-data.service';
 
+/*
+  Component for viewing events on different dates.
+
+  @author: Florian Bauer
+*/
 @Component({
   selector: 'app-events-day',
   templateUrl: './events-day.component.html',
@@ -24,15 +29,17 @@ export class EventsDayComponent implements OnInit {
   }
 
   setToday(): void {
-    const currentDate = new Date();
-    this.dateToday = currentDate.toISOString().slice(0, -1);
+    const tzoffset = (new Date()).getTimezoneOffset() * 60000;
+    this.dateToday = (new Date(Date.now() - tzoffset)).toISOString().slice(0, -1);
     this.selectedDate = this.dateToday;
   }
 
   setTomorrow(): void {
-    const currentDate = new Date();
+    const tzoffset = (new Date()).getTimezoneOffset() * 60000;
+    const currentDate = new Date(Date.now() - tzoffset);
     currentDate.setDate(currentDate.getDate() + 1);
     this.dateTomorrow = currentDate.toISOString().slice(0, -1);
+    console.log(this.dateTomorrow);
   }
 
   public getEventsToday(): void {
