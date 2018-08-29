@@ -1,0 +1,12 @@
+<mat-card-content class="chat" #scrollMe [scrollTop]="scrollMe.scrollHeight">
+    <div *ngFor="let message of getMessages()">
+      <h4>{{message.name}}</h4>
+      <div class="text" >{{message.value}}</div>
+    </div>
+  </mat-card-content>
+  <mat-form-field class="command-input-field">
+    <input (keydown.enter)="sendTextFieldMessage()" matInput #command [(ngModel)]="commandTextValue" [placeholder]="commandInputPlaceholder">
+  </mat-form-field>
+  <button mat-icon-button color="primary" (click)="sendTextFieldMessage()">
+    <mat-icon>send</mat-icon>
+  </button>

@@ -54,7 +54,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatNativeDateModule,
     BrowserModule,
     RouterModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatButtonToggleModule
   ],
   exports: [
     CommonModule,
@@ -81,7 +82,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatNativeDateModule,
     BrowserModule,
     RouterModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatButtonToggleModule
   ],
   declarations: [],
   providers: []

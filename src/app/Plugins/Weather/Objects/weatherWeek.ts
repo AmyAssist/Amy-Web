@@ -1,4 +1,4 @@
-import { Weather } from '../Objects/weather';
+import { Weather } from './weather';
 
 export class WeatherWeek {
     summary: string;

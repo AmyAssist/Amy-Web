@@ -1,33 +1,39 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { DatabaseService } from "../../Services/database.service";
 
 import { AmyChatComponent } from './amy-chat.component';
-import { MatCardModule, MatFormFieldModule, MatIconModule, MatButtonModule, MatInputModule } from '@angular/material';
+import { MatCardModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule } from '@angular/material';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CommandHandlerService } from '../../Services/command-handler.service';
+import { OptionsService } from '../../../../Services/options.service';
+import { ChatService } from './Services/chat.service';
 
 describe('AmyChatComponent', () => {
   let component: AmyChatComponent;
   let fixture: ComponentFixture<AmyChatComponent>;
 
   beforeEach(async(() => {
-    const spy = jasmine.createSpyObj('DatabaseService', ['getValue']);
+    const optionsSpy = jasmine.createSpyObj('OptionsService', ['getLanguage']);
+    const commandHandlerSpy = jasmine.createSpyObj('CommandHandlerService', ['sendCommand']);
+    const chatSpy = jasmine.createSpyObj('ChatService', ['getMessages', 'addMessage']);
     TestBed.configureTestingModule({
-      declarations: [ AmyChatComponent ],
+      declarations: [AmyChatComponent],
       imports: [
         MatCardModule,
-        MatFormFieldModule,
         MatIconModule,
+        MatFormFieldModule,
         MatButtonModule,
         MatInputModule,
         FormsModule,
         BrowserAnimationsModule
       ],
       providers: [
-        { provide: DatabaseService, useValue: spy }
+        { provide: OptionsService, useValue: optionsSpy },
+        { provide: CommandHandlerService, useValue: commandHandlerSpy },
+        { provide: ChatService, useValue: chatSpy }
       ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

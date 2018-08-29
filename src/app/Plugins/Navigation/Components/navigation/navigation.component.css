@@ -1,9 +1,2 @@
-.time-form {
-    min-width: 50px;
-    max-width: 100px;
-    width: 100%;
-  }
-
-.time-width {
-    width: 50%;
-  }
+/* Used by Navigation-Plugin to show date-time-picker */
+@import "~ng-pick-datetime/assets/style/picker.min.css";

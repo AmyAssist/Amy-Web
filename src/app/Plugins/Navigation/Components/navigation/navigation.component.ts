@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { MatToolbarModule } from '@angular/material/toolbar';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { NavigationDataService } from '../../Services/navigation-data.service';
 import { NavPath } from '../../Objects/navPath';
 import { BestTransportResult } from '../../Objects/bestTransportResult';
@@ -7,7 +6,8 @@ import { BestTransportResult } from '../../Objects/bestTransportResult';
 @Component({
   selector: 'app-navigation',
   templateUrl: './navigation.component.html',
-  styleUrls: ['./navigation.component.css']
+  styleUrls: ['./navigation.component.css'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class NavigationComponent implements OnInit {
 
@@ -15,7 +15,6 @@ export class NavigationComponent implements OnInit {
   from: string;
   to: string;
   way: string;
-  timeString: string;
   timeDate: Date;
   travelMode1: string;
   travelMode2: string;
@@ -50,8 +49,8 @@ export class NavigationComponent implements OnInit {
     this.bestTransport = new BestTransportResult();
   }
 
-  async fromToWay(from: string, to: string, date: string, hour: number, minute: number) {
-    this.createRoute(from, to, date, hour, minute);
+  async fromToWay(from: string, to: string, date: string) {
+    this.createRoute(from, to, date);
     this.navPathData.setTravelmode(this.travelMode1);
     this.navigationService.fromTo(this.navPathData).subscribe((data: BestTransportResult) => this.bestTransport = { ...data });
     await new Promise((resolve, reject) => setTimeout(resolve, 3000));
@@ -61,8 +60,8 @@ export class NavigationComponent implements OnInit {
     this.showMode = false;
   }
 
-  async bestType(from: string, to: string, date: string, hour: number, minute: number) {
-    this.createRoute(from, to, date, hour, minute);
+  async bestType(from: string, to: string, date: string) {
+    this.createRoute(from, to, date);
     this.navigationService.best(this.navPathData).subscribe((data: BestTransportResult) => this.bestTransport = { ...data });
     await new Promise((resolve, reject) => setTimeout(resolve, 3000));
     this.calcResult();
@@ -71,8 +70,8 @@ export class NavigationComponent implements OnInit {
     this.showMode = true;
   }
 
-  async searchWhen(from: string, to: string, date: string, hour: number, minute: number) {
-    this.createRoute(from, to, date, hour, minute);
+  async searchWhen(from: string, to: string, date: string) {
+    this.createRoute(from, to, date);
     this.navPathData.setTravelmode(this.travelMode2);
     this.navigationService.when(this.navPathData).subscribe((data: string) => this.whenTime = data);
     await new Promise((resolve, reject) => setTimeout(resolve, 3000));
@@ -83,17 +82,10 @@ export class NavigationComponent implements OnInit {
     this.showMode = false;
   }
 
-  setDate(time: string) {
-    this.Time = time;
-    console.log(this.Time);
-  }
-
-  createRoute(from: string, to: string, date: string, hour: number, minute: number) {
+  createRoute(from: string, to: string, date: string) {
     this.navPathData.setOrigin(from);
     this.navPathData.setDestination(to);
     this.timeDate = new Date(date);
-    this.timeDate.setHours(hour);
-    this.timeDate.setMinutes(minute);
     this.navPathData.setTime(this.timeDate.toISOString());
   }
 

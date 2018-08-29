@@ -24,6 +24,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { NavigationComponent } from './navigation.component';
 import { NavigationDataService } from '../../Services/navigation-data.service';
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 
 describe('NavigationComponent', () => {
   let component: NavigationComponent;
@@ -56,7 +57,10 @@ describe('NavigationComponent', () => {
         MatDividerModule,
         MatDatepickerModule,
         MatNativeDateModule,
-        BrowserAnimationsModule]
+        BrowserAnimationsModule,
+        OwlDateTimeModule, 
+        OwlNativeDateTimeModule
+      ]
     }).compileComponents();
   }));
 
