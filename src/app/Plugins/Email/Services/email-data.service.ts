@@ -28,6 +28,10 @@ export class EmailDataService {
         return this.http.post(this.path + 'connect', credentials, this.httpOptions);
     }
 
+    getCredentials() {
+        return this.http.get(this.path + 'getCredentials');
+    }
+
     getMails() {
         return this.http.get<MessageDTO[]>(this.path + 'getMails/20');
     }

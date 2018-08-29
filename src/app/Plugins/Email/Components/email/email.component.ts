@@ -21,23 +21,24 @@ export class EmailComponent implements OnInit {
   constructor(private readonly emailService: EmailDataService) { }
 
   ngOnInit() {
-    const username = localStorage.getItem(this.usernameKey);
-    const password = localStorage.getItem(this.passwordKey);
-    const imapServer = localStorage.getItem(this.serverKey);
-    if (username != null && password != null && imapServer != null) {
-      this.credentialsExist = true;
-      this.connect(username, password, imapServer);
-    }
+    this.emailService.getCredentials().subscribe((creds: EMailCredentials) => {
+      if (creds) {
+        this.credentialsExist = true;
+        this.connect(creds.username, creds.password, creds.imapServer);
+      }
+    });
   }
 
   connect(username: string, password: string, imapServer: string) {
-    const credentials = new EMailCredentials(username, password, imapServer);
+    let credentials: EMailCredentials;
+    if (username === '' && password === '' && imapServer === '') {
+      credentials = null;
+    } else {
+      credentials = new EMailCredentials(username, password, imapServer);
+    }
     this.connecting = true;
     this.emailService.connect(credentials).subscribe((data: boolean) => {
       if (data === true) {
-        localStorage.setItem(this.usernameKey, username);
-        localStorage.setItem(this.passwordKey, password);
-        localStorage.setItem(this.serverKey, imapServer);
         this.credentialsExist = true;
         this.connectionError = false;
         this.connected = true;
@@ -57,9 +58,6 @@ export class EmailComponent implements OnInit {
   disconnect() {
     this.emailService.disconnect().subscribe(() => {
       this.connected = false;
-      localStorage.removeItem(this.usernameKey);
-      localStorage.removeItem(this.passwordKey);
-      localStorage.removeItem(this.serverKey);
       this.credentialsExist = false;
     });
   }
