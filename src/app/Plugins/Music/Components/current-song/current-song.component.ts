@@ -47,73 +47,73 @@ export class CurrentSongComponent implements OnInit {
     this.musicCoverUrl = 'assets/music/defaultMusicCover.png';
     this.getVolume();
     this.getCurrentSong();
-  }
+}
 
-  /*
-    getting the current playing song
-  */
-  getCurrentSong() {
-    this.musicService.getCurrentSong()
-      .subscribe((data: Music) => {
-        this.musicData = { ...data };
-        this.currentArtist = this.musicData.artists[0].toString();
-        this.currentTitle = this.musicData.name;
-      }
-      );
-    if (this.musicTransService.getImageChanged) {
-      this.musicCoverUrl = this.musicTransService.getImageUrl();
-      this.musicTransService.setImageChanged(false);
+/*
+  getting the current playing song
+*/
+getCurrentSong() {
+  this.musicService.getCurrentSong()
+    .subscribe((data: Music) => {
+      this.musicData = { ...data };
+      this.currentArtist = this.musicData.artists[0].toString();
+      this.currentTitle = this.musicData.name;
     }
+    );
+  if (this.musicTransService.getImageChanged) {
+    this.musicCoverUrl = this.musicTransService.getImageUrl();
+    this.musicTransService.setImageChanged(false);
   }
-  /*
-      resuming the paused song
-    */
-  setResume() {
-    this.musicService.resume()
-      .subscribe();
-    this.playing = true;
-  }
-
-  /*
-    pausing the playing song
+}
+/*
+    resuming the paused song
   */
-  setPause() {
-    this.musicService.pause()
-      .subscribe();
-    this.playing = false;
-  }
+setResume() {
+  this.musicService.resume()
+    .subscribe();
+  this.playing = true;
+}
 
-  /*
-    skipping the playing song
-  */
-  setSkip() {
-    this.musicService.skip()
-      .subscribe();
-    this.playing = true;
-  }
+/*
+  pausing the playing song
+*/
+setPause() {
+  this.musicService.pause()
+    .subscribe();
+  this.playing = false;
+}
 
-  /*
-    returning to the previous song
-  */
-  setBack() {
-    this.musicService.back()
-      .subscribe();
-    this.playing = true;
-  }
+/*
+  skipping the playing song
+*/
+setSkip() {
+  this.musicService.skip()
+    .subscribe();
+  this.playing = true;
+}
 
-  /*
-    setting the volume
-  */
-  changeVolume(volumeData: number) {
-    this.musicService.setVolume(volumeData)
-      .subscribe();
-  }
+/*
+  returning to the previous song
+*/
+setBack() {
+  this.musicService.back()
+    .subscribe();
+  this.playing = true;
+}
 
-  /*
-  get the volume
-  */
+/*
+  setting the volume
+*/
+changeVolume(volumeData: number) {
+  this.musicService.setVolume(volumeData)
+    .subscribe();
+}
 
-  getVolume() {
-    this.musicService.getVolume().subscribe((data: number) => this.volumeValue = data);
-  }
+/*
+get the volume
+*/
+
+getVolume() {
+  this.musicService.getVolume().subscribe((data: number) => this.volumeValue = data);
+}
 }

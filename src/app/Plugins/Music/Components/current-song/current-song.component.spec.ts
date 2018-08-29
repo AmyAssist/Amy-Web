@@ -25,40 +25,41 @@ import { MusicDataService } from '../../Services/music-data.service';
 import { CurrentSongComponent } from './current-song.component';
 
 describe('CurrentSongComponent', () => {
-  let component: CurrentSongComponent;
-  let fixture: ComponentFixture<CurrentSongComponent>;
+    let component: CurrentSongComponent;
+    let fixture: ComponentFixture<CurrentSongComponent>;
 
-  beforeEach(async(() => {
-    const spy = jasmine.createSpyObj('DatabaseService', ['getValue']);
-    TestBed.configureTestingModule({
-      declarations: [ CurrentSongComponent ],
+    beforeEach(async(() => {
+        const spy = jasmine.createSpyObj('DatabaseService', ['getValue']);
+        TestBed.configureTestingModule({
+            declarations: [CurrentSongComponent],
 
-      imports: [
-          MatExpansionModule,
-          MatIconModule,
-          MatTabsModule,
-          ReactiveFormsModule,
-          MatSliderModule,
-          FormsModule,
-          MatFormFieldModule,
-          MatButtonModule,
-          MatInputModule,
-          MatCardModule,
-          MatSelectModule,
-          MatCheckboxModule,
-          MatToolbarModule,
-          MatMenuModule,
-          MatListModule,
-          MatGridListModule,
-          MatDividerModule,
-          BrowserAnimationsModule],
-      providers: [
-          {
-              provide: MusicDataService
-              , useValue: spy
-          }
-      ]
-  }).compileComponents();
-}));
+            imports: [
+                MatExpansionModule,
+                MatIconModule,
+                MatTabsModule,
+                ReactiveFormsModule,
+                MatSliderModule,
+                FormsModule,
+                MatFormFieldModule,
+                MatButtonModule,
+                MatInputModule,
+                MatCardModule,
+                MatSelectModule,
+                MatCheckboxModule,
+                MatToolbarModule,
+                MatMenuModule,
+                MatListModule,
+                MatGridListModule,
+                MatDividerModule,
+                BrowserAnimationsModule
+            ],
+            providers: [
+                {
+                    provide: MusicDataService
+                    , useValue: spy
+                }
+            ]
+        }).compileComponents();
+    }));
 
 });
