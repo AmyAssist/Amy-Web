@@ -29,6 +29,7 @@ export class NewEventComponent implements OnInit {
   reminderType: string;
   startChoosen: boolean;
   minDate: Date;
+  endDate: Date;
   startTime2: string;
   endTime2: string;
 
@@ -38,17 +39,18 @@ export class NewEventComponent implements OnInit {
     this.allDay = false;
     this.startChoosen = false;
     this.minDate = null;
+    this.endDate = null;
     this.resetValues();
   }
 
   setStart(): void {
-    if(this.startTime2 === ''){
+    if (this.startTime2 === '') {
       this.startTime2 = "00:00";
     }
   }
-  
+
   setEnd(): void {
-    if(this.endTime2 === ''){
+    if (this.endTime2 === '') {
       this.endTime2 = "23:59";
     }
   }
@@ -63,19 +65,21 @@ export class NewEventComponent implements OnInit {
     this.minDate = new Date(makeDate.getFullYear(), makeDate.getMonth(), makeDate.getDate());
   }
 
-  createEvent(startDateInput, endDateInput, timeValue): void {
+  endDateChoosen(dateValue): void {
+    this.endDate = new Date(dateValue);
+  }
+
+  createEvent(timeValue): void {
     this.createLocation();
-    const startDate = new Date(startDateInput);
-    const endDate = new Date(endDateInput);
     if (this.allDay) {
-      endDate.setDate(endDate.getDate() + 1);
+      this.endDate.setDate(this.endDate.getDate() + 1);
     }
     const startHour = this.startTime2.split(':')[0];
     const startMinute = this.startTime2.split(':')[1];
     const endHour = this.endTime2.split(':')[0];
     const endMinute = this.endTime2.split(':')[1];
-    const start = new LocalDateTime(startDate.getFullYear(), startDate.getMonth(), startDate.getDate(), parseInt(startHour), parseInt(startMinute));
-    const end = new LocalDateTime(endDate.getFullYear(), endDate.getMonth(), endDate.getDate(), parseInt(endHour), parseInt(endMinute));
+    const start = new LocalDateTime(this.minDate.getFullYear(), this.minDate.getMonth(), this.minDate.getDate(), parseInt(startHour), parseInt(startMinute));
+    const end = new LocalDateTime(this.endDate.getFullYear(), this.endDate.getMonth(), this.endDate.getDate(), parseInt(endHour), parseInt(endMinute));
     if (this.timeUnit === 'minutes') {
       this.reminderTime = timeValue;
     } else if (this.timeUnit === 'hours') {
@@ -89,6 +93,7 @@ export class NewEventComponent implements OnInit {
       this.description, this.location, this.reminderType, this.reminderTime, '', this.allDay);
     this.calendarService.setNewEvent(newEvent).subscribe();
     this.resetValues();
+    this.endDate.setDate(this.endDate.getDate() - 1);
   }
 
   resetValues(): void {
