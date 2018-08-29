@@ -3,9 +3,12 @@ import { HttpClient, HttpHeaders, HttpErrorResponse, HttpParams } from '@angular
 import { Observable, throwError } from 'rxjs';
 import { map, catchError, retry } from 'rxjs/operators';
 import { Music } from '../Objects/music';
+import { Album } from '../Objects/album';
+import { Artist } from '../Objects/artist';
 import { Playlist } from '../Objects/playlist';
 import { Device } from '../Objects/device';
 import { BackendResolver } from '../../../Services/backendResolver.service';
+import { identifierModuleUrl } from '@angular/compiler';
 
 /*
   service for exchanging data between the spotify plugin and the music component
@@ -26,20 +29,11 @@ export class MusicDataService {
   };
 
   private handleError(error: HttpErrorResponse) {
-    if (error.error instanceof ErrorEvent) {
-      // A client-side or network error occurred. Handle it accordingly.
-      console.error('An error occurred:', error.error.message);
-    } else {
-      // The backend returned an unsuccessful response code.
-      // The response body may contain clues as to what went wrong,
-      console.error(
-        `Backend returned code ${error.status}, ` +
-        `body was: ${error.error}`);
-    }
-    // return an observable with a user-facing error message
+    console.error(error);
     return throwError(
       'Something bad happened; please try again later.');
   }
+
   constructor(private readonly backend: BackendResolver, private readonly http: HttpClient) {
     this.setupPath();
   }
@@ -90,28 +84,34 @@ export class MusicDataService {
       catchError(this.handleError));
   }
 
-  /*
-    Getting the current Song.
-  */
-  getCurrentSong() {
-    return this.http.get<Music>(`${this.path}currentSong`, this.httpOptions).pipe(
-      catchError(this.handleError));
-  }
-
   search(searchValue: string, searchType: string, limit: string) {
     const params = new HttpParams().set('type', searchType);
     params.append('limit', limit);
-    return this.http.post(`${this.path}search/` + searchValue, null, { params }).pipe(
+    return this.http.post(`${this.path}search/` + `${searchType}/` + searchValue, { params }).pipe(
       catchError(this.handleError));
   }
 
   /*
     giving a command to play a song.
   */
-  playSong(musicData: Music): Observable<Music> {
-    const params = new HttpParams().set('type', 'track');
+  playSong(musicNumber: number) {
+    let params = new HttpParams();
+    params = params.append('index', musicNumber.toString());
+    return this.http.post(`${this.path}play/track`, null, { params }).pipe(
+      catchError(this.handleError));
+  }
 
-    return this.http.post<Music>(`${this.path}play`, musicData, { params }).pipe(
+  playAlbum(albumNumber: number) {
+    let params = new HttpParams();
+    params = params.append('index', albumNumber.toString());
+    return this.http.post(`${this.path}play/album`, null, { params }).pipe(
+      catchError(this.handleError));
+  }
+
+  playArtist(artistNumber: number) {
+    let params = new HttpParams();
+    params = params.append('index', artistNumber.toString());
+    return this.http.post(`${this.path}play/artist`, null, { params }).pipe(
       catchError(this.handleError));
   }
 
@@ -147,6 +147,14 @@ export class MusicDataService {
       catchError(this.handleError));
   }
 
+  /*
+    Getting the current Song.
+  */
+  getCurrentSong() {
+    return this.http.get<Music>(`${this.path}currentSong`, this.httpOptions).pipe(
+      catchError(this.handleError));
+  }
+
   setVolume(volumeData: number) {
     return this.http.post<Playlist>(this.path + 'volume/' + volumeData, null).pipe(
       catchError(this.handleError));
@@ -162,7 +170,7 @@ export class MusicDataService {
     param: type, decides which type of playlists will be loaded, featured or user
   */
   getPlaylist(type: string) {
-    return this.http.post<Playlist[]>(this.path + 'playlists/' + type, null).pipe(
+    return this.http.get<Playlist[]>(this.path + 'playlists/' + type, this.httpOptions).pipe(
       catchError(this.handleError));
   }
 }

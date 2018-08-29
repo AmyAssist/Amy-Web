@@ -1,5 +1,8 @@
 export class Artist {
-    artist: string[];
+    uri: string;
+    name: string;
+
+    genres: string[];
     imageUrl: string;
 
     constructor() { }

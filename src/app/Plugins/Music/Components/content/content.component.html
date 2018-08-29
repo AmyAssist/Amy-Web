@@ -14,13 +14,19 @@
   <button mat-raised-button color="primary" (click)="search(input.value, activeType)">Search</button>
 
   <h4 mat-subheader>Search results</h4>
-  <div *ngFor="let playlist of searchResults; let i = index">
+  <div *ngFor="let any of searchResults; let i = index">
     <mat-list-item role="listitem">
-      <mat-label>{{searchResults[i].name + " (from " + searchResults[i].artistName + ")"}}</mat-label>
+      <mat-label>{{searchResults[i].name}}</mat-label>
       <button mat-icon-button color="primary" (click)="playSearchResults(i)">
         <mat-icon>play_arrow</mat-icon>
       </button>
     </mat-list-item>
   </div>
-  
 </mat-card>
+
+
+<!--
+  
+<div class="mat-elevation-z2"></div>
+
+-->

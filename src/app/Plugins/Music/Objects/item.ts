@@ -1,6 +1,6 @@
 export class Item {
-    artist: string[];
-    imageUrl: string;
+    uri: string;
+    name: string;
 
     constructor() { }
 }

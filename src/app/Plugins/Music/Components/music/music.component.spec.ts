@@ -61,14 +61,4 @@ describe('MusicComponent', () => {
         }).compileComponents();
     }));
 
-    // this test doesn't do anything anyway (i think (lars)) 
-   /* beforeEach(() => {
-        fixture = TestBed.createComponent(MusicComponent);
-        component = fixture.componentInstance;
-        fixture.detectChanges();
-    });
-
-    it('should create', () => {
-        expect(component).toBeTruthy();
-    });*/
 });
