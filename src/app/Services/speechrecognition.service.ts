@@ -54,6 +54,7 @@ export class SpeechRecognitionService {
         this.activeCallbacks = [];
         this.sr.stop();
     }
+
     /**
      * @return true if the current browser supports the Speech Recognition feature
      */
@@ -63,11 +64,7 @@ export class SpeechRecognitionService {
 
     private onresult(event: Result) {
         const last = event.results.length - 1;
-        let text: string = event.results[last][0].transcript;
-        // this is only temporary. the grammars in the server don't allow : and .
-        text = text.replace(/:/g, ' x ');
-        text = text.replace(/p.m./gi, 'pm');
-        text = text.replace(/a.m./gi, 'am');
+        const text: string = event.results[last][0].transcript;
         for (const callbackFunc of this.activeCallbacks) {
             callbackFunc(text);
         }

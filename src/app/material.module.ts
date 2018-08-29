@@ -28,7 +28,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatStepperModule } from '@angular/material/stepper';
-
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
 @NgModule({
   imports: [
@@ -57,7 +57,8 @@ import { MatStepperModule } from '@angular/material/stepper';
     RouterModule,
     FlexLayoutModule,
     MatSidenavModule,
-    MatStepperModule
+    MatStepperModule,
+    MatButtonToggleModule
   ],
   exports: [
     CommonModule,
@@ -85,7 +86,8 @@ import { MatStepperModule } from '@angular/material/stepper';
     RouterModule,
     FlexLayoutModule,
     MatSidenavModule,
-    MatStepperModule
+    MatStepperModule,
+    MatButtonToggleModule
   ],
   declarations: [],
   providers: []
