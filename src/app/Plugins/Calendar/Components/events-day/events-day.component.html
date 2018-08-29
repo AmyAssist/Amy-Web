@@ -5,15 +5,16 @@
             <mat-button-toggle value="tomorrow" (click)="getEventsTomorrow()">Tomorrow</mat-button-toggle>
             <mat-button-toggle value="other-day" (click)="getEventsOnDate()">Other day</mat-button-toggle>
         </mat-button-toggle-group>
-        <button mat-icon-button  color="primary" (click)="refresh()">
+        <button mat-icon-button *ngIf="!onDate" color="primary" (click)="refresh()">
             <mat-icon>cached</mat-icon>
         </button>
-        <mat-form-field *ngIf="onDate" class="calendar-date-picker">
-            <input matInput #eventDate [matDatepicker]="eventDatePicker" placeholder="Choose a date" disabled
-                (dateChange)="chosenDate(eventDate.value)">
-            <mat-datepicker-toggle matSuffix [for]="eventDatePicker"></mat-datepicker-toggle>
-            <mat-datepicker #eventDatePicker disabled="false"></mat-datepicker>
+        <mat-form-field *ngIf="onDate">
+                <input matInput #eventdt #eventDate [owlDateTime]="eventdt" [owlDateTimeTrigger]="eventdt" readonly placeholder="Choose a date">
+                <owl-date-time [pickerType]="'calendar'" #eventdt></owl-date-time>
         </mat-form-field>
+        <button mat-icon-button *ngIf="onDate" color="primary" (click)="refreshOnDate(eventDate.value)">
+            <mat-icon>cached</mat-icon>
+        </button>
     </div>
     <mat-divider></mat-divider>
     <mat-list *ngFor="let event of events">

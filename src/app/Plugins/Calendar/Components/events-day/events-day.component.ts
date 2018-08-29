@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { CalendarEvent } from '../../Objects/CalendarEvent';
 import { CalendarDataService } from '../../Services/calendar-data.service';
 
@@ -10,7 +10,8 @@ import { CalendarDataService } from '../../Services/calendar-data.service';
 @Component({
   selector: 'app-events-day',
   templateUrl: './events-day.component.html',
-  styleUrls: ['./events-day.component.css']
+  styleUrls: ['./events-day.component.css'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class EventsDayComponent implements OnInit {
 
@@ -62,8 +63,8 @@ export class EventsDayComponent implements OnInit {
     });
   }
 
-  public chosenDate(date): void {
-    const makeDate = new Date(date);
+  public chosenDate(eventDate: string): void {
+    const makeDate = new Date(eventDate);
     makeDate.setDate(makeDate.getDate() + 1);
     this.selectedDate = makeDate.toISOString().slice(0, -1);
     this.getEventsOnDate();
@@ -85,6 +86,16 @@ export class EventsDayComponent implements OnInit {
       this.getEventsTomorrow();
     } else if (this.onDate) {
       this.getEventsOnDate();
+    }
+  }
+
+  public refreshOnDate(eventDate: string): void {
+    if (this.today) {
+      this.getEventsToday();
+    } else if (this.tomorrow) {
+      this.getEventsTomorrow();
+    } else if (this.onDate) {
+      this.chosenDate(eventDate);
     }
   }
 
