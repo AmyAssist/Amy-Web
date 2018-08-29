@@ -32,6 +32,7 @@ export class NewEventComponent implements OnInit {
   endDate: Date;
   startTime2: string;
   endTime2: string;
+  missingInputs: boolean;
 
   constructor(private readonly calendarService: CalendarDataService) { }
 
@@ -70,30 +71,48 @@ export class NewEventComponent implements OnInit {
   }
 
   createEvent(timeValue): void {
-    this.createLocation();
-    if (this.allDay) {
-      this.endDate.setDate(this.endDate.getDate() + 1);
+    if (this.checkInputs()) {
+      this.createLocation();
+      if (this.allDay) {
+        this.endDate.setDate(this.endDate.getDate() + 1);
+      }
+      const startHour = this.startTime2.split(':')[0];
+      const startMinute = this.startTime2.split(':')[1];
+      const endHour = this.endTime2.split(':')[0];
+      const endMinute = this.endTime2.split(':')[1];
+      const start = new LocalDateTime(this.minDate.getFullYear(), this.minDate.getMonth(), this.minDate.getDate(), parseInt(startHour), parseInt(startMinute));
+      const end = new LocalDateTime(this.endDate.getFullYear(), this.endDate.getMonth(), this.endDate.getDate(), parseInt(endHour), parseInt(endMinute));
+      if (this.timeUnit === 'minutes') {
+        this.reminderTime = timeValue;
+      } else if (this.timeUnit === 'hours') {
+        this.reminderTime = 60 * timeValue;
+      } else if (this.timeUnit === 'days') {
+        this.reminderTime = 24 * 60 * timeValue;
+      } else if (this.timeUnit === 'weeks') {
+        this.reminderTime = 7 * 24 * 60 * timeValue;
+      }
+      const newEvent = CalendarEvent.setEventData(this.title, start.toString(), end.toString(),
+        this.description, this.location, this.reminderType, this.reminderTime, '', this.allDay);
+      this.calendarService.setNewEvent(newEvent).subscribe();
+      this.resetValues();
+      this.endDate.setDate(this.endDate.getDate() - 1);
     }
-    const startHour = this.startTime2.split(':')[0];
-    const startMinute = this.startTime2.split(':')[1];
-    const endHour = this.endTime2.split(':')[0];
-    const endMinute = this.endTime2.split(':')[1];
-    const start = new LocalDateTime(this.minDate.getFullYear(), this.minDate.getMonth(), this.minDate.getDate(), parseInt(startHour), parseInt(startMinute));
-    const end = new LocalDateTime(this.endDate.getFullYear(), this.endDate.getMonth(), this.endDate.getDate(), parseInt(endHour), parseInt(endMinute));
-    if (this.timeUnit === 'minutes') {
-      this.reminderTime = timeValue;
-    } else if (this.timeUnit === 'hours') {
-      this.reminderTime = 60 * timeValue;
-    } else if (this.timeUnit === 'days') {
-      this.reminderTime = 24 * 60 * timeValue;
-    } else if (this.timeUnit === 'weeks') {
-      this.reminderTime = 7 * 24 * 60 * timeValue;
+  }
+
+  checkInputs(): boolean {
+    if (this.title !== ''
+      && this.description !== ''
+      && this.address !== ''
+      && this.city !== ''
+      && this.postalCode !== ''
+      && this.country !== ''
+    ) {
+      this.missingInputs = true;
+      return true;
+    } else {
+      this.missingInputs = false;
+      return false;
     }
-    const newEvent = CalendarEvent.setEventData(this.title, start.toString(), end.toString(),
-      this.description, this.location, this.reminderType, this.reminderTime, '', this.allDay);
-    this.calendarService.setNewEvent(newEvent).subscribe();
-    this.resetValues();
-    this.endDate.setDate(this.endDate.getDate() - 1);
   }
 
   resetValues(): void {
@@ -109,6 +128,7 @@ export class NewEventComponent implements OnInit {
     this.country = '';
     this.startTime2 = "00:00";
     this.endTime2 = "23:59";
+    this.missingInputs = true;
   }
 
   // this method makes sure that the location is displayed the right way

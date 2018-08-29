@@ -72,6 +72,7 @@
         <mat-option value="weeks">Weeks</mat-option>
       </mat-select>
     </mat-form-field>
+    <div class="mat-icons color_red" *ngIf="!missingInputs"><font color="red" font size="4">Enter missing information!</font></div>
   </div>
   <div class="create-event-button">
     <button mat-raised-button color="primary" (click)="createEvent(timeValue.value)">Create</button>
