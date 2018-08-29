@@ -28,7 +28,7 @@ export class NewEventComponent implements OnInit {
   timeUnit: string;
   reminderType: string;
 
-  constructor(private calendarService: CalendarDataService) { }
+  constructor(private readonly calendarService: CalendarDataService) { }
 
   ngOnInit() {
     this.allDay = false;
