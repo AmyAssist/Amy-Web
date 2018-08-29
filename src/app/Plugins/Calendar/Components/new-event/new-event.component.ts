@@ -97,7 +97,7 @@ export class NewEventComponent implements OnInit {
       }
     } else {
       if (this.postalCode !== '') {
-        this.location += ', ' + this.postalCode
+        this.location += ', ' + this.postalCode;
         if (this.city !== '') {
           this.location += ' ' + this.city;
         }
