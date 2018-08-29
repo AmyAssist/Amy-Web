@@ -8,7 +8,7 @@ import { CalendarDataService } from '../../Services/calendar-data.service';
   styleUrls: ['./calendar.component.css']
 })
 export class CalendarComponent implements OnInit {
-  
+
   constructor(private readonly calendarService: CalendarDataService) { }
 
   ngOnInit() {
