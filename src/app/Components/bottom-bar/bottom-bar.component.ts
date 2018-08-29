@@ -33,7 +33,7 @@ export class BottomBarComponent implements OnInit {
     private _displayBar = true;
 
     srState = 'inactive';
-    
+
     backendSoundMuted = false;
 
     test: string;
@@ -44,25 +44,25 @@ export class BottomBarComponent implements OnInit {
         private readonly options: OptionsService,
         private readonly commandHandler: CommandHandlerService,
         private readonly chat: ChatService,
-        private readonly backend : BackendResolver) { }
+        private readonly backend: BackendResolver) { }
 
 
     ngOnInit() {
     }
 
-    get soundEnabled(){
+    get soundEnabled() {
         return this.options.soundEnabled;
     }
 
-    get srSupported(){
+    get srSupported() {
         return this.speechRecognitionService.isSupported();
     }
 
-    get displayBar(){
+    get displayBar() {
         return this._displayBar;
     }
 
-    get displayChat(){
+    get displayChat() {
         return this.options.displayChat;
     }
 
@@ -92,13 +92,13 @@ export class BottomBarComponent implements OnInit {
      * Stop the current tts
      */
     triggerSound() {
-        if(this.options.soundEnabled){
-            if(this.ttsService.currentlyOutputting){
+        if (this.options.soundEnabled) {
+            if (this.ttsService.currentlyOutputting) {
                 this.ttsService.stop();
-            }else{
+            } else {
                 this.options.mute();
             }
-        }else{
+        } else {
             this.options.unmute();
         }
     }
@@ -107,9 +107,9 @@ export class BottomBarComponent implements OnInit {
      * Mute/Unmute the sound output of the backend
      */
     triggerBackendSound() {
-        if(this.backend.checkBackendSoundState()){
+        if (this.backend.checkBackendSoundState()) {
             this.backend.mute().subscribe();
-        }else{
+        } else {
             this.backend.unmute().subscribe();
         }
     }
