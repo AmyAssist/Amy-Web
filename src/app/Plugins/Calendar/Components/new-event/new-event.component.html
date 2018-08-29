@@ -3,28 +3,31 @@
     <input matInput #title placeholder="Title">
   </mat-form-field>
 
+  
+  <div class="new-event-field">
+    <mat-form-field>
+      <input matInput #eventStart [matDatepicker]="eventStartPicker" placeholder="Start" disabled>
+      <mat-datepicker-toggle matSuffix [for]="eventStartPicker"></mat-datepicker-toggle>
+      <mat-datepicker #eventStartPicker disabled="false"></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field *ngIf="!allDay">
+      <input matInput placeholder="Time">
+    </mat-form-field>
+  </div>
+  <div class="new-event-field">
+    <mat-form-field>
+      <input matInput #eventEnd [matDatepicker]="eventEndPicker" placeholder="End" disabled>
+      <mat-datepicker-toggle matSuffix [for]="eventEndPicker"></mat-datepicker-toggle>
+      <mat-datepicker #eventEndPicker disabled="false"></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field *ngIf="!allDay">
+      <input matInput placeholder="Time">
+    </mat-form-field>
+  </div>
+
   <mat-checkbox class="new-event-field" (change)="setAllDay()">All day</mat-checkbox>
 
-  <div class="new-event-field">
-      <mat-form-field *ngIf="!allDay">
-          <input matInput #sdt #eventStart [owlDateTime]="sdt" [owlDateTimeTrigger]="sdt" readonly placeholder="Start Time">
-          <owl-date-time #sdt></owl-date-time>
-        </mat-form-field>
-      <mat-form-field *ngIf="allDay">
-        <input matInput #sdt #eventStart [owlDateTime]="sdt" [owlDateTimeTrigger]="sdt" readonly placeholder="Start Time">
-        <owl-date-time [pickerType]="'calendar'" #sdt></owl-date-time>
-      </mat-form-field>
-    </div>
-      <div class="new-event-field">
-          <mat-form-field *ngIf="!allDay">
-              <input matInput #sdt #eventEnd [owlDateTime]="sdt" [owlDateTimeTrigger]="sdt" readonly placeholder="End Time">
-              <owl-date-time #sdt></owl-date-time>
-            </mat-form-field>
-          <mat-form-field *ngIf="allDay">
-            <input matInput #edt #eventEnd [owlDateTime]="edt" [owlDateTimeTrigger]="edt" readonly placeholder="End Time">
-            <owl-date-time [pickerType]="'calendar'" #edt></owl-date-time>
-          </mat-form-field>
-        </div>
+
 
   <div class="new-event-field">
     <mat-form-field>

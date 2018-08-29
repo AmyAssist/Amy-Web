@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { CalendarEvent } from '../../Objects/CalendarEvent';
 import { CalendarDataService } from '../../Services/calendar-data.service';
+import { LocalDateTime } from '../../../../Objects/LocalDateTime';
 
 /*
   Component for setting up a new event.
@@ -39,8 +40,8 @@ export class NewEventComponent implements OnInit {
     this.location = address;
     const startDate = new Date(startDateInput);
     const endDate = new Date(endDateInput);
-    const start = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDay());
-    const end = new Date(endDate.getFullYear(), endDate.getMonth(), endDate.getDay());
+    const start = new LocalDateTime(startDate.getFullYear(), startDate.getMonth(), startDate.getDay(), 0, 0);
+    const end = new LocalDateTime(endDate.getFullYear(), endDate.getMonth(), endDate.getDay(), 23, 59);
     if (postalCode != "") {
       this.location += ", " + postalCode;
       if (city != "") {
@@ -62,7 +63,7 @@ export class NewEventComponent implements OnInit {
     } else if (this.timeUnit == "weeks") {
       this.reminderTime = 7 * 24 * 60 * timeValue;
     }
-    const newEvent = new CalendarEvent(title, start, end, description, this.location, this.reminderType, this.reminderTime, "", this.allDay);
+    const newEvent = CalendarEvent.setEventData(title, start.toString(), end.toString(), description, this.location, this.reminderType, this.reminderTime, "", this.allDay);
     this.calendarService.setNewEvent(newEvent).subscribe();
   }
 

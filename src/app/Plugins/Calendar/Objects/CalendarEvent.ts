@@ -11,17 +11,21 @@ export class CalendarEvent {
     recurrence: string;
     allDay: boolean;
 
-    constructor(title, start, end, description, location, reminderType, reminderTime, recurrence, allDay) {
-        this.summary = title;
-        this.start = start;
-        this.end = end;
-        this.description = description;
-        this.location = location;
-        this.reminderType = reminderType;
-        this.reminderTime = reminderTime;
-        this.recurrence = recurrence;
-        this.allDay = allDay;
-     }
+    constructor() { }
+
+    static setEventData(title, start, end, description, location, reminderType, reminderTime, recurrence, allDay): CalendarEvent {
+        const newEvent = new CalendarEvent();
+        newEvent.summary = title;
+        newEvent.start = start;
+        newEvent.end = end;
+        newEvent.description = description;
+        newEvent.location = location;
+        newEvent.reminderType = reminderType;
+        newEvent.reminderTime = reminderTime;
+        newEvent.recurrence = recurrence;
+        newEvent.allDay = allDay;
+        return newEvent;
+    }
 
     getStartDate(): Date {
         return new Date(this.start);
