@@ -57,7 +57,8 @@ export class NewEventComponent implements OnInit {
     } else if (this.timeUnit === 'weeks') {
       this.reminderTime = 7 * 24 * 60 * timeValue;
     }
-    const newEvent = CalendarEvent.setEventData(this.title, start.toString(), end.toString(), this.description, this.location, this.reminderType, this.reminderTime, '', this.allDay);
+    const newEvent = CalendarEvent.setEventData(this.title, start.toString(), end.toString(),
+      this.description, this.location, this.reminderType, this.reminderTime, '', this.allDay);
     this.calendarService.setNewEvent(newEvent).subscribe();
     this.resetValues();
   }
