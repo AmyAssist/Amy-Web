@@ -93,14 +93,14 @@ export class EventsDayComponent implements OnInit {
     const startMinute = this.checkTime(event.getStartDate().getMinutes());
     const endHour = this.checkTime(event.getEndDate().getHours());
     const endMinute = this.checkTime(event.getEndDate().getMinutes());
-    const start = startHour + ":" + startMinute;
-    const end = endHour + ":" + endMinute;
-    return start + " - " + end;
+    const start = startHour + ':' + startMinute;
+    const end = endHour + ':' + endMinute;
+    return start + ' - ' + end;
   }
 
   checkTime(time): string {
     if (time < 10) {
-      return "0" + time;
+      return '0' + time;
     }
     return time;
   }
