@@ -1,8 +1,12 @@
 .alarmSet-container {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .musicSearch-container > * {
-    width: 100%;
-  }
+    padding: 16px;
+}
+
+.alarmEdit-container {
+  margin-top: 16px;
+  padding: 16px;
+}
+
+.alarmList-container {
+  margin-top: 16px;
+}
