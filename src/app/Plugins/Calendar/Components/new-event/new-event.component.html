@@ -6,7 +6,7 @@
   
   <div class="new-event-field">
     <mat-form-field>
-      <input matInput #eventStart [matDatepicker]="eventStartPicker" placeholder="Start" disabled>
+      <input matInput #eventStart [matDatepicker]="eventStartPicker" placeholder="Start" disabled (dateChange)="startDateChoosen(eventStart.value)">
       <mat-datepicker-toggle matSuffix [for]="eventStartPicker"></mat-datepicker-toggle>
       <mat-datepicker #eventStartPicker disabled="false"></mat-datepicker>
     </mat-form-field>
@@ -15,8 +15,8 @@
     </mat-form-field>
   </div>
   <div class="new-event-field">
-    <mat-form-field>
-      <input matInput #eventEnd [matDatepicker]="eventEndPicker" placeholder="End" disabled>
+    <mat-form-field *ngIf="startChoosen">
+      <input matInput #eventEnd [min]="minDate" [matDatepicker]="eventEndPicker" placeholder="End" disabled>
       <mat-datepicker-toggle matSuffix [for]="eventEndPicker"></mat-datepicker-toggle>
       <mat-datepicker #eventEndPicker disabled="false"></mat-datepicker>
     </mat-form-field>

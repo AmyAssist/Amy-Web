@@ -27,16 +27,26 @@ export class NewEventComponent implements OnInit {
   reminderTime: number;
   timeUnit: string;
   reminderType: string;
+  startChoosen: boolean;
+  minDate: Date;
 
   constructor(private readonly calendarService: CalendarDataService) { }
 
   ngOnInit() {
     this.allDay = false;
+    this.startChoosen = false;
+    this.minDate = null;
     this.resetValues();
   }
 
   setAllDay() {
     this.allDay = !this.allDay;
+  }
+
+  startDateChoosen(dateValue): void {
+    this.startChoosen = true;
+    const makeDate = new Date(dateValue);
+    this.minDate = new Date(makeDate.getFullYear(), makeDate.getMonth(), makeDate.getDate());
   }
 
   createEvent(startDateInput, endDateInput, timeValue): void {
