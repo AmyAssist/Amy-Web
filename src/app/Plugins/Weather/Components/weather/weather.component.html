@@ -1,11 +1,7 @@
-<mat-toolbar>
-  <span>Weather</span>
-</mat-toolbar>
-
-<mat-card>
-  <div class="example-container">
+<div class="select-container mat-elevation-z2">
+  <div>
     <mat-form-field>
-      <mat-select (selectionChange)="onChange($event)" placeholder="Select Location" [attr.selected]="selectedLocation">
+      <mat-select (selectionChange)="changeLocation($event)" placeholder="Select Location" [attr.selected]="selectedLocation">
         <mat-option *ngFor="let location of locations" [value]="location">
           {{location.name}}
         </mat-option>
@@ -17,125 +13,52 @@
     <button mat-raised-button color="basic" (click)="getWeatherTomorrow()">Tomorrow</button>
     <button mat-raised-button color="basic" (click)="getWeatherWeek()">Week</button>
   </div>
+</div>
 
-  <div *ngIf=today>
-    <mat-card class="mat-card-weather">
-      <mat-grid-list cols="2" row="2" rowHeight="2:1">
-        <mat-grid-tile>
-          <img alt="image" style='height: 100%; width: 100%; object-fit: contain' [attr.src]="weatherToday.iconSrc" type="image/svg+xml">
-        </mat-grid-tile>
-        <mat-grid-tile style="white-space:pre-wrap;">
-          <mat-card-content>
-            <h2>{{weatherToday.summary}}</h2>
-            <p>{{selectedLocation}}</p>
-            <p>date {{weatherToday.time}}</p>
-          </mat-card-content>
-        </mat-grid-tile>
-        <mat-grid-tile class="mat-card-tile" colspan="2" rowspan="1">
-          <mat-list role="list">
-            <mat-list-item role="listitem">temperature high
-              <br/> {{weatherToday.temperatureMax}}</mat-list-item>
-            <mat-list-item role="listitem">temperature low
-              <br/> {{weatherToday.temperatureMin}}</mat-list-item>
-          </mat-list>
-          <mat-list role="list">
-            <mat-list-item role="listitem">precipitation chance
-              <br/> {{weatherToday.precipProbability}}</mat-list-item>
-            <mat-list-item role="listitem">precipitation type
-              <br/> {{weatherToday.precipType}}</mat-list-item>
-          </mat-list>
-          <mat-list role="list">
-            <mat-list-item role="listitem">sunrise
-              <br/> {{weatherToday.sunriseTime}}</mat-list-item>
-            <mat-list-item role="listitem">sunset
-              <br/> {{weatherToday.sunsetTime}}</mat-list-item>
-          </mat-list>
-        </mat-grid-tile>
-      </mat-grid-list>
-    </mat-card>
-  </div>
+<div *ngIf="selectedType !== 'none'" fxLayout="row warp" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign="space-between">
 
-  <div *ngIf=tommorow>
-    <mat-card class="mat-card-weather">
-        <mat-card-content>
-          <mat-grid-list cols="2" row="2" rowHeight="2:1">
-            <mat-grid-tile>
-              <img alt="image" style='height: 100%; width: 100%; object-fit: contain' [attr.src]="weatherTomorrow.iconSrc" type="image/svg+xml">
-            </mat-grid-tile>
-            <mat-grid-tile style="white-space:pre-wrap;">
-              <mat-card-content>
-                <h2>{{weatherTomorrow.summary}}</h2>
-                <p>{{selectedLocation}}</p>
-                <p>date {{weatherToday.time}}</p>
-              </mat-card-content>
-            </mat-grid-tile>
-            <mat-grid-tile class="mat-card-tile" colspan="2" rowspan="1">
-              <mat-list role="list">
-                <mat-list-item role="listitem">temperature high
-                  <br/> {{weatherTomorrow.temperatureMax}}</mat-list-item>
-                <mat-list-item role="listitem">temperature low
-                  <br/> {{weatherTomorrow.temperatureMin}}</mat-list-item>
-              </mat-list>
-              <mat-list role="list">
-                <mat-list-item role="listitem">precipitation chance
-                  <br/> {{weatherTomorrow.precipProbability}}</mat-list-item>
-                <mat-list-item role="listitem">precipitation type
-                  <br/> {{weatherTomorrow.precipType}}</mat-list-item>
-              </mat-list>
-              <mat-list role="list">
-                <mat-list-item role="listitem">sunrise
-                  <br/> {{weatherTomorrow.sunriseTime}}</mat-list-item>
-                <mat-list-item role="listitem">sunset
-                  <br/> {{weatherTomorrow.sunsetTime}}</mat-list-item>
-              </mat-list>
-            </mat-grid-tile>
-          </mat-grid-list>
-        </mat-card-content>
-    </mat-card>
+  <div *ngFor="let weather of showReports" class="mat-elevation-z2" style="min-width: 430px;min-height: 200px;" fxFlex="50"
+    fxFlex.sm="auto" fxFlex.xs>
+    <mat-grid-list cols="2" row="2" rowHeight="2:1">
+      <mat-grid-tile>
+        <img alt="image" style='height: 100%; width: 100%; object-fit: contain' [attr.src]="weather.iconSrc" type="image/svg+xml">
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <div>
+          <h2 class="mat-h2">{{weather.summary}}</h2>
+          <p class="mat-body-2">{{selectedLocation}}</p>
+          <p class="mat-body-1">{{weather.time}}</p>
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile class="mat-card-tile" colspan="2" rowspan="1">
+        <mat-list role="list">
+          <mat-list-item role="listitem">temperature high
+            <br/> {{weather.temperatureMax}}
+          </mat-list-item>
+          <mat-list-item role="listitem">temperature low
+            <br/> {{weather.temperatureMin}}
+          </mat-list-item>
+        </mat-list>
+        <mat-list role="list">
+          <mat-list-item role="listitem">precipitation chance
+            <br/> {{weather.precipProbability}}
+          </mat-list-item>
+          <mat-list-item role="listitem">precipitation type
+            <br/> {{weather.precipType}}
+          </mat-list-item>
+        </mat-list>
+        <mat-list role="list">
+          <mat-list-item role="listitem">sunrise
+            <br/> {{weather.sunriseTime}}
+          </mat-list-item>
+          <mat-list-item role="listitem">sunset
+            <br/> {{weather.sunsetTime}}
+          </mat-list-item>
+        </mat-list>
+      </mat-grid-tile>
+    </mat-grid-list>
   </div>
-
-  <div *ngIf=week>
-    <div class='card-list' layout="row" layout-wrap>
-      <mat-card *ngFor="let weather of weatherWeekData.days; let i = index"
-        class="mat-card-weather">
-        <mat-card-content>
-          <mat-grid-list cols="2" row="2" rowHeight="2:1">
-            <mat-grid-tile>
-              <img alt="image" style='height: 100%; width: 100%; object-fit: contain' [attr.src]="weather.iconSrc" type="image/svg+xml">
-            </mat-grid-tile>
-            <mat-grid-tile style="white-space:pre-wrap;">
-              <mat-card-content>
-                <h2>{{weather.summary}}</h2>
-                <p>{{selectedLocation}}</p>
-                <p>{{weather.time}}</p>
-              </mat-card-content>
-            </mat-grid-tile>
-            <mat-grid-tile class="mat-card-tile" colspan="2" rowspan="1">
-              <mat-list role="list">
-                <mat-list-item role="listitem">temperature high
-                  <br/> {{weather.temperatureMax}}</mat-list-item>
-                <mat-list-item role="listitem">temperature low
-                  <br/> {{weather.temperatureMin}}</mat-list-item>
-              </mat-list>
-              <mat-list role="list">
-                <mat-list-item role="listitem">precipitation chance
-                  <br/> {{weather.precipProbability}}</mat-list-item>
-                <mat-list-item role="listitem">precipitation type
-                  <br/> {{weather.precipType}}</mat-list-item>
-              </mat-list>
-              <mat-list role="list">
-                <mat-list-item role="listitem">sunrise
-                  <br/> {{weather.sunriseTime}}</mat-list-item>
-                <mat-list-item role="listitem">sunset
-                  <br/> {{weather.sunsetTime}}</mat-list-item>
-              </mat-list>
-            </mat-grid-tile>
-          </mat-grid-list>
-          </mat-card-content>
-      </mat-card>
-    </div>
-  </div>
-</mat-card>
+</div>
 
 <div class="bottom-text">Icons made by
   <a href="https://www.flaticon.com/authors/vitaly-gorbachev" title="Vitaly Gorbachev">Vitaly Gorbachev</a> from

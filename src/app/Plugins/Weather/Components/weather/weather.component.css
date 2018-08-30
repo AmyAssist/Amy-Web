@@ -1,19 +1,9 @@
-.mat-card-weather{
-    width: 30%;
-    margin: 0.1%;
-    min-width: 430px;
-    min-height: 200px;
+.select-container {
+    padding: 16px;
 }
 
 .mat-card-tile{
     left:5px;
-}
-
-.card-list {
-    display:flex;
-    flex-flow:row wrap;
-    margin-left: auto;
-    margin-right: auto;
 }
 
 .dynamic-text {
