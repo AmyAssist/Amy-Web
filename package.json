@@ -29,12 +29,8 @@
     "hammerjs": "^2.0.8",
     "material-design-icons": "^3.0.1",
     "ng-pick-datetime": "^6.0.12",
-<<<<<<< HEAD
-    "rxjs": "^6.2.2",    "zone.js": "^0.8.26"
-=======
     "rxjs": "^6.2.2",
     "zone.js": "^0.8.26"
->>>>>>> ffaca6dd90c3df0c85816a359cb8a70d3ee90b5f
   },
   "devDependencies": {
 
