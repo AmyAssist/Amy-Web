@@ -16,10 +16,11 @@
   <h4 mat-subheader>Search results</h4>
   <div *ngFor="let any of searchResults; let i = index">
     <mat-list-item role="listitem">
-      <mat-label>{{searchResults[i].name}}</mat-label>
       <button mat-icon-button color="primary" (click)="playSearchResults(i)">
         <mat-icon>play_arrow</mat-icon>
       </button>
+      <mat-label>{{searchResults[i].name}}</mat-label>
+      
     </mat-list-item>
   </div>
 </mat-card>

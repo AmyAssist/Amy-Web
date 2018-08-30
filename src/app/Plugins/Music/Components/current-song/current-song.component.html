@@ -1,6 +1,6 @@
 <mat-card>
 
-  <img mat-card-image src={{musicCoverUrl}} alt="Songcover missing">
+  <img mat-card-image [attr.src]="this.musicCoverUrl" alt="Songcover missing">
 
   <mat-card-content>
     <p mat-line>Artist: {{currentArtist}}</p>
