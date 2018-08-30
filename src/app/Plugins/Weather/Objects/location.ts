@@ -1,6 +1,6 @@
 export class Location {
 
-    persistendId: number;
+    persistentId: number;
     name: string;
     zipCode: string;
     city: string;
