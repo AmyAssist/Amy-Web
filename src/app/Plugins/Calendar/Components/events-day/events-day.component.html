@@ -1,7 +1,7 @@
 <div class="mat-elevation-z2">
     <div class="calendar-date-toolbar">
-        <button mat-raised-button color="basic" (click)="getEventsToday()">Today</button>
-        <button mat-raised-button color="basic" (click)="getEventsTomorrow()">Tomorrow</button>
+        <button mat-raised-button color="basic" (click)="chosenDate('today')">Today</button>
+        <button mat-raised-button color="basic" (click)="chosenDate('tomorrow')">Tomorrow</button>
         <button mat-raised-button color="basic" (click)="getEventsOnDate()">Other Day</button>
         <button mat-icon-button *ngIf="!onDate" color="primary" (click)="refresh()">
             <mat-icon>cached</mat-icon>

@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { CalendarEvent } from '../../Objects/CalendarEvent';
 import { CalendarDataService } from '../../Services/calendar-data.service';
+import { LocalDateTime } from '../../../../Objects/LocalDateTime';
 
 /*
   Component for viewing events on different dates.
@@ -16,76 +17,47 @@ import { CalendarDataService } from '../../Services/calendar-data.service';
 export class EventsDayComponent implements OnInit {
 
   events: CalendarEvent[];
-  today: boolean;
-  tomorrow: boolean;
   onDate: boolean;
   selectedDate: string;
-  dateToday: string;
-  dateTomorrow: string;
 
   constructor(private readonly calendarService: CalendarDataService) { }
 
   ngOnInit() {
-    this.getEventsToday();
-  }
-
-  setToday(): void {
-    const tzoffset = (new Date()).getTimezoneOffset() * 60000;
-    this.dateToday = (new Date(Date.now() - tzoffset)).toISOString().slice(0, -1);
-    this.selectedDate = this.dateToday;
-  }
-
-  setTomorrow(): void {
-    const tzoffset = (new Date()).getTimezoneOffset() * 60000;
-    const currentDate = new Date(Date.now() - tzoffset);
-    currentDate.setDate(currentDate.getDate() + 1);
-    this.dateTomorrow = currentDate.toISOString().slice(0, -1);
-  }
-
-  public getEventsToday(): void {
-    this.today = true;
-    this.tomorrow = false;
-    this.onDate = false;
-    this.setToday();
-    this.calendarService.getEvents(this.dateToday).subscribe((data: CalendarEvent[]) => {
-      this.events = [...data];
-    });
-  }
-
-  public getEventsTomorrow(): void {
-    this.today = false;
-    this.tomorrow = true;
-    this.onDate = false;
-    this.setTomorrow();
-    this.calendarService.getEvents(this.dateTomorrow).subscribe((data: CalendarEvent[]) => {
-      this.events = [...data];
-    });
+    this.chosenDate('today');
   }
 
   public chosenDate(eventDate: string): void {
-    const makeDate = new Date(eventDate);
-    makeDate.setDate(makeDate.getDate() + 1);
-    this.selectedDate = makeDate.toISOString().slice(0, -1);
-    this.getEventsOnDate();
+    if (eventDate === "today" || eventDate === "tomorrow") {
+      this.getDate(eventDate);
+      this.onDate = false;
+    } else {
+      const makeDate = new Date(eventDate);
+      this.selectedDate = new LocalDateTime(makeDate.getFullYear(), makeDate.getMonth(), makeDate.getDate(), 0, 0).toString();
+    }
+    this.getEvents();
   }
 
-  public getEventsOnDate(): void {
-    this.today = false;
-    this.tomorrow = false;
-    this.onDate = true;
+  public getDate(eventDate: string) {
+    const tzoffset = (new Date()).getTimezoneOffset() * 60000;
+    const currentDate = new Date(Date.now() - tzoffset);
+    if (eventDate === "tomorrow") {
+      currentDate.setDate(currentDate.getDate() + 1);
+    }
+    this.selectedDate = currentDate.toISOString().slice(0, -1);
+  }
+
+  public getEvents(): void {
     this.calendarService.getEvents(this.selectedDate).subscribe((data: CalendarEvent[]) => {
       this.events = [...data];
     });
   }
 
+  public getEventsOnDate(): void {
+    this.onDate = true;
+  }
+
   public refresh(): void {
-    if (this.today) {
-      this.getEventsToday();
-    } else if (this.tomorrow) {
-      this.getEventsTomorrow();
-    } else if (this.onDate) {
-      this.getEventsOnDate();
-    }
+    this.getEvents();
   }
 
   public getTime(event): string {
