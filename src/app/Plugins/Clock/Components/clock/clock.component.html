@@ -1,22 +1,74 @@
-<mat-toolbar>
-  <span>Wecker</span>
-</mat-toolbar>
-
-<div class="alarmSet-container">
+<div fxLayout="column" class="alarmSet-container mat-elevation-z2">
+  <h1 class="mat-h1">Set Alarm</h1>
   <mat-form-field>
-    <input matInput #hour placeholder="Stunde">
+    <mat-label>Hour</mat-label>
+    <input matInput #hour placeholder="0">
   </mat-form-field>
 
   <mat-form-field>
-    <input matInput #minute placeholder="Minute">
+    <mat-label>Minute</mat-label>
+    <input matInput #minute placeholder="0">
   </mat-form-field>
+  <div>
+    <mat-button-toggle-group #group="matButtonToggleGroup" value="today">
+      <mat-button-toggle value="today">
+        Today
+      </mat-button-toggle>
+      <mat-button-toggle value="tomorrow">
+        Tomorrow
+      </mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+  <div style="margin-top:8px">
+    <button mat-raised-button color="primary" (click)="setAlarm(group.value, hour.value, minute.value)">Save</button>
+    <button mat-raised-button style="margin-left:8px" color="basic" (click)="getAlarms()">Refresh</button>
+  </div>
 </div>
-<button mat-raised-button color="primary" (click)="setAlarm(hour.value, minute.value)">Speichern</button>
 
-<button mat-raised-button color="basic" (click)="getAlarms()">Wecker laden</button>
-<div *ngFor="let clock of clockData; let i = index">
-  <mat-list role="list">
-    <mat-list-item role="listitem">Wecker {{i +1}}</mat-list-item>
-    <mat-list-item role="listitem">{{clock.hour}} : {{clock.minute}}</mat-list-item>
+<div fxLayout="column" class="alarmEdit-container mat-elevation-z2" *ngIf="this.selectedClock">
+  <h2 class="mat-h2">Edit Alarm {{this.selectedClock.id}}</h2>
+  <mat-form-field>
+    <mat-label>Hour</mat-label>
+    <input matInput #edithour placeholder="0">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Minute</mat-label>
+    <input matInput #editminute placeholder="0">
+  </mat-form-field>
+  <div>
+    <mat-button-toggle-group #group="matButtonToggleGroup" value="today">
+      <mat-button-toggle value="today">
+        Today
+      </mat-button-toggle>
+      <mat-button-toggle value="tomorrow">
+        Tomorrow
+      </mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+  <div style="margin-top:8px">
+    <button mat-raised-button color="primary" (click)="editAlarm(this.selectedClock.id, group.value, edithour.value, editminute.value)">Save</button>
+  </div>
+</div>
+
+<div class="alarmList-container mat-elevation-z2">
+  <mat-list role="list" *ngFor="let clock of clockData; let i = index">
+    <mat-list-item role="listitem">
+      <button mat-icon-button *ngIf="clock.active" (click)="activatedeactivateAlarm(clock)">
+        <mat-icon>alarm_on</mat-icon>
+      </button>
+      <button mat-icon-button *ngIf="!clock.active" (click)="activatedeactivateAlarm(clock)">
+        <mat-icon>alarm_off</mat-icon>
+      </button>
+      <button mat-icon-button (click)="showEditFields(clock)">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button (click)="deleteAlarm(clock.id)">
+        <mat-icon>delete_forever</mat-icon>
+      </button>
+      <h1 mat-line>Alarm {{clock.id}}</h1>
+      <h4 mat-line>{{clock.alarmTime.toString().substring(11)}}</h4>
+      <p mat-line>{{clock.alarmTime.toString().substring(8,10)}}.{{clock.alarmTime.toString().substring(5,7)}}.{{clock.alarmTime.toString().substring(0,4)}}</p>
+      <mat-divider></mat-divider>
+    </mat-list-item>
   </mat-list>
 </div>
