@@ -27,6 +27,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatStepperModule } from '@angular/material/stepper';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
 @NgModule({
@@ -55,12 +57,11 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
     BrowserModule,
     RouterModule,
     FlexLayoutModule,
-<<<<<<< HEAD
+    MatSidenavModule,
+    MatStepperModule,
+    MatButtonToggleModule,
     ReactiveFormsModule,
     MatAutocompleteModule
-=======
-    MatButtonToggleModule
->>>>>>> 0778b6b3938df9fbf816fccb1d8b493469136761
   ],
   exports: [
     CommonModule,
@@ -87,11 +88,10 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
     BrowserModule,
     RouterModule,
     FlexLayoutModule,
-<<<<<<< HEAD
+    MatSidenavModule,
+    MatStepperModule,
+    MatButtonToggleModule,
     MatAutocompleteModule
-=======
-    MatButtonToggleModule
->>>>>>> 0778b6b3938df9fbf816fccb1d8b493469136761
   ],
   declarations: [],
   providers: []
