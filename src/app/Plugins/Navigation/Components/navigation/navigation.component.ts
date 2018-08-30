@@ -2,12 +2,12 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { NavigationDataService } from '../../Services/navigation-data.service';
 import { NavPath } from '../../Objects/navPath';
 import { BestTransportResult } from '../../Objects/bestTransportResult';
-import {combineLatest, Observable} from 'rxjs';
-import {FormControl} from '@angular/forms';
-import {map, startWith} from 'rxjs/operators';
+import { combineLatest, Observable } from 'rxjs';
+import { FormControl } from '@angular/forms';
+import { map, startWith } from 'rxjs/operators';
 
 class Tag {
-    constructor(readonly name: string) {}
+    constructor(readonly name: string) { }
 }
 
 @Component({
@@ -84,7 +84,7 @@ export class NavigationComponent implements OnInit {
                 }
                 return tag.name.toLowerCase().indexOf(searchText.toLowerCase()) === 0;
             })
-        ));
+            ));
 
         this.destinationFilteredTags = combineLatest(
             this.destinationField.valueChanges.pipe(startWith('')) as Observable<string | Tag>,
@@ -99,7 +99,7 @@ export class NavigationComponent implements OnInit {
                 }
                 return tag.name.toLowerCase().indexOf(searchText.toLowerCase()) === 0;
             })
-        ));
+            ));
     }
 
     async fromToWay(from: string | Tag, to: string | Tag, date: string) {
@@ -116,24 +116,25 @@ export class NavigationComponent implements OnInit {
 
     async bestType(from: string, to: string, date: string) {
         this.createRoute(from, to, date);
-        this.navigationService.best(this.navPathData).subscribe((data: BestTransportResult) => this.bestTransport = { ...data });
-        await new Promise((resolve, reject) => setTimeout(resolve, 3000));
-        this.calcResult();
-        this.showWay = false;
-        this.showWhen = false;
-        this.showMode = true;
+        this.navigationService.best(this.navPathData).subscribe((data: BestTransportResult) => {
+            this.bestTransport = { ...data };
+            this.calcResult();
+            this.showWay = false;
+            this.showWhen = false;
+            this.showMode = true;
+        });
     }
 
     async searchWhen(from: string | Tag, to: string | Tag, date: string) {
         this.createRoute(from, to, date);
         this.navPathData.travelmode = this.travelMode2;
-        this.navigationService.when(this.navPathData).subscribe((data: string) => this.whenTime = data);
-        await new Promise((resolve, reject) => setTimeout(resolve, 3000));
-        console.log(this.whenTime);
-        this.whenTimeDate = new Date(this.whenTime);
-        this.showWay = false;
-        this.showWhen = true;
-        this.showMode = false;
+        this.navigationService.when(this.navPathData).subscribe((data: string) => {
+            this.whenTime = data;
+            this.whenTimeDate = new Date(this.whenTime);
+            this.showWay = false;
+            this.showWhen = true;
+            this.showMode = false;
+        });
     }
 
     createRoute(from: string | Tag, to: string | Tag, date: string) {
@@ -150,7 +151,7 @@ export class NavigationComponent implements OnInit {
         this.timeDate = new Date(date);
         this.navPathData.time = this.timeDate.toISOString();
     }
-      
+
     calcResult() {
         if (this.bestTransport.mode.toString() === 'DRIVING') {
             this.resultMode = 'car';

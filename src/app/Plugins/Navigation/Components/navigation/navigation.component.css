@@ -1,2 +1,17 @@
 /* Used by Navigation-Plugin to show date-time-picker */
 @import "~ng-pick-datetime/assets/style/picker.min.css";
+
+.music-Content-Row {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  .contentClass {
+    width: 100%;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    margin-left: 8px;
+    margin-right: 8px;
+  }

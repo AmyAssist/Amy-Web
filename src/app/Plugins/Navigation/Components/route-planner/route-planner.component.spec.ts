@@ -23,18 +23,19 @@ import { MatSliderModule } from '@angular/material/slider';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../../../../material.module';
 
-import { NavigationComponent } from './navigation.component';
 import { NavigationDataService } from '../../Services/navigation-data.service';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 
-describe('NavigationComponent', () => {
-  let component: NavigationComponent;
-  let fixture: ComponentFixture<NavigationComponent>;
+import { RoutePlannerComponent } from './route-planner.component';
+
+describe('RoutePlannerComponent', () => {
+  let component: RoutePlannerComponent;
+  let fixture: ComponentFixture<RoutePlannerComponent>;
 
   beforeEach(async(() => {
     const spy = jasmine.createSpyObj('DatabaseService', ['getValue']);
     TestBed.configureTestingModule({
-      declarations: [NavigationComponent],
+      declarations: [RoutePlannerComponent],
       providers: [
         { provide: NavigationDataService, useValue: spy }
       ],

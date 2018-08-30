@@ -1,0 +1,45 @@
+<mat-card>
+  <mat-card-subtitle>
+    Travel Mode
+  </mat-card-subtitle>
+  <div>
+    <mat-form-field>
+      <input matInput #from3 placeholder="From:">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput #to3 placeholder="To:">
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field>
+      <input matInput #dt3 #dateTime3 [owlDateTime]="dt3" [owlDateTimeTrigger]="dt3" readonly placeholder="Departure Time">
+      <owl-date-time #dt3></owl-date-time>
+    </mat-form-field>
+  </div>
+
+  <button mat-raised-button color="primary" (click)="bestType(from3.value, to3.value, dateTime3.value)">Search</button>
+
+  <div *ngIf="showMode">
+    <div *ngIf="!transit">
+      <h3>Route:</h3>
+      <p>Best Travel Mode: {{resultMode}}</p>
+      <p>Distance: {{resultDistance}}</p>
+      <p>Duration: {{resultDuration}}</p>
+      <p>Start-address: {{resultStartAddress}}</p>
+      <p>End-address: {{resultEndAddress}}</p>
+    </div>
+    <div *ngIf="transit">
+      <h3>Route:</h3>
+      <p>Best Travel Mode: {{resultMode}}</p>
+      <p>Distance: {{resultDistance}}</p>
+      <p>Duration: {{resultDuration}}</p>
+      <p>Start-address: {{resultStartAddress}}</p>
+      <p>End-address: {{resultEndAddress}}</p>
+
+      <p>Departure-time: {{resultDepartureTime}}</p>
+      <p>Arrival-time: {{resultArrivalTime}}</p>
+    </div>
+  </div>
+</mat-card>

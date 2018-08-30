@@ -1,0 +1,36 @@
+<mat-card>
+  <mat-card-subtitle>
+    Departure planner
+  </mat-card-subtitle>
+  <div>
+    <mat-form-field>
+      <input matInput #from2 placeholder="From:">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput #to2 placeholder="To:">
+    </mat-form-field>
+  </div>
+
+  <mat-form-field>
+    <mat-select [(value)]="travelMode2" placeholder="Travel Mode">
+      <mat-option>None</mat-option>
+      <mat-option value="DRIVING">Car</mat-option>
+      <mat-option value="TRANSIT">Transit</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <div>
+    <mat-form-field>
+      <input matInput #dt2 #dateTime2 [owlDateTime]="dt2" [owlDateTimeTrigger]="dt2" readonly placeholder="Departure Time">
+      <owl-date-time #dt2></owl-date-time>
+    </mat-form-field>
+  </div>
+
+  <button mat-raised-button color="primary" (click)="searchWhen(from2.value, to2.value, dateTime2.value)">Search</button>
+
+  <div *ngIf="showWhen">
+    <h3>Required departure time:</h3>
+    <p>{{whenTimeDate | date:'medium'}}</p>
+  </div>
+</mat-card>
