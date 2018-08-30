@@ -1,4 +1,4 @@
-import { Music } from '../Objects/music';
+import { Music } from './music';
 
 export class Playlist {
     uri: string;

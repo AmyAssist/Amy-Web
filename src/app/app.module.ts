@@ -26,21 +26,25 @@ import { ClockComponent } from './Plugins/Clock/Components/clock/clock.component
 import { WeatherComponent } from './Plugins/Weather/Components/weather/weather.component';
 import { HomeComponent } from './Components/home/home.component';
 import { CalendarComponent } from './Plugins/Calendar/Components/calendar/calendar.component';
-import { NavigationComponent } from './Plugins/Navigation/Components/navigation/navigation.component';
 import { EmailComponent } from './Plugins/Email/Components/email/email.component';
 
 import { LocationRegistryComponent } from './Plugins/Registry/Components/location-registry/location-registry.component';
-import { ErrorDialogComponent } from './Components/error-dialog/error-dialog.component';
 import { RegistryContainerComponent } from './Plugins/Registry/Components/registry-container/registry-container.component';
 import { ContactRegistryComponent } from './Plugins/Registry/Components/contact-registry/contact-registry.component';
-import { LoginComponent } from './login/login.component';
 
-import { AuthService } from './auth.service';
+import { ErrorDialogComponent } from './Components/error-dialog/error-dialog.component';
+import { LoginComponent } from './Components/login/login.component';
+
+import { AuthService } from './Services/auth.service';
 import { AuthGuard } from './auth.guard';
 
 import { MaterialModule } from './material.module';
 import { MusicModule } from './Plugins/Music/music.module';
-import { AmyChatComponent } from './Components/amy-chat/amy-chat.component';
+
+import { AmyChatComponent } from './Components/bottom-bar/Components/amy-chat/amy-chat.component';
+import { BottomBarComponent } from './Components/bottom-bar/bottom-bar.component';
+
+import { NavigationModule } from './Plugins/Navigation/navigation.module';
 
 /*
     Routing of the components to the respective links
@@ -67,11 +71,6 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'navigation',
-    component: NavigationComponent,
-    canActivate: [AuthGuard]
-  },
-  {
     path: 'email',
     component: EmailComponent,
     canActivate: [AuthGuard]
@@ -95,7 +94,6 @@ const routes: Routes = [
     WeatherComponent,
     HomeComponent,
     CalendarComponent,
-    NavigationComponent,
     EmailComponent,
     LoginComponent,
     LocationRegistryComponent,
@@ -103,9 +101,11 @@ const routes: Routes = [
     RegistryContainerComponent,
     ContactRegistryComponent,
     AmyChatComponent,
+    BottomBarComponent,
   ],
   imports: [
     MusicModule,
+    NavigationModule,
     MaterialModule,
     BrowserModule,
     FormsModule,
@@ -124,7 +124,7 @@ const routes: Routes = [
     HttpClientModule,
     RouterModule.forRoot(routes),
     MatRadioModule,
-    FormsModule,
+    FormsModule
   ],
   exports: [RouterModule],
   providers: [AuthService, AuthGuard],
