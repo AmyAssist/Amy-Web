@@ -27,6 +27,8 @@ export class CommandHandlerService {
 
   private uuid: string;
 
+  private readResponseState = false;
+
   constructor(
     private readonly databaseService: DatabaseService,
     private readonly chat: ChatService,
@@ -43,7 +45,7 @@ export class CommandHandlerService {
     interval(1000).pipe(mergeMap(() => this.databaseService.checkForResponses(uuid))).subscribe(data => {
       console.log(data);
       if (data) {
-        this.chat.addMessage(AMY_CHAT_NAME[this.options.language], data, true);
+        this.chat.addMessage(AMY_CHAT_NAME[this.options.language], data, this.readResponseState);
       }
 
     }, error => {
@@ -58,6 +60,7 @@ export class CommandHandlerService {
    */
   public sendCommand(commandValue: string, readResponse: boolean) {
     const commandData = new Command(commandValue);
+    this.readResponseState = readResponse;
     this.databaseService.sendCommand(commandData, this.uuid).subscribe(r => {
       this.errorStateMatcher.error = false;
     }, error => {
