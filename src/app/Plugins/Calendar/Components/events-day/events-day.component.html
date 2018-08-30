@@ -1,10 +1,8 @@
 <div class="mat-elevation-z2">
     <div class="calendar-date-toolbar">
-        <mat-button-toggle-group name="fontStyle" aria-label="Font Style" value="today">
-            <mat-button-toggle value="today" (click)="getEventsToday()">Today</mat-button-toggle>
-            <mat-button-toggle value="tomorrow" (click)="getEventsTomorrow()">Tomorrow</mat-button-toggle>
-            <mat-button-toggle value="other-day" (click)="getEventsOnDate()">Other day</mat-button-toggle>
-        </mat-button-toggle-group>
+        <button mat-raised-button color="basic" (click)="getEventsToday()">Today</button>
+        <button mat-raised-button color="basic" (click)="getEventsTomorrow()">Tomorrow</button>
+        <button mat-raised-button color="basic" (click)="getEventsOnDate()">Other Day</button>
         <button mat-icon-button *ngIf="!onDate" color="primary" (click)="refresh()">
             <mat-icon>cached</mat-icon>
         </button>
