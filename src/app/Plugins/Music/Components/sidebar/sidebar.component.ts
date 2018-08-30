@@ -40,7 +40,7 @@ export class SidebarComponent implements OnInit {
   // user spotify-playlists
   playlistAllUser: Playlist[];
 
-  constructor(private readonly musicService: MusicDataService, private musicTransService: MusicDataTransferService) { }
+  constructor(private readonly musicService: MusicDataService, private readonly musicTransService: MusicDataTransferService) { }
 
   ngOnInit() {
     console.log(this.musicService);
@@ -66,19 +66,16 @@ export class SidebarComponent implements OnInit {
     this.playPlaylist(id, 'user');
     this.musicTransService.setImageUrl(this.playlistAllUser[id].imageUrl);
     this.musicTransService.imageChanged = true;
-    // this.getCurrentSong();
   }
 
   playPlaylistFeatured(id: number) {
     this.playPlaylist(id, 'featured');
     this.musicTransService.setImageUrl(this.playlistAllFeatured[id].imageUrl);
     this.musicTransService.imageChanged = true;
-    // this.getCurrentSong();
   }
 
   playPlaylist(playlistNumber: number, playlistType: string) {
     this.musicService.playPlaylist(playlistNumber, playlistType).subscribe();
-    // playlist => this.musicPlaylistData = playlist
     if (playlistType === 'user') {
       this.musicPlaylistData = this.playlistAllUser[playlistNumber];
     }

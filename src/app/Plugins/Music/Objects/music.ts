@@ -4,6 +4,6 @@ export class Music {
 
     artists: string[];
     durationInMs: number;
-    
+
     constructor() { }
 }

@@ -37,7 +37,7 @@ export class CurrentSongComponent implements OnInit {
   currentArtist: string;
   currentTitle: string;
 
-  constructor(private readonly musicService: MusicDataService, private musicTransService: MusicDataTransferService) { }
+  constructor(private readonly musicService: MusicDataService, private readonly musicTransService: MusicDataTransferService) { }
 
   ngOnInit() {
     this.musicService.setupPath();
@@ -47,73 +47,73 @@ export class CurrentSongComponent implements OnInit {
     this.musicCoverUrl = 'assets/music/defaultMusicCover.png';
     this.getVolume();
     this.getCurrentSong();
-}
-
-/*
-  getting the current playing song
-*/
-getCurrentSong() {
-  this.musicService.getCurrentSong()
-    .subscribe((data: Music) => {
-      this.musicData = { ...data };
-      this.currentArtist = this.musicData.artists[0].toString();
-      this.currentTitle = this.musicData.name;
-    }
-    );
-  if (this.musicTransService.getImageChanged) {
-    this.musicCoverUrl = this.musicTransService.getImageUrl();
-    this.musicTransService.setImageChanged(false);
   }
-}
-/*
-    resuming the paused song
+
+  /*
+    getting the current playing song
   */
-setResume() {
-  this.musicService.resume()
-    .subscribe();
-  this.playing = true;
-}
+  getCurrentSong() {
+    this.musicService.getCurrentSong()
+      .subscribe((data: Music) => {
+        this.musicData = { ...data };
+        this.currentArtist = this.musicData.artists[0].toString();
+        this.currentTitle = this.musicData.name;
+      }
+      );
+    if (this.musicTransService.getImageChanged) {
+      this.musicCoverUrl = this.musicTransService.getImageUrl();
+      this.musicTransService.setImageChanged(false);
+    }
+  }
+  /*
+      resuming the paused song
+    */
+  setResume() {
+    this.musicService.resume()
+      .subscribe();
+    this.playing = true;
+  }
 
-/*
-  pausing the playing song
-*/
-setPause() {
-  this.musicService.pause()
-    .subscribe();
-  this.playing = false;
-}
+  /*
+    pausing the playing song
+  */
+  setPause() {
+    this.musicService.pause()
+      .subscribe();
+    this.playing = false;
+  }
 
-/*
-  skipping the playing song
-*/
-setSkip() {
-  this.musicService.skip()
-    .subscribe();
-  this.playing = true;
-}
+  /*
+    skipping the playing song
+  */
+  setSkip() {
+    this.musicService.skip()
+      .subscribe();
+    this.playing = true;
+  }
 
-/*
-  returning to the previous song
-*/
-setBack() {
-  this.musicService.back()
-    .subscribe();
-  this.playing = true;
-}
+  /*
+    returning to the previous song
+  */
+  setBack() {
+    this.musicService.back()
+      .subscribe();
+    this.playing = true;
+  }
 
-/*
-  setting the volume
-*/
-changeVolume(volumeData: number) {
-  this.musicService.setVolume(volumeData)
-    .subscribe();
-}
+  /*
+    setting the volume
+  */
+  changeVolume(volumeData: number) {
+    this.musicService.setVolume(volumeData)
+      .subscribe();
+  }
 
-/*
-get the volume
-*/
+  /*
+  get the volume
+  */
 
-getVolume() {
-  this.musicService.getVolume().subscribe((data: number) => this.volumeValue = data);
-}
+  getVolume() {
+    this.musicService.getVolume().subscribe((data: number) => this.volumeValue = data);
+  }
 }

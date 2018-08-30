@@ -3,26 +3,11 @@
   <img mat-card-image src={{musicCoverUrl}} alt="Songcover missing">
 
   <mat-card-content>
-    <!--
-    <mat-list>
-      <mat-list-item>
-        <p mat-line>Artist: {{musicData.artist}}</p>
-      </mat-list-item>
-      <mat-list-item>
-        <p mat-line>Title: {{musicData.title}}</p>
-      </mat-list-item>
-    </mat-list>
-    -->
-
     <p mat-line>Artist: {{currentArtist}}</p>
     <p mat-line>Title: {{currentTitle}}</p>
   </mat-card-content>
 
   <mat-card-actions style="justify-content: center">
-    <!--
-      <button mat-raised-button color="primary" (click)="getCurrentSong()">Current song</button>
-      -->
-
     <button mat-icon-button color="primary" (click)="setBack()">
       <mat-icon>skip_previous</mat-icon>
     </button>
@@ -45,18 +30,3 @@
 
   </mat-card-actions>
 </mat-card>
-
-
-<!--
-<div *ngIf=playlist>
-  <mat-list-item role="listitem">Playlist: {{musicPlaylistData.name}}</mat-list-item>
-  <mat-list>
-    <mat-list-item *ngFor="let music of playlistSongs; let i = index">
-      <p matLine>Track: {{i +1}}</p>
-      <p matLine>Artist: {{music.artist}}</p>
-      <p matLine>Title: {{music.title}}</p>
-    </mat-list-item>
-  </mat-list>
-</div>
-
--->

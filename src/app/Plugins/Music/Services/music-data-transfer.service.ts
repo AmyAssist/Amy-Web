@@ -5,10 +5,10 @@ import { Injectable } from '@angular/core';
 })
 export class MusicDataTransferService {
 
-  imageUrl: string
+  imageUrl: string;
   imageChanged: boolean;
 
-  constructor() { 
+  constructor() {
     this.imageChanged = false;
   }
 

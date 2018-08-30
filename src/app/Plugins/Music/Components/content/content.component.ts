@@ -44,7 +44,7 @@ export class ContentComponent implements OnInit {
   searchResultPlaylist: Playlist[];
 
 
-  constructor(private readonly musicService: MusicDataService, private musicTransService: MusicDataTransferService) { }
+  constructor(private readonly musicService: MusicDataService, private readonly musicTransService: MusicDataTransferService) { }
 
   ngOnInit() {
     console.log(this.musicService);
@@ -63,13 +63,13 @@ export class ContentComponent implements OnInit {
     sending a search request
   */
   search(searchValue: string, type: string) {
-    if (type == 'song') {
+    if (type === 'song') {
       this.searchSong(searchValue, type);
-    } else if (type == 'album') {
+    } else if (type === 'album') {
       this.searchAlbum(searchValue, type);
-    } else if (type == 'artist') {
+    } else if (type === 'artist') {
       this.searchArtist(searchValue, type);
-    } else if (type == 'playlist') {
+    } else if (type === 'playlist') {
       this.searchPlaylist(searchValue, type);
     }
   }
@@ -99,19 +99,19 @@ export class ContentComponent implements OnInit {
   }
 
   playSearchResults(id: number) {
-    if (this.searchType == 'track') {
+    if (this.searchType === 'track') {
       this.musicService.playSong(id).subscribe();
       this.musicTransService.setImageUrl("assets/music/defaultMusicCover.png");
       this.musicTransService.imageChanged = true;
-    } else if (this.searchType == 'artist') {
+    } else if (this.searchType === 'artist') {
       this.musicService.playArtist(id).subscribe();
       this.musicTransService.setImageUrl(this.searchResults[id].imageUrl);
       this.musicTransService.imageChanged = true;
-    } else if (this.searchType == 'album') {
+    } else if (this.searchType === 'album') {
       this.musicService.playAlbum(id).subscribe();
       this.musicTransService.setImageUrl(this.searchResults[id].imageUrl);
       this.musicTransService.imageChanged = true;
-    } else if (this.searchType == 'playlist') {
+    } else if (this.searchType === 'playlist') {
       this.musicService.playPlaylist(id, 'search').subscribe();
       this.musicTransService.setImageUrl(this.searchResults[id].imageUrl);
       this.musicTransService.imageChanged = true;
