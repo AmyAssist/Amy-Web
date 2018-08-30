@@ -46,7 +46,6 @@ export class CurrentSongComponent implements OnInit {
     this.getVolume();
     this.getCurrentSong();
     this.musicCoverUrl = 'assets/music/defaultMusicCover.png';
-    
   }
 
   /*
