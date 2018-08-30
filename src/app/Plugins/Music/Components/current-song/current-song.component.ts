@@ -28,7 +28,6 @@ export class CurrentSongComponent implements OnInit {
 
   // music-object for the play-function
   musicData: Music;
-  //musicCoverUrl: string;
 
   musicCoverUrl: string;
   // bool for showing the current playlist

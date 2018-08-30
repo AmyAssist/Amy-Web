@@ -101,7 +101,7 @@ export class ContentComponent implements OnInit {
   playSearchResults(id: number) {
     if (this.searchType === 'track') {
       this.musicService.playSong(id).subscribe();
-      this.musicTransService.setImageUrl("assets/music/defaultMusicCover.png");
+      this.musicTransService.setImageUrl('assets/music/defaultMusicCover.png');
       this.musicTransService.imageChanged = true;
     } else if (this.searchType === 'artist') {
       this.musicService.playArtist(id).subscribe();
