@@ -12,7 +12,10 @@ import { BackendResolver } from '../../../Services/backendResolver.service';
   providedIn: 'root'
 })
 export class CalendarDataService {
-  path: string;
+
+  get path() {
+    return this.backend.backendPath + 'calendar/';
+  }
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -36,12 +39,11 @@ export class CalendarDataService {
   }
 
   constructor(private readonly backend: BackendResolver, private readonly http: HttpClient) {
-    this.path = backend.backendPath + 'calendar/';
   }
 
   getEvents(date: string) {
     return this.http.get<CalendarEvent[]>(`${this.path}eventsAt/${date}`, this.httpOptions).pipe(
-    catchError(this.handleError)).pipe(map((response: CalendarEvent[]) => {
+      catchError(this.handleError)).pipe(map((response: CalendarEvent[]) => {
         response.forEach(l => Object.setPrototypeOf(l, new CalendarEvent()));
         return response;
       }));

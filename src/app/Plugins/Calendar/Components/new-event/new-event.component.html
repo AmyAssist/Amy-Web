@@ -1,6 +1,6 @@
 <div class="mat-elevation-z2">
   <mat-form-field class="new-event-field">
-    <input matInput #title placeholder="Choose a title to continue!" (change)="setTitle(title.value)">
+    <input matInput [(ngModel)]="title" placeholder="Choose a title to continue!" (change)="setTitle()">
   </mat-form-field>
 
 

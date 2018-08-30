@@ -38,9 +38,6 @@ export class NewEventComponent implements OnInit {
   constructor(private readonly calendarService: CalendarDataService) { }
 
   ngOnInit() {
-    this.allDay = false;
-    this.startChoosen = false;
-    this.endChoosen = false;
     this.minDate = null;
     this.endDate = null;
     this.resetValues();
@@ -52,8 +49,7 @@ export class NewEventComponent implements OnInit {
     }
   }
 
-  setTitle(title): void {
-    this.title = title;
+  setTitle(): void {
     if (this.title !== '') {
       this.titleChoosen = true;
     } else {
@@ -113,6 +109,10 @@ export class NewEventComponent implements OnInit {
   }
 
   resetValues(): void {
+    this.allDay = false;
+    this.titleChoosen = false;
+    this.startChoosen = false;
+    this.endChoosen = false;
     this.location = '';
     this.reminderTime = null;
     this.timeUnit = 'minutes';
