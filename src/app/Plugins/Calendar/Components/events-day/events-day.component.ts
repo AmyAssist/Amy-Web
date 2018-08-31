@@ -23,6 +23,7 @@ export class EventsDayComponent implements OnInit {
   constructor(private readonly calendarService: CalendarDataService) { }
 
   ngOnInit() {
+    this.events = [];
     this.chosenDate('today');
   }
 

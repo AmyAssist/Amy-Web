@@ -17,8 +17,9 @@
         </button>
     </div>
     <mat-divider></mat-divider>
-    <mat-list *ngFor="let event of events">
-        <mat-list-item>
+    <mat-list>
+        <div *ngIf="events.length === 0">No events</div>
+        <mat-list-item *ngFor="let event of events">
             <h4 mat-line *ngIf="event.allDay; else thenBlock">{{event.summary}}</h4>
             <ng-template #thenBlock>
                 <h4 mat-line>{{event.summary}}: {{getTime(event)}}</h4>
