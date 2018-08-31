@@ -27,7 +27,7 @@ export class EventsDayComponent implements OnInit {
   }
 
   public chosenDate(eventDate: string): void {
-    if (eventDate === "today" || eventDate === "tomorrow") {
+    if (eventDate === 'today' || eventDate === 'tomorrow') {
       this.getDate(eventDate);
       this.onDate = false;
     } else {
@@ -40,7 +40,7 @@ export class EventsDayComponent implements OnInit {
   public getDate(eventDate: string) {
     const tzoffset = (new Date()).getTimezoneOffset() * 60000;
     const currentDate = new Date(Date.now() - tzoffset);
-    if (eventDate === "tomorrow") {
+    if (eventDate === 'tomorrow') {
       currentDate.setDate(currentDate.getDate() + 1);
     }
     this.selectedDate = currentDate.toISOString().slice(0, -1);
