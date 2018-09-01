@@ -21,7 +21,6 @@ export class WeatherComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.weatherService.setupPath();
     this.selectedType = 'today';
     this.weatherService.getAllLocations().subscribe((data: Location[]) => {
       this.locations = data;
