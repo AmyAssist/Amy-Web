@@ -32,8 +32,12 @@ export class BackendResolver {
     setBackendPath(path: string) {
         if (path == null) {
             this.backendPath.next(null);
+        } else {
+            const urlObject = new URL(path);
+            let url = urlObject.href;
+            url += url.endsWith('/') ? '' : '/';
+            this.backendPath.next(url);
         }
-        this.backendPath.next(path);
     }
 
     private isValidBackendURL(backendUrl: string): boolean {

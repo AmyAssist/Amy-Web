@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../Services/auth.service';
 
@@ -9,6 +9,18 @@ import { AuthService } from '../../Services/auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+
+  urlFormControl = new FormControl('', [
+    Validators.required,
+    (control) => {
+      try {
+        const t = new URL(control.value);
+      } catch (e) {
+        return { url: 'error' };
+      }
+      return null;
+    }
+  ]);
 
   url: string;
   inputText = '';
