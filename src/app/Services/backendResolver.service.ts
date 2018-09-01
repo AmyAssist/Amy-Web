@@ -1,28 +1,43 @@
-import { Injectable, ErrorHandler, Component, OnInit } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { throwError } from 'rxjs';
+import { throwError, BehaviorSubject } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-/*
-    Service for providing and receiving data from the REST interface that is used for general functions of the application.
-*/
+/**
+ *    Service for providing and receiving data from the REST interface that is used for general functions of the application.
+ */
 @Injectable({
     providedIn: 'root'
 })
 export class BackendResolver {
 
-    backendPath: string;
+    private readonly backendPath = new BehaviorSubject<string>(null);
     backendSoundEnabled = true;
 
     constructor(private readonly http: HttpClient) { }
+    /**
+     * The backend URL to use to connect to the Backend server.
+     * The value can be null if currently no backend URL is provided.
+     * You can subscibe to changes of this value.
+     * @returns a BehaviorSubject representing the backend URL over time
+     */
+    get backendURL() {
+        return this.backendPath;
+    }
 
     private handleError(error: HttpErrorResponse) {
-        console.error(error);
-        return throwError('Something bad happened; please try again later.');
+        return throwError(error);
     }
 
     setBackendPath(path: string) {
-        this.backendPath = path;
+        if (path == null) {
+            this.backendPath.next(null);
+        }
+        this.backendPath.next(path);
+    }
+
+    private isValidBackendURL(backendUrl: string): boolean {
+        return true;
     }
 
     /*

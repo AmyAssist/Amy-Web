@@ -17,7 +17,9 @@ import { BackendResolver } from '../../../Services/backendResolver.service';
 })
 export class MusicDataService {
 
-  path: string;
+  get path() {
+    return this.backend.backendURL.getValue() + 'music/';
+  }
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -40,13 +42,7 @@ export class MusicDataService {
     return throwError(
       'Something bad happened; please try again later.');
   }
-  constructor(private readonly backend: BackendResolver, private readonly http: HttpClient) {
-    this.setupPath();
-  }
-
-  setupPath() {
-    this.path = this.backend.backendPath + 'music/';
-  }
+  constructor(private readonly backend: BackendResolver, private readonly http: HttpClient) { }
 
   /*
     Returns a login link to a personal spotify Account
