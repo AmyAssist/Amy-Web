@@ -2,7 +2,9 @@
 
   <h1 class='mat-display-1 header'>E-Mail</h1>
 
-  <mat-card *ngIf=!credentialsExist>
+  <p *ngIf=checkingConnection>Checking if connection already exists...</p>
+
+  <mat-card *ngIf='!connected && !checkingConnection'>
 
     <mat-card-title>
       Log-In
@@ -37,7 +39,7 @@
     <p *ngIf=connecting style="margin-top: 1em">Connecting...</p>
     <p *ngIf='connectionError && !connecting' class="errorMessage">Couldn't connect to mail server</p>
   </mat-card>
-  <div *ngIf=connected>
+  <div *ngIf='connected && !checkingConnection'>
     <button mat-raised-button color="primary" style="float: right" (click)="disconnect()">Log Out</button>
     <app-email-messagelist></app-email-messagelist>
   </div>

@@ -8,24 +8,24 @@ import { EMailCredentials } from '../../Objects/EMailCredentials';
   styleUrls: ['./email.component.css']
 })
 export class EmailComponent implements OnInit {
-
-  readonly usernameKey = 'mail_username';
-  readonly passwordKey = 'mail_password';
-  readonly serverKey = 'mail_server';
-
-  credentialsExist = false;
+  checkingConnection: boolean;
   connecting = false;
+
   connected = false;
   connectionError = false;
 
   constructor(private readonly emailService: EmailDataService) { }
 
   ngOnInit() {
-    this.emailService.getCredentials().subscribe((creds: EMailCredentials) => {
-      if (creds) {
-        this.credentialsExist = true;
-        this.connect(creds.username, creds.password, creds.imapServer);
+    this.checkingConnection = true;
+    this.emailService.isConnected().subscribe((connected: boolean) => {
+      if (connected) {
+        this.connected = true;
       }
+      this.checkingConnection = false;
+    }, error => {
+      console.log(error);
+      this.checkingConnection = false;
     });
   }
 
@@ -39,7 +39,6 @@ export class EmailComponent implements OnInit {
     this.connecting = true;
     this.emailService.connect(credentials).subscribe((data: boolean) => {
       if (data === true) {
-        this.credentialsExist = true;
         this.connectionError = false;
         this.connected = true;
       } else {
@@ -58,7 +57,6 @@ export class EmailComponent implements OnInit {
   disconnect() {
     this.emailService.disconnect().subscribe(() => {
       this.connected = false;
-      this.credentialsExist = false;
     });
   }
 

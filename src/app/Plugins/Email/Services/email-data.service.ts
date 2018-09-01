@@ -24,12 +24,12 @@ export class EmailDataService {
         this.path = this.backend.backendPath + 'email/';
     }
 
-    connect(credentials: EMailCredentials) {
-        return this.http.post(this.path + 'connect', credentials, this.httpOptions);
+    isConnected() {
+        return this.http.get(this.path + 'isConnected');
     }
 
-    getCredentials() {
-        return this.http.get(this.path + 'getCredentials');
+    connect(credentials: EMailCredentials) {
+        return this.http.post(this.path + 'connect', credentials, this.httpOptions);
     }
 
     getMails() {
