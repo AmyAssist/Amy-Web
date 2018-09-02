@@ -40,7 +40,6 @@ export class NavigationComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.navigationService);
-    this.navigationService.setupPath();
     this.showWay = false;
     this.showWhen = false;
     this.showMode = false;

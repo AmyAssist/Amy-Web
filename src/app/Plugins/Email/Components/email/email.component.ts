@@ -17,7 +17,6 @@ export class EmailComponent implements OnInit {
   constructor(private readonly emailService: EmailDataService) { }
 
   ngOnInit() {
-    this.emailService.setupPath();
     this.unreadMessages = -1;
     this.newMessages = false;
   }
