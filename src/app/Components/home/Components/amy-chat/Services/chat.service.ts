@@ -19,9 +19,9 @@ export class ChatService {
      * @param name Name of the Message Source
      * @param value String of the Message
      */
-  public addMessage(name: string, value: string, readLoud: boolean) {
+  public addMessage(isResponse: boolean, name: string, value: string, readLoud: boolean) {
     this.zone.run(() => {
-      this.messages.push({ name, value });
+      this.messages.push({ isResponse, name, value });
     });
     if (readLoud) {
       this.ttsService.speak(value);

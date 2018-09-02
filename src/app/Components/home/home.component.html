@@ -1,6 +1,46 @@
-<mat-card>
-    <mat-card-title>Home</mat-card-title>
-    <mat-card-content>
-        Welcome to Amy Web!
-    </mat-card-content>
-</mat-card>
+<!--Home Component-->
+<div class="main" fxLayout="column" fxLayoutAlign="end center">
+
+  <!-- Chat Displayal-->
+  <div class="content chat-background mat-elevation-z2" fxLayout="column" fxLayoutAlign="end center">
+    <div class="chat-text" #scrollMe [scrollTop]="scrollMe.scrollHeight">
+      <app-amy-chat></app-amy-chat>
+    </div>
+  </div>
+
+  <!--Input Field-->
+  <div class="content">
+    <mat-form-field class="input-line">
+      <textarea rows="1" matInput (keydown.enter)="sendTextFieldMessage()" #command [(ngModel)]="commandTextValue" [placeholder]="commandInputPlaceholder"></textarea>
+    </mat-form-field>
+    <button mat-icon-button color="primary" (click)="sendTextFieldMessage()">
+      <mat-icon>send</mat-icon>
+    </button>
+  </div>
+
+  <!--Buttons-->
+  <div class="content" fxLayout="row" fxLayoutAlign="center center">
+
+    <!--Sound Button - Mute/Unmute & Cancel current Voice Output-->
+    <button mat-icon-button (click)="triggerSound()">
+      <mat-icon *ngIf="soundEnabled">record_voice_over</mat-icon>
+      <mat-icon class="mat-icons color_red" *ngIf="!soundEnabled">voice_over_off</mat-icon>
+    </button>
+
+    <!--SR Buttom-->
+    <button mat-button class="button round" *ngIf="srSupported" [@srState]="srState" (click)="triggerSR()">
+      <mat-icon class="material-icons md-48">keyboard_voice</mat-icon>
+    </button>
+    <button *ngIf="!srSupported" disabled [@srState]="srState" (click)="triggerSR()">
+      <mat-icon class="material-icons md-48">keyboard_voice</mat-icon>
+    </button>
+
+    <!--Backend Sound Button - Mute/Unmute Sound Output of the Backend-->
+    <button mat-icon-button (click)="triggerBackendSound()">
+      <mat-icon *ngIf="backend.checkBackendSoundState()">music_note</mat-icon>
+      <mat-icon class="mat-icons color_red" *ngIf="!backend.checkBackendSoundState()">music_off</mat-icon>
+    </button>
+
+  </div>
+
+</div>

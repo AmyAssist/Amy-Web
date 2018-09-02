@@ -9,12 +9,8 @@ import { MaterialModule } from './material.module';
 
 
 import { AppComponent } from './app.component';
-import { BottomBarComponent } from './Components/bottom-bar/bottom-bar.component';
-import { AmyChatComponent } from './Components/bottom-bar/Components/amy-chat/amy-chat.component';
 
-import { CommandHandlerService } from './Components/bottom-bar/Services/command-handler.service';
 import { OptionsService } from './Services/options.service';
-import { ChatService } from './Components/bottom-bar/Components/amy-chat/Services/chat.service';
 
 describe('AppComponent', () => {
     const optionsSpy = jasmine.createSpyObj('OptionsService', ['getLanguage']);
@@ -25,8 +21,6 @@ describe('AppComponent', () => {
             declarations: [
                 AppComponent,
                 RouterOutletStubComponent,
-                BottomBarComponent,
-                AmyChatComponent
             ],
             imports: [
                 MaterialModule,
@@ -35,9 +29,7 @@ describe('AppComponent', () => {
                 RouterTestingModule
             ],
             providers: [
-                { provide: OptionsService, useValue: optionsSpy },
-                { provide: CommandHandlerService, useValue: commandHandlerSpy },
-                { provide: ChatService, useValue: chatSpy }
+                { provide: OptionsService, useValue: optionsSpy }
             ]
         }).compileComponents();
     }));

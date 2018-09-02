@@ -41,8 +41,7 @@ import { AuthGuard } from './auth.guard';
 import { MaterialModule } from './material.module';
 import { MusicModule } from './Plugins/Music/music.module';
 
-import { AmyChatComponent } from './Components/bottom-bar/Components/amy-chat/amy-chat.component';
-import { BottomBarComponent } from './Components/bottom-bar/bottom-bar.component';
+import { AmyChatComponent } from './Components/home/Components/amy-chat/amy-chat.component';
 
 import { NavigationModule } from './Plugins/Navigation/navigation.module';
 
@@ -101,7 +100,6 @@ const routes: Routes = [
     RegistryContainerComponent,
     ContactRegistryComponent,
     AmyChatComponent,
-    BottomBarComponent,
   ],
   imports: [
     MusicModule,

@@ -1,5 +1,137 @@
-.command-input-field {
-    min-width: 150px;
-    max-width: 500px;
+.main {
+    display: flex;
+    flex-direction: column;
+    align-content: flex-end;
+    width: inherit;
+    height: inherit;
+    position: fixed;
+    padding: 8px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    /* top: @media */
+}
+
+.content {
+    flex: content;
+}
+
+.content.chat-background {
+    background-color: floralwhite;
+    height: 100%;
     width: 100%;
+}
+
+.chat-text {
+    width: 100%;
+    align-items: flex-end;
+    overflow: auto;
+    scroll-behavior: auto;
+}
+
+.button.round{ 
+    border-radius: 50%;
+    color: white;
+}
+
+.material-icons.md-18 { font-size: 18px; width: 18px; height: 18px; }
+.material-icons.md-24 { font-size: 24px; width: 24px; height: 24px; }
+.material-icons.md-36 { font-size: 36px; width: 36px; height: 36px; }
+.material-icons.md-48 { font-size: 48px !important; width: 48px !important; height: 48px !important; }
+
+.mat-icons.color_red { color: rgb(255, 0, 0); }
+
+/* Height */
+@media (min-height: 1100px){
+    .main{
+        top: 5%;
+    }
+}
+
+@media (min-height: 600px) and (max-height: 1099px){
+    .main{
+        top: 10%;
+    }
+}
+
+@media (min-height: 400px) and (max-height: 599px){
+    .main{
+        top: 15%;
+    }
+}
+
+@media (min-height: 300px) and (max-height: 399px){
+    .main{
+        top: 20%;
+    }
+}
+
+@media (min-height: 240px) and (max-height: 299px){
+    .main{
+        top: 25%;
+    }
+}
+
+@media (max-height: 239px){
+    .main{
+        top: 0px;
+        width: 50%;
+        left: 25%;
+    }
+}
+
+
+/* Width */
+@media (min-width: 1600px){
+    .input-line{
+        width: 1500px;
+    }
+}
+
+@media (min-width: 1200px) and (max-width: 1599px){
+    .input-line{
+        width: 1100px;
+    }
+}
+
+@media (min-width: 1000px) and (max-width: 1199px){
+    .input-line{
+        width: 950px;
+    }
+}
+
+@media (min-width: 800px) and (max-width: 999px){
+    .input-line{
+        width: 750px;
+    }
+}
+
+@media (min-width: 600px) and (max-width: 799px){
+    .input-line{
+        width: 550px;
+    }
+}
+
+@media (min-width: 500px) and (max-width: 599px){
+    .input-line{
+        width: 550px;
+    }
+}
+
+@media (min-width: 400px) and (max-width: 599px){
+    .input-line{
+        width: 350px;
+    }
+}
+
+@media (min-width: 300px) and (max-width: 399px){
+    .input-line{
+        width: 250px;
+    }
+}
+
+@media (min-width: 240px) and (max-width: 299px){
+    .input-line{
+        width: 200px;
+    }
 }
