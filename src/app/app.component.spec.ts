@@ -14,8 +14,6 @@ import { OptionsService } from './Services/options.service';
 
 describe('AppComponent', () => {
     const optionsSpy = jasmine.createSpyObj('OptionsService', ['getLanguage']);
-    const commandHandlerSpy = jasmine.createSpyObj('CommandHandlerService', ['sendCommand']);
-    const chatSpy = jasmine.createSpyObj('ChatService', ['getMessages', 'addMessage']);
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [
