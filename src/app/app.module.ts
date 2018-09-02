@@ -25,7 +25,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { ClockComponent } from './Plugins/Clock/Components/clock/clock.component';
 import { WeatherComponent } from './Plugins/Weather/Components/weather/weather.component';
-import { HomeComponent } from './Components/home/home.component';
+import { HomeComponent } from './Components/Home/home.component';
 import { CalendarComponent } from './Plugins/Calendar/Components/calendar/calendar.component';
 import { EmailComponent } from './Plugins/Email/Components/email/email.component';
 
@@ -47,6 +47,8 @@ import { AmyChatComponent } from './Components/bottom-bar/Components/amy-chat/am
 import { BottomBarComponent } from './Components/bottom-bar/bottom-bar.component';
 
 import { NavigationModule } from './Plugins/Navigation/navigation.module';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 /*
     Routing of the components to the respective links
@@ -129,6 +131,7 @@ const routes: Routes = [
     MatRadioModule,
     FormsModule,
     MatProgressSpinnerModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   exports: [RouterModule],
   providers: [AuthService, AuthGuard],
