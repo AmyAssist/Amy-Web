@@ -1,0 +1,51 @@
+<!--Home Component-->
+<div class="main mat-elevation-z2" fxLayout="column" fxLayoutAlign="end center">
+
+  <!-- Chat Displayal-->
+  <div class="content chat-background" fxFlex fxLayout="column" fxLayoutAlign="end center">
+    <div class="chat-text" #scrollMe [scrollTop]="scrollMe.scrollHeight">
+      <app-messages-container></app-messages-container>
+    </div>
+  </div>
+
+  <!--Input Field-->
+  <div fxLayout="row" fxLayoutAlign="center center" style="width: 100%;padding: 8px">
+    <div fxFlex>
+      <mat-form-field class="input-line">
+        <mat-label>{{commandInputPlaceholder}}</mat-label>
+        <textarea matInput class="textarea-fix" rows="1" (keydown.enter)="sendTextFieldMessage()" #command [(ngModel)]="commandTextValue"></textarea>
+      </mat-form-field>
+    </div>
+    <div>
+      <button mat-icon-button color="primary" (click)="sendTextFieldMessage()">
+        <mat-icon>send</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <!--Buttons-->
+  <div style="padding: 8px" fxLayout="row" fxLayoutAlign="center center">
+
+    <!--Sound Button - Mute/Unmute & Cancel current Voice Output-->
+    <button mat-icon-button (click)="triggerSound()">
+      <mat-icon *ngIf="soundEnabled">record_voice_over</mat-icon>
+      <mat-icon class="mat-icons color_red" *ngIf="!soundEnabled">voice_over_off</mat-icon>
+    </button>
+
+    <!--SR Buttom-->
+    <button mat-button class="button round" *ngIf="srSupported" [@srState]="srState" (click)="triggerSR()">
+      <mat-icon class="material-icons md-48">keyboard_voice</mat-icon>
+    </button>
+    <button *ngIf="!srSupported" disabled [@srState]="srState" (click)="triggerSR()">
+      <mat-icon class="material-icons md-48">keyboard_voice</mat-icon>
+    </button>
+
+    <!--Backend Sound Button - Mute/Unmute Sound Output of the Backend-->
+    <button mat-icon-button (click)="triggerBackendSound()">
+      <mat-icon *ngIf="backendSoundState">music_note</mat-icon>
+      <mat-icon class="mat-icons color_red" *ngIf="!backendSoundState">music_off</mat-icon>
+    </button>
+
+  </div>
+
+</div>
