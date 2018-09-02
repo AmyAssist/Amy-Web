@@ -13,7 +13,7 @@ import { AppComponent } from './app.component';
 import { OptionsService } from './Services/options.service';
 
 describe('AppComponent', () => {
-    const optionsSpy = jasmine.createSpyObj('OptionsService', ['getLanguage']);
+    const optionsSpy = jasmine.createSpyObj('OptionsService', ['language']);
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [
