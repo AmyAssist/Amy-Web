@@ -100,7 +100,9 @@ const routes: Routes = [
     ErrorDialogComponent,
     RegistryContainerComponent,
     ContactRegistryComponent,
-    MessagesContainerComponent,  ],
+    MessagesContainerComponent,  
+    MessageListComponent,
+  ],
   imports: [
     MusicModule,
     NavigationModule,
