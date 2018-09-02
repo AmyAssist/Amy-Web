@@ -6,10 +6,7 @@ import {
 } from '@angular/material';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MaterialModule } from './material.module';
-
-
 import { AppComponent } from './app.component';
-
 import { OptionsService } from './Services/options.service';
 
 describe('AppComponent', () => {
