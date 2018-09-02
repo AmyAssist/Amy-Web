@@ -1,6 +1,6 @@
 import { Injectable, NgZone } from '@angular/core';
-import { Message } from '../Objects/message';
-import { TTSService } from '../../../../../Services/tts.service';
+import { TTSService } from '../../../Services/tts.service';
+import { Message } from '../Home-Objects/message';
 
 @Injectable({
   providedIn: 'root'

@@ -5,9 +5,9 @@ import { interval } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 
 import { ErrorStateMatcher } from '@angular/material/core';
-import { ChatService } from '../Components/amy-chat/Services/chat.service';
 import { AMY_CHAT_NAME, AMY_UNKNOWN_COMMAND_RESPONSE } from '../../../Constants/strings';
 import { OptionsService } from '../../../Services/options.service';
+import { ChatService } from './chat.service';
 
 export class CommandErrorStateMatcher implements ErrorStateMatcher {
   error = false;

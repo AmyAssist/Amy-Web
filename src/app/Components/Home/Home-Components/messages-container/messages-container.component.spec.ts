@@ -1,23 +1,23 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AmyChatComponent } from './amy-chat.component';
+import { MessagesContainerComponent } from './messages-container.component';
 import { MatCardModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule } from '@angular/material';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CommandHandlerService } from '../../Services/command-handler.service';
 import { OptionsService } from '../../../../Services/options.service';
-import { ChatService } from './Services/chat.service';
+import { CommandHandlerService } from '../../Home-Services/command-handler.service';
+import { ChatService } from '../../Home-Services/chat.service';
 
-describe('AmyChatComponent', () => {
-  let component: AmyChatComponent;
-  let fixture: ComponentFixture<AmyChatComponent>;
+describe('MessagesContainerComponent', () => {
+  let component: MessagesContainerComponent;
+  let fixture: ComponentFixture<MessagesContainerComponent>;
 
   beforeEach(async(() => {
     const optionsSpy = jasmine.createSpyObj('OptionsService', ['getLanguage']);
     const commandHandlerSpy = jasmine.createSpyObj('CommandHandlerService', ['sendCommand']);
     const chatSpy = jasmine.createSpyObj('ChatService', ['getMessages', 'addMessage']);
     TestBed.configureTestingModule({
-      declarations: [AmyChatComponent],
+      declarations: [MessagesContainerComponent],
       imports: [
         MatCardModule,
         MatIconModule,
@@ -37,7 +37,7 @@ describe('AmyChatComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AmyChatComponent);
+    fixture = TestBed.createComponent(MessagesContainerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

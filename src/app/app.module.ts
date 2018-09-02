@@ -24,7 +24,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { ClockComponent } from './Plugins/Clock/Components/clock/clock.component';
 import { WeatherComponent } from './Plugins/Weather/Components/weather/weather.component';
-import { HomeComponent } from './Components/home/home.component';
 import { CalendarComponent } from './Plugins/Calendar/Components/calendar/calendar.component';
 import { EmailComponent } from './Plugins/Email/Components/email/email.component';
 
@@ -41,9 +40,9 @@ import { AuthGuard } from './auth.guard';
 import { MaterialModule } from './material.module';
 import { MusicModule } from './Plugins/Music/music.module';
 
-import { AmyChatComponent } from './Components/home/Components/amy-chat/amy-chat.component';
-
 import { NavigationModule } from './Plugins/Navigation/navigation.module';
+import { HomeComponent } from './Components/Home/Home-Components/home/home.component';
+import { MessagesContainerComponent } from './Components/Home/Home-Components/messages-container/messages-container.component';
 
 /*
     Routing of the components to the respective links
@@ -99,7 +98,7 @@ const routes: Routes = [
     ErrorDialogComponent,
     RegistryContainerComponent,
     ContactRegistryComponent,
-    AmyChatComponent,
+    MessagesContainerComponent,
   ],
   imports: [
     MusicModule,

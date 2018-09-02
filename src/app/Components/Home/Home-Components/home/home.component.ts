@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { SpeechRecognitionService } from '../../Services/speechrecognition.service';
-import { TTSService } from '../../Services/tts.service';
-import { USER_CHAT_NAME, COMMAND_INPUT_PLACEHOLDER } from '../../Constants/strings';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { CommandHandlerService } from './Services/command-handler.service';
-import { ChatService } from './Components/amy-chat/Services/chat.service';
-import { OptionsService } from '../../Services/options.service';
-import { BackendResolver } from '../../Services/backendResolver.service';
+import { COMMAND_INPUT_PLACEHOLDER, USER_CHAT_NAME } from '../../../../Constants/strings';
+import { SpeechRecognitionService } from '../../../../Services/speechrecognition.service';
+import { TTSService } from '../../../../Services/tts.service';
+import { OptionsService } from '../../../../Services/options.service';
+import { CommandHandlerService } from '../../Home-Services/command-handler.service';
+import { ChatService } from '../../Home-Services/chat.service';
+import { BackendResolver } from '../../../../Services/backendResolver.service';
 
 
 @Component({
