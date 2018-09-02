@@ -1,6 +1,6 @@
 import { Injectable, NgZone } from '@angular/core';
-import { Message } from '../Objects/message';
-import { TTSService } from '../../../../../Services/tts.service';
+import { TTSService } from '../../../Services/tts.service';
+import { Message } from '../Home-Objects/message';
 
 @Injectable({
   providedIn: 'root'
@@ -19,9 +19,9 @@ export class ChatService {
      * @param name Name of the Message Source
      * @param value String of the Message
      */
-  public addMessage(name: string, value: string, readLoud: boolean) {
+  public addMessage(from: string, value: string, readLoud: boolean) {
     this.zone.run(() => {
-      this.messages.push({ name, value });
+      this.messages.push({ from, value });
     });
     if (readLoud) {
       this.ttsService.speak(value);

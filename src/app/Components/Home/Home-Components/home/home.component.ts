@@ -1,22 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import { SpeechRecognitionService } from '../../Services/speechrecognition.service';
-import { TTSService } from '../../Services/tts.service';
-import { USER_CHAT_NAME } from '../../Constants/strings';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { CommandHandlerService } from './Services/command-handler.service';
-import { ChatService } from './Components/amy-chat/Services/chat.service';
-import { OptionsService } from '../../Services/options.service';
-import { BackendResolver } from '../../Services/backendResolver.service';
+import { COMMAND_INPUT_PLACEHOLDER, USER_CHAT_NAME } from '../../../../Constants/strings';
+import { SpeechRecognitionService } from '../../../../Services/speechrecognition.service';
+import { TTSService } from '../../../../Services/tts.service';
+import { OptionsService } from '../../../../Services/options.service';
+import { CommandHandlerService } from '../../Home-Services/command-handler.service';
+import { ChatService } from '../../Home-Services/chat.service';
+import { BackendResolver } from '../../../../Services/backendResolver.service';
 
 
 @Component({
-    selector: 'app-bottom-bar',
-    templateUrl: './bottom-bar.component.html',
-    styleUrls: ['./bottom-bar.component.css'],
+    selector: 'app-home',
+    templateUrl: './home.component.html',
+    styleUrls: ['./home.component.css'],
     animations: [
         trigger('srState', [
             state('inactive', style({
-                backgroundColor: '#eee',
+                backgroundColor: '#283593',
                 transform: 'scale(1)'
             })),
             state('active', style({
@@ -28,15 +28,19 @@ import { BackendResolver } from '../../Services/backendResolver.service';
         ])
     ]
 })
-export class BottomBarComponent implements OnInit {
+export class HomeComponent implements OnInit {
 
-    private _displayBar = true;
+    // PlaceHolder for Command input Field
+    commandInputPlaceholder: string = COMMAND_INPUT_PLACEHOLDER[this.options.language];
 
+    // Content of command input field
+    commandTextValue = '';
+
+    // State of the current Speech Recognition
     srState = 'inactive';
 
+    // is the Sound muted in Backend
     backendSoundMuted = false;
-
-    test: string;
 
     constructor(
         private readonly speechRecognitionService: SpeechRecognitionService,
@@ -58,33 +62,18 @@ export class BottomBarComponent implements OnInit {
         return this.speechRecognitionService.isSupported();
     }
 
-    get displayBar() {
-        return this._displayBar;
-    }
-
-    get displayChat() {
-        return this.options.displayChat;
+    get backendSoundState(){
+        return this.backend.checkBackendSoundState();
     }
 
     /**
-     * Trigger the displayal of the bottom Bar
+     * Send current input Field input
      */
-    changeBarDisplayal() {
-        if (this.displayBar) {
-            this._displayBar = false;
-        } else {
-            this._displayBar = true;
-        }
-    }
-
-    /**
-     * Trigger the displayal of the chat window
-     */
-    changeChatDisplayal() {
-        if (this.displayChat) {
-            this.options.displayChat = false;
-        } else {
-            this.options.displayChat = true;
+    sendTextFieldMessage() {
+        if (this.commandTextValue.trim().length > 0) {
+            this.chat.addMessage(USER_CHAT_NAME[this.options.language], this.commandTextValue, false);
+            this.commandHandler.sendCommand(this.commandTextValue, false);
+            this.commandTextValue = '';
         }
     }
 

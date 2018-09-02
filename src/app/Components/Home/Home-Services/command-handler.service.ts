@@ -5,9 +5,9 @@ import { interval } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 
 import { ErrorStateMatcher } from '@angular/material/core';
-import { ChatService } from '../Components/amy-chat/Services/chat.service';
 import { AMY_CHAT_NAME, AMY_UNKNOWN_COMMAND_RESPONSE } from '../../../Constants/strings';
 import { OptionsService } from '../../../Services/options.service';
+import { ChatService } from './chat.service';
 
 export class CommandErrorStateMatcher implements ErrorStateMatcher {
   error = false;
@@ -21,12 +21,15 @@ export class CommandErrorStateMatcher implements ErrorStateMatcher {
 })
 export class CommandHandlerService {
 
-  response: string;
-
   private readonly errorStateMatcher = new CommandErrorStateMatcher();
 
+  // UUID -> id representing this conversation with the KI backend system
   private uuid: string;
 
+  // response of the KI backend system
+  response: string;
+
+  // shall the respnse of the KI backend system be read out loud
   private readResponseState = false;
 
   constructor(
@@ -60,9 +63,9 @@ export class CommandHandlerService {
    */
   public sendCommand(commandValue: string, readResponse: boolean) {
     const commandData = new Command(commandValue);
-    this.readResponseState = readResponse;
     this.databaseService.sendCommand(commandData, this.uuid).subscribe(r => {
       this.errorStateMatcher.error = false;
+      this.readResponseState = readResponse;
     }, error => {
       this.response = null;
       this.errorStateMatcher.error = true;

@@ -1,6 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
+html {
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+body {
+    height: 100%;
+}
+
+app-root {
+    display: block;
+    height: 100%;
+}
+
 * {
     padding: 0;
     margin: 0;
