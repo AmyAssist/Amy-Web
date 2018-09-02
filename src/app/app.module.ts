@@ -11,7 +11,8 @@ import {
   MatMenuModule,
   MatTableModule,
   MatTabsModule,
-  MatToolbarModule
+  MatToolbarModule,
+  MatProgressSpinnerModule
 } from '@angular/material';
 
 
@@ -31,6 +32,7 @@ import { EmailComponent } from './Plugins/Email/Components/email/email.component
 import { LocationRegistryComponent } from './Plugins/Registry/Components/location-registry/location-registry.component';
 import { RegistryContainerComponent } from './Plugins/Registry/Components/registry-container/registry-container.component';
 import { ContactRegistryComponent } from './Plugins/Registry/Components/contact-registry/contact-registry.component';
+import { MessageListComponent } from './Plugins/Email/Components/messagelist/messagelist.component';
 
 import { ErrorDialogComponent } from './Components/error-dialog/error-dialog.component';
 import { LoginComponent } from './Components/login/login.component';
@@ -100,6 +102,7 @@ const routes: Routes = [
     ErrorDialogComponent,
     RegistryContainerComponent,
     ContactRegistryComponent,
+    MessageListComponent,
     AmyChatComponent,
     BottomBarComponent,
   ],
@@ -124,7 +127,8 @@ const routes: Routes = [
     HttpClientModule,
     RouterModule.forRoot(routes),
     MatRadioModule,
-    FormsModule
+    FormsModule,
+    MatProgressSpinnerModule,
   ],
   exports: [RouterModule],
   providers: [AuthService, AuthGuard],

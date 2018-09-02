@@ -1,48 +1,41 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
-import { throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
 import { BackendResolver } from '../../../Services/backendResolver.service';
+import { MessageDTO } from '../../Email/Objects/MessageDTO';
+import { EMailCredentials } from '../../Email/Objects/EMailCredentials';
 
 @Injectable({
     providedIn: 'root'
 })
 export class EmailDataService {
+
+    static readonly MAIL_AMOUNT = 20;
+
     get path() {
         return this.backend.backendURL.getValue() + 'email/';
     }
 
     httpOptions = {
         headers: new HttpHeaders({
-            'Content-Type': 'text/plain'
+            'Content-Type': 'application/json'
         }),
-        responseType: 'text' as 'text'
     };
 
     constructor(private readonly backend: BackendResolver, private readonly http: HttpClient) { }
 
-    private handleError(error: HttpErrorResponse) {
-        return throwError(error);
+    isConnected() {
+        return this.http.get(this.path + 'isConnected');
     }
 
-    amountNewMessages() {
-        return this.http.get(this.path + 'new/count').pipe(
-            catchError(this.handleError));
+    connect(credentials: EMailCredentials) {
+        return this.http.post(this.path + 'connect', credentials, this.httpOptions);
     }
 
-    hasUnreadMessages() {
-        return this.http.get(this.path + 'unread').pipe(
-            catchError(this.handleError));
+    getMails() {
+        return this.http.get<MessageDTO[]>(this.path + `getMails/${EmailDataService.MAIL_AMOUNT}`);
     }
 
-    getMails(amount: number, important: boolean) {
-        let params = new HttpParams();
-        params = params.append('amount', amount.toString());
-        if (important) {
-            return this.http.post(this.path + 'plains/important', { params }, this.httpOptions).pipe(
-                catchError(this.handleError));
-        }
-        return this.http.post(this.path + 'plains', { params }, this.httpOptions).pipe(
-            catchError(this.handleError));
+    disconnect() {
+        return this.http.post(this.path + 'disconnect', this.httpOptions);
     }
 }
