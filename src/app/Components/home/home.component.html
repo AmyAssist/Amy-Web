@@ -37,8 +37,8 @@
 
     <!--Backend Sound Button - Mute/Unmute Sound Output of the Backend-->
     <button mat-icon-button (click)="triggerBackendSound()">
-      <mat-icon *ngIf="backend.checkBackendSoundState()">music_note</mat-icon>
-      <mat-icon class="mat-icons color_red" *ngIf="!backend.checkBackendSoundState()">music_off</mat-icon>
+      <mat-icon *ngIf="backendSoundState">music_note</mat-icon>
+      <mat-icon class="mat-icons color_red" *ngIf="!backendSoundState">music_off</mat-icon>
     </button>
 
   </div>

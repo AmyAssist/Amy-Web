@@ -23,13 +23,13 @@ export class CommandHandlerService {
 
   private readonly errorStateMatcher = new CommandErrorStateMatcher();
 
-  //UUID -> id representing this conversation with the KI backend system
+  // UUID -> id representing this conversation with the KI backend system
   private uuid: string;
 
-  //response of the KI backend system
+  // response of the KI backend system
   response: string;
 
-  //shall the respnse of the KI backend system be read out loud
+  // shall the respnse of the KI backend system be read out loud
   private readResponseState = false;
 
   constructor(

@@ -30,16 +30,16 @@ import { BackendResolver } from '../../Services/backendResolver.service';
 })
 export class HomeComponent implements OnInit {
 
-    //PlaceHolder for Command input Field
+    // PlaceHolder for Command input Field
     commandInputPlaceholder: string = COMMAND_INPUT_PLACEHOLDER[this.options.language];
 
-    //Content of command input field
+    // Content of command input field
     commandTextValue = '';
 
-    //State of the current Speech Recognition
+    // State of the current Speech Recognition
     srState = 'inactive';
 
-    //is the Sound muted in Backend
+    // is the Sound muted in Backend
     backendSoundMuted = false;
 
     constructor(
@@ -62,8 +62,13 @@ export class HomeComponent implements OnInit {
         return this.speechRecognitionService.isSupported();
     }
 
+    get backendSoundState(){
+        return this.backend.checkBackendSoundState();
+    }
 
-
+    /**
+     * Send current input Field input
+     */
     sendTextFieldMessage() {
         if (this.commandTextValue.trim().length > 0) {
             this.chat.addMessage(false, USER_CHAT_NAME[this.options.language], this.commandTextValue, false);
