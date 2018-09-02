@@ -2,7 +2,7 @@
   <div *ngIf="isResponse(message)">
     <div class="speech-bubble-response">
       <div class="text left">
-          <h4>{{message.name}}</h4>
+          <h4>{{message.from}}</h4>
           {{message.value}}
       </div>
     </div>
@@ -10,7 +10,7 @@
   <div *ngIf="!isResponse(message)">
     <div class="speech-bubble-no-response">
       <div class="text right">
-          <h4>{{message.name}}</h4>
+          <h4>{{message.from}}</h4>
           {{message.value}}
       </div>
     </div>

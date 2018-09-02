@@ -1,5 +1,4 @@
 export class Message {
-    isResponse: boolean;
-    name: string;
+    from: string;
     value: string;
 }

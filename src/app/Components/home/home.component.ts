@@ -71,7 +71,7 @@ export class HomeComponent implements OnInit {
      */
     sendTextFieldMessage() {
         if (this.commandTextValue.trim().length > 0) {
-            this.chat.addMessage(false, USER_CHAT_NAME[this.options.language], this.commandTextValue, false);
+            this.chat.addMessage(USER_CHAT_NAME[this.options.language], this.commandTextValue, false);
             this.commandHandler.sendCommand(this.commandTextValue, false);
             this.commandTextValue = '';
         }
@@ -109,7 +109,7 @@ export class HomeComponent implements OnInit {
      */
     private srResponse(command: string) {
         if (this.srState === 'active') {
-            this.chat.addMessage(false, USER_CHAT_NAME[this.options.language], command, false);
+            this.chat.addMessage(USER_CHAT_NAME[this.options.language], command, false);
             this.commandHandler.sendCommand(command, true);
         }
     }

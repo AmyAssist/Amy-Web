@@ -29,6 +29,10 @@
     width: 100%;
 }
 
+.textarea-fix {
+    resize: none;
+}
+
 .material-icons.md-18 { font-size: 18px; width: 18px; height: 18px; }
 .material-icons.md-24 { font-size: 24px; width: 24px; height: 24px; }
 .material-icons.md-36 { font-size: 36px; width: 36px; height: 36px; }
