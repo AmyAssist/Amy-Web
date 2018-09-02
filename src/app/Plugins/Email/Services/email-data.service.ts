@@ -8,6 +8,9 @@ import { EMailCredentials } from '../../Email/Objects/EMailCredentials';
     providedIn: 'root'
 })
 export class EmailDataService {
+
+    static readonly MAIL_AMOUNT = 20;
+
     get path() {
         return this.backend.backendURL.getValue() + 'email/';
     }
@@ -22,7 +25,6 @@ export class EmailDataService {
 
     isConnected() {
         return this.http.get(this.path + 'isConnected');
-
     }
 
     connect(credentials: EMailCredentials) {
@@ -30,7 +32,7 @@ export class EmailDataService {
     }
 
     getMails() {
-        return this.http.get<MessageDTO[]>(this.path + 'getMails/20');
+        return this.http.get<MessageDTO[]>(this.path + `getMails/${EmailDataService.MAIL_AMOUNT}`);
     }
 
     disconnect() {
