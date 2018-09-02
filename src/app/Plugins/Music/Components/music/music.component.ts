@@ -74,9 +74,6 @@ export class MusicComponent implements OnInit {
 
   ngOnInit() {
 
-
-    this.musicService.setupPath();
-
     this.musicData = new Music;
 
     // array of songs from the current playlist for display

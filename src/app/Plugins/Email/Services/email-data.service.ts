@@ -8,7 +8,9 @@ import { EMailCredentials } from '../../Email/Objects/EMailCredentials';
     providedIn: 'root'
 })
 export class EmailDataService {
-    path: string;
+    get path() {
+        return this.backend.backendURL.getValue() + 'email/';
+    }
 
     httpOptions = {
         headers: new HttpHeaders({
@@ -16,16 +18,11 @@ export class EmailDataService {
         }),
     };
 
-    constructor(private readonly backend: BackendResolver, private readonly http: HttpClient) {
-        this.setupPath();
-    }
-
-    setupPath() {
-        this.path = this.backend.backendPath + 'email/';
-    }
+    constructor(private readonly backend: BackendResolver, private readonly http: HttpClient) { }
 
     isConnected() {
         return this.http.get(this.path + 'isConnected');
+
     }
 
     connect(credentials: EMailCredentials) {

@@ -3,7 +3,6 @@ import { WeatherDataService } from '../../Services/weather-data.service';
 import { Weather } from '../../Objects/weather';
 import { WeatherWeek } from '../../Objects/weatherWeek';
 import { Location } from '../../Objects/location';
-import { BackendResolver } from '../../../../Services/backendResolver.service';
 import { DatePipe } from '@angular/common';
 
 @Component({
@@ -12,13 +11,9 @@ import { DatePipe } from '@angular/common';
   styleUrls: ['./weather.component.css']
 })
 export class WeatherComponent implements OnInit {
+  selectedType: string;
+  showReports: Weather[];
 
-  weatherToday: Weather;
-  weatherTomorrow: Weather;
-  weatherWeekData: WeatherWeek;
-  today: boolean;
-  tommorow: boolean;
-  week: boolean;
   locations: Location[];
   selectedLocation: string;
 
@@ -26,64 +21,66 @@ export class WeatherComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.weatherService.setupPath();
-    this.weatherToday = new Weather();
-    this.weatherTomorrow = new Weather();
-    this.weatherWeekData = new WeatherWeek();
-    this.today = false;
-    this.tommorow = false;
-    this.week = false;
-    this.weatherService.getAllLocations()
-      .subscribe((data: Location[]) => {
-        this.locations = data;
-        this.selectedLocation = this.locations[0].name;
-      });
+    this.selectedType = 'today';
+    this.weatherService.getAllLocations().subscribe((data: Location[]) => {
+      this.locations = data;
+      this.selectLocation(this.locations[0]);
+    });
   }
 
-  public onChange(event): void {
-    this.weatherService.sendLocation(event.value.persistentId);
-    this.selectedLocation = event.value.name;
-    if (this.today) { this.getWeatherToday(); }
-    if (this.tommorow) { this.getWeatherTomorrow(); }
-    if (this.week) { this.getWeatherWeek(); }
+  public changeLocation(event): void {
+    this.selectLocation(event.value);
+  }
+
+  public selectLocation(location: Location): void {
+    this.weatherService.sendLocation(location.persistentId);
+    this.selectedLocation = location.name;
+    switch (this.selectedType) {
+      case 'today':
+        this.getWeatherToday();
+        break;
+      case 'tomorrow':
+        this.getWeatherTomorrow();
+        break;
+      case 'week':
+        this.getWeatherWeek();
+        break;
+    }
   }
 
   getWeatherToday() {
-    this.today = true;
-    this.tommorow = false;
-    this.week = false;
+    this.selectedType = 'today';
     this.weatherService.getWeatherToday()
       .subscribe((data: Weather) => {
-        this.weatherToday = { ...data };
-        this.weatherToday.iconSrc = this.getWeatherIcon(this.weatherToday);
-        this.weatherToday.time = this.convertTime(this.weatherToday.timestamp);
+        const weatherToday = { ...data };
+        weatherToday.iconSrc = this.getWeatherIcon(weatherToday);
+        weatherToday.time = this.convertTime(weatherToday.timestamp);
+        this.showReports = [weatherToday];
       });
   }
 
   getWeatherTomorrow() {
-    this.today = false;
-    this.tommorow = true;
-    this.week = false;
+    this.selectedType = 'tomorrow';
     this.weatherService.getWeatherTomorrow()
       .subscribe((data: Weather) => {
-        this.weatherTomorrow = { ...data };
-        this.weatherTomorrow.iconSrc = this.getWeatherIcon(this.weatherTomorrow);
-        this.weatherTomorrow.time = this.convertTime(this.weatherTomorrow.timestamp);
+        const weatherTomorrow = { ...data };
+        weatherTomorrow.iconSrc = this.getWeatherIcon(weatherTomorrow);
+        weatherTomorrow.time = this.convertTime(weatherTomorrow.timestamp);
+        this.showReports = [weatherTomorrow];
       });
 
   }
 
   getWeatherWeek() {
-    this.today = false;
-    this.tommorow = false;
-    this.week = true;
+    this.selectedType = 'week';
     this.weatherService.getWeatherWeek()
       .subscribe((data: WeatherWeek) => {
-        this.weatherWeekData = { ...data };
-        for (const weather of this.weatherWeekData.days) {
+        const weatherWeekData = { ...data };
+        for (const weather of weatherWeekData.days) {
           weather.iconSrc = this.getWeatherIcon(weather);
           weather.time = this.convertTime(weather.timestamp);
         }
+        this.showReports = weatherWeekData.days;
       });
 
   }

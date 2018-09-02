@@ -1,5 +1,5 @@
-import { Injectable, ErrorHandler, Component, OnInit } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams, HttpErrorResponse } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
 import { Command } from '../Objects/command';
 import { BackendResolver } from '../Services/backendResolver.service';
@@ -31,15 +31,15 @@ export class DatabaseService {
         let params = new HttpParams();
         params = params.append('langInput', commandData.value);
         params = params.append('clientUUID', uuid);
-        return this.http.post(this.backend.backendPath + 'chat/input', null, { params });
+        return this.http.post(this.backend.backendURL.getValue() + 'chat/input', null, { params });
     }
 
     registerChat() {
-        return this.http.post(this.backend.backendPath + 'chat/register', null, this.httpOptions);
+        return this.http.post(this.backend.backendURL.getValue() + 'chat/register', null, this.httpOptions);
     }
 
     checkForResponses(uuid: string) {
-        return this.http.post(this.backend.backendPath + 'chat/response', uuid, this.httpOptions);
+        return this.http.post(this.backend.backendURL.getValue() + 'chat/response', uuid, this.httpOptions);
     }
 }
 

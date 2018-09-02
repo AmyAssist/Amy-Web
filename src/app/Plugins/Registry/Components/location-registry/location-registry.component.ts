@@ -31,7 +31,6 @@ export class LocationRegistryComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.registryService.setupPath();
         this.dataSource = new AsyncTableDataSource<Location>([], Location, this.locationValidator,
             this.insertLocation.bind(this),
             this.updateLocation.bind(this),
