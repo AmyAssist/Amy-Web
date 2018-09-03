@@ -5,9 +5,9 @@ import { interval } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 
 import { ErrorStateMatcher } from '@angular/material/core';
-import { ChatService } from '../Components/amy-chat/Services/chat.service';
 import { AMY_CHAT_NAME, AMY_UNKNOWN_COMMAND_RESPONSE } from '../../../Constants/strings';
 import { OptionsService } from '../../../Services/options.service';
+import { ChatService } from './chat.service';
 
 export class CommandErrorStateMatcher implements ErrorStateMatcher {
   error = false;
@@ -21,11 +21,16 @@ export class CommandErrorStateMatcher implements ErrorStateMatcher {
 })
 export class CommandHandlerService {
 
-  response: string;
-
   private readonly errorStateMatcher = new CommandErrorStateMatcher();
 
+  // UUID -> id representing this conversation with the KI backend system
   private uuid: string;
+
+  // response of the KI backend system
+  response: string;
+
+  // shall the respnse of the KI backend system be read out loud
+  private readResponseState = false;
 
   constructor(
     private readonly databaseService: DatabaseService,
@@ -43,7 +48,7 @@ export class CommandHandlerService {
     interval(1000).pipe(mergeMap(() => this.databaseService.checkForResponses(uuid))).subscribe(data => {
       console.log(data);
       if (data) {
-        this.chat.addMessage(AMY_CHAT_NAME[this.options.language], data, true);
+        this.chat.addMessage(AMY_CHAT_NAME[this.options.language], data, this.readResponseState);
       }
 
     }, error => {
@@ -60,6 +65,7 @@ export class CommandHandlerService {
     const commandData = new Command(commandValue);
     this.databaseService.sendCommand(commandData, this.uuid).subscribe(r => {
       this.errorStateMatcher.error = false;
+      this.readResponseState = readResponse;
     }, error => {
       this.response = null;
       this.errorStateMatcher.error = true;

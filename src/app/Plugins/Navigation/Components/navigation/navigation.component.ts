@@ -84,7 +84,7 @@ export class NavigationComponent implements OnInit {
                 }
                 return tag.name.toLowerCase().indexOf(searchText.toLowerCase()) === 0;
             })
-            ));
+        ));
 
         this.destinationFilteredTags = combineLatest(
             this.destinationField.valueChanges.pipe(startWith('')) as Observable<string | Tag>,
@@ -99,7 +99,7 @@ export class NavigationComponent implements OnInit {
                 }
                 return tag.name.toLowerCase().indexOf(searchText.toLowerCase()) === 0;
             })
-            ));
+        ));
     }
 
     async fromToWay(from: string | Tag, to: string | Tag, date: string) {

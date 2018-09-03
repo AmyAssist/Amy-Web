@@ -12,7 +12,9 @@ import { ResponseType } from '@angular/http';
 })
 export class NavigationDataService {
 
-  path: string;
+  get path() {
+    return this.backend.backendURL.getValue() + 'navigation/';
+  }
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -29,18 +31,10 @@ export class NavigationDataService {
   };
 
   private handleError(error: HttpErrorResponse) {
-    console.error(error);
-    return throwError(
-      'Something bad happened; please try again later.');
+    return throwError(error);
   }
 
-  constructor(private readonly backend: BackendResolver, private readonly http: HttpClient) {
-    this.setupPath();
-  }
-
-  setupPath() {
-    this.path = this.backend.backendPath + 'navigation/';
-  }
+  constructor(private readonly backend: BackendResolver, private readonly http: HttpClient) { }
 
   fromTo(wayData: NavPath) {
     return this.http.post(this.path + 'fromTo', wayData, this.httpOptions).pipe(

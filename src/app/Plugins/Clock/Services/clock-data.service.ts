@@ -13,7 +13,7 @@ export class ClockDataService {
    * Path for all Data concerning the clock-plugin
    */
   get path() {
-    return this.backend.backendPath + 'clock/';
+    return this.backend.backendURL.getValue() + 'clock/';
   }
 
   httpOptions = {
@@ -63,7 +63,8 @@ export class ClockDataService {
     Activate and Deactivate Alarms
   */
   activatedeactivateAlarm(alarmnumber: number, clockData: Clock): Observable<Clock> {
-    return this.http.post<Clock>(`${this.path}alarms/de.activate/${alarmnumber}`, clockData, this.httpOptions).pipe(catchError(this.handleError));
+    return this.http.post<Clock>(`${this.path}alarms/de.activate/${alarmnumber}`, clockData, this.httpOptions)
+      .pipe(catchError(this.handleError));
   }
 
   /*
