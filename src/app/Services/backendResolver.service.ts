@@ -56,7 +56,7 @@ export class BackendResolver {
      */
     mute() {
         this.backendSoundEnabled = false;
-        return this.http.post(this.backendPath + 'home/mute', null).pipe(
+        return this.http.post(this.backendPath.getValue() + 'home/mute', null).pipe(
             catchError(this.handleError));
     }
 
@@ -65,7 +65,7 @@ export class BackendResolver {
      */
     unmute() {
         this.backendSoundEnabled = true;
-        return this.http.post(this.backendPath + 'home/unmute', null).pipe(
+        return this.http.post(this.backendPath.getValue() + 'home/unmute', null).pipe(
             catchError(this.handleError));
     }
 }
