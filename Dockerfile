@@ -2,7 +2,7 @@
 FROM scratch AS source
 
 COPY .docker/ /.docker/
-COPY angular.json package.json package-lock.json tsconfig.json /app/
+COPY angular.json package.json package-lock.json tsconfig.json ngsw-config.json /app/
 COPY src /app/src
 
 # build environment
@@ -16,7 +16,7 @@ WORKDIR /app
 
 RUN set -x; npm ci
 
-RUN set -x; ng build --output-path /dist/
+RUN set -x; ng build --prod --output-path /dist/
 
 # production
 FROM httpd:2.4.34-alpine
