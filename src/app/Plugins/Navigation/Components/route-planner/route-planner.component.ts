@@ -70,35 +70,25 @@ export class RoutePlannerComponent implements OnInit {
   loadTags() {
     this.tags = this.navigationService.getTags().pipe(map(tags => tags.map(t => new Tag(t))));
 
-    this.originFilteredTags = combineLatest(
-      this.originField.valueChanges.pipe(startWith('')) as Observable<string | Tag>,
-      this.tags.pipe(startWith([]))
-    ).pipe(
-      map(([text, tags]) => tags.filter(tag => {
-        let searchText: string;
-        if (text instanceof Tag) {
-          searchText = text.name;
-        } else {
-          searchText = text;
-        }
-        return tag.name.toLowerCase().indexOf(searchText.toLowerCase()) === 0;
-      })
-      ));
+      const mapping = map(([text, tags]) => tags.filter(tag => {
+          let searchText: string;
+          if (text instanceof Tag) {
+              searchText = text.name;
+          } else {
+              searchText = text;
+          }
+          return tag.name.toLowerCase().indexOf(searchText.toLowerCase()) === 0;
+      }));
 
-    this.destinationFilteredTags = combineLatest(
-      this.destinationField.valueChanges.pipe(startWith('')) as Observable<string | Tag>,
-      this.tags.pipe(startWith([]))
-    ).pipe(
-      map(([text, tags]) => tags.filter(tag => {
-        let searchText: string;
-        if (text instanceof Tag) {
-          searchText = text.name;
-        } else {
-          searchText = text;
-        }
-        return tag.name.toLowerCase().indexOf(searchText.toLowerCase()) === 0;
-      })
-      ));
+      this.originFilteredTags = combineLatest(
+          this.originField.valueChanges.pipe(startWith('')) as Observable<string | Tag>,
+          this.tags.pipe(startWith([]))
+      ).pipe(mapping);
+
+      this.destinationFilteredTags = combineLatest(
+          this.destinationField.valueChanges.pipe(startWith('')) as Observable<string | Tag>,
+          this.tags.pipe(startWith([]))
+      ).pipe(mapping);
   }
 
   async fromToWay(from: string | Tag, to: string | Tag, date: string) {
