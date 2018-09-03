@@ -6,6 +6,7 @@ import { TTSService } from '../../../../Services/tts.service';
 import { OptionsService } from '../../../../Services/options.service';
 import { CommandHandlerService } from '../../Home-Services/command-handler.service';
 import { ChatService } from '../../Home-Services/chat.service';
+import { BackendSoundService } from '../../Home-Services/backendSound.service';
 import { BackendResolver } from '../../../../Services/backendResolver.service';
 
 
@@ -48,6 +49,7 @@ export class HomeComponent implements OnInit {
         private readonly options: OptionsService,
         private readonly commandHandler: CommandHandlerService,
         private readonly chat: ChatService,
+        private readonly backendSound: BackendSoundService,
         private readonly backend: BackendResolver) { }
 
 
@@ -62,8 +64,8 @@ export class HomeComponent implements OnInit {
         return this.speechRecognitionService.isSupported();
     }
 
-    get backendSoundState(){
-        return this.backend.checkBackendSoundState();
+    get backendSoundState() {
+        return this.backendSound.checkBackendSoundState();
     }
 
     /**
@@ -96,10 +98,10 @@ export class HomeComponent implements OnInit {
      * Mute/Unmute the sound output of the backend
      */
     triggerBackendSound() {
-        if (this.backend.checkBackendSoundState()) {
-            this.backend.mute().subscribe();
+        if (this.backendSound.checkBackendSoundState()) {
+            this.backendSound.mute().subscribe();
         } else {
-            this.backend.unmute().subscribe();
+            this.backendSound.unmute().subscribe();
         }
     }
 
@@ -120,23 +122,23 @@ export class HomeComponent implements OnInit {
     triggerSR() {
         if (this.srState !== 'active') {
             this.srState = 'active';
-            if (this.backend.checkBackendSoundState()) {
+            if (this.backendSound.checkBackendSoundState()) {
                 this.backendSoundMuted = true;
-                this.backend.mute().subscribe();
+                this.backendSound.mute().subscribe();
             }
             this.speechRecognitionService.recognize((result) => {
                 this.srResponse(result);
                 this.srState = 'inactive';
                 if (this.backendSoundMuted) {
                     this.backendSoundMuted = false;
-                    this.backend.unmute().subscribe();
+                    this.backendSound.unmute().subscribe();
                 }
             });
         } else {
             this.srState = 'inactive';
             if (this.backendSoundMuted) {
                 this.backendSoundMuted = false;
-                this.backend.unmute().subscribe();
+                this.backendSound.unmute().subscribe();
             }
             this.speechRecognitionService.cancelRecognition();
         }
