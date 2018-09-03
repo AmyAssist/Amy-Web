@@ -12,7 +12,6 @@ import { catchError } from 'rxjs/operators';
 export class BackendResolver {
 
     private readonly backendPath = new BehaviorSubject<string>(null);
-    backendSoundEnabled = true;
 
     constructor(private readonly http: HttpClient) { }
     /**
@@ -23,10 +22,6 @@ export class BackendResolver {
      */
     get backendURL() {
         return this.backendPath;
-    }
-
-    private handleError(error: HttpErrorResponse) {
-        return throwError(error);
     }
 
     setBackendPath(path: string) {
@@ -42,30 +37,5 @@ export class BackendResolver {
 
     private isValidBackendURL(backendUrl: string): boolean {
         return true;
-    }
-
-    /*
-     * Check current sound output state
-     */
-    checkBackendSoundState(): boolean {
-        return this.backendSoundEnabled;
-    }
-
-    /*
-     * Mute the sound output of the backend
-     */
-    mute() {
-        this.backendSoundEnabled = false;
-        return this.http.post(this.backendPath.getValue() + 'home/mute', null).pipe(
-            catchError(this.handleError));
-    }
-
-    /*
-     * Unmute the sound output of the backend
-     */
-    unmute() {
-        this.backendSoundEnabled = true;
-        return this.http.post(this.backendPath.getValue() + 'home/unmute', null).pipe(
-            catchError(this.handleError));
     }
 }
