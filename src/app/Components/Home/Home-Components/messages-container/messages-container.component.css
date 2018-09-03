@@ -2,39 +2,56 @@
     word-wrap: break-word;
 }
 
-.text.left {
-    text-align: left;
-	margin-right: 5px;
-    margin-left: 5px;
+.text-from {
+	margin-bottom: 5px;
 }
 
-.text.right {
-    text-align: right;
-	margin-right: 5px;
-	margin-left: 5px;
-}
-
-
-/* response bubble */
-.speech-bubble-response{
+/* Speech Bubbles */
+.speech-bubble {
 	position: relative;
-	background: #E0E0E0;
+	padding: 8px;
     border-radius: .4em;
-    margin-left: 20px;
     margin-bottom: 10px;
 	left: 0px;
 	width: fit-content;
 	max-width: 70%;
+	/* 
+	left/right
+	background: color;
+	margin-left/right: 20px;
+	align-self: flex-start/end;
+	-/margin-left: auto;
+	*/
 }
 
-.speech-bubble-response:after{
+.speech-bubble:after{
 	content: '';
 	position: absolute;
-	left: 0;
 	top: 50%;
 	width: 0;
 	height: 0;
 	border: 20px solid transparent;
+	/* 
+	left/right: 0;
+	border-left/right-color: color;
+	border-left/right: 0;
+	border-top/bottom: 0;
+	margin-top: -10px;
+	margin-left/right: -20px;
+	*/
+}
+
+/* Response Bubble */
+.speech-bubble.response {
+	background: #E0E0E0;
+    margin-left: 20px;
+	align-self: flex-start;
+
+	text-align: left;
+}
+
+.speech-bubble.response:after{
+	left: 0;
 	border-right-color: #E0E0E0;
 	border-left: 0;
 	border-top: 0;
@@ -42,27 +59,18 @@
 	margin-left: -20px;
 }
 
-/* user bubble */
-.speech-bubble-no-response {
-	position: relative;
+/* user Bubble */
+.speech-bubble.no-response {
 	background: #9FA8DA;
-    border-radius: .4em;
     margin-right: 20px;
-    margin-bottom: 10px;
 	align-self: flex-end;
-	width: fit-content;
 	margin-left: auto;
-	max-width: 70%;
+
+	text-align: right;
 }
 
-.speech-bubble-no-response:after {
-	content: '';
-	position: absolute;
+.speech-bubble.no-response:after {
 	right: 0;
-	top: 50%;
-	width: 0;
-	height: 0;
-	border: 20px solid transparent;
 	border-left-color: #9FA8DA;
 	border-right: 0;
 	border-bottom: 0;
