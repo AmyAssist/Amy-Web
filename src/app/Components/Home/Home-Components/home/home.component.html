@@ -14,14 +14,14 @@
     <!-- Show Button to switch to SR View -->
     <div *ngIf="srSupported">
       <button mat-icon-button class="mybutton md-48" (click)="triggerKeyboard()">
-        <mat-icon class="mat-icons md-36">keyboard_hide</mat-icon>
+        <mat-icon class="material-icons md-36">keyboard_hide</mat-icon>
       </button>
     </div>
     <!--SR View not Supported -> Show Supported Buttons from SR View -->
     <div *ngIf="!srSupported">
       <button mat-icon-button class="mybutton md-48" color="primary" (click)="triggerBackendSound()">
-        <mat-icon *ngIf="backendSoundState" class="mat-icons md-36">music_note</mat-icon>
-        <mat-icon *ngIf="!backendSoundState" class="mat-icons md-36 color_red">music_off</mat-icon>
+        <mat-icon *ngIf="backendSoundState" class="material-icons md-36">music_note</mat-icon>
+        <mat-icon *ngIf="!backendSoundState" class="material-icons md-36 color_red">music_off</mat-icon>
       </button>
     </div>
 
@@ -36,7 +36,7 @@
     <!-- Send Input -->
     <div>
       <button mat-icon-button class="mybutton md-48" color="primary" (click)="sendTextFieldMessage()">
-        <mat-icon class="mat-icons md-36">send</mat-icon>
+        <mat-icon class="material-icons md-36">send</mat-icon>
       </button>
     </div>
   </div>
@@ -56,7 +56,7 @@
     <!--SR Buttom-->
     <div>
       <button mat-icon-button class="mybutton md-48" [@srState]="srState" (click)="triggerSR()">
-        <mat-icon class="mat-icons md-48 color_white">keyboard_voice</mat-icon>
+        <mat-icon class="material-icons md-48 color_white">keyboard_voice</mat-icon>
       </button>
     </div>
 
@@ -65,13 +65,13 @@
       <!--Voice Button - Mute/Unmute & Cancel current Voice Output-->
       <button mat-icon-button (click)="triggerSound()">
         <mat-icon *ngIf="soundEnabled">record_voice_over</mat-icon>
-        <mat-icon class="mat-icons color_red" *ngIf="!soundEnabled">voice_over_off</mat-icon>
+        <mat-icon class="material-icons color_red" *ngIf="!soundEnabled">voice_over_off</mat-icon>
       </button>
 
       <!--Backend Sound Button - Mute/Unmute Sound Output of the Backend-->
       <button mat-icon-button (click)="triggerBackendSound()">
         <mat-icon *ngIf="backendSoundState">music_note</mat-icon>
-        <mat-icon class="mat-icons color_red" *ngIf="!backendSoundState">music_off</mat-icon>
+        <mat-icon class="material-icons color_red" *ngIf="!backendSoundState">music_off</mat-icon>
       </button>
     </div>
 

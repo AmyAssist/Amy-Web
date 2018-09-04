@@ -34,10 +34,10 @@
 .mybutton.md-36 { width: 42px; height: 42px; }
 .mybutton.md-48 { width: 56px; height: 56px; }
 
-.mat-icons.md-18 { font-size: 18px; width: 18px; }
-.mat-icons.md-24 { font-size: 24px; width: 24px; }
-.mat-icons.md-36 { font-size: 36px; width: 36px; }
-.mat-icons.md-48 { font-size: 48px; width: 48px; }
+.material-icons.md-18 { font-size: 18px; width: 18px; }
+.material-icons.md-24 { font-size: 24px; width: 24px; }
+.material-icons.md-36 { font-size: 36px; width: 36px; }
+.material-icons.md-48 { font-size: 48px; width: 48px; }
 
-.mat-icons.color_red { color: red; }
-.mat-icons.color_white { color: white; }
+.material-icons.color_red { color: red; }
+.material-icons.color_white { color: white; }
