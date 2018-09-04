@@ -46,6 +46,9 @@ import { NavigationModule } from './Plugins/Navigation/navigation.module';
 import { HomeComponent } from './Components/Home/Home-Components/home/home.component';
 import { MessagesContainerComponent } from './Components/Home/Home-Components/messages-container/messages-container.component';
 
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
+
 /*
     Routing of the components to the respective links
 */
@@ -126,6 +129,7 @@ const routes: Routes = [
     MatRadioModule,
     FormsModule,
     MatProgressSpinnerModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   exports: [RouterModule],
   providers: [AuthService, AuthGuard],
