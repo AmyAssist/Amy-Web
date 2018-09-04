@@ -24,9 +24,9 @@
 
 .textarea-fix { resize: none; }
 
-.input-outline.md-48 { height: 21px; margin: 3px; margin-bottom: 6px; }
-.input-outline.md-48 { height: 28px; margin: 4px; margin-bottom: 8px; }
-.input-outline.md-48 { height: 42px; margin: 6px; margin-bottom: 12px; }
+.input-outline.md-18 { height: 21px; margin: 3px; margin-bottom: 6px; }
+.input-outline.md-24 { height: 28px; margin: 4px; margin-bottom: 8px; }
+.input-outline.md-36 { height: 42px; margin: 6px; margin-bottom: 12px; }
 .input-outline.md-48 { height: 56px; margin: 8px; margin-bottom: 16px; }
 
 .mybutton.md-18 { width: 21px; height: 21px; }
