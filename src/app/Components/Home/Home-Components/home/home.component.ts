@@ -82,9 +82,9 @@ export class HomeComponent implements OnInit {
         if (this.commandTextValue.trim().length > 0) {
             this.chat.addMessage(USER_CHAT_NAME[this.options.language], this.commandTextValue, false);
             this.commandHandler.sendCommand(this.commandTextValue, false);
-            this.commandTextValue = '';
-            return false;
         }
+        this.commandTextValue = '';
+        return false;
     }
 
     /**
