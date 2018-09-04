@@ -2,16 +2,14 @@
   <div *ngIf="isResponse(message)">
     <div class="speech-bubble response">
       <div class="text">
-          <h4 class="text-from">{{message.from}}</h4>
-          {{message.value}}
+          <p class="mat-body-1">{{message.value}}</p>    
       </div>
     </div>
   </div>
   <div *ngIf="!isResponse(message)">
     <div class="speech-bubble no-response">
       <div class="text">
-          <h4 class="text-from">{{message.from}}</h4>
-          {{message.value}}
+          <p class="mat-body-1">{{message.value}}</p>          
       </div>
     </div>
   </div>

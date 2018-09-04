@@ -32,7 +32,7 @@ import { BackendResolver } from '../../../../Services/backendResolver.service';
 export class HomeComponent implements OnInit {
 
     // PlaceHolder for Command input Field
-    private commandInputPlaceholder: string = COMMAND_INPUT_PLACEHOLDER[this.options.language];
+    private readonly commandInputPlaceholder: string = COMMAND_INPUT_PLACEHOLDER[this.options.language];
 
     // Content of command input field
     private commandTextValue = '';

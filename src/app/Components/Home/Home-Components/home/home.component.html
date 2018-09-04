@@ -8,28 +8,42 @@
     </div>
   </div>
 
-  <!--Input Field-->
-  <div *ngIf="keyboardActive" fxLayout="row" fxLayoutAlign="center center" style="width: 100%;padding: 8px">
-    <div>
-      <button mat-icon-button (click)="triggerKeyboard()">
-        <mat-icon>keyboard_hide</mat-icon>
+  <!-- Input Field View -->
+  <div *ngIf="!srSupported || keyboardActive" fxLayout="row" fxLayoutAlign="center center" style="width: 100%; padding: 8px">
+
+    <!-- Show Button to switch to SR View -->
+    <div *ngIf="srSupported">
+      <button mat-icon-button class="mybutton md-48" (click)="triggerKeyboard()">
+        <mat-icon class="mat-icons md-36">keyboard_hide</mat-icon>
       </button>
     </div>
+    <!--SR View not Supported -> Show Supported Buttons from SR View -->
+    <div *ngIf="!srSupported">
+      <button mat-icon-button class="mybutton md-48" color="primary" (click)="triggerBackendSound()">
+        <mat-icon *ngIf="backendSoundState" class="mat-icons md-36">music_note</mat-icon>
+        <mat-icon *ngIf="!backendSoundState" class="mat-icons md-36 color_red">music_off</mat-icon>
+      </button>
+    </div>
+
+    <!-- Input Field -->
     <div fxFlex>
-      <mat-form-field class="full-width-content" appearance="outline">
+      <mat-form-field class="full-width-content input-outline md-48" appearance="outline">
         <mat-label>{{commandInputPlaceholder}}</mat-label>
         <textarea matInput rows="1" autofocus class="textarea-fix" (keydown.enter)="sendTextFieldMessage()" #command [(ngModel)]="commandTextValue"></textarea>
       </mat-form-field>
     </div>
+
+    <!-- Send Input -->
     <div>
-      <button mat-icon-button color="primary" (click)="sendTextFieldMessage()">
-        <mat-icon>send</mat-icon>
+      <button mat-icon-button class="mybutton md-48" color="primary" (click)="sendTextFieldMessage()">
+        <mat-icon class="mat-icons md-36">send</mat-icon>
       </button>
     </div>
   </div>
 
-  <!--Buttons-->
-  <div *ngIf="!keyboardActive" class="full-width-content" style="padding: 8px" fxLayout="row" fxLayoutAlign="space-between center">
+
+  <!-- sr View -->
+  <div *ngIf="srSupported && !keyboardActive" class="full-width-content" style="padding: 8px" fxLayout="row" fxLayoutAlign="space-between center">
 
     <!-- Input Field Activator -->
     <div>
@@ -41,11 +55,8 @@
 
     <!--SR Buttom-->
     <div>
-      <button mat-icon-button class="mybutton md-48" *ngIf="srSupported" [@srState]="srState" (click)="triggerSR()">
-        <mat-icon class="material-icons md-48">keyboard_voice</mat-icon>
-      </button>
-      <button *ngIf="!srSupported" disabled [@srState]="srState" (click)="triggerSR()">
-        <mat-icon class="material-icons md-48">keyboard_voice</mat-icon>
+      <button mat-icon-button class="mybutton md-48" [@srState]="srState" (click)="triggerSR()">
+        <mat-icon class="mat-icons md-48 color_white">keyboard_voice</mat-icon>
       </button>
     </div>
 
@@ -65,5 +76,4 @@
     </div>
 
   </div>
-
 </div>

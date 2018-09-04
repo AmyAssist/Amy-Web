@@ -8,7 +8,7 @@
 }
 
 .chat-background {
-    background-color: floralwhite;
+    background-color: white;
     height: 100%;
     width: 100%;
 }
@@ -24,17 +24,20 @@
 
 .textarea-fix { resize: none; }
 
-.mybutton { color: white; }
-
+.input-outline.md-48 { height: 21px; margin: 3px; margin-bottom: 6px; }
+.input-outline.md-48 { height: 28px; margin: 4px; margin-bottom: 8px; }
+.input-outline.md-48 { height: 42px; margin: 6px; margin-bottom: 12px; }
+.input-outline.md-48 { height: 56px; margin: 8px; margin-bottom: 16px; }
 
 .mybutton.md-18 { width: 21px; height: 21px; }
 .mybutton.md-24 { width: 28px; height: 28px; }
 .mybutton.md-36 { width: 42px; height: 42px; }
 .mybutton.md-48 { width: 56px; height: 56px; }
 
-.material-icons.md-18 { font-size: 18px; width: 18px; }
-.material-icons.md-24 { font-size: 24px; width: 24px; }
-.material-icons.md-36 { font-size: 36px; width: 36px; }
-.material-icons.md-48 { font-size: 48px; width: 48px; }
+.mat-icons.md-18 { font-size: 18px; width: 18px; }
+.mat-icons.md-24 { font-size: 24px; width: 24px; }
+.mat-icons.md-36 { font-size: 36px; width: 36px; }
+.mat-icons.md-48 { font-size: 48px; width: 48px; }
 
-.mat-icons.color_red { color: rgb(255, 0, 0); }
+.mat-icons.color_red { color: red; }
+.mat-icons.color_white { color: white; }
