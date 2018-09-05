@@ -17,7 +17,7 @@ import { BackendResolver } from '../../../../Services/backendResolver.service';
     animations: [
         trigger('srState', [
             state('inactive', style({
-                backgroundColor: '#283593',
+                backgroundColor: '#3F51B5',
                 transform: 'scale(1)'
             })),
             state('active', style({

@@ -5,6 +5,7 @@
 .main {
     width: 100%;
     height: 100%;
+    padding: 8px;
 }
 
 .chat-background {
@@ -20,24 +21,62 @@
     scroll-behavior: auto;
 }
 
+.command-bar {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 80px;
+    resize: none;
+    overflow: hidden;
+}
+
+.test {
+    position: absolute;
+    left: 0px;
+}
+
 .full-width-content { width: 100%; }
 
 .textarea-fix { resize: none; }
+
+.mybutton { color: #3F51B5 };
 
 .input-outline.md-18 { height: 21px; margin: 3px; margin-bottom: 6px; }
 .input-outline.md-24 { height: 28px; margin: 4px; margin-bottom: 8px; }
 .input-outline.md-36 { height: 42px; margin: 6px; margin-bottom: 12px; }
 .input-outline.md-48 { height: 56px; margin: 8px; margin-bottom: 16px; }
+.input-outline.md-60 { height: 70px; margin: 10px; margin-bottom: 20px; }
 
 .mybutton.md-18 { width: 21px; height: 21px; }
 .mybutton.md-24 { width: 28px; height: 28px; }
 .mybutton.md-36 { width: 42px; height: 42px; }
 .mybutton.md-48 { width: 56px; height: 56px; }
+.mybutton.md-60 { width: 70px; height: 70px; }
 
 .material-icons.md-18 { font-size: 18px; width: 18px; }
 .material-icons.md-24 { font-size: 24px; width: 24px; }
 .material-icons.md-36 { font-size: 36px; width: 36px; }
 .material-icons.md-48 { font-size: 48px; width: 48px; }
+.material-icons.md-60 { font-size: 60px; width: 60px; }
 
 .material-icons.color_red { color: red; }
 .material-icons.color_white { color: white; }
+
+
+@media (min-width: 300px) and (max-width: 350px){
+    .input-outline {
+        width: 150px;
+    }
+}
+
+@media (min-width: 250px) and (max-width: 299px){
+    .input-outline {
+        width: 100px;
+    }
+}
+
+@media (max-width: 249px){
+    .input-outline {
+        width: 50px;
+    }
+}
