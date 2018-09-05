@@ -1,62 +1,45 @@
-<div class="select-container mat-elevation-z2">
-  <div>
-    <mat-form-field>
-      <mat-select (selectionChange)="changeLocation($event)" placeholder="Select Location" [attr.selected]="selectedLocation">
-        <mat-option *ngFor="let location of locations" [value]="location">
-          {{location.name}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-  </div>
-  <div>
-    <button mat-raised-button color="basic" (click)="getWeatherToday()">Today</button>
-    <button mat-raised-button color="basic" (click)="getWeatherTomorrow()">Tomorrow</button>
-    <button mat-raised-button color="basic" (click)="getWeatherWeek()">Week</button>
-  </div>
-</div>
-
-<div *ngIf="selectedType !== 'none'" fxLayout="row warp" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign="space-between">
-
-  <div *ngFor="let weather of showReports" class="mat-elevation-z2" style="min-width: 430px;min-height: 200px;" fxFlex="50"
-    fxFlex.sm="auto" fxFlex.xs>
-    <mat-grid-list cols="2" row="2" rowHeight="2:1">
-      <mat-grid-tile>
-        <img alt="image" style='height: 100%; width: 100%; object-fit: contain' [attr.src]="weather.iconSrc" type="image/svg+xml">
-      </mat-grid-tile>
-      <mat-grid-tile>
-        <div>
-          <h2 class="mat-h2">{{weather.summary}}</h2>
-          <p class="mat-body-2">{{selectedLocation}}</p>
-          <p class="mat-body-1">{{weather.time}}</p>
+<div id="showReport" fxLayout="column" fxLayoutAlign="space-around center" class="mat-elevation-z2">
+  <div id="now" fxLayout="row wrap" style="width: 100%" fxLayoutAlign="space-around center">
+    <div>
+      <div>
+        <div id="locationSelector">
+          <mat-form-field>
+            <mat-select (selectionChange)="changeLocation($event)" placeholder="Select Location" [attr.selected]="selectedLocation">
+              <mat-option *ngFor="let location of locations" [value]="location">
+                {{location.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
         </div>
-      </mat-grid-tile>
-      <mat-grid-tile class="mat-card-tile" colspan="2" rowspan="1">
-        <mat-list role="list">
-          <mat-list-item role="listitem">temperature high
-            <br/> {{weather.temperatureMax}}
-          </mat-list-item>
-          <mat-list-item role="listitem">temperature low
-            <br/> {{weather.temperatureMin}}
-          </mat-list-item>
-        </mat-list>
-        <mat-list role="list">
-          <mat-list-item role="listitem">precipitation chance
-            <br/> {{weather.precipProbability}}
-          </mat-list-item>
-          <mat-list-item role="listitem">precipitation type
-            <br/> {{weather.precipType}}
-          </mat-list-item>
-        </mat-list>
-        <mat-list role="list">
-          <mat-list-item role="listitem">sunrise
-            <br/> {{weather.sunriseTime}}
-          </mat-list-item>
-          <mat-list-item role="listitem">sunset
-            <br/> {{weather.sunsetTime}}
-          </mat-list-item>
-        </mat-list>
-      </mat-grid-tile>
-    </mat-grid-list>
+      </div>
+    </div>
+    <div id="weatherNowIcon">
+      <img alt="image" style='height: 100%; width: 100%; object-fit: contain' [attr.src]="showReportNow.iconSrc" type="image/svg+xml">
+    </div>
+    <div id="weatherNowTemperature">
+      <p class="mat-h1">
+        {{showReportNow.temperatureNow}}°C
+      </p>
+      <p class="mat-h3">
+        {{showReportNow.summary}}
+      </p>
+    </div>
+  </div>
+  <div id="week" fxLayout="row wrap" style="width: 100%" fxLayoutAlign="space-around center">
+    <div style="margin-top: 8px" *ngFor="let weatherReportWeek of showReportWeek" class="mat-elevation-z2">
+      <p class="mat-h3">
+        {{weatherReportWeek.time}}
+      </p>
+      <p align="center">
+        <img alt="image" style='height: 50%; width: 50%; object-fit: contain' [attr.src]="weatherReportWeek.iconSrc" type="image/svg+xml">
+      </p>
+      <p class="mat-h3" align="center">
+        <font color="red">{{weatherReportWeek.temperatureMax}}°C</font>
+      </p>
+      <p class="mat-h3" align="center">
+        <font color="blue">{{weatherReportWeek.temperatureMin}}°C</font>
+      </p>
+    </div>
   </div>
 </div>
 
