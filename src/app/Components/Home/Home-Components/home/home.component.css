@@ -52,19 +52,32 @@
 .material-icons.color_white { color: white; }
 
 
-@media (min-width: 300px) and (max-width: 350px){
+@media (min-width: 285px) and (max-width: 310px){
+    .input-outline {
+        width: 175px;
+    }
+}
+@media (min-width: 260px) and (max-width: 284px){
     .input-outline {
         width: 150px;
     }
 }
-
-@media (min-width: 250px) and (max-width: 299px){
+@media (min-width: 235px) and (max-width: 259px){
+    .input-outline {
+        width: 125px;
+    }
+}
+@media (min-width: 210px) and (max-width: 234px){
     .input-outline {
         width: 100px;
     }
 }
-
-@media (max-width: 249px){
+@media (min-width: 185px) and (max-width: 209px){
+    .input-outline {
+        width: 75px;
+    }
+}
+@media (max-width: 184px){
     .input-outline {
         width: 50px;
     }
