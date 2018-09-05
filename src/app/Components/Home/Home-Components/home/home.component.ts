@@ -164,8 +164,8 @@ export class HomeComponent implements OnInit {
                 this.inputField.nativeElement.focus();
             }, 100);
         } else {
-            this._keyboardActive = false,
-            this.commandTextValue = ''
+            this._keyboardActive = false;
+            this.commandTextValue = '';
         }
         return false;
     }
