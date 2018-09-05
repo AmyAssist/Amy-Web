@@ -2,6 +2,7 @@
     display: block;
     height: 100%;
 }
+
 .main {
     width: 100%;
     height: 100%;
@@ -9,9 +10,10 @@
 }
 
 .chat-background {
-    background-color: white;
     height: 100%;
     width: 100%;
+    overflow: auto;
+    scroll-behavior: auto;
 }
 
 .chat-text {
@@ -30,22 +32,9 @@
     overflow: hidden;
 }
 
-.test {
-    position: absolute;
-    left: 0px;
-}
+.input-outline { width: 100%; }
 
-.full-width-content { width: 100%; }
-
-.textarea-fix { resize: none; }
-
-.mybutton { color: #3F51B5 };
-
-.input-outline.md-18 { height: 21px; margin: 3px; margin-bottom: 6px; }
-.input-outline.md-24 { height: 28px; margin: 4px; margin-bottom: 8px; }
-.input-outline.md-36 { height: 42px; margin: 6px; margin-bottom: 12px; }
-.input-outline.md-48 { height: 56px; margin: 8px; margin-bottom: 16px; }
-.input-outline.md-60 { height: 70px; margin: 10px; margin-bottom: 20px; }
+.mybutton { color: #3F51B5; }
 
 .mybutton.md-18 { width: 21px; height: 21px; }
 .mybutton.md-24 { width: 28px; height: 28px; }

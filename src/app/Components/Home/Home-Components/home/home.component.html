@@ -2,7 +2,7 @@
 <div class="main mat-elevation-z2" fxLayout="column" fxLayoutAlign="end center">
 
   <!-- Chat Displayal-->
-  <div class="content chat-background" fxFlex fxLayout="column" fxLayoutAlign="end center">
+  <div class="chat-background" fxFlex fxLayout="column" fxLayoutAlign="end center">
     <div class="chat-text" #scrollMe [scrollTop]="scrollMe.scrollHeight">
       <app-messages-container></app-messages-container>
     </div>
@@ -11,7 +11,7 @@
   <div class="command-bar">
 
     <!-- Input Field View -->
-    <div *ngIf="!srSupported || keyboardActive" fxLayout="row" fxLayoutAlign="center center" class="command-bar input-field-view">
+    <div *ngIf="!srSupported || keyboardActive" fxLayout="row" fxLayoutAlign="center stretch" class="command-bar input-field-view">
 
       <!-- Show Button to switch to SR View -->
       <div *ngIf="srSupported">
@@ -29,9 +29,9 @@
 
       <!-- Input Field -->
       <div fxFlex>
-        <mat-form-field class="full-width-content input-outline md-48" appearance="outline">
+        <mat-form-field class="input-outline" appearance="outline">
           <mat-label>{{commandInputPlaceholder}}</mat-label>
-          <textarea matInput rows="1" autofocus class="textarea-fix" (keydown.enter)="sendTextFieldMessage()" #command [(ngModel)]="commandTextValue"></textarea>
+          <textarea matInput rows="1" style="resize:none" autofocus (keydown.enter)="sendTextFieldMessage()" #command [(ngModel)]="commandTextValue"></textarea>
         </mat-form-field>
       </div>
 
