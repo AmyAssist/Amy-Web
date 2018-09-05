@@ -13,31 +13,31 @@
         </div>
       </div>
     </div>
-    <div id="weatherNowIcon">
-      <img alt="image" style='height: 100%; width: 100%; object-fit: contain' [attr.src]="showReportNow.iconSrc" type="image/svg+xml">
+    <div id="weatherNowIcon" *ngIf="locationSelected" style="text-align:center;">
+      <img alt="image" style='height: 80%; width: 80%; object-fit: contain' [attr.src]="showReportNow.iconSrc" type="image/svg+xml">
     </div>
-    <div id="weatherNowTemperature">
+    <div id="weatherNowTemperature" *ngIf="locationSelected" >
       <p class="mat-h1">
         {{showReportNow.temperatureNow}}°C
       </p>
-      <p class="mat-h3">
+      <p class="mat-h4">
         {{showReportNow.summary}}
       </p>
     </div>
   </div>
-  <div id="week" fxLayout="row wrap" style="width: 100%" fxLayoutAlign="space-around center">
-    <div style="margin-top: 8px" *ngFor="let weatherReportWeek of showReportWeek" class="mat-elevation-z2">
-      <p class="mat-h3">
+  <div id="week" *ngIf="locationSelected" fxLayout="row wrap" style="width: 100%" fxLayoutAlign="space-around center">
+    <div style="margin-top: 8px; width: 120px;" *ngFor="let weatherReportWeek of showReportWeek">
+      <p style="text-align:center;" class="mat-h3">
         {{weatherReportWeek.time}}
       </p>
-      <p align="center">
+      <p style="text-align:center;">
         <img alt="image" style='height: 50%; width: 50%; object-fit: contain' [attr.src]="weatherReportWeek.iconSrc" type="image/svg+xml">
       </p>
-      <p class="mat-h3" align="center">
-        <font color="red">{{weatherReportWeek.temperatureMax}}°C</font>
+      <p class="mat-h3" style="text-align:center; color:red;">
+        {{weatherReportWeek.temperatureMax}}°C
       </p>
-      <p class="mat-h3" align="center">
-        <font color="blue">{{weatherReportWeek.temperatureMin}}°C</font>
+      <p class="mat-h3" style="text-align:center; color:blue;">
+        {{weatherReportWeek.temperatureMin}}°C
       </p>
     </div>
   </div>

@@ -18,6 +18,7 @@ export class WeatherComponent implements OnInit {
 
   locations: Location[];
   selectedLocation: string;
+  locationSelected: boolean = false;
 
   constructor(private readonly weatherService: WeatherDataService) {
   }
@@ -25,7 +26,9 @@ export class WeatherComponent implements OnInit {
   ngOnInit() {
     this.weatherService.getAllLocations().subscribe((data: Location[]) => {
       this.locations = data;
-      this.selectLocation(this.locations[0]);
+      if (data !== null) {
+        this.selectLocation(this.locations[0]);
+      }
     });
   }
 
@@ -34,6 +37,7 @@ export class WeatherComponent implements OnInit {
   }
 
   public selectLocation(location: Location): void {
+    this.locationSelected = true;
     this.weatherService.sendLocation(location.persistentId);
     this.selectedLocation = location.name;
     this.getWeatherNow();
@@ -73,7 +77,7 @@ export class WeatherComponent implements OnInit {
       });
   }
 
-  getWeatherIcon(icon: WeatherDay["icon"]): string {
+  getWeatherIcon(icon: WeatherDay['icon']): string {
     switch (icon) {
       case 'clear-day': {
         return 'assets/weather/sunny.svg';
