@@ -31,7 +31,8 @@
       <div fxFlex fxFlexAlign="stretch">
         <mat-form-field class="input-outline" appearance="outline">
           <mat-label>{{commandInputPlaceholder}}</mat-label>
-          <textarea matInput rows="1" style="resize:none; height: 30px;" #inputField autofocus (keydown.enter)="sendTextFieldMessage()" [(ngModel)]="commandTextValue"></textarea>
+          <textarea matInput rows="1" style="resize:none; height: 30px;" #inputField autofocus (keydown.enter)="sendTextFieldMessage()"
+            [(ngModel)]="commandTextValue"></textarea>
         </mat-form-field>
       </div>
 

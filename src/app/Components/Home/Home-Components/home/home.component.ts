@@ -158,7 +158,7 @@ export class HomeComponent implements OnInit {
      * activate/deactovate input field
      */
     triggerKeyboard() {
-        if(!this._keyboardActive){
+        if (!this._keyboardActive) {
             this._keyboardActive = true;
             setTimeout(() => {
                 this.inputField.nativeElement.focus();
