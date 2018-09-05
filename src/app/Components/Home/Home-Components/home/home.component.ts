@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { COMMAND_INPUT_PLACEHOLDER, USER_CHAT_NAME } from '../../../../Constants/strings';
 import { SpeechRecognitionService } from '../../../../Services/speechrecognition.service';
@@ -30,6 +30,8 @@ import { BackendResolver } from '../../../../Services/backendResolver.service';
     ]
 })
 export class HomeComponent implements OnInit {
+
+    @ViewChild('inputField') inputField: ElementRef;
 
     // PlaceHolder for Command input Field
     private readonly commandInputPlaceholder: string = COMMAND_INPUT_PLACEHOLDER[this.options.language];
@@ -156,6 +158,15 @@ export class HomeComponent implements OnInit {
      * activate/deactovate input field
      */
     triggerKeyboard() {
-        this._keyboardActive = !this._keyboardActive;
+        if(!this._keyboardActive){
+            this._keyboardActive = true;
+            setTimeout(() => {
+                this.inputField.nativeElement.focus();
+            }, 100);
+        } else {
+            this._keyboardActive = false,
+            this.commandTextValue = ''
+        }
+        return false;
     }
 }
