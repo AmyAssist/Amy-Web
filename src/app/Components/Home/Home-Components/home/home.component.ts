@@ -64,7 +64,6 @@ export class HomeComponent implements OnInit {
     }
 
     get srSupported() {
-        return true;
         return this.speechRecognitionService.isSupported();
     }
 
