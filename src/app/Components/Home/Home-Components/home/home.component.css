@@ -24,15 +24,16 @@
 }
 
 .command-bar {
-    position: relative;
-    display: block;
     width: 100%;
-    height: 80px;
+    height: 64px;
     resize: none;
     overflow: hidden;
 }
 
-.input-outline { width: 100%; }
+.command-input {
+    width: 100%;
+    height: 64px;
+ }
 
 .mybutton { color: #3F51B5; }
 
