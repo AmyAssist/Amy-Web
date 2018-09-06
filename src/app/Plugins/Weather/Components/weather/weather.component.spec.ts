@@ -17,6 +17,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { WeatherComponent } from './weather.component';
 import { WeatherDataService } from '../../Services/weather-data.service';
+import { FormsModule } from '@angular/forms';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 describe('WeatherComponent', () => {
     let component: WeatherComponent;
@@ -41,7 +43,12 @@ describe('WeatherComponent', () => {
                 MatListModule,
                 MatGridListModule,
                 MatDividerModule,
-                BrowserAnimationsModule]
+                BrowserAnimationsModule,
+                FormsModule
+            ],
+            schemas: [
+                CUSTOM_ELEMENTS_SCHEMA
+            ]
         })
             .compileComponents();
     }));
