@@ -54,32 +54,32 @@
 
 
 @media (min-width: 285px) and (max-width: 310px){
-    .input-outline {
+    .command-input {
         width: 175px;
     }
 }
 @media (min-width: 260px) and (max-width: 284px){
-    .input-outline {
+    .command-input {
         width: 150px;
     }
 }
 @media (min-width: 235px) and (max-width: 259px){
-    .input-outline {
+    .command-input {
         width: 125px;
     }
 }
 @media (min-width: 210px) and (max-width: 234px){
-    .input-outline {
+    .command-input {
         width: 100px;
     }
 }
 @media (min-width: 185px) and (max-width: 209px){
-    .input-outline {
+    .command-input {
         width: 75px;
     }
 }
 @media (max-width: 184px){
-    .input-outline {
+    .command-input {
         width: 50px;
     }
 }
