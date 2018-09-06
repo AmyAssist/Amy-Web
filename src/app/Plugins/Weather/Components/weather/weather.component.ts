@@ -18,7 +18,7 @@ export class WeatherComponent implements OnInit {
 
   locations: Location[];
   selectedLocation: string;
-  locationSelected: boolean = false;
+  locationSelected = false;
 
   constructor(private readonly weatherService: WeatherDataService) {
   }
@@ -50,6 +50,7 @@ export class WeatherComponent implements OnInit {
       .subscribe((data: WeatherNow) => {
         const weatherNow = { ...data };
         weatherNow.iconSrc = this.getWeatherIcon(weatherNow.icon);
+        weatherNow.precipIconSrc = this.getWeatherIcon(weatherNow.precipType)
         weatherNow.time = this.convertTime(weatherNow.timestamp);
         this.showReportNow = weatherNow;
       });
@@ -60,6 +61,7 @@ export class WeatherComponent implements OnInit {
       .subscribe((data: WeatherDay) => {
         const weatherDay = { ...data };
         weatherDay.iconSrc = this.getWeatherIcon(weatherDay.icon);
+        weatherDay.precipIconSrc = this.getWeatherIcon(weatherDay.precipType)
         weatherDay.time = this.convertTime(weatherDay.timestamp);
         this.showReportDay = weatherDay;
       });
@@ -71,6 +73,7 @@ export class WeatherComponent implements OnInit {
         const weatherWeekData = { ...data };
         for (const weatherWeek of weatherWeekData.days) {
           weatherWeek.iconSrc = this.getWeatherIcon(weatherWeek.icon);
+          weatherWeek.precipIconSrc = this.getWeatherIcon(weatherWeek.precipType);
           weatherWeek.time = this.convertTime(weatherWeek.timestamp);
         }
         this.showReportWeek = weatherWeekData.days;
@@ -86,7 +89,7 @@ export class WeatherComponent implements OnInit {
         return 'assets/weather/sunny.svg';
       }
       case 'sleet': {
-        return 'assets/weather/rain.svg';
+        return 'assets/weather/sleet.svg';
       }
       case 'rain': {
         return 'assets/weather/rain.svg';

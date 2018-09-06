@@ -4,6 +4,7 @@ export class WeatherDay {
     summary: string;
     precipProbability: string;
     precipType: string;
+    precipIconSrc = 'assets/weather/rain.svg';
     temperatureMin: number;
     temperatureMax: number;
     sunriseTime: string;

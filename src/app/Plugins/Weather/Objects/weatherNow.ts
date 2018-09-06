@@ -4,10 +4,11 @@ export class WeatherNow {
     summary: string;
     precipProbability: string;
     precipType: string;
+    precipIconSrc = 'assets/weather/rain.svg';
     temperatureNow: number;
     iconSrc = 'assets/weather/cloudy.svg';
     icon: string;
-    windSpeed: number;
+    windspeed: number;
     timestamp: number;
     time: string;
 
