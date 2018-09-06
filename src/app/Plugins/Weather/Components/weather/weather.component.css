@@ -1,15 +1,34 @@
-.select-container {
+.main {
+    height: 100%;
+    width: 100%;
     padding: 16px;
 }
 
-.mat-card-tile{
-    left:5px;
+.text.color_light-grey { color: #9E9E9E;}
+.text.color_mid-grey { color: #616161; }
+
+.active-weather-data {
+    align-content: space-between;
+    align-items: center;
 }
 
-.dynamic-text {
-    color: #5f6368;
+.weather-icon {
+    max-width: 450px;
 }
 
-.bottom-text {
-    bottom: 0;
+.weather-icon.small {
+    width: 80%;
+    max-width: 150px;
+}
+
+@media (min-width: 1150px){
+    .active-weather-data {
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 300px){
+    .weather-icon {
+        width: 100px;
+    }
 }

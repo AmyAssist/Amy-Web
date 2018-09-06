@@ -1,4 +1,10 @@
-<div class="select-container mat-elevation-z2">
+<div class="main mat-elevation-z2">
+
+  <div class="content" fxLayout="column">
+
+  </div>
+
+  <!-- select Location -->
   <div>
     <mat-form-field>
       <mat-select (selectionChange)="changeLocation($event)" placeholder="Select Location" [attr.selected]="selectedLocation">
@@ -8,60 +14,64 @@
       </mat-select>
     </mat-form-field>
   </div>
-  <div>
-    <button mat-raised-button color="basic" (click)="getWeatherToday()">Today</button>
-    <button mat-raised-button color="basic" (click)="getWeatherTomorrow()">Tomorrow</button>
-    <button mat-raised-button color="basic" (click)="getWeatherWeek()">Week</button>
-  </div>
-</div>
 
-<div *ngIf="selectedType !== 'none'" fxLayout="row warp" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign="space-between">
 
-  <div *ngFor="let weather of showReports" class="mat-elevation-z2" style="min-width: 430px;min-height: 200px;" fxFlex="50"
-    fxFlex.sm="auto" fxFlex.xs>
-    <mat-grid-list cols="2" row="2" rowHeight="2:1">
-      <mat-grid-tile>
-        <img alt="image" style='height: 100%; width: 100%; object-fit: contain' [attr.src]="weather.iconSrc" type="image/svg+xml">
-      </mat-grid-tile>
-      <mat-grid-tile>
-        <div>
-          <h2 class="mat-h2">{{weather.summary}}</h2>
-          <p class="mat-body-2">{{selectedLocation}}</p>
-          <p class="mat-body-1">{{weather.time}}</p>
+  <!-- Active Day -->
+  <p class="text color_light-grey mat-body-2">{{selectedWeatherReport.time}}</p>
+  <p class="text mat-subheading-2">{{selectedWeatherReport.summary}}</p>
+  <div fxLayout="row wrap">
+    <div fxFlex>
+        <img alt="image" class="weather-icon" [attr.src]="selectedWeatherReport.iconSrc" type="image/svg+xml">
+    </div>
+    <div fxFlex style="position: relative;" fxLayout="column" class="active-weather-data">
+      <div fxFlexAlign="flex-start">
+        <div fxLayout="row">
+          <h1 class="text mat-h1">
+            {{selectedWeatherReport.temperatureMax}}°C
+            <!---->
+          </h1>
+          <h2 class="text color_mid-grey mat-h2">
+            /{{selectedWeatherReport.temperatureMin}}°C
+            <!---->
+          </h2>
         </div>
-      </mat-grid-tile>
-      <mat-grid-tile class="mat-card-tile" colspan="2" rowspan="1">
-        <mat-list role="list">
-          <mat-list-item role="listitem">temperature high
-            <br/> {{weather.temperatureMax}}
-          </mat-list-item>
-          <mat-list-item role="listitem">temperature low
-            <br/> {{weather.temperatureMin}}
-          </mat-list-item>
-        </mat-list>
-        <mat-list role="list">
-          <mat-list-item role="listitem">precipitation chance
-            <br/> {{weather.precipProbability}}
-          </mat-list-item>
-          <mat-list-item role="listitem">precipitation type
-            <br/> {{weather.precipType}}
-          </mat-list-item>
-        </mat-list>
-        <mat-list role="list">
-          <mat-list-item role="listitem">sunrise
-            <br/> {{weather.sunriseTime}}
-          </mat-list-item>
-          <mat-list-item role="listitem">sunset
-            <br/> {{weather.sunsetTime}}
-          </mat-list-item>
-        </mat-list>
-      </mat-grid-tile>
-    </mat-grid-list>
+      </div>
+      <div style="margin-left: 8px;">
+        <p class="text mat-subheading-1">
+          Precipitation({{selectedWeatherReport.precipType}}): {{selectedWeatherReport.precipProbability}}
+          <br/>Sunset: {{selectedWeatherReport.sunsetTime}}
+          <br/>Sunrise: {{selectedWeatherReport.sunriseTime}}
+        </p>
+        <!---->
+      </div>
+    </div>
   </div>
-</div>
 
-<div class="bottom-text">Icons made by
-  <a href="https://www.flaticon.com/authors/vitaly-gorbachev" title="Vitaly Gorbachev">Vitaly Gorbachev</a> from
-  <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by
-  <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>
+
+  <!-- whole Week -->
+  <mat-button-toggle-group name="weather Reports" [(ngModel)]="selectedDay" style="width: fit-content;">
+    <div fxLayout="row wrap">
+      <div *ngFor="let weather of showReports" class=" mat-elevation-z2" style="padding: 5px; width: fit-content;">
+        <mat-button-toggle style="width: fit-content;" [value]="showReports.indexOf(weather)">
+          <p class="text color_light-grey mat-body-2">{{weather.time}}</p>
+          <img alt="image" class="weather-icon small" [attr.src]="weather.iconSrc" type="image/svg+xml">
+          <div fxLayout="row">
+            <p class="text mat-body-2">{{weather.temperatureMax}}°C </p>
+            <p class="text color_light-grey mat-body-2">{{weather.temperatureMin}}°C</p>
+            <p class="text mat-body-2" fxFlex></p>
+            <p class="text mat-body-2">{{weather.precipType}}: </p>
+            <p class="text mat-body-2">{{weather.precipProbability}}</p>
+          </div>
+        </mat-button-toggle>
+      </div>
+    </div>
+  </mat-button-toggle-group>
+
+
+  <!-- Licence note -->
+  <div class="mat-body-2" style="margin-top: 5px;">Icons made by
+    <a href="https://www.flaticon.com/authors/vitaly-gorbachev" title="Vitaly Gorbachev">Vitaly Gorbachev</a> from
+    <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by
+    <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>
+  </div>
 </div>

@@ -12,6 +12,8 @@ import { DatePipe } from '@angular/common';
 })
 export class WeatherComponent implements OnInit {
   selectedType: string;
+
+  selectedDay = '0';
   showReports: Weather[];
 
   locations: Location[];
@@ -21,11 +23,19 @@ export class WeatherComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.selectedType = 'today';
     this.weatherService.getAllLocations().subscribe((data: Location[]) => {
       this.locations = data;
       this.selectLocation(this.locations[0]);
     });
+    if(this.locations.length > 0){
+      this.selectLocation(this.locations[0]);
+    }
+  }
+
+  get selectedWeatherReport(): Weather {
+    const weather = new Weather(this.showReports[this.selectedDay]);
+    weather.time = this.convertTime(weather.timestamp);
+    return weather;
   }
 
   public changeLocation(event): void {
@@ -35,50 +45,19 @@ export class WeatherComponent implements OnInit {
   public selectLocation(location: Location): void {
     this.weatherService.sendLocation(location.persistentId);
     this.selectedLocation = location.name;
-    switch (this.selectedType) {
-      case 'today':
-        this.getWeatherToday();
-        break;
-      case 'tomorrow':
-        this.getWeatherTomorrow();
-        break;
-      case 'week':
-        this.getWeatherWeek();
-        break;
-    }
-  }
-
-  getWeatherToday() {
-    this.selectedType = 'today';
-    this.weatherService.getWeatherToday()
-      .subscribe((data: Weather) => {
-        const weatherToday = { ...data };
-        weatherToday.iconSrc = this.getWeatherIcon(weatherToday);
-        weatherToday.time = this.convertTime(weatherToday.timestamp);
-        this.showReports = [weatherToday];
-      });
-  }
-
-  getWeatherTomorrow() {
-    this.selectedType = 'tomorrow';
-    this.weatherService.getWeatherTomorrow()
-      .subscribe((data: Weather) => {
-        const weatherTomorrow = { ...data };
-        weatherTomorrow.iconSrc = this.getWeatherIcon(weatherTomorrow);
-        weatherTomorrow.time = this.convertTime(weatherTomorrow.timestamp);
-        this.showReports = [weatherTomorrow];
-      });
-
+    this.getWeatherWeek();
   }
 
   getWeatherWeek() {
-    this.selectedType = 'week';
     this.weatherService.getWeatherWeek()
       .subscribe((data: WeatherWeek) => {
         const weatherWeekData = { ...data };
         for (const weather of weatherWeekData.days) {
           weather.iconSrc = this.getWeatherIcon(weather);
-          weather.time = this.convertTime(weather.timestamp);
+          weather.time = this.convertTimeShort(weather.timestamp);
+          if(weather.precipType === 'no data'){
+            weather.precipType = 'rain';
+          }
         }
         this.showReports = weatherWeekData.days;
       });
@@ -120,5 +99,10 @@ export class WeatherComponent implements OnInit {
   convertTime(stamp: number): string {
     const datePipe = new DatePipe('en-US');
     return datePipe.transform(stamp * 1000, 'EEEE, MMMM d');
+  }
+
+  convertTimeShort(stamp: number): string {
+    const datePipe = new DatePipe('en-US');
+    return datePipe.transform(stamp * 1000, 'EEE, MMM d');
   }
 }
