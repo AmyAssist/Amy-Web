@@ -50,7 +50,7 @@ export class WeatherComponent implements OnInit {
       .subscribe((data: WeatherNow) => {
         const weatherNow = { ...data };
         weatherNow.iconSrc = this.getWeatherIcon(weatherNow.icon);
-        weatherNow.precipIconSrc = this.getWeatherIcon(weatherNow.precipType)
+        weatherNow.precipIconSrc = this.getWeatherIcon(weatherNow.precipType);
         weatherNow.time = this.convertTime(weatherNow.timestamp);
         this.showReportNow = weatherNow;
       });
@@ -61,7 +61,7 @@ export class WeatherComponent implements OnInit {
       .subscribe((data: WeatherDay) => {
         const weatherDay = { ...data };
         weatherDay.iconSrc = this.getWeatherIcon(weatherDay.icon);
-        weatherDay.precipIconSrc = this.getWeatherIcon(weatherDay.precipType)
+        weatherDay.precipIconSrc = this.getWeatherIcon(weatherDay.precipType);
         weatherDay.time = this.convertTime(weatherDay.timestamp);
         this.showReportDay = weatherDay;
       });
