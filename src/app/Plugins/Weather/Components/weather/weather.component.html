@@ -42,7 +42,7 @@
     <div id="weatherNow" class="flex_layout" *ngIf="locationSelected" fxLayout="column" fxLayoutAlign="space-around center">
       <img alt="image" class="weather_now_icon" [attr.src]="showReportNow.iconSrc" type="image/svg+xml" *ngIf="locationSelected">
       <p style="text-align:center;" class="mat-h1" *ngIf="locationSelected">
-        {{showReportNow.temperatureNow}}°C
+        <br/>{{showReportNow.temperatureNow}}°C
         <br/>{{showReportNow.summary}}
       </p>
     </div>
