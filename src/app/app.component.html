@@ -29,7 +29,7 @@
     <button mat-button *ngIf="!auth.loggedIn()" routerLink="login">Login</button>
     <button mat-button *ngIf="auth.loggedIn()" (click)="auth.logout()">Logout</button>
   </mat-menu>
-  <div fxFlex class="main-content">
+  <div fxFlex class="main-content mat-elevation-z2">
     <router-outlet></router-outlet>
   </div>
 </div>
