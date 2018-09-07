@@ -1,47 +1,43 @@
-<section class="mat-typography">
+<h1 class="mat-h1">E-Mail</h1>
 
-  <h1 class='mat-display-1 header'>E-Mail</h1>
+<p *ngIf=checkingConnection class="mat-body-1">Checking if connection already exists...</p>
 
-  <p *ngIf=checkingConnection>Checking if connection already exists...</p>
+<mat-card *ngIf='!connected && !checkingConnection'>
 
-  <mat-card *ngIf='!connected && !checkingConnection'>
+  <mat-card-title>
+    Log-In
+  </mat-card-title>
+  <mat-card-subtitle>
+    <p>Please enter your email credentials</p>
+    <em>Leave everything blank to connect to Amy Mail</em>
+  </mat-card-subtitle>
 
-    <mat-card-title>
-      Log-In
-    </mat-card-title>
-    <mat-card-subtitle>
-      <p>Please enter your email credentials</p>
-      <em>Leave everything blank to connect to Amy Mail</em>
-    </mat-card-subtitle>
-
-    <div>
-      <mat-form-field class="form-full-width">
-        <mat-label>EMail Address</mat-label>
-        <input matInput #username type="text" placeholder="email@example.com">
-      </mat-form-field>
-    </div>
-
-    <div>
-      <mat-form-field class="form-full-width">
-        <mat-label>IMAP Server</mat-label>
-        <input matInput #imapServer type="text" placeholder="imap.gmail.com">
-      </mat-form-field>
-    </div>
-
-    <div>
-      <mat-form-field class="form-full-width">
-        <mat-label>Password</mat-label>
-        <input matInput #password type="password">
-      </mat-form-field>
-    </div>
-
-    <button mat-raised-button color="primary" (click)="connect(username.value, password.value, imapServer.value)">Connect</button>
-    <p *ngIf=connecting style="margin-top: 1em">Connecting...</p>
-    <p *ngIf='connectionError && !connecting' class="errorMessage">Couldn't connect to mail server</p>
-  </mat-card>
-  <div *ngIf='connected && !checkingConnection'>
-    <button mat-raised-button color="primary" style="float: right" (click)="disconnect()">Log Out</button>
-    <app-email-messagelist></app-email-messagelist>
+  <div>
+    <mat-form-field class="form-full-width">
+      <mat-label>EMail Address</mat-label>
+      <input matInput #username type="text" placeholder="email@example.com">
+    </mat-form-field>
   </div>
 
-</section>
+  <div>
+    <mat-form-field class="form-full-width">
+      <mat-label>IMAP Server</mat-label>
+      <input matInput #imapServer type="text" placeholder="imap.gmail.com">
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field class="form-full-width">
+      <mat-label>Password</mat-label>
+      <input matInput #password type="password">
+    </mat-form-field>
+  </div>
+
+  <button mat-raised-button color="primary" (click)="connect(username.value, password.value, imapServer.value)">Connect</button>
+  <p *ngIf=connecting style="margin-top: 1em">Connecting...</p>
+  <p *ngIf='connectionError && !connecting' class="errorMessage">Couldn't connect to mail server</p>
+</mat-card>
+<div *ngIf='connected && !checkingConnection'>
+  <button mat-raised-button color="primary" style="float: right" (click)="disconnect()">Log Out</button>
+  <app-email-messagelist></app-email-messagelist>
+</div>
