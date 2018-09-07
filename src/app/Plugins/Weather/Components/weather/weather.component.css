@@ -1,47 +1,42 @@
-.current_weather_icon {
+.weather_now_layout {
+    width: 100%; 
+    margin-top: 8px;
+}
+
+
+.weather_now_icon {
     height: 120px; 
     width: 120px; 
     object-fit: contain;
 }
 
-.current_info_icon {
+.weather_now_info_icon {
     height: 30px; 
     width: 30px;
 }
 
-.week_display {
-    margin-top: 8px;
-    flex-basis: 25%;
-}
-
-.week_weather_icon {
+.weather_week_icon {
     height: 60px;
     width: 60px; 
     object-fit: contain;
 }
 
-.week_info_icon {
+.weather_week_info_icon {
     height: 20px;
     width: 20px; 
     object-fit: contain;
 }
 
+.flex_layout {
+    margin-top: 8px;
+    flex-basis: 25%;
+}
+
 .text.color_red { color: rgb(255, 0, 0);}
 .text.color_blue { color: rgb(0, 0, 255); }
 
-.select-container {
-    padding: 16px;
-}
-
-.mat-card-tile{
-    left:5px;
-}
-
-.dynamic-text {
-    color: #5f6368;
-}
-
 .bottom-text {
+    margin-top: 8px;
     bottom: 0;
 }
 
