@@ -1,6 +1,6 @@
 <div id="completeLayout" fxLayout="column" fxLayoutAlign="space-around center" class="mat-elevation-z2">
 
-  <div id="WeatherNowLayout" class="weather_now_layout mat-elevation-z2" fxLayout="row wrap" fxLayoutAlign="space-around center">
+  <div id="WeatherNowLayout" class="weather_now_layout" fxLayout="row wrap" fxLayoutAlign="space-around center">
 
     <!--Select location for weather report-->
     <div id="locationSelector" class="flex_layout" *ngIf="locationSelected" fxLayout="column" fxLayoutAlign="space-around center">
@@ -52,7 +52,7 @@
   <div id="weatherWeekLayout" *ngIf="locationSelected" fxLayout="row wrap" fxLayoutAlign="space-around stretch">
 
     <!--Show weather report of the week-->
-    <div class="flex_layout mat-elevation-z2" *ngFor="let weatherReportWeek of showReportWeek">
+    <div class="flex_layout" *ngFor="let weatherReportWeek of showReportWeek">
       <p style="text-align:center;" class="text mat-body-2">{{weatherReportWeek.time}}</p>
       <p style="text-align:center;">
         <img alt="image" class="weather_week_icon" [attr.src]="weatherReportWeek.iconSrc" type="image/svg+xml">
