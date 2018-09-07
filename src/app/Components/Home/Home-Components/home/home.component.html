@@ -11,7 +11,7 @@
   <div class="command-bar">
 
     <!-- Input Field View -->
-    <div *ngIf="!srSupported || keyboardActive" fxLayout="row" fxLayoutAlign="center center">
+    <div *ngIf="!srSupported || keyboardActive" class="command-bar-content" fxLayout="row" fxLayoutAlign="center center">
 
       <!-- Show Button to switch to SR View -->
       <div *ngIf="srSupported" fxFlexAlign="baseline">
@@ -45,7 +45,7 @@
 
 
     <!-- sr Button View -->
-    <div *ngIf="srSupported && !keyboardActive" fxLayout="row" fxLayoutAlign="space-between center">
+    <div *ngIf="srSupported && !keyboardActive" class="command-bar-content" fxLayout="row" fxLayoutAlign="space-between center">
 
       <!-- Input Field Activator -->
       <div fxFlex="80px">
@@ -55,7 +55,7 @@
       </div>
 
       <!--SR Button-->
-      <button mat-icon-button class="mybutton md-60" [@srState]="srState" (click)="triggerSR()">
+      <button mat-icon-button class="mybutton md-48" [@srState]="srState" (click)="triggerSR()">
         <mat-icon class="material-icons md-48 color_white">keyboard_voice</mat-icon>
       </button>
 
