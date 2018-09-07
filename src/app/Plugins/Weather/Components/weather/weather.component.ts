@@ -26,7 +26,7 @@ export class WeatherComponent implements OnInit {
   ngOnInit() {
     this.weatherService.getAllLocations().subscribe((data: Location[]) => {
       this.locations = data;
-      if (data !== null) {
+      if (data.length > 0) {
         this.selectLocation(this.locations[0]);
       }
     });

@@ -3,7 +3,7 @@
   <div id="WeatherNowLayout" class="weather_now_layout mat-elevation-z2" fxLayout="row wrap" fxLayoutAlign="space-around center">
 
     <!--Select location for weather report-->
-    <div id="locationSelector" class="flex_layout" fxLayout="column" fxLayoutAlign="space-around center">
+    <div id="locationSelector" class="flex_layout" *ngIf="locationSelected" fxLayout="column" fxLayoutAlign="space-around center">
       <mat-form-field>
         <mat-select (selectionChange)="changeLocation($event)" placeholder="Select Location" [attr.selected]="selectedLocation">
           <mat-option *ngFor="let location of locations" [value]="location">
@@ -14,6 +14,9 @@
       <p style="text-align:center;" class="mat-h3" *ngIf="locationSelected">
         {{showReportNow.time}}
       </p>
+    </div>
+    <div *ngIf="!locationSelected">
+      <p style="text-align:center" class="text color_red text mat-body-2 mat-h3">Register a location first.</p>
     </div>
 
     <!--Show current weather report information-->
