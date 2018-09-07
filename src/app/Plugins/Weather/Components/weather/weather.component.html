@@ -11,8 +11,9 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <p style="text-align:center;" class="mat-h3" *ngIf="locationSelected">
-        {{showReportNow.time}}
+      <p style="text-align:center;" class="mat-h2" *ngIf="locationSelected">
+        {{selectedLocation}}
+        <br>{{showReportNow.time}}
       </p>
     </div>
     <div *ngIf="!locationSelected">
@@ -29,10 +30,10 @@
           <img alt="image" class="weather_now_info_icon mat-h3" src="assets/weather/sunset.svg" type="image/svg+xml">
         </div>
         <div fxLayout="column" *ngIf="locationSelected">
-          <p class="text mat-body-2 mat-h3">{{showReportNow.precipProbability}}</p>
-          <p class="text mat-body-2 mat-h3">{{showReportNow.windspeed}}km/h</p>
-          <p class="text mat-body-2 mat-h3">{{showReportDay.sunriseTime}}</p>
-          <p class="text mat-body-2 mat-h3">{{showReportDay.sunsetTime}}</p>
+          <p style="text-align:right" class="text mat-body-3 mat-h3">{{showReportNow.precipProbability}}</p>
+          <p style="text-align:right" class="text mat-body-3 mat-h3">{{showReportNow.windspeed}}km/h</p>
+          <p style="text-align:right" class="text mat-body-3 mat-h3">{{showReportDay.sunriseTime}}</p>
+          <p style="text-align:right" class="text mat-body-3 mat-h3">{{showReportDay.sunsetTime}}</p>
         </div>
       </div>
     </div>
