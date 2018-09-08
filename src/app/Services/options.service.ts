@@ -7,7 +7,6 @@ export class OptionsService {
 
   private readonly _language = 0;
   private _soundEnabled = true;
-  private _displayChat = false;
 
   constructor() { }
 
@@ -25,13 +24,5 @@ export class OptionsService {
 
   unmute() {
     this._soundEnabled = true;
-  }
-
-  get displayChat() {
-    return this._displayChat;
-  }
-
-  set displayChat(newState: boolean) {
-    this._displayChat = newState;
   }
 }

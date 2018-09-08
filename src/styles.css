@@ -21,3 +21,7 @@ app-root {
     padding: 0;
     margin: 0;
 }
+
+textarea {
+    height: 18px;
+}

@@ -2,50 +2,78 @@
 <div class="main mat-elevation-z2" fxLayout="column" fxLayoutAlign="end center">
 
   <!-- Chat Displayal-->
-  <div class="content chat-background" fxFlex fxLayout="column" fxLayoutAlign="end center">
+  <div class="chat-background" fxFlex fxLayout="column" fxLayoutAlign="end center">
     <div class="chat-text" #scrollMe [scrollTop]="scrollMe.scrollHeight">
       <app-messages-container></app-messages-container>
     </div>
   </div>
 
-  <!--Input Field-->
-  <div fxLayout="row" fxLayoutAlign="center center" style="width: 100%;padding: 8px">
-    <div fxFlex>
-      <mat-form-field class="input-line">
-        <mat-label>{{commandInputPlaceholder}}</mat-label>
-        <textarea matInput class="textarea-fix" rows="1" (keydown.enter)="sendTextFieldMessage()" #command [(ngModel)]="commandTextValue"></textarea>
-      </mat-form-field>
+  <div class="command-bar">
+
+    <!-- Input Field View -->
+    <div *ngIf="!srSupported || keyboardActive" class="command-bar-content" fxLayout="row" fxLayoutAlign="center center">
+
+      <!-- Show Button to switch to SR View -->
+      <div *ngIf="srSupported" fxFlexAlign="baseline">
+        <button mat-icon-button class="mybutton md-36" (click)="triggerKeyboard()">
+          <mat-icon class="material-icons md-36">keyboard_hide</mat-icon>
+        </button>
+      </div>
+      <!--SR View not Supported -> Show Supported Buttons from SR View -->
+      <div *ngIf="!srSupported" fxFlexAlign="baseline">
+        <button mat-icon-button class="mybutton md-36" color="primary" (click)="triggerBackendSound()">
+          <mat-icon *ngIf="backendSoundState" class="material-icons md-36">music_note</mat-icon>
+          <mat-icon *ngIf="!backendSoundState" class="material-icons md-36 color_red">music_off</mat-icon>
+        </button>
+      </div>
+
+      <!-- Input Field -->
+      <div fxFlex fxFlexAlign="baseline">
+        <mat-form-field class="command-input" appearance="outline">
+          <mat-label>{{commandInputPlaceholder}}</mat-label>
+          <textarea matInput rows="1" style="resize:none" #inputField autofocus (keydown.enter)="sendTextFieldMessage()" [(ngModel)]="commandTextValue"></textarea>
+        </mat-form-field>
+      </div>
+
+      <!-- Send Input -->
+      <div fxFlexAlign="baseline">
+        <button mat-icon-button class="mybutton md-36" color="primary" (click)="sendTextFieldMessage()">
+          <mat-icon class="material-icons md-36">send</mat-icon>
+        </button>
+      </div>
     </div>
-    <div>
-      <button mat-icon-button color="primary" (click)="sendTextFieldMessage()">
-        <mat-icon>send</mat-icon>
+
+
+    <!-- sr Button View -->
+    <div *ngIf="srSupported && !keyboardActive" class="command-bar-content" fxLayout="row" fxLayoutAlign="space-between center">
+
+      <!-- Input Field Activator -->
+      <div fxFlex="80px">
+        <button mat-icon-button class="mybutton" (click)="triggerKeyboard()">
+          <mat-icon>keyboard</mat-icon>
+        </button>
+      </div>
+
+      <!--SR Button-->
+      <button mat-icon-button class="mybutton md-48" [@srState]="srState" (click)="triggerSR()">
+        <mat-icon class="material-icons md-48 color_white">keyboard_voice</mat-icon>
       </button>
+
+      <!-- Other Buttons (Voice mute & Sound Mute) -->
+      <div fxFlex="80px">
+        <!--Voice Button - Mute/Unmute & Cancel current Voice Output-->
+        <button mat-icon-button class="mybutton" (click)="triggerSound()">
+          <mat-icon *ngIf="soundEnabled">record_voice_over</mat-icon>
+          <mat-icon class="material-icons color_red" *ngIf="!soundEnabled">voice_over_off</mat-icon>
+        </button>
+
+        <!--Backend Sound Button - Mute/Unmute Sound Output of the Backend-->
+        <button mat-icon-button class="mybutton" (click)="triggerBackendSound()">
+          <mat-icon *ngIf="backendSoundState">music_note</mat-icon>
+          <mat-icon class="material-icons color_red" *ngIf="!backendSoundState">music_off</mat-icon>
+        </button>
+      </div>
+
     </div>
   </div>
-
-  <!--Buttons-->
-  <div style="padding: 8px" fxLayout="row" fxLayoutAlign="center center">
-
-    <!--Sound Button - Mute/Unmute & Cancel current Voice Output-->
-    <button mat-icon-button (click)="triggerSound()">
-      <mat-icon *ngIf="soundEnabled">record_voice_over</mat-icon>
-      <mat-icon class="mat-icons color_red" *ngIf="!soundEnabled">voice_over_off</mat-icon>
-    </button>
-
-    <!--SR Buttom-->
-    <button mat-button class="button round" *ngIf="srSupported" [@srState]="srState" (click)="triggerSR()">
-      <mat-icon class="material-icons md-48">keyboard_voice</mat-icon>
-    </button>
-    <button *ngIf="!srSupported" disabled [@srState]="srState" (click)="triggerSR()">
-      <mat-icon class="material-icons md-48">keyboard_voice</mat-icon>
-    </button>
-
-    <!--Backend Sound Button - Mute/Unmute Sound Output of the Backend-->
-    <button mat-icon-button (click)="triggerBackendSound()">
-      <mat-icon *ngIf="backendSoundState">music_note</mat-icon>
-      <mat-icon class="mat-icons color_red" *ngIf="!backendSoundState">music_off</mat-icon>
-    </button>
-
-  </div>
-
 </div>
