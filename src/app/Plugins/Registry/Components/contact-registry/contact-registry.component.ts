@@ -24,7 +24,6 @@ export class ContactRegistryComponent implements OnInit {
                 private readonly dialog: MatDialog) {}
 
     ngOnInit() {
-        this.registryService.setupPath();
         this.dataSource = new AsyncTableDataSource<Location>([], Location, this.validatorService,
             this.insertContact.bind(this),
             this.updateContact.bind(this),

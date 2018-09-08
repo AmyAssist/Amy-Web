@@ -27,6 +27,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 @NgModule({
   imports: [
@@ -55,6 +58,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     BrowserModule,
     RouterModule,
     FlexLayoutModule,
+    MatSidenavModule,
+    MatStepperModule,
     MatButtonToggleModule
   ],
   exports: [
@@ -83,6 +88,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     BrowserModule,
     RouterModule,
     FlexLayoutModule,
+    MatSidenavModule,
+    MatStepperModule,
     MatButtonToggleModule
   ],
   declarations: [],

@@ -1,0 +1,46 @@
+<mat-card>
+  <mat-card-title>
+    Devices
+  </mat-card-title>
+
+  <mat-tab-group>
+    <mat-tab label="device selection">
+      <mat-form-field>
+        <mat-select [(value)]="activeDeviceID" placeholder="Choose device">
+          <mat-option *ngFor="let device of deviceAll; let i = index" value={{deviceAll[i].id}}>
+            {{device.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <button mat-icon-button color="primary" (click)="setDevice(activeDeviceID)">
+        <mat-icon>swap_horizontal_circle</mat-icon>
+      </button>
+
+      <button mat-icon-button color="primary" (click)="getDevs()">
+        <mat-icon>cached</mat-icon>
+      </button>
+      <p>You selected: {{activeDeviceID}}</p>
+    </mat-tab>
+    <mat-tab label="Rename device">
+      <mat-form-field>
+        <mat-select [(value)]="renameDeviceID" placeholder="Choose device">
+          <mat-option *ngFor="let device of deviceAll; let i = index" value={{deviceAll[i].id}}>
+            {{device.name}}
+          </mat-option>
+        </mat-select>
+
+      </mat-form-field>
+      <mat-form-field style="margin-left: 5px">
+        <input matInput #deviceName placeholder="New name">
+      </mat-form-field>
+      <button mat-icon-button (click)="setDeviceName(renameDeviceID, deviceName.value)">
+        <mat-icon>swap_horizontal_circle</mat-icon>
+      </button>
+      <button mat-icon-button color="primary" (click)="getDevs()">
+        <mat-icon>cached</mat-icon>
+      </button>
+    </mat-tab>
+  </mat-tab-group>
+
+</mat-card>

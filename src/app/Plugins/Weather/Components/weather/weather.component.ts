@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { WeatherDataService } from '../../Services/weather-data.service';
-import { Weather } from '../../Objects/weather';
+import { WeatherNow } from '../../Objects/weatherNow';
+import { WeatherDay } from '../../Objects/weatherDay';
 import { WeatherWeek } from '../../Objects/weatherWeek';
 import { Location } from '../../Objects/location';
-import { BackendResolver } from '../../../../Services/backendResolver.service';
 import { DatePipe } from '@angular/common';
 
 @Component({
@@ -12,110 +12,102 @@ import { DatePipe } from '@angular/common';
   styleUrls: ['./weather.component.css']
 })
 export class WeatherComponent implements OnInit {
+  showReportWeek: WeatherDay[];
+  showReportDay: WeatherDay;
+  showReportNow: WeatherNow;
 
-  weatherToday: Weather;
-  weatherTomorrow: Weather;
-  weatherWeekData: WeatherWeek;
-  today: boolean;
-  tommorow: boolean;
-  week: boolean;
   locations: Location[];
   selectedLocation: string;
+  locationSelected = false;
 
   constructor(private readonly weatherService: WeatherDataService) {
   }
 
   ngOnInit() {
-    this.weatherService.setupPath();
-    this.weatherToday = new Weather();
-    this.weatherTomorrow = new Weather();
-    this.weatherWeekData = new WeatherWeek();
-    this.today = false;
-    this.tommorow = false;
-    this.week = false;
-    this.weatherService.getAllLocations()
-      .subscribe((data: Location[]) => {
-        this.locations = data;
-        this.selectedLocation = this.locations[0].name;
+    this.weatherService.getAllLocations().subscribe((data: Location[]) => {
+      this.locations = data;
+      if (data.length > 0) {
+        this.selectLocation(this.locations[0]);
+      }
+    });
+  }
+
+  public changeLocation(event): void {
+    this.selectLocation(event.value);
+  }
+
+  public selectLocation(location: Location): void {
+    this.locationSelected = true;
+    this.weatherService.sendLocation(location.persistentId);
+    this.selectedLocation = location.name;
+    this.getWeatherNow();
+    this.getWeatherDay();
+    this.getWeatherWeek();
+  }
+
+  getWeatherNow() {
+    this.weatherService.getWeatherNow()
+      .subscribe((data: WeatherNow) => {
+        const weatherNow = { ...data };
+        weatherNow.iconSrc = this.getWeatherIcon(weatherNow.icon);
+        weatherNow.precipIconSrc = this.getWeatherIcon(weatherNow.precipType);
+        weatherNow.time = this.convertTime(weatherNow.timestamp);
+        this.showReportNow = weatherNow;
       });
   }
 
-  public onChange(event): void {
-    this.weatherService.sendLocation(event.value.persistentId);
-    this.selectedLocation = event.value.name;
-    if (this.today) { this.getWeatherToday(); }
-    if (this.tommorow) { this.getWeatherTomorrow(); }
-    if (this.week) { this.getWeatherWeek(); }
-  }
-
-  getWeatherToday() {
-    this.today = true;
-    this.tommorow = false;
-    this.week = false;
+  getWeatherDay() {
     this.weatherService.getWeatherToday()
-      .subscribe((data: Weather) => {
-        this.weatherToday = { ...data };
-        this.weatherToday.iconSrc = this.getWeatherIcon(this.weatherToday);
-        this.weatherToday.time = this.convertTime(this.weatherToday.timestamp);
+      .subscribe((data: WeatherDay) => {
+        const weatherDay = { ...data };
+        weatherDay.iconSrc = this.getWeatherIcon(weatherDay.icon);
+        weatherDay.precipIconSrc = this.getWeatherIcon(weatherDay.precipType);
+        weatherDay.time = this.convertTime(weatherDay.timestamp);
+        this.showReportDay = weatherDay;
       });
-  }
-
-  getWeatherTomorrow() {
-    this.today = false;
-    this.tommorow = true;
-    this.week = false;
-    this.weatherService.getWeatherTomorrow()
-      .subscribe((data: Weather) => {
-        this.weatherTomorrow = { ...data };
-        this.weatherTomorrow.iconSrc = this.getWeatherIcon(this.weatherTomorrow);
-        this.weatherTomorrow.time = this.convertTime(this.weatherTomorrow.timestamp);
-      });
-
   }
 
   getWeatherWeek() {
-    this.today = false;
-    this.tommorow = false;
-    this.week = true;
     this.weatherService.getWeatherWeek()
       .subscribe((data: WeatherWeek) => {
-        this.weatherWeekData = { ...data };
-        for (const weather of this.weatherWeekData.days) {
-          weather.iconSrc = this.getWeatherIcon(weather);
-          weather.time = this.convertTime(weather.timestamp);
+        const weatherWeekData = { ...data };
+        for (const weatherWeek of weatherWeekData.days) {
+          weatherWeek.iconSrc = this.getWeatherIcon(weatherWeek.icon);
+          weatherWeek.precipIconSrc = this.getWeatherIcon(weatherWeek.precipType);
+          weatherWeek.time = this.convertTime(weatherWeek.timestamp);
         }
+        this.showReportWeek = weatherWeekData.days;
       });
-
   }
 
-  getWeatherIcon(weather: Weather): string {
-    switch (weather.icon) {
+  getWeatherIcon(icon: WeatherDay['icon']): string {
+    switch (icon) {
       case 'clear-day': {
-        return weather.iconSrc = 'assets/weather/sunny.svg';
+        return 'assets/weather/sunny.svg';
       }
       case 'clear-night': {
-        return weather.iconSrc = 'assets/weather/sunny.svg';
+        return 'assets/weather/sunny.svg';
       }
       case 'sleet': {
-        return weather.iconSrc = 'assets/weather/rain.svg';
+        return 'assets/weather/sleet.svg';
       }
       case 'rain': {
-        return weather.iconSrc = 'assets/weather/rain.svg';
+        return 'assets/weather/rain.svg';
       }
       case 'snow': {
-        return weather.iconSrc = 'assets/weather/snows.svg';
+        return 'assets/weather/snows.svg';
       }
       case 'wind': {
-        return weather.iconSrc = 'assets/weather/wind.svg';
+        return 'assets/weather/wind.svg';
       }
       case 'fog': {
-        return weather.iconSrc = 'assets/weather/hazy.svg';
+        return 'assets/weather/hazy.svg';
       }
       case 'cloudy': {
-        return weather.iconSrc = 'assets/weather/cloudy.svg';
+        return 'assets/weather/cloudy.svg';
       }
       default: {
-        return weather.iconSrc = 'assets/weather/cloudy.svg';
+        return 'assets/weather/cloudy.svg';
       }
     }
   }

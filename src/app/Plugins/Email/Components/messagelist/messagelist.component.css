@@ -1,0 +1,13 @@
+.mat-expansion-panel-header-title,
+.mat-expansion-panel-header-description {
+    flex-basis: 0;
+}
+
+.unseenMail {
+    font-weight: bold;
+}
+
+.importantMail::before {
+    content: '★ ';
+    color: gold;
+}
