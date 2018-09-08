@@ -53,14 +53,6 @@ export class WeatherDataService {
   }
 
   /*
-    getting weather-Data for tomorrow.
-  */
-  getWeatherTomorrow() {
-    return this.http.get<WeatherDay>(this.path + 'weather/tomorrow', this.httpOptions).pipe(
-      catchError(this.handleError));
-  }
-
-  /*
     getting weather-Data for the whole week.
   */
   getWeatherWeek() {
