@@ -48,8 +48,6 @@ export class ContentComponent implements OnInit {
   constructor(private readonly musicService: MusicDataService, private readonly musicTransService: MusicDataTransferService) { }
 
   ngOnInit() {
-    console.log(this.musicService);
-    // this.musicService.setupPath();
     this.musicData = new Music;
 
     this.searchResultSong = new Array<Music>();

@@ -36,14 +36,7 @@ export class MusicDataService {
       'Something bad happened; please try again later.');
   }
 
-  constructor(private readonly backend: BackendResolver, private readonly http: HttpClient) {
-    // this.setupPath();
-  }
-  /*
-    setupPath() {
-      this.path = this.backend.backendPath + 'music/';
-    }
-    */
+  constructor(private readonly backend: BackendResolver, private readonly http: HttpClient) {}
 
   /*
     Returns a login link to a personal spotify Account

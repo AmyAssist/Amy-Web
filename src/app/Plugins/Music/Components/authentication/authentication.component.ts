@@ -27,8 +27,6 @@ export class AuthenticationComponent implements OnInit {
   constructor(private readonly musicService: MusicDataService) { }
 
   ngOnInit() {
-    console.log(this.musicService);
-    // this.musicService.setupPath();
   }
 
   /*

@@ -23,7 +23,6 @@ export class MusicComponent implements OnInit {
   screenWidth: number;
 
   constructor(private readonly musicService: MusicDataService) {
-    // this.musicService.setupPath();
     this.screenWidth = window.innerWidth;
     window.onresize = () => {
       // set screenWidth on screen size change

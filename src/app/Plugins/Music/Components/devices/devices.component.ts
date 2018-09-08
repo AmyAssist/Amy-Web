@@ -32,9 +32,6 @@ export class DevicesComponent implements OnInit {
   constructor(private readonly musicService: MusicDataService) { }
 
   ngOnInit() {
-    console.log(this.musicService);
-    // this.musicService.setupPath();
-
     this.deviceAll = new Array<Device>();
     this.getDevs();
   }
