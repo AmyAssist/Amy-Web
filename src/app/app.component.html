@@ -1,11 +1,25 @@
+<div fxLayout="column" fxFill fxLayoutAlign="start center">
+  <mat-toolbar class="mat-elevation-z6" id="amy-toolbar" color="primary" fxFlex="48px">
+    <button mat-button routerLink="">
+      <mat-icon>home</mat-icon>
+      Home</button>
+    <span class="fill-remaining-space"></span>
+    <div fxLayout="row" fxShow="false" fxShow.gt-sm>
+      <button mat-button routerLink="music">Music</button>
+      <button mat-button routerLink="clock">Alarm</button>
+      <button mat-button routerLink="weather">Weather</button>
+      <button mat-button routerLink="navigation">Navigation</button>
+      <button mat-button routerLink="email">E-Mail</button>
+      <button mat-button routerLink="registry">Registry</button>
+      <button mat-button *ngIf="!auth.loggedIn()" routerLink="login">Login</button>
+      <button mat-button *ngIf="auth.loggedIn()" (click)="auth.logout()">Logout</button>
+    </div>
+    <button mat-button [mat-menu-trigger-for]="menu" fxHide="false" fxHide.gt-sm>
+      <mat-icon>menu</mat-icon>
+    </button>
 
-<mat-toolbar color="primary">
-
-  <button mat-button routerLink="">
-    <mat-icon>home</mat-icon>
-    Home</button>
-  <span class="fill-remaining-space"></span>
-  <div fxLayout="row" fxShow="false" fxShow.gt-sm>
+  </mat-toolbar>
+  <mat-menu x-position="before" #menu="matMenu">
     <button mat-button routerLink="music">Music</button>
     <button mat-button routerLink="clock">Alarm</button>
     <button mat-button routerLink="weather">Weather</button>
@@ -14,27 +28,8 @@
     <button mat-button routerLink="registry">Registry</button>
     <button mat-button *ngIf="!auth.loggedIn()" routerLink="login">Login</button>
     <button mat-button *ngIf="auth.loggedIn()" (click)="auth.logout()">Logout</button>
+  </mat-menu>
+  <div fxFlex class="main-content">
+    <router-outlet></router-outlet>
   </div>
-  <button mat-button [mat-menu-trigger-for]="menu" fxHide="false" fxHide.gt-sm>
-    <mat-icon>menu</mat-icon>
-  </button>
-
-</mat-toolbar>
-<mat-menu x-position="before" #menu="matMenu">
-  <button mat-button routerLink="music">Music</button>
-  <button mat-button routerLink="clock">Alarm</button>
-  <button mat-button routerLink="weather">Weather</button>
-  <button mat-button routerLink="navigation">Navigation</button>
-  <button mat-button routerLink="email">E-Mail</button>
-  <button mat-button routerLink="registry">Registry</button>
-  <button mat-button *ngIf="!auth.loggedIn()" routerLink="login">Login</button>
-  <button mat-button *ngIf="auth.loggedIn()" (click)="auth.logout()">Logout</button>
-</mat-menu>
-
-<div class="main-content">
-  <router-outlet></router-outlet>
-</div>
-
-<div>
-  <app-bottom-bar></app-bottom-bar>
 </div>

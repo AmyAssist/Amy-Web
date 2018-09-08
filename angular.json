@@ -20,6 +20,7 @@
             "tsConfig": "src/tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
+              "src/manifest.json",
               "src/assets"
             ],
             "styles": [
@@ -43,7 +44,8 @@
               "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
-              "buildOptimizer": true
+              "buildOptimizer": true,
+              "serviceWorker": true
             }
           }
         },
@@ -77,6 +79,7 @@
             "scripts": [],
             "assets": [
               "src/favicon.ico",
+              "src/manifest.json",
               "src/assets"
             ]
           }

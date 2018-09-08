@@ -44,9 +44,7 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.musicService);
-
-    this.musicService.setupPath();
-
+    // this.musicService.setupPath();
     this.musicData = new Music;
 
     // array of songs from the current playlist for display

@@ -6,10 +6,7 @@ import { BackendResolver } from './backendResolver.service';
   providedIn: 'root',
 })
 export class AuthService {
-
-  isLoggedIn = false;
-  readonly cookieKey = 'core-domain';
-
+  private readonly cookieKey = 'core-domain';
 
   constructor(private readonly myRoute: Router, private readonly backend: BackendResolver) {
     if (this.loggedIn()) {
@@ -18,19 +15,22 @@ export class AuthService {
   }
 
   loggedIn(): boolean {
-    this.isLoggedIn = localStorage.getItem(this.cookieKey) != null;
-    return this.isLoggedIn;
+    return localStorage.getItem(this.cookieKey) != null;
   }
 
   login(domain: string) {
-    this.backend.setBackendPath(domain);
-    this.isLoggedIn = true;
+    const backendURL = this.preprocessBackendURL(domain);
+    this.backend.setBackendPath(backendURL);
     this.myRoute.navigate(['home']);
-    localStorage.setItem(this.cookieKey, domain);
+    localStorage.setItem(this.cookieKey, this.backend.backendURL.getValue());
+  }
+
+  private preprocessBackendURL(backendURL: string): string {
+    const url = new URL(backendURL);
+    return url.origin + url.pathname;
   }
 
   logout() {
-    this.isLoggedIn = false;
     this.myRoute.navigate(['login']);
     localStorage.removeItem(this.cookieKey);
   }

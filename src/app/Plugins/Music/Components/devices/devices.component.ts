@@ -33,7 +33,7 @@ export class DevicesComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.musicService);
-    this.musicService.setupPath();
+    // this.musicService.setupPath();
 
     this.deviceAll = new Array<Device>();
     this.getDevs();

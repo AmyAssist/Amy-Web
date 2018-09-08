@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EmailDataService } from '../../Services/email-data.service';
+import { EMailCredentials } from '../../Objects/EMailCredentials';
 
 @Component({
   selector: 'app-email',
@@ -7,40 +8,56 @@ import { EmailDataService } from '../../Services/email-data.service';
   styleUrls: ['./email.component.css']
 })
 export class EmailComponent implements OnInit {
+  checkingConnection: boolean;
+  connecting = false;
 
-  unreadMessages: number;
-
-  newMessages: boolean;
-
-  output: string;
+  connected = false;
+  connectionError = false;
 
   constructor(private readonly emailService: EmailDataService) { }
 
   ngOnInit() {
-    this.emailService.setupPath();
-    this.unreadMessages = -1;
-    this.newMessages = false;
+    this.checkingConnection = true;
+    this.emailService.isConnected().subscribe((connected: boolean) => {
+      if (connected) {
+        this.connected = true;
+      }
+      this.checkingConnection = false;
+    }, error => {
+      console.log(error);
+      this.checkingConnection = false;
+    });
   }
 
-  hasNewMessages() {
-    this.emailService.hasUnreadMessages().subscribe((data: boolean) => this.newMessages = data);
-    if (this.newMessages) {
-      this.output = 'You have new messages';
+  connect(username: string, password: string, imapServer: string) {
+    let credentials: EMailCredentials;
+    if (username === '' && password === '' && imapServer === '') {
+      credentials = null;
     } else {
-      this.output = 'You do not have new messages';
+      credentials = new EMailCredentials(username, password, imapServer);
     }
+    this.connecting = true;
+    this.emailService.connect(credentials).subscribe((data: boolean) => {
+      if (data === true) {
+        this.connectionError = false;
+        this.connected = true;
+      } else {
+        this.connected = false;
+        this.connectionError = true;
+      }
+      this.connecting = false;
+    }, error => {
+      console.log(error);
+      this.connected = false;
+      this.connectionError = true;
+      this.connecting = false;
+    });
   }
 
-  amountNewMessages() {
-    this.emailService.amountNewMessages().subscribe((data: number) => this.unreadMessages = data);
-    this.output = `You have ${ this.unreadMessages } new messages`;
+  disconnect() {
+    this.emailService.disconnect().subscribe(() => {
+      this.connected = false;
+    });
   }
 
-  getImportantMails() {
-    this.emailService.getMails(-1, true).subscribe((data: string) => this.output = data);
-  }
-
-  getAllMails() {
-    this.emailService.getMails(1, false).subscribe((data: string) => this.output = data);
-  }
 }

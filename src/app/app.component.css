@@ -2,11 +2,17 @@
     flex: 1 1 auto;
 }
 
+#amy-toolbar {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+}
+
 .main-content {
     box-sizing: border-box;
     padding: 16px;
-    margin: auto;
     width: 50%;
+    min-height: auto;
 }
 
 /* big desktop */

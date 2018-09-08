@@ -11,7 +11,8 @@ import {
   MatMenuModule,
   MatTableModule,
   MatTabsModule,
-  MatToolbarModule
+  MatToolbarModule,
+  MatProgressSpinnerModule
 } from '@angular/material';
 
 
@@ -24,13 +25,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { ClockComponent } from './Plugins/Clock/Components/clock/clock.component';
 import { WeatherComponent } from './Plugins/Weather/Components/weather/weather.component';
-import { HomeComponent } from './Components/home/home.component';
 import { CalendarComponent } from './Plugins/Calendar/Components/calendar/calendar.component';
 import { EmailComponent } from './Plugins/Email/Components/email/email.component';
 
 import { LocationRegistryComponent } from './Plugins/Registry/Components/location-registry/location-registry.component';
 import { RegistryContainerComponent } from './Plugins/Registry/Components/registry-container/registry-container.component';
 import { ContactRegistryComponent } from './Plugins/Registry/Components/contact-registry/contact-registry.component';
+import { MessageListComponent } from './Plugins/Email/Components/messagelist/messagelist.component';
 
 import { ErrorDialogComponent } from './Components/error-dialog/error-dialog.component';
 import { LoginComponent } from './Components/login/login.component';
@@ -41,10 +42,12 @@ import { AuthGuard } from './auth.guard';
 import { MaterialModule } from './material.module';
 import { MusicModule } from './Plugins/Music/music.module';
 
-import { AmyChatComponent } from './Components/bottom-bar/Components/amy-chat/amy-chat.component';
-import { BottomBarComponent } from './Components/bottom-bar/bottom-bar.component';
-
 import { NavigationModule } from './Plugins/Navigation/navigation.module';
+import { HomeComponent } from './Components/Home/Home-Components/home/home.component';
+import { MessagesContainerComponent } from './Components/Home/Home-Components/messages-container/messages-container.component';
+
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 /*
     Routing of the components to the respective links
@@ -100,8 +103,8 @@ const routes: Routes = [
     ErrorDialogComponent,
     RegistryContainerComponent,
     ContactRegistryComponent,
-    AmyChatComponent,
-    BottomBarComponent,
+    MessagesContainerComponent,
+    MessageListComponent,
   ],
   imports: [
     MusicModule,
@@ -124,7 +127,9 @@ const routes: Routes = [
     HttpClientModule,
     RouterModule.forRoot(routes),
     MatRadioModule,
-    FormsModule
+    FormsModule,
+    MatProgressSpinnerModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   exports: [RouterModule],
   providers: [AuthService, AuthGuard],

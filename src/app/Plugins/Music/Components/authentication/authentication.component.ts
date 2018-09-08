@@ -28,8 +28,7 @@ export class AuthenticationComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.musicService);
-
-    this.musicService.setupPath();
+    // this.musicService.setupPath();
   }
 
   /*

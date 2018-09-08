@@ -40,8 +40,7 @@ export class CurrentSongComponent implements OnInit {
   constructor(private readonly musicService: MusicDataService, private readonly musicTransService: MusicDataTransferService) { }
 
   ngOnInit() {
-    this.musicService.setupPath();
-
+    // this.musicService.setupPath();
     this.musicData = new Music;
 
     this.getVolume();
