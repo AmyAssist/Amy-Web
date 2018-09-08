@@ -21,7 +21,7 @@
       <mat-icon>skip_next</mat-icon>
     </button>
 
-    <mat-slider [max]="volumeMax" [min]="volumeMin" [step]="volumeStep" [(ngModel)]="volumeValue" (change)="changeVolume(volumeValue)">
+    <mat-slider class="volumeSlider" [max]="volumeMax" [min]="volumeMin" [step]="volumeStep" [(ngModel)]="volumeValue" (change)="changeVolume(volumeValue)">
     </mat-slider>
 
     <button mat-icon-button color="primary" (click)="getCurrentSong()">
