@@ -116,10 +116,10 @@ export class MusicDataService {
   */
   playPlaylist(playlistData: number, playlistType: string): Observable<Playlist> {
     let params = new HttpParams();
-    params = params.append('songNumber', playlistData.toString());
+    params = params.append('index', playlistData.toString());
     params = params.append('type', playlistType);
 
-    return this.http.post<Playlist>(`${this.path}play`, null, { params }).pipe(
+    return this.http.post<Playlist>(`${this.path}play/playlist`, null, { params }).pipe(
       catchError(this.handleError));
   }
 
