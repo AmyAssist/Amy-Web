@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MusicDataService } from '../../Services/music-data.service';
 
 /*
-  Component for controlling the authenticaation of the spotify plugin. It recieves data from the REST-backend with a custom music-dataservice.
+  Component for controlling the authenticaation of the spotify plugin.
+  It recieves data from the REST-backend with a custom music-dataservice.
 
   @author: Tobias Siemonsen
 */

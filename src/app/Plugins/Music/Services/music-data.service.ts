@@ -87,7 +87,7 @@ export class MusicDataService {
   search(searchValue: string, searchType: string, limit: string) {
     const params = new HttpParams().set('type', searchType);
     params.append('limit', limit);
-    return this.http.get(`${this.path}search/` + `${searchType}/` + searchValue, { params }).pipe(
+    return this.http.get(`${this.path}search/${searchType}/${searchValue}`, { params }).pipe(
       catchError(this.handleError));
   }
 
@@ -171,7 +171,7 @@ export class MusicDataService {
   */
   getPlaylist(type: string) {
     const params = new HttpParams().set('type', '10');
-    return this.http.get(this.path + 'playlists/' + type, { params}).pipe(
+    return this.http.get(`${this.path}playlists/${type}`, { params }).pipe(
       catchError(this.handleError));
   }
 }

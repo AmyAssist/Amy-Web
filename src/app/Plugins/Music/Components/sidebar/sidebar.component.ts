@@ -78,8 +78,7 @@ export class SidebarComponent implements OnInit {
     this.musicService.playPlaylist(playlistNumber, playlistType).subscribe();
     if (playlistType === 'user') {
       this.musicPlaylistData = this.playlistAllUser[playlistNumber];
-    }
-    else {
+    } else {
       this.musicPlaylistData = this.playlistAllFeatured[playlistNumber];
     }
   }

@@ -8,7 +8,8 @@ import { Playlist } from '../../Objects/playlist';
 import { Device } from '../../Objects/device';
 
 /*
-  Component for controlling the play functionality of the spotify plugin. It recieves data from the REST-backend with a custom music-dataservice.
+  Component for controlling the play functionality of the spotify plugin.
+  It recieves data from the REST-backend with a custom music-dataservice.
 
   @author: Tobias Siemonsen
 */
