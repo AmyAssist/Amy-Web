@@ -7,7 +7,6 @@ import { MusicRoutingModule } from './music-routing.module';
 import { MaterialModule } from '../../material.module';
 import { AuthenticationComponent } from '../../Plugins/Music/Components/authentication/authentication.component';
 import { CurrentSongComponent } from '../../Plugins/Music/Components/current-song/current-song.component';
-import { PlayComponent } from '../../Plugins/Music/Components/play/play.component';
 import { SidebarComponent } from '../../Plugins/Music/Components/sidebar/sidebar.component';
 import { ContentComponent } from '../../Plugins/Music/Components/content/content.component';
 import { DevicesComponent } from '../../Plugins/Music/Components/devices/devices.component';
@@ -22,7 +21,6 @@ import { DevicesComponent } from '../../Plugins/Music/Components/devices/devices
     MusicComponent,
     AuthenticationComponent,
     CurrentSongComponent,
-    PlayComponent,
     SidebarComponent,
     ContentComponent,
     DevicesComponent
