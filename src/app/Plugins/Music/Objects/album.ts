@@ -1,9 +1,9 @@
-export class Music {
+export class Album {
     uri: string;
     name: string;
 
     artists: string[];
-    durationInMs: number;
+    imageUrl: string;
 
     constructor() { }
 }

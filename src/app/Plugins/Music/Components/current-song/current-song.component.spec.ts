@@ -20,18 +20,18 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatSliderModule } from '@angular/material/slider';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { MusicComponent } from './music.component';
-
 import { MusicDataService } from '../../Services/music-data.service';
 
-describe('MusicComponent', () => {
-    let component: MusicComponent;
-    let fixture: ComponentFixture<MusicComponent>;
+import { CurrentSongComponent } from './current-song.component';
+
+describe('CurrentSongComponent', () => {
+    let component: CurrentSongComponent;
+    let fixture: ComponentFixture<CurrentSongComponent>;
 
     beforeEach(async(() => {
         const spy = jasmine.createSpyObj('DatabaseService', ['getValue']);
         TestBed.configureTestingModule({
-            declarations: [MusicComponent],
+            declarations: [CurrentSongComponent],
 
             imports: [
                 MatExpansionModule,
@@ -51,7 +51,8 @@ describe('MusicComponent', () => {
                 MatListModule,
                 MatGridListModule,
                 MatDividerModule,
-                BrowserAnimationsModule],
+                BrowserAnimationsModule
+            ],
             providers: [
                 {
                     provide: MusicDataService
