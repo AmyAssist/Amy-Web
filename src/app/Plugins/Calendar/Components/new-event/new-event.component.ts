@@ -133,10 +133,10 @@ export class NewEventComponent implements OnInit {
         const startMinute = this.startTime2.split(':')[1];
         const endHour = this.endTime2.split(':')[0];
         const endMinute = this.endTime2.split(':')[1];
-        if(endHour > startHour) {
+        if (endHour > startHour) {
           return true;
-        } else if (endHour === startHour){
-          if(endMinute > startMinute) {
+        } else if (endHour === startHour) {
+          if (endMinute > startMinute) {
             return true;
           }
         }
