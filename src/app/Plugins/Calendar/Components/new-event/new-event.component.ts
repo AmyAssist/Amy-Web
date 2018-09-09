@@ -39,12 +39,6 @@ export class NewEventComponent implements OnInit {
   missingInformation: string[];
   correctTime: boolean;
 
-  constructor(private readonly calendarService: CalendarDataService) { }
-
-  ngOnInit() {
-    this.resetValues();
-  }
-
   @ViewChild('eventStart', {
     read: MatInput
   }) eventStart: MatInput;
@@ -52,6 +46,12 @@ export class NewEventComponent implements OnInit {
   @ViewChild('eventEnd', {
     read: MatInput
   }) eventEnd: MatInput;
+
+  constructor(private readonly calendarService: CalendarDataService) { }
+
+  ngOnInit() {
+    this.resetValues();
+  }
 
   setStart(): void {
     if (this.startTime2 === '') {
@@ -149,16 +149,16 @@ export class NewEventComponent implements OnInit {
     this.hintString = `Please add the following details:`;
     this.missingInformation = [];
     if (!this.title) {
-      this.missingInformation.push(`Title`)
+      this.missingInformation.push(`Title`);
     }
     if (!this.startChoosen) {
       this.missingInformation.push(`Start of event`);
     }
     if (!this.endChoosen) {
-      this.missingInformation.push(`End of event`)
+      this.missingInformation.push(`End of event`);
     }
     if (this.minDate && this.endDate && !this.correctTime) {
-      this.missingInformation.push(`The end of the event has to be after the start.`)
+      this.missingInformation.push(`The end of the event has to be after the start.`);
     }
   }
 
