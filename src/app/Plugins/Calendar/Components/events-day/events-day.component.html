@@ -18,7 +18,13 @@
     </div>
     <mat-divider></mat-divider>
     <mat-list>
-        <div *ngIf="events.length === 0">No events</div>
+        <div *ngIf="events.length === 0">
+            <mat-list-item>
+                <p *ngIf="today" mat-line>You have no events today.</p>
+                <p *ngIf="tomorrow" mat-line>You have no events tomorrow.</p>
+                <p *ngIf="onDate" mat-line>You have no events on the {{dateString}}.</p>
+            </mat-list-item>
+        </div>
         <mat-list-item *ngFor="let event of events">
             <h4 mat-line *ngIf="event.allDay; else thenBlock">{{event.summary}}</h4>
             <ng-template #thenBlock>

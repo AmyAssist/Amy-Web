@@ -19,15 +19,21 @@ export class EventsDayComponent implements OnInit {
   events: CalendarEvent[];
   onDate: boolean;
   selectedDate: string;
+  today: boolean;
+  tomorrow: boolean;
+  dateString: string;
 
   constructor(private readonly calendarService: CalendarDataService) { }
 
   ngOnInit() {
     this.events = [];
     this.chosenDate('today');
+    this.today = true;
+    this.tomorrow = false;
   }
 
   public chosenDate(eventDate: string): void {
+    this.dateString = eventDate;
     if (eventDate === 'today' || eventDate === 'tomorrow') {
       this.getDate(eventDate);
       this.onDate = false;
@@ -39,9 +45,13 @@ export class EventsDayComponent implements OnInit {
   }
 
   public getDate(eventDate: string) {
+    this.today = true;
+    this.tomorrow = false;
     const tzoffset = (new Date()).getTimezoneOffset() * 60000;
     const currentDate = new Date(Date.now() - tzoffset);
     if (eventDate === 'tomorrow') {
+      this.today = false;
+      this.tomorrow = true;
       currentDate.setDate(currentDate.getDate() + 1);
     }
     this.selectedDate = currentDate.toISOString().slice(0, -1);
@@ -55,6 +65,8 @@ export class EventsDayComponent implements OnInit {
 
   public getEventsOnDate(): void {
     this.onDate = true;
+    this.today = false;
+    this.tomorrow = false;
   }
 
   public refresh(): void {

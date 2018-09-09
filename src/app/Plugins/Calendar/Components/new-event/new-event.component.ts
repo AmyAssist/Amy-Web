@@ -1,7 +1,8 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ViewChild } from '@angular/core';
 import { CalendarEvent } from '../../Objects/CalendarEvent';
 import { CalendarDataService } from '../../Services/calendar-data.service';
 import { LocalDateTime } from '../../../../Objects/LocalDateTime';
+import { MatInput } from '@angular/material';
 
 /*
   Component for setting up a new event.
@@ -34,14 +35,23 @@ export class NewEventComponent implements OnInit {
   endDate: Date;
   startTime2: string;
   endTime2: string;
+  hintString: string;
+  missingInformation: string[];
+  correctTime: boolean;
 
   constructor(private readonly calendarService: CalendarDataService) { }
 
   ngOnInit() {
-    this.minDate = null;
-    this.endDate = null;
     this.resetValues();
   }
+
+  @ViewChild('eventStart', {
+    read: MatInput
+  }) eventStart: MatInput;
+
+  @ViewChild('eventEnd', {
+    read: MatInput
+  }) eventEnd: MatInput;
 
   setStart(): void {
     if (this.startTime2 === '') {
@@ -81,34 +91,82 @@ export class NewEventComponent implements OnInit {
   }
 
   createEvent(timeValue): void {
-    this.createLocation();
-    if (this.allDay) {
-      this.endDate.setDate(this.endDate.getDate() + 1);
+    this.correctTime = this.checkIfEndAfterStart();
+    if (this.correctTime && this.titleChoosen && this.startChoosen && this.endChoosen) {
+      this.createLocation();
+      if (this.allDay) {
+        this.endDate.setDate(this.endDate.getDate() + 1);
+      }
+      const startHour = this.startTime2.split(':')[0];
+      const startMinute = this.startTime2.split(':')[1];
+      const endHour = this.endTime2.split(':')[0];
+      const endMinute = this.endTime2.split(':')[1];
+      const start = new LocalDateTime(this.minDate.getFullYear(), this.minDate.getMonth(), this.minDate.getDate(), parseInt(startHour, 10), parseInt(startMinute, 10));
+      const end = new LocalDateTime(this.endDate.getFullYear(), this.endDate.getMonth(), this.endDate.getDate(), parseInt(endHour, 10), parseInt(endMinute, 10));
+      if (this.timeUnit === 'minutes') {
+        this.reminderTime = timeValue;
+      } else if (this.timeUnit === 'hours') {
+        this.reminderTime = 60 * timeValue;
+      } else if (this.timeUnit === 'days') {
+        this.reminderTime = 24 * 60 * timeValue;
+      } else if (this.timeUnit === 'weeks') {
+        this.reminderTime = 7 * 24 * 60 * timeValue;
+      }
+      const newEvent = CalendarEvent.setEventData(this.title, start.toString(), end.toString(),
+        this.description, this.location, this.reminderType, this.reminderTime, '', this.allDay);
+      this.calendarService.setNewEvent(newEvent).subscribe();
+      this.endDate.setDate(this.endDate.getDate() - 1);
+      this.resetValues();
+    } else {
+      this.hintMessage();
     }
-    const startHour = this.startTime2.split(':')[0];
-    const startMinute = this.startTime2.split(':')[1];
-    const endHour = this.endTime2.split(':')[0];
-    const endMinute = this.endTime2.split(':')[1];
-    const start = new LocalDateTime(this.minDate.getFullYear(), this.minDate.getMonth(), this.minDate.getDate(), parseInt(startHour, 10), parseInt(startMinute, 10));
-    const end = new LocalDateTime(this.endDate.getFullYear(), this.endDate.getMonth(), this.endDate.getDate(), parseInt(endHour, 10), parseInt(endMinute, 10));
-    if (this.timeUnit === 'minutes') {
-      this.reminderTime = timeValue;
-    } else if (this.timeUnit === 'hours') {
-      this.reminderTime = 60 * timeValue;
-    } else if (this.timeUnit === 'days') {
-      this.reminderTime = 24 * 60 * timeValue;
-    } else if (this.timeUnit === 'weeks') {
-      this.reminderTime = 7 * 24 * 60 * timeValue;
-    }
-    const newEvent = CalendarEvent.setEventData(this.title, start.toString(), end.toString(),
-      this.description, this.location, this.reminderType, this.reminderTime, '', this.allDay);
-    this.calendarService.setNewEvent(newEvent).subscribe();
-    this.resetValues();
-    this.endDate.setDate(this.endDate.getDate() - 1);
+  }
 
+  checkIfEndAfterStart(): boolean {
+    this.setStart();
+    this.setEnd();
+    if (this.minDate && this.endDate) {
+      if (this.endDate.getTime() > this.minDate.getTime()) {
+        return true;
+      } else if (this.endDate.getTime() === this.minDate.getTime()) {
+        const startHour = this.startTime2.split(':')[0];
+        const startMinute = this.startTime2.split(':')[1];
+        const endHour = this.endTime2.split(':')[0];
+        const endMinute = this.endTime2.split(':')[1];
+        if(endHour > startHour) {
+          return true;
+        } else if (endHour === startHour){
+          if(endMinute > startMinute) {
+            return true;
+          }
+        }
+      }
+    }
+    return false;
+  }
+
+  hintMessage() {
+    this.hintString = `Please add the following details:`;
+    this.missingInformation = [];
+    if (!this.title) {
+      this.missingInformation.push(`Title`)
+    }
+    if (!this.startChoosen) {
+      this.missingInformation.push(`Start of event`);
+    }
+    if (!this.endChoosen) {
+      this.missingInformation.push(`End of event`)
+    }
+    if (this.minDate && this.endDate && !this.correctTime) {
+      this.missingInformation.push(`The end of the event has to be after the start.`)
+    }
   }
 
   resetValues(): void {
+    this.minDate = null;
+    this.endDate = null;
+    this.eventStart.value = ``;
+    this.eventEnd.value = ``;
     this.allDay = false;
     this.titleChoosen = false;
     this.startChoosen = false;
@@ -125,6 +183,9 @@ export class NewEventComponent implements OnInit {
     this.country = '';
     this.startTime2 = '00:00';
     this.endTime2 = '23:59';
+    this.hintString = null;
+    this.missingInformation = [];
+    this.correctTime = false;
   }
 
   // this method makes sure that the location is displayed the right way
