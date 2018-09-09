@@ -23,7 +23,7 @@ export class EventsDayComponent implements OnInit {
   dateChoosen: boolean;
   selectedDate: string;
   dateString: string;
-  
+
   @ViewChild('eventDate', {
     read: MatInput
   }) eventDate: MatInput;
@@ -66,7 +66,7 @@ export class EventsDayComponent implements OnInit {
   }
 
   public getEventsOnDate(): void {
-    if(this.eventDate) {
+    if (this.eventDate) {
       this.eventDate.value = ``;
     }
     this.dateChoosen = false;
