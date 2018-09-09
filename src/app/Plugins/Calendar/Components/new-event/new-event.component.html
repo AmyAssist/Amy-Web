@@ -78,14 +78,10 @@
   <div class="create-event-button">
     <button mat-raised-button color="primary" (click)="createEvent(timeValue.value)">Create</button>
   </div>
-  <div class="new-event-field" *ngIf="hintString">
-    {{hintString}}
-    <mat-list *ngIf="missingInformation.length !== 0">
-        <mat-list-item *ngFor="let item of missingInformation">
-          <p mat-line>{{item}}</p>
-        </mat-list-item>
-    </mat-list>
-  </div> 
+  <div class="new-event-field" *ngIf="missingInformation.length !== 0">
+    <h4>{{hintString}}</h4>
+    <p *ngFor="let item of missingInformation" mat-line>{{item}}</p>
+  </div>
 
 
 </div>
