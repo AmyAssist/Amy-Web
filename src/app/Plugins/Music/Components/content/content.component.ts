@@ -60,7 +60,7 @@ export class ContentComponent implements OnInit {
     sending a search request
   */
   search(searchValue: string, type: string) {
-    if (type === 'song') {
+    if (type === 'track') {
       this.searchSong(searchValue, type);
     } else if (type === 'album') {
       this.searchAlbum(searchValue, type);
