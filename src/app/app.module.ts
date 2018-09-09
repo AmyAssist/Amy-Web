@@ -93,6 +93,7 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
+    CalendarComponent,
     ClockComponent,
     WeatherComponent,
     HomeComponent,
@@ -108,7 +109,6 @@ const routes: Routes = [
   imports: [
     MusicModule,
     NavigationModule,
-    CalendarModule,
     MaterialModule,
     BrowserModule,
     FormsModule,

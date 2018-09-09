@@ -14,7 +14,7 @@ import { BackendResolver } from '../../../Services/backendResolver.service';
 export class CalendarDataService {
 
   get path() {
-    return this.backend.backendPath + 'calendar/';
+    return this.backend.backendURL.getValue() + 'calendar/';
   }
 
   httpOptions = {
