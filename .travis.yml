@@ -3,9 +3,6 @@ node_js: '10'
 sudo: required
 addons:
   chrome: stable
-cache:
-  directories:
-  - node_modules
 before_install:
   - npm i -g @angular/cli
 jobs:
