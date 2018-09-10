@@ -36,15 +36,18 @@ export class CurrentSongComponent implements OnInit {
 
   currentArtist: string;
   currentTitle: string;
+  currentImageUrl: string;
 
   constructor(private readonly musicService: MusicDataService, private readonly musicTransService: MusicDataTransferService) { }
 
   ngOnInit() {
     this.musicData = new Music;
 
-    this.getVolume();
-    this.getCurrentSong();
+
     this.musicCoverUrl = 'assets/music/defaultMusicCover.png';
+
+    this.getCurrentSong();
+    this.getVolume();
   }
 
   /*
@@ -61,6 +64,8 @@ export class CurrentSongComponent implements OnInit {
     if (this.musicTransService.getImageChanged) {
       this.musicCoverUrl = this.musicTransService.getImageUrl();
       this.musicTransService.setImageChanged(false);
+    } else {
+      this.musicCoverUrl = this.musicData.imageUrl;
     }
   }
   /*
@@ -110,7 +115,6 @@ export class CurrentSongComponent implements OnInit {
   /*
   get the volume
   */
-
   getVolume() {
     this.musicService.getVolume().subscribe((data: number) => this.volumeValue = data);
   }

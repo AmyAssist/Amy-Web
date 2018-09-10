@@ -1,28 +1,21 @@
-<div class="music-Content-Row" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="10px" fxLayoutGap.xs="10px">
-  <div fxFlex="60%">
-
-
-    <div class="contentClass">
-      <app-content></app-content>
-    </div>
-    <div class="contentClass">
-      <app-sidebar></app-sidebar>
-    </div>
-
-
-  </div>
+<div class="music-Content-Row" fxLayout="row-reverse" fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="10px" fxLayoutGap.xs="10px">
   <div fxFlex="40%">
-
-
     <div class="contentClass">
       <app-current-song></app-current-song>
     </div>
     <div class="contentClass">
       <app-devices></app-devices>
     </div>
+  </div>
+  <div fxFlex="60%">
+    <div class="contentClass">
+      <app-content></app-content>
+    </div>
+    <div class="contentClass">
+      <app-sidebar></app-sidebar>
+    </div>
     <div class="contentClass">
       <app-authentication></app-authentication>
     </div>
-
   </div>
 </div>
