@@ -4,11 +4,21 @@
   </mat-card-subtitle>
   <div>
     <mat-form-field>
-      <input matInput #from2 placeholder="From:">
+      <input matInput placeholder="From:" [formControl]="originField" [matAutocomplete]="originAuto">
+      <mat-autocomplete autoActiveFirstOption #originAuto="matAutocomplete" [displayWith]="getTagDisplayName">
+        <mat-option *ngFor="let option of originFilteredTags | async" [value]="option">
+          {{option.name}}
+        </mat-option>
+      </mat-autocomplete>
     </mat-form-field>
 
     <mat-form-field>
-      <input matInput #to2 placeholder="To:">
+      <input matInput placeholder="To:" [formControl]="destinationField" [matAutocomplete]="destinationAuto">
+      <mat-autocomplete autoActiveFirstOption #destinationAuto="matAutocomplete" [displayWith]="getTagDisplayName">
+        <mat-option *ngFor="let option of destinationFilteredTags | async" [value]="option">
+          {{option.name}}
+        </mat-option>
+      </mat-autocomplete>
     </mat-form-field>
   </div>
 
@@ -27,7 +37,7 @@
     </mat-form-field>
   </div>
 
-  <button mat-raised-button color="primary" (click)="searchWhen(from2.value, to2.value, dateTime2.value)">Search</button>
+  <button mat-raised-button color="primary" (click)="searchWhen(originField.value, destinationField.value, dateTime2.value)">Search</button>
 
   <div *ngIf="showWhen">
     <h3>Required departure time:</h3>

@@ -4,7 +4,7 @@
   </mat-card-subtitle>
   <div>
     <mat-form-field>
-      <input matInput #from3 placeholder="From:" [formControl]="originField" [matAutocomplete]="originAuto">
+      <input matInput placeholder="From:" [formControl]="originField" [matAutocomplete]="originAuto">
       <mat-autocomplete autoActiveFirstOption #originAuto="matAutocomplete" [displayWith]="getTagDisplayName">
         <mat-option *ngFor="let option of originFilteredTags | async" [value]="option">
           {{option.name}}
@@ -13,9 +13,9 @@
     </mat-form-field>
 
     <mat-form-field>
-      <input matInput #to3 placeholder="To:" [formControl]="originField" [matAutocomplete]="originAuto">
-      <mat-autocomplete autoActiveFirstOption #originAuto="matAutocomplete" [displayWith]="getTagDisplayName">
-        <mat-option *ngFor="let option of originFilteredTags | async" [value]="option">
+      <input matInput placeholder="To:" [formControl]="destinationField" [matAutocomplete]="destinationAuto">
+      <mat-autocomplete autoActiveFirstOption #destinationAuto="matAutocomplete" [displayWith]="getTagDisplayName">
+        <mat-option *ngFor="let option of destinationFilteredTags | async" [value]="option">
           {{option.name}}
         </mat-option>
       </mat-autocomplete>
@@ -29,7 +29,7 @@
     </mat-form-field>
   </div>
 
-  <button mat-raised-button color="primary" (click)="bestType(from3.value, to3.value, dateTime3.value)">Search</button>
+  <button mat-raised-button color="primary" (click)="bestType(originField.value, destinationField.value, dateTime3.value)">Search</button>
 
   <div *ngIf="showMode">
     <div *ngIf="!transit">
