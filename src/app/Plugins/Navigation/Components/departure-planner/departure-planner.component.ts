@@ -56,7 +56,6 @@ export class DeparturePlannerComponent implements OnInit {
     constructor(private readonly navigationService: NavigationDataService) { }
 
     ngOnInit() {
-        console.log(this.navigationService);
         this.showWay = false;
         this.showWhen = false;
         this.showMode = false;

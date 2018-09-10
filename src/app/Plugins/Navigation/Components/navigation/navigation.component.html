@@ -1,21 +1,13 @@
-<div class="music-Content-Row" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="10px" fxLayoutGap.xs="10px">
-  <div fxFlex="50%">
-
-
-    <div class="contentClass">
+<mat-card>
+  <mat-tab-group>
+    <mat-tab label="Departure planner">
       <app-departure-planner></app-departure-planner>
-    </div>
-    <div class="contentClass">
+    </mat-tab>
+    <mat-tab label="Route planner">
       <app-route-planner></app-route-planner>
-    </div>
-
-
-  </div>
-  <div fxFlex="50%">
-
-    <div class="contentClass">
+    </mat-tab>
+    <mat-tab label="Best travel mode">
       <app-travel-mode></app-travel-mode>
-    </div>
-
-  </div>
-</div>
+    </mat-tab>
+  </mat-tab-group>
+</mat-card>

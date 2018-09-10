@@ -5,6 +5,7 @@ import { BestTransportResult } from '../../Objects/bestTransportResult';
 import { combineLatest, Observable } from 'rxjs';
 import { FormControl } from '@angular/forms';
 import { map, startWith } from 'rxjs/operators';
+import { Coordinate } from '../../Objects/Coordinate';
 
 class Tag {
   constructor(readonly name: string) { }
@@ -49,6 +50,12 @@ export class RoutePlannerComponent implements OnInit {
   originField = new FormControl();
   destinationField = new FormControl();
 
+  link: string = null;
+
+  createLink(from: Coordinate, to: Coordinate, mode: string) {
+    this.link = `https://www.google.com/maps/dir/?api=1&origin=${from.lat},${from.lng}&destination=${to.lat},${to.lng}&travelmode=${mode}`;
+  }
+
   getTagDisplayName(t: Tag) {
     return t ? t.name : '';
   }
@@ -56,7 +63,6 @@ export class RoutePlannerComponent implements OnInit {
   constructor(private readonly navigationService: NavigationDataService) { }
 
   ngOnInit() {
-    console.log(this.navigationService);
     this.showWay = false;
     this.showWhen = false;
     this.showMode = false;
@@ -100,6 +106,8 @@ export class RoutePlannerComponent implements OnInit {
       this.showWay = true;
       this.showWhen = false;
       this.showMode = false;
+      this.createLink(this.bestTransport.route.legs[0].startLocation,
+        this.bestTransport.route.legs[0].endLocation, this.bestTransport.mode);
     });
   }
 
