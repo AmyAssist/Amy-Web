@@ -1,11 +1,14 @@
 import { forwardRef, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NavigationComponent } from './Components/navigation/navigation.component';
 import { NavigationDataService } from './Services/navigation-data.service';
 import { MaterialModule } from '../../material.module';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { NavigationRoutingModule } from './navigation-routing.module';
+import { RoutePlannerComponent } from '../../Plugins/Navigation/Components/route-planner/route-planner.component';
+import { DeparturePlannerComponent } from '../../Plugins/Navigation/Components/departure-planner/departure-planner.component';
+import { TravelModeComponent } from '../../Plugins/Navigation/Components/travel-mode/travel-mode.component';
 
 @NgModule({
   imports: [
@@ -13,9 +16,16 @@ import { NavigationRoutingModule } from './navigation-routing.module';
     MaterialModule,
     NavigationRoutingModule,
     OwlDateTimeModule,
-    OwlNativeDateTimeModule
+    OwlNativeDateTimeModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
-  declarations: [NavigationComponent],
-  providers:  [forwardRef(() => NavigationDataService)]
+  declarations: [
+    NavigationComponent,
+    RoutePlannerComponent,
+    DeparturePlannerComponent,
+    TravelModeComponent
+  ],
+  providers: [forwardRef(() => NavigationDataService)]
 })
 export class NavigationModule { }
