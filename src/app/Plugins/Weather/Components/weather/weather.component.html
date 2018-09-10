@@ -1,6 +1,6 @@
 <div id="completeLayout" fxLayout="column" fxLayoutAlign="space-around center" class="mat-elevation-z2">
 
-  <div id="WeatherNowLayout" class="weather_now_layout" fxLayout="row wrap" fxLayoutAlign="space-around center">
+  <div id="WeatherInstantLayout" class="weather_instant_layout" fxLayout="row wrap" fxLayoutAlign="space-around center">
 
     <!--Select location for weather report-->
     <div id="locationSelector" class="flex_layout" *ngIf="locationSelected" fxLayout="column" fxLayoutAlign="space-around center">
@@ -13,7 +13,7 @@
       </mat-form-field>
       <p style="text-align:center;" class="mat-h2" *ngIf="locationSelected">
         {{selectedLocation}}
-        <br>{{showReport.current.time}}
+        <br>{{showReportInstant.time}}
       </p>
     </div>
     <div *ngIf="!locationSelected">
@@ -21,17 +21,17 @@
     </div>
 
     <!--Show current weather report information-->
-    <div id="weatherNowInformation" class="flex_layout" *ngIf="locationSelected" fxLayout="column">
+    <div id="weatherInstantInformation" class="flex_layout" *ngIf="locationSelected" fxLayout="column">
       <div fxLayout="row" fxLayoutAlign="space-around center">
         <div fxLayout="column" *ngIf="locationSelected">
-          <img alt="image" class="weather_now_info_icon mat-h3" [attr.src]="showReport.current.precipIconSrc" type="image/svg+xml">
-          <img alt="image" class="weather_now_info_icon mat-h3" src="assets/weather/wind.svg" type="image/svg+xml">
-          <img alt="image" class="weather_now_info_icon mat-h3" src="assets/weather/sunrise.svg" type="image/svg+xml">
-          <img alt="image" class="weather_now_info_icon mat-h3" src="assets/weather/sunset.svg" type="image/svg+xml">
+          <img alt="image" class="weather_instant_info_icon mat-h3" [attr.src]="showReportInstant.precipIconSrc" type="image/svg+xml">
+          <img alt="image" class="weather_instant_info_icon mat-h3" src="assets/weather/wind.svg" type="image/svg+xml">
+          <img alt="image" class="weather_instant_info_icon mat-h3" src="assets/weather/sunrise.svg" type="image/svg+xml">
+          <img alt="image" class="weather_instant_info_icon mat-h3" src="assets/weather/sunset.svg" type="image/svg+xml">
         </div>
         <div fxLayout="column" *ngIf="locationSelected">
-          <p style="text-align:right" class="text mat-body-3 mat-h3">{{showReport.current.precipProbability}}%</p>
-          <p style="text-align:right" class="text mat-body-3 mat-h3">{{showReport.current.windspeed}}km/h</p>
+          <p style="text-align:right" class="text mat-body-3 mat-h3">{{showReportInstant.precipProbability}}%</p>
+          <p style="text-align:right" class="text mat-body-3 mat-h3">{{showReportInstant.windSpeed}}km/h</p>
           <p style="text-align:right" class="text mat-body-3 mat-h3">{{showReportWeek[0].sunriseTime}}</p>
           <p style="text-align:right" class="text mat-body-3 mat-h3">{{showReportWeek[0].sunsetTime}}</p>
         </div>
@@ -39,11 +39,11 @@
     </div>
 
     <!--Show current weather report-->
-    <div id="weatherNow" class="flex_layout" *ngIf="locationSelected" fxLayout="column" fxLayoutAlign="space-around center">
-      <img alt="image" class="weather_now_icon" [attr.src]="showReport.current.iconSrc" type="image/svg+xml" *ngIf="locationSelected">
+    <div id="weatherInstant" class="flex_layout" *ngIf="locationSelected" fxLayout="column" fxLayoutAlign="space-around center">
+      <img alt="image" class="weather_instant_icon" [attr.src]="showReportInstant.iconSrc" type="image/svg+xml" *ngIf="locationSelected">
       <p style="text-align:center;" class="mat-h1" *ngIf="locationSelected">
-        <br/>{{showReport.current.temperatureNow}}°C
-        <br/>{{showReport.current.summary}}
+        <br/>{{showReportInstant.temperature}}°C
+        <br/>{{showReportInstant.summary}}
       </p>
     </div>
 
@@ -64,7 +64,7 @@
         </div>
         <div fxLayout="column">
           <img alt="image" class="weather_week_info_icon" [attr.src]="weatherReportWeek.precipIconSrc" type="image/svg+xml">
-          <p class="text mat-body-2">{{weatherReportWeek.precipProbability}}</p>
+          <p class="text mat-body-2">{{weatherReportWeek.precipProbability}}%</p>
         </div>
       </div>
     </div>

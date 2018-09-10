@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { WeatherDataService } from '../../Services/weather-data.service';
-import { Weather } from '../../Objects/weather';
-import { WeatherDay } from '../../Objects/weatherDay';
+import { WeatherReport } from '../../Objects/weatherReport';
+import { WeatherReportInstant } from '../../Objects/weatherReportInstant';
+import { WeatherReportDay } from '../../Objects/weatherReportDay';
 import { Location } from '../../Objects/location';
 import { DatePipe } from '@angular/common';
 
@@ -11,8 +12,8 @@ import { DatePipe } from '@angular/common';
   styleUrls: ['./weather.component.css']
 })
 export class WeatherComponent implements OnInit {
-  showReportWeek: WeatherDay[];
-  showReport: Weather;
+  showReportInstant: WeatherReportInstant;
+  showReportWeek: WeatherReportDay[];
 
   locations: Location[];
   selectedLocation: string;
@@ -42,40 +43,41 @@ export class WeatherComponent implements OnInit {
 
   getWeatherReport(location: Location) {
     this.weatherService.getWeatherReport(location.persistentId)
-      .subscribe((data: Weather) => {
-        const weather = { ...data };
-        weather.current.temperatureNow = Math.round(weather.current.temperatureNow);
-        weather.current.iconSrc = this.getWeatherIcon(weather.current.iconType);
-        weather.current.precipIconSrc = this.getWeatherIcon(weather.current.precipType);
-        weather.current.precipProbability = weather.current.precipProbability * 100;
-        weather.current.time = this.convertTime(weather.current.timestamp, weather.timeZone);
+      .subscribe((data: WeatherReport) => {
+        const weatherReport = { ...data };
+        weatherReport.current.temperature = Math.round(weatherReport.current.temperature);
+        weatherReport.current.iconSrc = this.getWeatherIcon(weatherReport.current.iconType);
+        weatherReport.current.precipIconSrc = this.getWeatherIcon(weatherReport.current.precipType);
+        weatherReport.current.precipProbability = weatherReport.current.precipProbability * 100;
+        weatherReport.current.time = this.convertDateTime(weatherReport.current.timestamp, weatherReport.timeZone);
 
-        for (const weatherWeek of weather.week.days) {
-          weatherWeek.iconSrc = this.getWeatherIcon(weatherWeek.iconType);
-          weatherWeek.precipIconSrc = this.getWeatherIcon(weatherWeek.precipType);
-          weatherWeek.temperatureMax = Math.round(weatherWeek.temperatureMax);
-          weatherWeek.temperatureMin = Math.round(weatherWeek.temperatureMin);
-          weatherWeek.precipProbability = weatherWeek.precipProbability * 100;
-          weatherWeek.time = this.convertTime(weatherWeek.timestamp, weather.timeZone);
+        for (const weatherReportWeek of weatherReport.week.days) {
+          weatherReportWeek.iconSrc = this.getWeatherIcon(weatherReportWeek.iconType);
+          weatherReportWeek.precipIconSrc = this.getWeatherIcon(weatherReportWeek.precipType);
+          weatherReportWeek.temperatureMax = Math.round(weatherReportWeek.temperatureMax);
+          weatherReportWeek.temperatureMin = Math.round(weatherReportWeek.temperatureMin);
+          weatherReportWeek.sunriseTime = this.convertTime(parseInt(weatherReportWeek.sunriseTime), weatherReport.timeZone);
+          weatherReportWeek.sunsetTime = this.convertTime(parseInt(weatherReportWeek.sunsetTime), weatherReport.timeZone);
+          weatherReportWeek.precipProbability = weatherReportWeek.precipProbability * 100;
+          weatherReportWeek.time = this.convertDateTime(weatherReportWeek.timestamp, weatherReport.timeZone);
         }
-        this.showReport = weather;
-        this.showReportWeek = weather.week.days;
+        this.showReportInstant = weatherReport.current;
+        this.showReportWeek = weatherReport.week.days;
       });
   }
 
-  getWeatherIcon(iconType: WeatherDay['iconType']): string {
+  getWeatherIcon(iconType: WeatherReportDay['iconType']): string {
     switch (iconType) {
       case 'clear-day': {
         return 'assets/weather/sunny.svg';
       }
-      case 'partly-cloudy-day': {
+      case 'partly-cloudy-day':
+      case 'partly-cloudy-night':
+      case 'cloudy': {
         return 'assets/weather/cloudy.svg';
       }
       case 'clear-night': {
         return 'assets/weather/sunny.svg';
-      }
-      case 'partly-cloudy-night': {
-        return 'assets/weather/cloudy.svg';
       }
       case 'sleet': {
         return 'assets/weather/sleet.svg';
@@ -92,9 +94,6 @@ export class WeatherComponent implements OnInit {
       case 'fog': {
         return 'assets/weather/hazy.svg';
       }
-      case 'cloudy': {
-        return 'assets/weather/cloudy.svg';
-      }
       default: {
         return 'assets/weather/rain.svg';
       }
@@ -103,6 +102,11 @@ export class WeatherComponent implements OnInit {
 
   convertTime(stamp: number, timeZone: string): string {
     const datePipe = new DatePipe('en-US');
-    return datePipe.transform(stamp * 1000, 'EEEE, MMMM d');
+    return datePipe.transform(stamp * 1000, 'HH:mm', timeZone);
+  }
+
+  convertDateTime(stamp: number, timeZone: string): string {
+    const datePipe = new DatePipe('en-US');
+    return datePipe.transform(stamp * 1000, 'EEEE, MMMM d', timeZone);
   }
 }

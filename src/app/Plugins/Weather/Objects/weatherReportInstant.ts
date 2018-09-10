@@ -1,18 +1,16 @@
-export class WeatherDay {
+export class WeatherReportInstant {
     summary: string;
-    precipProbability: number
+    precipProbability: number;
     precipType: string;
     precipIconSrc = 'assets/weather/rain.svg';
-    temperatureMin: number;
-    temperatureMax: number;
+    temperature: number;
     timestamp: number;
-    time: string;
-    sunriseTime: string;
-    sunsetTime: string;
+    windSpeed: number;
     iconType: string;
     iconSrc = 'assets/weather/cloudy.svg';
-    
+    time: string;
+
     constructor() {
-        
+
     }
 }

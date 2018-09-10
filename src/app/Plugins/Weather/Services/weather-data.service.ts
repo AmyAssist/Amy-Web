@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Location } from '../Objects/location';
@@ -34,7 +34,8 @@ export class WeatherDataService {
   }
 
   getWeatherReport(id: number) {
-    return this.http.post(this.path + 'weather/report/' + id, this.httpPlainTextHeader).pipe(
+    const params = new HttpParams().set('id', id.toString());
+    return this.http.get(this.path + 'weather/report/', { params }).pipe(
       catchError(this.handleError));
   }
 
