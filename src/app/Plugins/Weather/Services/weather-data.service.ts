@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { Weather } from '../Objects/weather';
+import { WeatherNow } from '../Objects/weatherNow';
+import { WeatherDay } from '../Objects/weatherDay';
 import { WeatherWeek } from '../Objects/weatherWeek';
 import { Location } from '../Objects/location';
 import { BackendResolver } from '../../../Services/backendResolver.service';
@@ -36,18 +37,18 @@ export class WeatherDataService {
   }
 
   /*
-    getting weather-Data for today.
+    getting weather-Data for now.
   */
-  getWeatherToday() {
-    return this.http.get<Weather>(this.path + 'weather/today', this.httpOptions).pipe(
+  getWeatherNow() {
+    return this.http.get<WeatherNow>(this.path + 'weather/now', this.httpOptions).pipe(
       catchError(this.handleError));
   }
 
   /*
-    getting weather-Data for tomorrow.
+    getting weather-Data for today.
   */
-  getWeatherTomorrow() {
-    return this.http.get<Weather>(this.path + 'weather/tomorrow', this.httpOptions).pipe(
+  getWeatherToday() {
+    return this.http.get<WeatherDay>(this.path + 'weather/today', this.httpOptions).pipe(
       catchError(this.handleError));
   }
 

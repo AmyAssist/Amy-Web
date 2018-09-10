@@ -4,11 +4,21 @@
   </mat-card-subtitle>
   <div>
     <mat-form-field>
-      <input matInput #from3 placeholder="From:">
+      <input matInput #from3 placeholder="From:" [formControl]="originField" [matAutocomplete]="originAuto">
+      <mat-autocomplete autoActiveFirstOption #originAuto="matAutocomplete" [displayWith]="getTagDisplayName">
+        <mat-option *ngFor="let option of originFilteredTags | async" [value]="option">
+          {{option.name}}
+        </mat-option>
+      </mat-autocomplete>
     </mat-form-field>
 
     <mat-form-field>
-      <input matInput #to3 placeholder="To:">
+      <input matInput #to3 placeholder="To:" [formControl]="originField" [matAutocomplete]="originAuto">
+      <mat-autocomplete autoActiveFirstOption #originAuto="matAutocomplete" [displayWith]="getTagDisplayName">
+        <mat-option *ngFor="let option of originFilteredTags | async" [value]="option">
+          {{option.name}}
+        </mat-option>
+      </mat-autocomplete>
     </mat-form-field>
   </div>
 

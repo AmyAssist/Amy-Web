@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { COMMAND_INPUT_PLACEHOLDER, USER_CHAT_NAME } from '../../../../Constants/strings';
 import { SpeechRecognitionService } from '../../../../Services/speechrecognition.service';
@@ -6,6 +6,7 @@ import { TTSService } from '../../../../Services/tts.service';
 import { OptionsService } from '../../../../Services/options.service';
 import { CommandHandlerService } from '../../Home-Services/command-handler.service';
 import { ChatService } from '../../Home-Services/chat.service';
+import { BackendSoundService } from '../../Home-Services/backendSound.service';
 import { BackendResolver } from '../../../../Services/backendResolver.service';
 
 
@@ -16,7 +17,7 @@ import { BackendResolver } from '../../../../Services/backendResolver.service';
     animations: [
         trigger('srState', [
             state('inactive', style({
-                backgroundColor: '#283593',
+                backgroundColor: '#3F51B5',
                 transform: 'scale(1)'
             })),
             state('active', style({
@@ -30,17 +31,22 @@ import { BackendResolver } from '../../../../Services/backendResolver.service';
 })
 export class HomeComponent implements OnInit {
 
+    @ViewChild('inputField') inputField: ElementRef;
+
     // PlaceHolder for Command input Field
-    commandInputPlaceholder: string = COMMAND_INPUT_PLACEHOLDER[this.options.language];
+    private readonly commandInputPlaceholder: string = COMMAND_INPUT_PLACEHOLDER[this.options.language];
 
     // Content of command input field
-    commandTextValue = '';
+    private commandTextValue = '';
 
     // State of the current Speech Recognition
-    srState = 'inactive';
+    private srState = 'inactive';
 
     // is the Sound muted in Backend
-    backendSoundMuted = false;
+    private backendSoundMuted = false;
+
+    // is the input field active
+    private _keyboardActive = false;
 
     constructor(
         private readonly speechRecognitionService: SpeechRecognitionService,
@@ -48,6 +54,7 @@ export class HomeComponent implements OnInit {
         private readonly options: OptionsService,
         private readonly commandHandler: CommandHandlerService,
         private readonly chat: ChatService,
+        private readonly backendSound: BackendSoundService,
         private readonly backend: BackendResolver) { }
 
 
@@ -62,8 +69,12 @@ export class HomeComponent implements OnInit {
         return this.speechRecognitionService.isSupported();
     }
 
-    get backendSoundState(){
-        return this.backend.checkBackendSoundState();
+    get backendSoundState() {
+        return this.backendSound.checkBackendSoundState();
+    }
+
+    get keyboardActive() {
+        return this._keyboardActive;
     }
 
     /**
@@ -73,7 +84,19 @@ export class HomeComponent implements OnInit {
         if (this.commandTextValue.trim().length > 0) {
             this.chat.addMessage(USER_CHAT_NAME[this.options.language], this.commandTextValue, false);
             this.commandHandler.sendCommand(this.commandTextValue, false);
-            this.commandTextValue = '';
+        }
+        this.commandTextValue = '';
+        return false;
+    }
+
+    /**
+     * Send the srResponse to Backend and Chat
+     * @param command String of the Command
+     */
+    private srResponse(command: string) {
+        if (this.srState === 'active') {
+            this.chat.addMessage(USER_CHAT_NAME[this.options.language], command, false);
+            this.commandHandler.sendCommand(command, true);
         }
     }
 
@@ -96,21 +119,10 @@ export class HomeComponent implements OnInit {
      * Mute/Unmute the sound output of the backend
      */
     triggerBackendSound() {
-        if (this.backend.checkBackendSoundState()) {
-            this.backend.mute().subscribe();
+        if (this.backendSound.checkBackendSoundState()) {
+            this.backendSound.mute().subscribe();
         } else {
-            this.backend.unmute().subscribe();
-        }
-    }
-
-    /**
-     * Send the srResponse to Backend and Chat
-     * @param command String of the Command
-     */
-    private srResponse(command: string) {
-        if (this.srState === 'active') {
-            this.chat.addMessage(USER_CHAT_NAME[this.options.language], command, false);
-            this.commandHandler.sendCommand(command, true);
+            this.backendSound.unmute().subscribe();
         }
     }
 
@@ -120,25 +132,41 @@ export class HomeComponent implements OnInit {
     triggerSR() {
         if (this.srState !== 'active') {
             this.srState = 'active';
-            if (this.backend.checkBackendSoundState()) {
+            if (this.backendSound.checkBackendSoundState()) {
                 this.backendSoundMuted = true;
-                this.backend.mute().subscribe();
+                this.backendSound.mute().subscribe();
             }
             this.speechRecognitionService.recognize((result) => {
                 this.srResponse(result);
                 this.srState = 'inactive';
                 if (this.backendSoundMuted) {
                     this.backendSoundMuted = false;
-                    this.backend.unmute().subscribe();
+                    this.backendSound.unmute().subscribe();
                 }
             });
         } else {
             this.srState = 'inactive';
             if (this.backendSoundMuted) {
                 this.backendSoundMuted = false;
-                this.backend.unmute().subscribe();
+                this.backendSound.unmute().subscribe();
             }
             this.speechRecognitionService.cancelRecognition();
         }
+    }
+
+    /**
+     * activate/deactovate input field
+     */
+    triggerKeyboard() {
+        if (!this._keyboardActive) {
+            this._keyboardActive = true;
+            setTimeout(() => {
+                this.inputField.nativeElement.focus();
+            }, 100);
+        } else {
+            this._keyboardActive = false;
+            this.commandTextValue = '';
+        }
+        return false;
     }
 }

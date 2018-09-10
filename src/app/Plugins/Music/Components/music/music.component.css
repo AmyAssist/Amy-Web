@@ -1,12 +1,50 @@
-.musicSearch-container {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .musicSearch-container > * {
-    width: 100%;
-  }
+.fill-space {
+  flex: 1 1 auto;
+}
 
-  mat-slider {
-    width: 300px;
-  }
+.contentClass {
+  width: 100%;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
+.currentSongClass {
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.playlistClass {
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.devicesClass {
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.authClass {
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.music-Content-Row {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+}

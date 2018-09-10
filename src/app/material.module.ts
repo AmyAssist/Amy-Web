@@ -29,7 +29,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatStepperModule } from '@angular/material/stepper';
+<<<<<<< HEAD
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
+=======
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+>>>>>>> 51f633267f481f25b36274afb453322b0fbe8dd0
 
 @NgModule({
   imports: [
@@ -59,9 +63,13 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
     FlexLayoutModule,
     MatSidenavModule,
     MatStepperModule,
+<<<<<<< HEAD
     MatButtonToggleModule,
     ReactiveFormsModule,
     MatAutocompleteModule
+=======
+    MatButtonToggleModule
+>>>>>>> 51f633267f481f25b36274afb453322b0fbe8dd0
   ],
   exports: [
     CommonModule,
@@ -90,8 +98,12 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
     FlexLayoutModule,
     MatSidenavModule,
     MatStepperModule,
+<<<<<<< HEAD
     MatButtonToggleModule,
     MatAutocompleteModule
+=======
+    MatButtonToggleModule
+>>>>>>> 51f633267f481f25b36274afb453322b0fbe8dd0
   ],
   declarations: [],
   providers: []

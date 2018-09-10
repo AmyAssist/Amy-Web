@@ -3,18 +3,12 @@ node_js: '10'
 sudo: required
 addons:
   chrome: stable
-cache:
-  directories:
-  - node_modules
 before_install:
   - npm i -g @angular/cli
 jobs:
   include:
-    - stage: test
-      name: "test"
-      script: ng test --no-progress --karma-config karma.conf.js
-    - stage: deploy
-      name: "Static Code Analysis"
+    - stage: test and code quality
+      name: "test and code quality"
       script:
       - ng test --no-progress --code-coverage --karma-config karma.conf.js
       - ng lint Amy-Webapp --format json > tsLintReport.json || true
@@ -23,11 +17,12 @@ jobs:
         sonarcloud:
           organization: "amyassist"
           token: $SONAR_TOKEN
-    - name: "Docker"
+    - stage: deploy
+      name: "Docker"
       before_install: skip
       install: skip
       script: docker build . -t amy-web-ci
-    - name: "Build"
+    - name: "Depoly GitHub Pages"
       if: branch = master
       script: ng build --prod --no-progress --base-href=/Amy-Web/
       deploy:
