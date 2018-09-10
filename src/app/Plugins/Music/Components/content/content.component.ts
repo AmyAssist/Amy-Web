@@ -71,34 +71,50 @@ export class ContentComponent implements OnInit {
     }
   }
 
+  /*
+    search-request for Songs
+  */
   searchSong(searchValue: string, searchType: string) {
     this.musicService.search(searchValue, searchType, '7')
       .subscribe((data: Music[]) => this.searchResults = [...data]);
     this.searchType = 'track';
   }
 
+  /*
+    search-request for Artists
+  */
   searchArtist(searchValue: string, searchType: string) {
     this.musicService.search(searchValue, searchType, '7')
       .subscribe((data: Artist[]) => this.searchResults = [...data]);
     this.searchType = 'artist';
   }
 
+  /*
+    search-request for Albums
+  */
   searchAlbum(searchValue: string, searchType: string) {
     this.musicService.search(searchValue, searchType, '7')
       .subscribe((data: Album[]) => this.searchResults = [...data]);
     this.searchType = 'album';
   }
 
+  /*
+    search-request for Playlists
+  */
   searchPlaylist(searchValue: string, searchType: string) {
     this.musicService.search(searchValue, searchType, '7')
       .subscribe((data: Playlist[]) => this.searchResults = [...data]);
     this.searchType = 'playlist';
   }
 
+  /*
+    play request for one item out of the searched items,
+    depending on the type of item a different method gets called
+  */
   playSearchResults(id: number) {
     if (this.searchType === 'track') {
       this.musicService.playSong(id).subscribe();
-      this.musicTransService.setImageUrl('assets/music/defaultMusicCover.png');
+      this.musicTransService.setImageUrl(this.searchResults[id].imageUrl);
       this.musicTransService.imageChanged = true;
     } else if (this.searchType === 'artist') {
       this.musicService.playArtist(id).subscribe();
