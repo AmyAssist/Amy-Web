@@ -12,9 +12,9 @@ import {
   MatTableModule,
   MatTabsModule,
   MatToolbarModule,
+  MatAutocompleteModule,
   MatProgressSpinnerModule
 } from '@angular/material';
-
 
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
@@ -128,6 +128,7 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     MatRadioModule,
     FormsModule,
+    MatAutocompleteModule,
     MatProgressSpinnerModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
