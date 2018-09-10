@@ -2,15 +2,15 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import {
-  MatButtonModule,
-  MatCheckboxModule,
-  MatToolbarModule,
-  MatGridListModule,
-  MatMenuModule,
-  MatListModule,
-  MatDividerModule,
-  MatNativeDateModule,
-  MatAutocompleteModule
+    MatButtonModule,
+    MatCheckboxModule,
+    MatToolbarModule,
+    MatGridListModule,
+    MatMenuModule,
+    MatListModule,
+    MatDividerModule,
+    MatNativeDateModule,
+    MatAutocompleteModule
 } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -29,83 +29,71 @@ import { RouterModule, Routes } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatStepperModule } from '@angular/material/stepper';
-<<<<<<< HEAD
-import {MatButtonToggleModule} from '@angular/material/button-toggle';
-=======
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
->>>>>>> 51f633267f481f25b36274afb453322b0fbe8dd0
 
 @NgModule({
-  imports: [
-    CommonModule,
-    MatFormFieldModule,
-    MatButtonModule,
-    MatInputModule,
-    MatCardModule,
-    MatExpansionModule,
-    MatIconModule,
-    MatTabsModule,
-    MatSliderModule,
-    MatDatepickerModule,
-    MatSelectModule,
-    MatCheckboxModule,
-    MatToolbarModule,
-    MatMenuModule,
-    MatListModule,
-    MatGridListModule,
-    MatDividerModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    FormsModule,
-    MatNativeDateModule,
-    BrowserModule,
-    RouterModule,
-    FlexLayoutModule,
-    MatSidenavModule,
-    MatStepperModule,
-<<<<<<< HEAD
-    MatButtonToggleModule,
-    ReactiveFormsModule,
-    MatAutocompleteModule
-=======
-    MatButtonToggleModule
->>>>>>> 51f633267f481f25b36274afb453322b0fbe8dd0
-  ],
-  exports: [
-    CommonModule,
-    MatFormFieldModule,
-    MatButtonModule,
-    MatInputModule,
-    MatCardModule,
-    MatExpansionModule,
-    MatIconModule,
-    MatTabsModule,
-    MatSliderModule,
-    MatDatepickerModule,
-    MatSelectModule,
-    MatCheckboxModule,
-    MatToolbarModule,
-    MatMenuModule,
-    MatListModule,
-    MatGridListModule,
-    MatDividerModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    FormsModule,
-    MatNativeDateModule,
-    BrowserModule,
-    RouterModule,
-    FlexLayoutModule,
-    MatSidenavModule,
-    MatStepperModule,
-<<<<<<< HEAD
-    MatButtonToggleModule,
-    MatAutocompleteModule
-=======
-    MatButtonToggleModule
->>>>>>> 51f633267f481f25b36274afb453322b0fbe8dd0
-  ],
-  declarations: [],
-  providers: []
+    imports: [
+        CommonModule,
+        MatFormFieldModule,
+        MatButtonModule,
+        MatInputModule,
+        MatCardModule,
+        MatExpansionModule,
+        MatIconModule,
+        MatTabsModule,
+        MatSliderModule,
+        MatDatepickerModule,
+        MatSelectModule,
+        MatCheckboxModule,
+        MatToolbarModule,
+        MatMenuModule,
+        MatListModule,
+        MatGridListModule,
+        MatDividerModule,
+        BrowserAnimationsModule,
+        HttpClientModule,
+        FormsModule,
+        MatNativeDateModule,
+        BrowserModule,
+        RouterModule,
+        FlexLayoutModule,
+        MatSidenavModule,
+        MatStepperModule,
+        MatButtonToggleModule,
+        ReactiveFormsModule,
+        MatAutocompleteModule
+    ],
+    exports: [
+        CommonModule,
+        MatFormFieldModule,
+        MatButtonModule,
+        MatInputModule,
+        MatCardModule,
+        MatExpansionModule,
+        MatIconModule,
+        MatTabsModule,
+        MatSliderModule,
+        MatDatepickerModule,
+        MatSelectModule,
+        MatCheckboxModule,
+        MatToolbarModule,
+        MatMenuModule,
+        MatListModule,
+        MatGridListModule,
+        MatDividerModule,
+        BrowserAnimationsModule,
+        HttpClientModule,
+        FormsModule,
+        MatNativeDateModule,
+        BrowserModule,
+        RouterModule,
+        FlexLayoutModule,
+        MatSidenavModule,
+        MatStepperModule,
+        MatButtonToggleModule,
+        MatAutocompleteModule
+    ],
+    declarations: [],
+    providers: []
 })
 export class MaterialModule { }

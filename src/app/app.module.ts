@@ -128,14 +128,9 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     MatRadioModule,
     FormsModule,
-<<<<<<< HEAD
-    ReactiveFormsModule,
     MatAutocompleteModule,
-    MatProgressSpinnerModule
-=======
     MatProgressSpinnerModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
->>>>>>> 51f633267f481f25b36274afb453322b0fbe8dd0
   ],
   exports: [RouterModule],
   providers: [AuthService, AuthGuard],
