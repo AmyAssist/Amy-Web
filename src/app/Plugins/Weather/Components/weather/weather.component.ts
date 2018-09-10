@@ -56,8 +56,8 @@ export class WeatherComponent implements OnInit {
           weatherReportWeek.precipIconSrc = this.getWeatherIcon(weatherReportWeek.precipType);
           weatherReportWeek.temperatureMax = Math.round(weatherReportWeek.temperatureMax);
           weatherReportWeek.temperatureMin = Math.round(weatherReportWeek.temperatureMin);
-          weatherReportWeek.sunriseTime = this.convertTime(parseInt(weatherReportWeek.sunriseTime), weatherReport.timeZone);
-          weatherReportWeek.sunsetTime = this.convertTime(parseInt(weatherReportWeek.sunsetTime), weatherReport.timeZone);
+          weatherReportWeek.sunriseTime = this.convertTime(parseInt(weatherReportWeek.sunriseTime, 10), weatherReport.timeZone);
+          weatherReportWeek.sunsetTime = this.convertTime(parseInt(weatherReportWeek.sunsetTime, 10), weatherReport.timeZone);
           weatherReportWeek.precipProbability = weatherReportWeek.precipProbability * 100;
           weatherReportWeek.time = this.convertDateTime(weatherReportWeek.timestamp, weatherReport.timeZone);
         }
