@@ -13,7 +13,7 @@
       </mat-form-field>
       <p style="text-align:center;" class="mat-h2" *ngIf="locationSelected">
         {{selectedLocation}}
-        <br>{{showReportNow.time}}
+        <br>{{showReport.current.time}}
       </p>
     </div>
     <div *ngIf="!locationSelected">
@@ -24,26 +24,26 @@
     <div id="weatherNowInformation" class="flex_layout" *ngIf="locationSelected" fxLayout="column">
       <div fxLayout="row" fxLayoutAlign="space-around center">
         <div fxLayout="column" *ngIf="locationSelected">
-          <img alt="image" class="weather_now_info_icon mat-h3" [attr.src]="showReportNow.precipIconSrc" type="image/svg+xml">
+          <img alt="image" class="weather_now_info_icon mat-h3" [attr.src]="showReport.current.precipIconSrc" type="image/svg+xml">
           <img alt="image" class="weather_now_info_icon mat-h3" src="assets/weather/wind.svg" type="image/svg+xml">
           <img alt="image" class="weather_now_info_icon mat-h3" src="assets/weather/sunrise.svg" type="image/svg+xml">
           <img alt="image" class="weather_now_info_icon mat-h3" src="assets/weather/sunset.svg" type="image/svg+xml">
         </div>
         <div fxLayout="column" *ngIf="locationSelected">
-          <p style="text-align:right" class="text mat-body-3 mat-h3">{{showReportNow.precipProbability}}</p>
-          <p style="text-align:right" class="text mat-body-3 mat-h3">{{showReportNow.windspeed}}km/h</p>
-          <p style="text-align:right" class="text mat-body-3 mat-h3">{{showReportDay.sunriseTime}}</p>
-          <p style="text-align:right" class="text mat-body-3 mat-h3">{{showReportDay.sunsetTime}}</p>
+          <p style="text-align:right" class="text mat-body-3 mat-h3">{{showReport.current.precipProbability}}%</p>
+          <p style="text-align:right" class="text mat-body-3 mat-h3">{{showReport.current.windspeed}}km/h</p>
+          <p style="text-align:right" class="text mat-body-3 mat-h3">{{showReportWeek[0].sunriseTime}}</p>
+          <p style="text-align:right" class="text mat-body-3 mat-h3">{{showReportWeek[0].sunsetTime}}</p>
         </div>
       </div>
     </div>
 
     <!--Show current weather report-->
     <div id="weatherNow" class="flex_layout" *ngIf="locationSelected" fxLayout="column" fxLayoutAlign="space-around center">
-      <img alt="image" class="weather_now_icon" [attr.src]="showReportNow.iconSrc" type="image/svg+xml" *ngIf="locationSelected">
+      <img alt="image" class="weather_now_icon" [attr.src]="showReport.current.iconSrc" type="image/svg+xml" *ngIf="locationSelected">
       <p style="text-align:center;" class="mat-h1" *ngIf="locationSelected">
-        <br/>{{showReportNow.temperatureNow}}°C
-        <br/>{{showReportNow.summary}}
+        <br/>{{showReport.current.temperatureNow}}°C
+        <br/>{{showReport.current.summary}}
       </p>
     </div>
 

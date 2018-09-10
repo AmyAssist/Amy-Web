@@ -1,15 +1,13 @@
 export class WeatherNow {
-    search: string;
-    preamble: string;
     summary: string;
-    precipProbability: string;
+    precipProbability: number;
     precipType: string;
     precipIconSrc = 'assets/weather/rain.svg';
     temperatureNow: number;
-    iconSrc = 'assets/weather/cloudy.svg';
-    icon: string;
-    windspeed: number;
     timestamp: number;
+    windspeed: number;
+    iconType: string;
+    iconSrc = 'assets/weather/cloudy.svg';
     time: string;
 
     constructor() {

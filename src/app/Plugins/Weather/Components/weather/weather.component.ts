@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { WeatherDataService } from '../../Services/weather-data.service';
-import { WeatherNow } from '../../Objects/weatherNow';
+import { Weather } from '../../Objects/weather';
 import { WeatherDay } from '../../Objects/weatherDay';
-import { WeatherWeek } from '../../Objects/weatherWeek';
 import { Location } from '../../Objects/location';
 import { DatePipe } from '@angular/common';
 
@@ -13,8 +12,7 @@ import { DatePipe } from '@angular/common';
 })
 export class WeatherComponent implements OnInit {
   showReportWeek: WeatherDay[];
-  showReportDay: WeatherDay;
-  showReportNow: WeatherNow;
+  showReport: Weather;
 
   locations: Location[];
   selectedLocation: string;
@@ -38,55 +36,46 @@ export class WeatherComponent implements OnInit {
 
   public selectLocation(location: Location): void {
     this.locationSelected = true;
-    this.weatherService.sendLocation(location.persistentId);
     this.selectedLocation = location.name;
-    this.getWeatherNow();
-    this.getWeatherDay();
-    this.getWeatherWeek();
+    this.getWeatherReport(location);
   }
 
-  getWeatherNow() {
-    this.weatherService.getWeatherNow()
-      .subscribe((data: WeatherNow) => {
-        const weatherNow = { ...data };
-        weatherNow.iconSrc = this.getWeatherIcon(weatherNow.icon);
-        weatherNow.precipIconSrc = this.getWeatherIcon(weatherNow.precipType);
-        weatherNow.time = this.convertTime(weatherNow.timestamp);
-        this.showReportNow = weatherNow;
-      });
-  }
+  getWeatherReport(location: Location) {
+    this.weatherService.getWeatherReport(location.persistentId)
+      .subscribe((data: Weather) => {
+        const weather = { ...data };
+        weather.current.temperatureNow = Math.round(weather.current.temperatureNow);
+        weather.current.iconSrc = this.getWeatherIcon(weather.current.iconType);
+        weather.current.precipIconSrc = this.getWeatherIcon(weather.current.precipType);
+        weather.current.precipProbability = weather.current.precipProbability * 100;
+        weather.current.time = this.convertTime(weather.current.timestamp, weather.timeZone);
 
-  getWeatherDay() {
-    this.weatherService.getWeatherToday()
-      .subscribe((data: WeatherDay) => {
-        const weatherDay = { ...data };
-        weatherDay.iconSrc = this.getWeatherIcon(weatherDay.icon);
-        weatherDay.precipIconSrc = this.getWeatherIcon(weatherDay.precipType);
-        weatherDay.time = this.convertTime(weatherDay.timestamp);
-        this.showReportDay = weatherDay;
-      });
-  }
-
-  getWeatherWeek() {
-    this.weatherService.getWeatherWeek()
-      .subscribe((data: WeatherWeek) => {
-        const weatherWeekData = { ...data };
-        for (const weatherWeek of weatherWeekData.days) {
-          weatherWeek.iconSrc = this.getWeatherIcon(weatherWeek.icon);
+        for (const weatherWeek of weather.week.days) {
+          weatherWeek.iconSrc = this.getWeatherIcon(weatherWeek.iconType);
           weatherWeek.precipIconSrc = this.getWeatherIcon(weatherWeek.precipType);
-          weatherWeek.time = this.convertTime(weatherWeek.timestamp);
+          weatherWeek.temperatureMax = Math.round(weatherWeek.temperatureMax);
+          weatherWeek.temperatureMin = Math.round(weatherWeek.temperatureMin);
+          weatherWeek.precipProbability = weatherWeek.precipProbability * 100;
+          weatherWeek.time = this.convertTime(weatherWeek.timestamp, weather.timeZone);
         }
-        this.showReportWeek = weatherWeekData.days;
+        this.showReport = weather;
+        this.showReportWeek = weather.week.days;
       });
   }
 
-  getWeatherIcon(icon: WeatherDay['icon']): string {
-    switch (icon) {
+  getWeatherIcon(iconType: WeatherDay['iconType']): string {
+    switch (iconType) {
       case 'clear-day': {
         return 'assets/weather/sunny.svg';
       }
+      case 'partly-cloudy-day': {
+        return 'assets/weather/cloudy.svg';
+      }
       case 'clear-night': {
         return 'assets/weather/sunny.svg';
+      }
+      case 'partly-cloudy-night': {
+        return 'assets/weather/cloudy.svg';
       }
       case 'sleet': {
         return 'assets/weather/sleet.svg';
@@ -107,12 +96,12 @@ export class WeatherComponent implements OnInit {
         return 'assets/weather/cloudy.svg';
       }
       default: {
-        return 'assets/weather/cloudy.svg';
+        return 'assets/weather/rain.svg';
       }
     }
   }
 
-  convertTime(stamp: number): string {
+  convertTime(stamp: number, timeZone: string): string {
     const datePipe = new DatePipe('en-US');
     return datePipe.transform(stamp * 1000, 'EEEE, MMMM d');
   }
