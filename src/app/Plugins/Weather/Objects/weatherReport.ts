@@ -4,7 +4,7 @@ import { WeatherReportWeek } from './weatherReportWeek';
 export class WeatherReport {
     current: WeatherReportInstant;
     week: WeatherReportWeek;
-    timeZone: string;
+    timezone: string;
 
     constructor() {
 

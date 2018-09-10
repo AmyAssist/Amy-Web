@@ -4,7 +4,7 @@ import { WeatherReport } from '../../Objects/weatherReport';
 import { WeatherReportInstant } from '../../Objects/weatherReportInstant';
 import { WeatherReportDay } from '../../Objects/weatherReportDay';
 import { Location } from '../../Objects/location';
-import { DatePipe } from '@angular/common';
+import * as moment from 'moment-timezone';
 
 @Component({
   selector: 'app-weather',
@@ -48,18 +48,18 @@ export class WeatherComponent implements OnInit {
         weatherReport.current.temperature = Math.round(weatherReport.current.temperature);
         weatherReport.current.iconSrc = this.getWeatherIcon(weatherReport.current.iconType);
         weatherReport.current.precipIconSrc = this.getWeatherIcon(weatherReport.current.precipType);
-        weatherReport.current.precipProbability = weatherReport.current.precipProbability * 100;
-        weatherReport.current.time = this.convertDateTime(weatherReport.current.timestamp, weatherReport.timeZone);
+        weatherReport.current.precipProbability = Math.round(weatherReport.current.precipProbability * 100);
+        weatherReport.current.time = this.convertDateTime(weatherReport.current.timestamp, weatherReport.timezone);
 
         for (const weatherReportWeek of weatherReport.week.days) {
           weatherReportWeek.iconSrc = this.getWeatherIcon(weatherReportWeek.iconType);
           weatherReportWeek.precipIconSrc = this.getWeatherIcon(weatherReportWeek.precipType);
           weatherReportWeek.temperatureMax = Math.round(weatherReportWeek.temperatureMax);
           weatherReportWeek.temperatureMin = Math.round(weatherReportWeek.temperatureMin);
-          weatherReportWeek.sunriseTime = this.convertTime(parseInt(weatherReportWeek.sunriseTime, 10), weatherReport.timeZone);
-          weatherReportWeek.sunsetTime = this.convertTime(parseInt(weatherReportWeek.sunsetTime, 10), weatherReport.timeZone);
-          weatherReportWeek.precipProbability = weatherReportWeek.precipProbability * 100;
-          weatherReportWeek.time = this.convertDateTime(weatherReportWeek.timestamp, weatherReport.timeZone);
+          weatherReportWeek.sunriseTime = this.convertTime(parseInt(weatherReportWeek.sunriseTime, 10), weatherReport.timezone);
+          weatherReportWeek.sunsetTime = this.convertTime(parseInt(weatherReportWeek.sunsetTime, 10), weatherReport.timezone);
+          weatherReportWeek.precipProbability = Math.round(weatherReportWeek.precipProbability * 100);
+          weatherReportWeek.time = this.convertDateTime(weatherReportWeek.timestamp, weatherReport.timezone);
         }
         this.showReportInstant = weatherReport.current;
         this.showReportWeek = weatherReport.week.days;
@@ -100,13 +100,11 @@ export class WeatherComponent implements OnInit {
     }
   }
 
-  convertTime(stamp: number, timeZone: string): string {
-    const datePipe = new DatePipe('en-US');
-    return datePipe.transform(stamp * 1000, 'HH:mm', timeZone);
+  convertTime(stamp: number, timezone: string): string {
+    return moment(stamp * 1000).tz(timezone).format('HH:mm');
   }
 
-  convertDateTime(stamp: number, timeZone: string): string {
-    const datePipe = new DatePipe('en-US');
-    return datePipe.transform(stamp * 1000, 'EEEE, MMMM d', timeZone);
+  convertDateTime(stamp: number, timezone: string): string {
+    return moment(stamp * 1000).tz(timezone).format('dddd, MMMM DD');
   }
 }
