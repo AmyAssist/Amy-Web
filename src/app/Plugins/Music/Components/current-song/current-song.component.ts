@@ -45,6 +45,7 @@ export class CurrentSongComponent implements OnInit, OnDestroy {
   constructor(private readonly musicService: MusicDataService, private readonly musicTransService: MusicDataTransferService) {
     this.subscription = this.musicTransService.getMessage().subscribe(message => {
       this.message = message;
+      console.log(message);
       this.getCurrentSong();
     });
   }
@@ -58,7 +59,7 @@ export class CurrentSongComponent implements OnInit, OnDestroy {
     this.getCurrentSong();
     this.getVolume();
 
-    setInterval(() => this.getCurrentSong(), 1000);
+    setInterval(() => this.getCurrentSong(), 5000);
   }
 
   ngOnDestroy() {
