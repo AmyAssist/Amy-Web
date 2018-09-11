@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { MusicDataService } from '../../Services/music-data.service';
 import { MusicDataTransferService } from '../../Services/music-data-transfer.service';
 import { Music } from '../../Objects/music';
@@ -16,7 +17,10 @@ import { Url } from 'url';
   templateUrl: './current-song.component.html',
   styleUrls: ['./current-song.component.css']
 })
-export class CurrentSongComponent implements OnInit {
+export class CurrentSongComponent implements OnInit, OnDestroy {
+
+  message: any;
+  subscription: Subscription;
 
   // bool to check if u paused or resumed the current song
   playing = false;
@@ -38,7 +42,13 @@ export class CurrentSongComponent implements OnInit {
   currentTitle: string;
   currentImageUrl: string;
 
-  constructor(private readonly musicService: MusicDataService, private readonly musicTransService: MusicDataTransferService) { }
+  constructor(private readonly musicService: MusicDataService, private readonly musicTransService: MusicDataTransferService) {
+    this.subscription = this.musicTransService.getMessage().subscribe(message => {
+      this.message = message;
+      console.log(message);
+      this.getCurrentSong();
+    });
+  }
 
   ngOnInit() {
     this.musicData = new Music;
@@ -46,6 +56,19 @@ export class CurrentSongComponent implements OnInit {
 
     this.musicCoverUrl = 'assets/music/defaultMusicCover.png';
 
+    this.getCurrentSong();
+    this.getVolume();
+
+    setInterval(() => this.getCurrentSong(), 5000);
+  }
+
+  ngOnDestroy() {
+    // unsubscribe to ensure no memory leaks
+    this.subscription.unsubscribe();
+  }
+
+  refresh() {
+    console.log('test');
     this.getCurrentSong();
     this.getVolume();
   }
@@ -59,14 +82,14 @@ export class CurrentSongComponent implements OnInit {
         this.musicData = { ...data };
         this.currentArtist = this.musicData.artists[0].toString();
         this.currentTitle = this.musicData.name;
-      }
-      );
-    if (this.musicTransService.getImageChanged) {
-      this.musicCoverUrl = this.musicTransService.getImageUrl();
-      this.musicTransService.setImageChanged(false);
-    } else {
-      this.musicCoverUrl = this.musicData.imageUrl;
-    }
+        this.playing = true;
+        if (this.musicTransService.getImageChanged) {
+          this.musicCoverUrl = this.musicTransService.getImageUrl();
+          this.musicTransService.setImageChanged(false);
+        } else {
+          this.musicCoverUrl = this.musicData.imageUrl;
+        }
+      });
   }
   /*
       resuming the paused song

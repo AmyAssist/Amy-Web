@@ -56,6 +56,16 @@ export class ContentComponent implements OnInit {
     this.searchResultPlaylist = new Array<Playlist>();
   }
 
+  sendMessage(): void {
+    // send message to subscribers via observable subject
+    this.musicTransService.sendMessage('Now playing an objekt.');
+  }
+
+  clearMessage(): void {
+    // clear message
+    this.musicTransService.clearMessage();
+  }
+
   /*
     sending a search request
   */
@@ -129,5 +139,6 @@ export class ContentComponent implements OnInit {
       this.musicTransService.setImageUrl(this.searchResults[id].imageUrl);
       this.musicTransService.imageChanged = true;
     }
+    this.sendMessage();
   }
 }
