@@ -1,80 +1,80 @@
 <div id="completeLayout" fxLayout="column" fxLayoutAlign="space-around center" class="mat-elevation-z2">
 
-  <div id="WeatherInstantLayout" class="weather_instant_layout" fxLayout="row wrap" fxLayoutAlign="space-around center">
-
-    <!--Select location for weather report-->
-    <div id="locationSelector" class="flex_layout" *ngIf="locationSelected" fxLayout="column" fxLayoutAlign="space-around center">
-      <mat-form-field>
-        <mat-select (selectionChange)="changeLocation($event)" placeholder="Select Location" [attr.selected]="selectedLocation">
-          <mat-option *ngFor="let location of locations" [value]="location">
-            <p style="text-align:center;" class="mat-h3">{{location.name}}</p>
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-      <p style="text-align:center;" class="mat-h2" *ngIf="locationSelected">
-        {{selectedLocation}}
-        <br>{{showReportInstant.time}}
-      </p>
-    </div>
-    <div *ngIf="!locationSelected">
-      <p style="text-align:center" class="text color_red text mat-body-2 mat-h3">Register a location first.</p>
-    </div>
-
-    <!--Show current weather report information-->
-    <div id="weatherInstantInformation" class="flex_layout" *ngIf="locationSelected" fxLayout="column">
-      <div fxLayout="row" fxLayoutAlign="space-around center">
-        <div fxLayout="column" *ngIf="locationSelected">
-          <img alt="image" class="weather_instant_info_icon mat-h3" [attr.src]="showReportInstant.precipIconSrc" type="image/svg+xml">
-          <img alt="image" class="weather_instant_info_icon mat-h3" src="assets/weather/wind.svg" type="image/svg+xml">
-          <img alt="image" class="weather_instant_info_icon mat-h3" src="assets/weather/sunrise.svg" type="image/svg+xml">
-          <img alt="image" class="weather_instant_info_icon mat-h3" src="assets/weather/sunset.svg" type="image/svg+xml">
-        </div>
-        <div fxLayout="column" *ngIf="locationSelected">
-          <p style="text-align:right" class="text mat-body-3 mat-h3">{{showReportInstant.precipProbability}}%</p>
-          <p style="text-align:right" class="text mat-body-3 mat-h3">{{showReportInstant.windSpeed}}km/h</p>
-          <p style="text-align:right" class="text mat-body-3 mat-h3">{{showReportWeek[0].sunriseTime}}</p>
-          <p style="text-align:right" class="text mat-body-3 mat-h3">{{showReportWeek[0].sunsetTime}}</p>
+    <div id="WeatherInstantLayout" class="weather_instant_layout" fxLayout="row wrap" fxLayoutAlign="space-around center">
+  
+      <!--Select location for weather report-->
+      <div id="locationSelector" class="flex_layout" *ngIf="locationSelected" fxLayout="column" fxLayoutAlign="space-around center">
+        <mat-form-field>
+          <mat-select (selectionChange)="changeLocation($event)" placeholder="{{selectedLocation}}" [value]="selectedLocation" [attr.selected]="selectedLocation">
+            <mat-option *ngFor="let location of locations" [value]="location">
+              <p style="text-align:center;" class="mat-h3">{{location.name}}</p>
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <p style="text-align:center;" class="mat-h2" *ngIf="locationSelected">
+          {{selectedLocation}}
+          <br>{{showReportInstant.time}}
+        </p>
+      </div>
+      <div *ngIf="noLocationFound">
+        <p style="text-align:center" class="text color_red text mat-body-2 mat-h3">Register a location first.</p>
+      </div>
+  
+      <!--Show current weather report information-->
+      <div id="weatherInstantInformation" class="flex_layout" *ngIf="locationSelected" fxLayout="column">
+        <div fxLayout="row" fxLayoutAlign="space-around center">
+          <div fxLayout="column" *ngIf="locationSelected">
+            <img alt="image" class="weather_instant_info_icon mat-h3" [attr.src]="showReportInstant.precipIconSrc" type="image/svg+xml">
+            <img alt="image" class="weather_instant_info_icon mat-h3" src="assets/weather/wind.svg" type="image/svg+xml">
+            <img alt="image" class="weather_instant_info_icon mat-h3" src="assets/weather/sunrise.svg" type="image/svg+xml">
+            <img alt="image" class="weather_instant_info_icon mat-h3" src="assets/weather/sunset.svg" type="image/svg+xml">
+          </div>
+          <div fxLayout="column" *ngIf="locationSelected">
+            <p style="text-align:right" class="text mat-body-3 mat-h3">{{showReportInstant.precipProbability}}%</p>
+            <p style="text-align:right" class="text mat-body-3 mat-h3">{{showReportInstant.windSpeed}}km/h</p>
+            <p style="text-align:right" class="text mat-body-3 mat-h3">{{showReportWeek[0].sunriseTime}}</p>
+            <p style="text-align:right" class="text mat-body-3 mat-h3">{{showReportWeek[0].sunsetTime}}</p>
+          </div>
         </div>
       </div>
+  
+      <!--Show current weather report-->
+      <div id="weatherInstant" class="flex_layout" *ngIf="locationSelected" fxLayout="column" fxLayoutAlign="space-around center">
+        <img alt="image" class="weather_instant_icon" [attr.src]="showReportInstant.iconSrc" type="image/svg+xml" *ngIf="locationSelected">
+        <p style="text-align:center;" class="mat-h1" *ngIf="locationSelected">
+          <br/>{{showReportInstant.temperature}}°C
+          <br/>{{showReportInstant.summary}}
+        </p>
+      </div>
+  
     </div>
-
-    <!--Show current weather report-->
-    <div id="weatherInstant" class="flex_layout" *ngIf="locationSelected" fxLayout="column" fxLayoutAlign="space-around center">
-      <img alt="image" class="weather_instant_icon" [attr.src]="showReportInstant.iconSrc" type="image/svg+xml" *ngIf="locationSelected">
-      <p style="text-align:center;" class="mat-h1" *ngIf="locationSelected">
-        <br/>{{showReportInstant.temperature}}°C
-        <br/>{{showReportInstant.summary}}
-      </p>
-    </div>
-
-  </div>
-  <mat-divider style="width: 100%"></mat-divider>
-  <div id="weatherWeekLayout" *ngIf="locationSelected" fxLayout="row wrap" fxLayoutAlign="space-around stretch">
-
-    <!--Show weather report of the week-->
-    <div class="flex_layout" *ngFor="let weatherReportWeek of showReportWeek">
-      <p style="text-align:center;" class="text mat-body-2">{{weatherReportWeek.time}}</p>
-      <p style="text-align:center;">
-        <img alt="image" class="weather_week_icon" [attr.src]="weatherReportWeek.iconSrc" type="image/svg+xml">
-      </p>
-      <div id="weatherWeekInformation" fxLayout="row" fxLayoutAlign="space-evenly center">
-        <div fxLayout="column">
-          <p class="text color_red mat-body-2">{{weatherReportWeek.temperatureMax}}°C</p>
-          <p class="text color_blue mat-body-2">{{weatherReportWeek.temperatureMin}}°C</p>
-        </div>
-        <div fxLayout="column">
-          <img alt="image" class="weather_week_info_icon" [attr.src]="weatherReportWeek.precipIconSrc" type="image/svg+xml">
-          <p class="text mat-body-2">{{weatherReportWeek.precipProbability}}%</p>
+    <mat-divider style="width: 100%"></mat-divider>
+    <div id="weatherWeekLayout" *ngIf="locationSelected" fxLayout="row wrap" fxLayoutAlign="space-around stretch">
+  
+      <!--Show weather report of the week-->
+      <div class="flex_layout" *ngFor="let weatherReportWeek of showReportWeek">
+        <p style="text-align:center;" class="text mat-body-2">{{weatherReportWeek.time}}</p>
+        <p style="text-align:center;">
+          <img alt="image" class="weather_week_icon" [attr.src]="weatherReportWeek.iconSrc" type="image/svg+xml">
+        </p>
+        <div id="weatherWeekInformation" fxLayout="row" fxLayoutAlign="space-evenly center">
+          <div fxLayout="column">
+            <p class="text color_red mat-body-2">{{weatherReportWeek.temperatureMax}}°C</p>
+            <p class="text color_blue mat-body-2">{{weatherReportWeek.temperatureMin}}°C</p>
+          </div>
+          <div fxLayout="column">
+            <img alt="image" class="weather_week_info_icon" [attr.src]="weatherReportWeek.precipIconSrc" type="image/svg+xml">
+            <p class="text mat-body-2">{{weatherReportWeek.precipProbability}}%</p>
+          </div>
         </div>
       </div>
+  
     </div>
-
+  
   </div>
-
-</div>
-
-<div class="bottom-text" *ngIf="locationSelected">Icons made by
-  <a href="https://www.flaticon.com/authors/vitaly-gorbachev" title="Vitaly Gorbachev">Vitaly Gorbachev</a> from
-  <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by
-  <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>
-</div>
+  
+  <div class="bottom-text" *ngIf="locationSelected">Icons made by
+    <a href="https://www.flaticon.com/authors/vitaly-gorbachev" title="Vitaly Gorbachev">Vitaly Gorbachev</a> from
+    <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by
+    <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>
+  </div>
