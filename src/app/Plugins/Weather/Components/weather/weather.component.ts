@@ -16,7 +16,7 @@ export class WeatherComponent implements OnInit {
   showReportWeek: WeatherReportDay[];
 
   locations: Location[];
-  selectedLocation = "Select a Location"
+  selectedLocation = 'Select a Location';
   locationSelected = false;
   noLocationFound = false;
 
