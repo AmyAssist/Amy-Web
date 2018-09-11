@@ -55,6 +55,16 @@ export class SidebarComponent implements OnInit {
     this.getPlaylists();
   }
 
+  sendMessage(): void {
+    // send message to subscribers via observable subject
+    this.musicTransService.sendMessage('Now playing a playlist.');
+  }
+
+  clearMessage(): void {
+    // clear message
+    this.musicTransService.clearMessage();
+  }
+
   /*
     playing a playlist out of the displayed ones
   */
@@ -77,6 +87,7 @@ export class SidebarComponent implements OnInit {
     } else {
       this.musicPlaylistData = this.playlistAllFeatured[playlistNumber];
     }
+    this.sendMessage();
   }
 
   getPlaylists() {
