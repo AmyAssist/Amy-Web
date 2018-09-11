@@ -1,0 +1,65 @@
+<div>
+  <mat-form-field>
+    <input matInput placeholder="From:" [formControl]="originField" [matAutocomplete]="originAuto">
+    <mat-autocomplete autoActiveFirstOption #originAuto="matAutocomplete" [displayWith]="getTagDisplayName">
+      <mat-option *ngFor="let option of originFilteredTags | async" [value]="option">
+        {{option.name}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="To:" [formControl]="destinationField" [matAutocomplete]="destinationAuto">
+    <mat-autocomplete autoActiveFirstOption #destinationAuto="matAutocomplete" [displayWith]="getTagDisplayName">
+      <mat-option *ngFor="let option of destinationFilteredTags | async" [value]="option">
+        {{option.name}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+</div>
+
+<mat-form-field>
+  <mat-select [(value)]="travelMode1" placeholder="Travel Mode">
+    <mat-option value="DRIVING">Car</mat-option>
+    <mat-option value="BICYCLING">Bicycle</mat-option>
+    <mat-option value="TRANSIT">Transit</mat-option>
+  </mat-select>
+</mat-form-field>
+
+<div>
+  <mat-form-field>
+    <input matInput #dt1 #dateTime1 [owlDateTime]="dt1" [owlDateTimeTrigger]="dt1" readonly placeholder="Departure Time">
+    <owl-date-time #dt1></owl-date-time>
+  </mat-form-field>
+</div>
+
+<button mat-raised-button color="primary" (click)="fromToWay(originField.value, destinationField.value, dateTime1.value)">Search</button>
+
+<div *ngIf="showWay" style="margin-top: 1em">
+  <div *ngIf="!transit">
+    <h3>Route:</h3>
+    <p>Best Travel Mode: {{resultMode}}</p>
+    <p>Distance: {{resultDistance}}</p>
+    <p>Duration: {{resultDuration}}</p>
+    <p>Start-address: {{resultStartAddress}}</p>
+    <p>End-address: {{resultEndAddress}}</p>
+  </div>
+  <div *ngIf="transit">
+    <h3>Route:</h3>
+    <p>Best Travel Mode: {{resultMode}}</p>
+    <p>Distance: {{resultDistance}}</p>
+    <p>Duration: {{resultDuration}}</p>
+    <p>Start-address: {{resultStartAddress}}</p>
+    <p>End-address: {{resultEndAddress}}</p>
+
+    <p>Departure-time: {{resultDepartureTime}}</p>
+    <p>Arrival-time: {{resultArrivalTime}}</p>
+  </div>
+</div>
+
+<div style="margin-top: 1em" *ngIf=link>
+  <a href="{{link}}" target="_blank">
+    <mat-icon>directions</mat-icon>
+    See in Google Maps
+  </a>
+</div>

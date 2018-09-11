@@ -1,6 +1,7 @@
 import { Distance } from './distance';
 import { Duration } from './duration';
 import { NavDate } from './navDate';
+import { Coordinate } from './Coordinate';
 
 export class DirectionsLeg {
     distance: Distance;
@@ -8,8 +9,8 @@ export class DirectionsLeg {
     durationInTraffic: Duration;
     arrivalTime: NavDate;
     departureTime: NavDate;
-    startLocation: any;
-    endLocation: any;
+    startLocation: Coordinate;
+    endLocation: Coordinate;
     startAddress: string;
     endAddress: string;
 
