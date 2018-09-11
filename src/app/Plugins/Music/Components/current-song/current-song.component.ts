@@ -48,6 +48,14 @@ export class CurrentSongComponent implements OnInit {
 
     this.getCurrentSong();
     this.getVolume();
+
+    setInterval(() => this.getCurrentSong(), 1000);
+  }
+
+  refresh() {
+    console.log('test');
+    this.getCurrentSong();
+    this.getVolume();
   }
 
   /*
@@ -59,6 +67,7 @@ export class CurrentSongComponent implements OnInit {
         this.musicData = { ...data };
         this.currentArtist = this.musicData.artists[0].toString();
         this.currentTitle = this.musicData.name;
+        this.musicCoverUrl = this.musicData.imageUrl;
       }
       );
     if (this.musicTransService.getImageChanged) {
