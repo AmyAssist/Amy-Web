@@ -47,11 +47,4 @@ export class WeatherDataService {
       catchError(this.handleError));
   }
 
-  /*
-  sends the selected location to amy
-  */
-  sendLocation(id: number) {
-    this.http.put(this.path + 'weather/setLocation', String(id), this.httpPlainTextHeader).pipe(
-      catchError(this.handleError)).subscribe();
-  }
 }

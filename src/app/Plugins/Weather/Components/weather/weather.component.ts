@@ -101,7 +101,7 @@ export class WeatherComponent implements OnInit {
   }
 
   convertTime(stamp: number, timezone: string): string {
-    return moment(stamp * 1000).tz(timezone).format('HH:mm');
+    return moment(stamp * 1000).tz(timezone).format('HH:mm:ss');
   }
 
   convertDateTime(stamp: number, timezone: string): string {
