@@ -1,0 +1,39 @@
+<div fxLayout="column" class="timerSet-container mat-elevation-z2">
+  <mat-card>
+    <mat-card-title>Set Timer</mat-card-title>
+    <div>
+        <section class="setTimer-section">
+            <mat-form-field class="hour-margin">
+              <input matInput type="number" placeholder="Hour" [(ngModel)]="hour">
+            </mat-form-field>
+            <mat-form-field class="minute-margin">
+              <input matInput type="number" placeholder="Minute" [(ngModel)]="minute">
+            </mat-form-field>
+            <mat-form-field class="second-margin">
+              <input matInput type="number" placeholder="Second" [(ngModel)]="second">
+            </mat-form-field>
+            <button mat-raised-button color="primary" (click)="setTimer(hour, minute, second)">Start Timer</button>
+          </section>
+    </div>
+  </mat-card>
+
+  <mat-card>
+    <mat-card-title>All Timers</mat-card-title>
+    <div>
+        <mat-list role="list" *ngFor="let timer of timerData; let i = index">
+            <mat-list-item role="listitem">
+
+              <div class="timer-container">
+                <p mat-line style="display:inline">Timer {{timer.id}}: </p>
+                <h4 id={{timer.id}} style="display:inline"> {{countdownTimer(timer, timer.id)}}</h4>
+              
+                <button mat-icon-button (click)="deleteTimer(timer.id)" style="right:0%">
+                    <mat-icon>delete_forever</mat-icon>
+                </button>
+                <mat-divider></mat-divider>
+              </div>
+              </mat-list-item>
+        </mat-list>
+    </div>
+  </mat-card>
+</div>
