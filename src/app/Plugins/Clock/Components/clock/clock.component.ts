@@ -68,8 +68,7 @@ export class ClockComponent implements OnInit {
     if (day === 'tomorrow') {
       date.setDate(date.getDate() + 1);
     }
-
-    return new LocalDateTime(date.getFullYear(), date.getMonth(), date.getDate(), hour, minute);
+    return new LocalDateTime(date.getFullYear(), date.getMonth(), date.getDate(), hour, minute, 0);
   }
 
   activatedeactivateAlarm(alarm: Clock) {
