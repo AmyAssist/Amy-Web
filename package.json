@@ -1,6 +1,8 @@
 {
   "name": "amy-webapp",
-  "version": "0.0.0",
+  "version": "0.1.0",
+  "homepage": "https://github.com/AmyAssist/Amy-Web",
+  "license": "MIT",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -9,6 +11,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
+  "browser": true,
   "private": true,
   "dependencies": {
     "@angular/animations": "^6.1.4",
