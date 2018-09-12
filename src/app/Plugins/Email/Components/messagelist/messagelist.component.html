@@ -10,20 +10,30 @@
     <mat-tab label='Important'>
     </mat-tab>
 </mat-tab-group>
-<mat-accordion>
-    <div *ngFor="let message of messages; let i = index">
-        <mat-expansion-panel *ngIf='showAll || message.important'>
-            <mat-expansion-panel-header>
-                <mat-panel-title>
-                    <span [ngClass]="{'unseenMail': !message.seen, 'importantMail': message.important}">{{message.from}}</span>
-                </mat-panel-title>
 
-                <mat-panel-description>
+<div *ngFor="let message of messages; let i = index" style="margin-top: 1em">
+    <div *ngIf='showAll || message.important'>
+        <mat-divider *ngIf="i != 0" class="messageDivider"></mat-divider>
+        <div fxLayout="row" style="margin: center">
+            <div class="fromCol">
+                <span class="mat-h3" [ngClass]="{'unseenMail': !message.seen, 'importantMail': message.important}">
+                    {{message.from}}
+                </span>
+            </div>
+
+            <div class="subjectCol">
+                <span class="mat-body-1">
                     <strong *ngIf=!message.seen>{{message.subject}}</strong>
                     <span *ngIf=message.seen>{{message.subject}}</span>
-                </mat-panel-description>
-            </mat-expansion-panel-header>
-            {{message.content}}
-        </mat-expansion-panel>
+                </span>
+            </div>
+
+            <div class="dateCol">
+                <div fxLayout="column" class="mat-caption">
+                    <span>{{getSentDate(message)}}</span>
+                    <span>{{getSentTime(message)}}</span>
+                </div>
+            </div>
+        </div>
     </div>
-</mat-accordion>
+</div>
