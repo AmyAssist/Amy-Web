@@ -13,7 +13,6 @@
 
 <div *ngFor="let message of messages; let i = index" style="margin-top: 1em">
     <div *ngIf='showAll || message.important'>
-        <mat-divider *ngIf="i != 0" class="messageDivider"></mat-divider>
         <div fxLayout="row">
             <div class="fromCol">
                 <span class="mat-h3" [ngClass]="{'unseenMail': !message.seen, 'importantMail': message.important}">
@@ -35,5 +34,6 @@
                 </div>
             </div>
         </div>
+        <mat-divider class="messageDivider"></mat-divider>
     </div>
 </div>
