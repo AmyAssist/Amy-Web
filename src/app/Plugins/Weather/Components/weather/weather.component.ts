@@ -16,7 +16,7 @@ export class WeatherComponent implements OnInit {
   showReportWeek: WeatherReportDay[];
 
   locations: Location[];
-  selectedLocation = 'Select a Location';
+  selectedLocation: Location;
   locationSelected = false;
   noLocationFound = false;
 
@@ -34,12 +34,16 @@ export class WeatherComponent implements OnInit {
     });
   }
 
+  compareLocations(l1: Location, l2: Location): boolean {
+    return l1.persistentId === l2.persistentId;
+  }
+
   public changeLocation(event): void {
     this.selectLocation(event.value);
   }
 
   public selectLocation(location: Location): void {
-    this.selectedLocation = location.name;
+    this.selectedLocation = location;
     this.getWeatherReport(location);
   }
 

@@ -5,14 +5,14 @@
       <!--Select location for weather report-->
       <div id="locationSelector" class="flex_layout" *ngIf="locationSelected" fxLayout="column" fxLayoutAlign="space-around center">
         <mat-form-field>
-          <mat-select (selectionChange)="changeLocation($event)" placeholder="{{selectedLocation}}" [value]="selectedLocation" [attr.selected]="selectedLocation">
+          <mat-select (selectionChange)="changeLocation($event)" [(value)]="selectedLocation" [compareWith]="compareLocations">
             <mat-option *ngFor="let location of locations" [value]="location">
               <p style="text-align:center;" class="mat-h3">{{location.name}}</p>
             </mat-option>
           </mat-select>
         </mat-form-field>
         <p style="text-align:center;" class="mat-h2" *ngIf="locationSelected">
-          {{selectedLocation}}
+          {{selectedLocation.name}}
           <br>{{showReportInstant.time}}
         </p>
       </div>
