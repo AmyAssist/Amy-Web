@@ -16,8 +16,9 @@ export class WeatherComponent implements OnInit {
   showReportWeek: WeatherReportDay[];
 
   locations: Location[];
-  selectedLocation: string;
+  selectedLocation: Location;
   locationSelected = false;
+  noLocationFound = false;
 
   constructor(private readonly weatherService: WeatherDataService) {
   }
@@ -27,8 +28,14 @@ export class WeatherComponent implements OnInit {
       this.locations = data;
       if (data.length > 0) {
         this.selectLocation(this.locations[0]);
+      } else {
+        this.noLocationFound = true;
       }
     });
+  }
+
+  compareLocations(l1: Location, l2: Location): boolean {
+    return l1.persistentId === l2.persistentId;
   }
 
   public changeLocation(event): void {
@@ -36,8 +43,7 @@ export class WeatherComponent implements OnInit {
   }
 
   public selectLocation(location: Location): void {
-    this.locationSelected = true;
-    this.selectedLocation = location.name;
+    this.selectedLocation = location;
     this.getWeatherReport(location);
   }
 
@@ -63,6 +69,7 @@ export class WeatherComponent implements OnInit {
         }
         this.showReportInstant = weatherReport.current;
         this.showReportWeek = weatherReport.week.days;
+        this.locationSelected = true;
       });
   }
 
@@ -77,7 +84,7 @@ export class WeatherComponent implements OnInit {
         return 'assets/weather/cloudy.svg';
       }
       case 'clear-night': {
-        return 'assets/weather/sunny.svg';
+        return 'assets/weather/moon.svg';
       }
       case 'sleet': {
         return 'assets/weather/sleet.svg';
