@@ -27,6 +27,7 @@ import { ClockComponent } from './Plugins/Clock/Components/clock/clock.component
 import { WeatherComponent } from './Plugins/Weather/Components/weather/weather.component';
 import { CalendarComponent } from './Plugins/Calendar/Components/calendar/calendar.component';
 import { EmailComponent } from './Plugins/Email/Components/email/email.component';
+import { TimerComponent } from './Plugins/Timer/Components/timer/timer.component';
 
 import { LocationRegistryComponent } from './Plugins/Registry/Components/location-registry/location-registry.component';
 import { RegistryContainerComponent } from './Plugins/Registry/Components/registry-container/registry-container.component';
@@ -69,6 +70,11 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: 'timer',
+    component: TimerComponent,
+    canActivate: [AuthGuard]
+  },
+  {
     path: 'weather',
     component: WeatherComponent,
     canActivate: [AuthGuard]
@@ -98,6 +104,7 @@ const routes: Routes = [
     HomeComponent,
     CalendarComponent,
     EmailComponent,
+    TimerComponent,
     LoginComponent,
     LocationRegistryComponent,
     ErrorDialogComponent,
