@@ -24,7 +24,6 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { ClockComponent } from './Plugins/Clock/Components/clock/clock.component';
-import { WeatherComponent } from './Plugins/Weather/Components/weather/weather.component';
 import { EmailComponent } from './Plugins/Email/Components/email/email.component';
 
 import { LocationRegistryComponent } from './Plugins/Registry/Components/location-registry/location-registry.component';
@@ -44,6 +43,8 @@ import { MusicModule } from './Plugins/Music/music.module';
 import { NavigationModule } from './Plugins/Navigation/navigation.module';
 import { HomeComponent } from './Components/Home/Home-Components/home/home.component';
 import { MessagesContainerComponent } from './Components/Home/Home-Components/messages-container/messages-container.component';
+
+import { WeatherModule } from './Plugins/Weather/weather.module';
 
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
@@ -70,11 +71,6 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'weather',
-    component: WeatherComponent,
-    canActivate: [AuthGuard]
-  },
-  {
     path: 'email',
     component: EmailComponent,
     canActivate: [AuthGuard]
@@ -95,7 +91,6 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     ClockComponent,
-    WeatherComponent,
     HomeComponent,
     EmailComponent,
     LoginComponent,
@@ -110,6 +105,7 @@ const routes: Routes = [
     CalendarModule,
     MusicModule,
     NavigationModule,
+    WeatherModule,
     MaterialModule,
     BrowserModule,
     FormsModule,
