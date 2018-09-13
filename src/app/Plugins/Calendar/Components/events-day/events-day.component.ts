@@ -73,6 +73,7 @@ export class EventsDayComponent implements OnInit {
     this.noDate = true;
     this.dateString = ``;
     this.onDate = true;
+    this.events = [];
   }
 
   public refresh(): void {
