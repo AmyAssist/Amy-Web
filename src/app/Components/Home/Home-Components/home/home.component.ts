@@ -33,7 +33,7 @@ export class HomeComponent implements OnInit {
 
     @ViewChild('inputField') inputField: ElementRef;
 
-    @ViewChild('scrollView') private scrollView: ElementRef;
+    @ViewChild('scrollView') private readonly scrollView: ElementRef;
 
     // PlaceHolder for Command input Field
     private readonly commandInputPlaceholder: string = COMMAND_INPUT_PLACEHOLDER[this.options.language];
@@ -56,8 +56,7 @@ export class HomeComponent implements OnInit {
         private readonly options: OptionsService,
         private readonly commandHandler: CommandHandlerService,
         private readonly chat: ChatService,
-        private readonly backendSound: BackendSoundService,
-        private readonly backend: BackendResolver) {
+        private readonly backendSound: BackendSoundService) {
     }
 
 
