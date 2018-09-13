@@ -29,7 +29,7 @@ export class CommandHandlerService {
     // shall the response of the KI backend system be read out loud
     private readResponseState = false;
 
-    private socket: WebSocketSubject<ChatMessage | string> = null;
+    private readonly socket: WebSocketSubject<ChatMessage | string> = null;
 
     constructor(
         private readonly databaseService: DatabaseService,
