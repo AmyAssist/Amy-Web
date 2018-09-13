@@ -19,7 +19,7 @@ export class CommandErrorStateMatcher implements ErrorStateMatcher {
 }
 
 class ChatMessage {
-	msg: string;
+    msg: string;
 }
 
 @Injectable({
@@ -35,23 +35,23 @@ export class CommandHandlerService {
         private readonly databaseService: DatabaseService,
         private readonly chat: ChatService,
         private readonly options: OptionsService,
-		private readonly backendResolver: BackendResolver) {
+        private readonly backendResolver: BackendResolver) {
 
-		this.socket = new WebSocketSubject(this.generateWebSocketURL());
-		this.socket.subscribe((data) => {
-			this.chat.addMessage(AMY_CHAT_NAME[this.options.language], (data as ChatMessage).msg, this.readResponseState);
-		}, (error) => {
-			console.error(`WebSocket error: ${error}`);
-		}, () => {
-			console.error('WebSocket closed');
-		});
+        this.socket = new WebSocketSubject(this.generateWebSocketURL());
+        this.socket.subscribe((data) => {
+            this.chat.addMessage(AMY_CHAT_NAME[this.options.language], (data as ChatMessage).msg, this.readResponseState);
+        }, (error) => {
+            console.error(`WebSocket error: ${error}`);
+        }, () => {
+            console.error('WebSocket closed');
+        });
     }
 
     private generateWebSocketURL(): string {
-    	const restURL = this.backendResolver.backendURL.getValue();
-    	const port = 6661;
-    	return restURL.replace(/http(s)?:\/\/(.*):([0-9]{1,})(\/.*)?/, `ws$1://$2:${port}`);
-	}
+        const restURL = this.backendResolver.backendURL.getValue();
+        const port = 6661;
+        return restURL.replace(/http(s)?:\/\/(.*):([0-9]{1,})(\/.*)?/, `ws$1://$2:${port}`);
+    }
 
 
 
