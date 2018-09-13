@@ -33,6 +33,8 @@ export class HomeComponent implements OnInit {
 
     @ViewChild('inputField') inputField: ElementRef;
 
+    @ViewChild('scrollView') private scrollView: ElementRef;
+
     // PlaceHolder for Command input Field
     private readonly commandInputPlaceholder: string = COMMAND_INPUT_PLACEHOLDER[this.options.language];
 
@@ -55,10 +57,22 @@ export class HomeComponent implements OnInit {
         private readonly commandHandler: CommandHandlerService,
         private readonly chat: ChatService,
         private readonly backendSound: BackendSoundService,
-        private readonly backend: BackendResolver) { }
+        private readonly backend: BackendResolver) {
+    }
 
 
     ngOnInit() {
+        this.chat.stream.subscribe(() => {
+            // Scroll the scrollView to the bottom when a new messages is received
+            // Unfortunately the browser only inserts the HTML element slight later.
+            // Therefore we have to do this awful hack and wait for a few milliseconds until the element is inserted
+            setTimeout(() => {
+                const table = this.scrollView.nativeElement.lastChild;
+                if (table.lastChild && table.lastChild.scrollIntoView) {
+                    table.lastChild.scrollIntoView({block: 'start', behavior: 'smooth'});
+                }
+            }, 10);
+        });
     }
 
     get soundEnabled() {
