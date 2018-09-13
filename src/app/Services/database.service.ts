@@ -24,22 +24,5 @@ export class DatabaseService {
         private readonly http: HttpClient,
         private readonly backend: BackendResolver) { }
 
-    /**
-     * Function to send typed commands to the backend and receive the response
-     */
-    sendCommand(commandData: Command, uuid: string) {
-        let params = new HttpParams();
-        params = params.append('langInput', commandData.value);
-        params = params.append('clientUUID', uuid);
-        return this.http.post(this.backend.backendURL.getValue() + 'chat/input', null, { params });
-    }
-
-    registerChat() {
-        return this.http.post(this.backend.backendURL.getValue() + 'chat/register', null, this.httpOptions);
-    }
-
-    checkForResponses(uuid: string) {
-        return this.http.post(this.backend.backendURL.getValue() + 'chat/response', uuid, this.httpOptions);
-    }
 }
 
