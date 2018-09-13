@@ -25,7 +25,7 @@
     </mat-form-field>
   </div>
   <div class="new-event-field">
-    <mat-checkbox (change)="setAllDay()">All day</mat-checkbox>
+    <mat-checkbox #allDayCheck (change)="setAllDay()">All day</mat-checkbox>
   </div>
 
 
@@ -76,7 +76,7 @@
 
   </div>
   <div class="create-event-button">
-    <button mat-raised-button color="primary" (click)="createEvent(timeValue.value)">Create</button>
+    <button mat-raised-button color="primary" (click)="createEvent(timeValue.value, allDayCheck)">Create</button>
   </div>
   <div class="new-event-field" *ngIf="missingInformation.length !== 0">
     <h4>{{hintString}}</h4>
