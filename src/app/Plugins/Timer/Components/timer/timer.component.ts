@@ -47,19 +47,17 @@ export class TimerComponent implements OnInit {
   setTimer(hour: number, minute: number, second: number) {
     const timer = new Timer();
 
-    if(second > 59){
-      minute = minute + Math.floor(second/60);
-      second = second%60;
+    if (second > 59) {
+      minute = minute + Math.floor(second / 60);
+      second = second % 60;
     }
-    if(minute > 59){
-      hour = hour + Math.floor(minute/60);
-      minute = minute%60;
+    if (minute > 59) {
+      hour = hour + Math.floor(minute / 60);
+      minute = minute % 60;
     }
     timer.timerTime = this.toLocalDateTime(hour, minute, second).toString();
     this.clockService.setNewTimer(timer).subscribe(data => {
       this.getTimers();
-      this.countdownTimer(timer, timer.id.toString());
-      
     });
   }
 
@@ -83,6 +81,7 @@ export class TimerComponent implements OnInit {
 
   activatedeactivateTimer(timer: Timer) {
     this.clockService.activatedeactivateTimer(timer.id, timer).subscribe(data => {
+      timer.active = !timer.active;
       this.getTimers();
     });
   }
@@ -94,32 +93,38 @@ export class TimerComponent implements OnInit {
         splitted[i] = '0' + splitted[i];
       }
     }
-    return splitted[1] + ':' + splitted[2] + ':' + splitted[3];
+    document.getElementById(timer.id.toString()).innerHTML = splitted[1] + ":"
+      + splitted[2] + ":" + splitted[3];
   }
 
 
   countdownTimer(timer: Timer, i: string) {
+    if (!timer.active) {
+      this.displayTimerTime(timer);
+    }
     var countDownDate = new Date(timer.timerTime).getTime();
+    if (timer.active) {
+      var x = setInterval(function () {
+        var now = new Date().getTime();
+        var distance = countDownDate - now;
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-    var x = setInterval(function () {
+        document.getElementById(i).innerHTML = days + " Days, " + hours + ":"
+          + minutes + ":" + seconds;
 
-      var now = new Date().getTime();
-
-      var distance = countDownDate - now;
-
-      var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-      document.getElementById(i).innerHTML = days + " Days, " + hours + ":"
-        + minutes + ":" + seconds;
-
-      if (distance < 0) {
-        clearInterval(x);
-        document.getElementById(i).innerHTML = "00:00:00";
-      }
-    }, 1000);
+        if (distance < 0) {
+          clearInterval(x);
+          document.getElementById(i).innerHTML = "00:00:00";
+        }
+        if (!timer.active) {
+          clearInterval(x);
+          this.displayTimerTime(timer);
+        }
+      }, 1000);
+    }
   }
 }
 

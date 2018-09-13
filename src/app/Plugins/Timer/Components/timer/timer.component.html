@@ -25,8 +25,7 @@
 
               <div class="timer-container">
                 <p mat-line style="display:inline">Timer {{timer.id}}: </p>
-                <h4 id={{timer.id}} style="display:inline" *ngIf="timer.active"> {{countdownTimer(timer, timer.id)}}</h4>
-                <h4 id={{timer.id}} style="display:inline" *ngIf="!timer.active"> {{displayTimerTime(timer)}}</h4>
+                <h4 id={{timer.id}} style="display:inline"> {{countdownTimer(timer, timer.id)}}</h4>
 
                 <div style="margin-inline-end: 100%">
                   <button mat-icon-button *ngIf="timer.active" (click)="activatedeactivateTimer(timer)">
