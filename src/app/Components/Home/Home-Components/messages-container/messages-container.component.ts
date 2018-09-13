@@ -13,7 +13,7 @@ export class MessagesContainerComponent implements OnInit {
 
 
   constructor(
-    protected readonly chat: ChatService,
+    public readonly chat: ChatService,
     private readonly options: OptionsService
   ) { }
 
