@@ -46,6 +46,15 @@ export class TimerComponent implements OnInit {
   */
   setTimer(hour: number, minute: number, second: number) {
     const timer = new Timer();
+
+    if(second > 59){
+      minute = minute + Math.floor(second/60);
+      second = second%60;
+    }
+    if(minute > 59){
+      hour = hour + Math.floor(minute/60);
+      minute = minute%60;
+    }
     timer.timerTime = this.toLocalDateTime(hour, minute, second).toString();
     this.clockService.setNewTimer(timer).subscribe(data => {
       this.getTimers();
