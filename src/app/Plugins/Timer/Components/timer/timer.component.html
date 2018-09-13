@@ -25,14 +25,23 @@
 
               <div class="timer-container">
                 <p mat-line style="display:inline">Timer {{timer.id}}: </p>
-                <h4 id={{timer.id}} style="display:inline"> {{countdownTimer(timer, timer.id)}}</h4>
-              
-                <button mat-icon-button (click)="deleteTimer(timer.id)" style="right:0%">
+                <h4 id={{timer.id}} style="display:inline" *ngIf="timer.active"> {{countdownTimer(timer, timer.id)}}</h4>
+                <h4 id={{timer.id}} style="display:inline" *ngIf="!timer.active"> {{displayTimerTime(timer)}}</h4>
+
+                <div style="margin-inline-end: 100%">
+                  <button mat-icon-button *ngIf="timer.active" (click)="activatedeactivateTimer(timer)">
+                    <mat-icon>pause</mat-icon>
+                  </button>
+                  <button mat-icon-button *ngIf="!timer.active" (click)="activatedeactivateTimer(timer)">
+                    <mat-icon>play_arrow</mat-icon>
+                  </button>
+                <button mat-icon-button (click)="deleteTimer(timer.id)" style="align-content:right">
                     <mat-icon>delete_forever</mat-icon>
                 </button>
+              </div>
                 <mat-divider></mat-divider>
               </div>
-              </mat-list-item>
+            </mat-list-item>
         </mat-list>
     </div>
   </mat-card>

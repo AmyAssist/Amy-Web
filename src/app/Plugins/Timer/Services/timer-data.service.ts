@@ -52,6 +52,14 @@ export class TimerDataService {
     return this.http.get<Timer>(`${this.path}timers/timerNumber`, this.httpOptions).pipe(catchError(this.handleError));
   }
 
+  /*
+    Activate and Deactivate Timers
+  */
+ activatedeactivateTimer(timernumber: number, timerData: Timer): Observable<Timer> {
+  return this.http.post<Timer>(`${this.path}timers/de.activate/${timernumber}`, timerData, this.httpOptions)
+    .pipe(catchError(this.handleError));
+}
+
 
   /*
     Delete Timers
