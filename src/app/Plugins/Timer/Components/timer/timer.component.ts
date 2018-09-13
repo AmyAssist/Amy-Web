@@ -49,7 +49,8 @@ export class TimerComponent implements OnInit {
     timer.timerTime = this.toLocalDateTime(hour, minute, second).toString();
     this.clockService.setNewTimer(timer).subscribe(data => {
       this.getTimers();
-      location.reload();
+      this.countdownTimer(timer, timer.id.toString());
+      
     });
   }
 
@@ -74,7 +75,6 @@ export class TimerComponent implements OnInit {
   activatedeactivateTimer(timer: Timer) {
     this.clockService.activatedeactivateTimer(timer.id, timer).subscribe(data => {
       this.getTimers();
-      location.reload();
     });
   }
 

@@ -4,13 +4,13 @@
     <div>
         <section class="setTimer-section">
             <mat-form-field class="hour-margin">
-              <input matInput type="number" placeholder="Hour" [(ngModel)]="hour">
+              <input matInput type="number" min="0" placeholder="Hour" [(ngModel)]="hour" required>
             </mat-form-field>
             <mat-form-field class="minute-margin">
-              <input matInput type="number" placeholder="Minute" [(ngModel)]="minute">
+              <input matInput type="number" min="0" placeholder="Minute" [(ngModel)]="minute" required>
             </mat-form-field>
             <mat-form-field class="second-margin">
-              <input matInput type="number" placeholder="Second" [(ngModel)]="second">
+              <input matInput type="number" min="0" placeholder="Second" [(ngModel)]="second" required>
             </mat-form-field>
             <button mat-raised-button color="primary" (click)="setTimer(hour, minute, second)">Start Timer</button>
           </section>
