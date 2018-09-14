@@ -193,9 +193,9 @@ export class NewEventComponent implements OnInit {
     if (this.address !== '') {
       this.location += this.address + ', ';
     }
-    if(this.postalCode !== '' || this.city !== ''){
-      this.location += this.postalCode + ' ' + this.city + ', ';
-    }    
+    if (this.postalCode !== '' || this.city !== '') {
+      this.location += `${this.postalCode} ${this.city}, `;
+    }
     if (this.country !== '') {
       this.location += this.country;
     }
