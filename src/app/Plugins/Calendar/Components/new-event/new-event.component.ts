@@ -191,7 +191,7 @@ export class NewEventComponent implements OnInit {
   // this method makes sure that the location is displayed the right way
   formatLocation(): void {
     if (this.address !== '') {
-      this.location += this.address + ', ';
+      this.location += `${this.address}, `;
     }
     if (this.postalCode !== '' || this.city !== '') {
       this.location += `${this.postalCode} ${this.city}, `;
