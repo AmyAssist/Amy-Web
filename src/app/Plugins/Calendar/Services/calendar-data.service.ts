@@ -17,9 +17,15 @@ export class CalendarDataService {
     return this.backend.backendURL.getValue() + 'calendar/';
   }
 
-  httpOptions = {
+  httpPlainTextOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'text/plain'
+    })
+  };
+
+  httpJsonOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json'
     })
   };
 
@@ -31,7 +37,7 @@ export class CalendarDataService {
   }
 
   getEvents(date: string) {
-    return this.http.get<CalendarEvent[]>(`${this.path}eventsAt/${date}`, this.httpOptions).pipe(
+    return this.http.get<CalendarEvent[]>(`${this.path}eventsAt/${date}`, this.httpPlainTextOptions).pipe(
       catchError(this.handleError)).pipe(map((response: CalendarEvent[]) => {
         response.forEach(l => Object.setPrototypeOf(l, new CalendarEvent()));
         return response;
@@ -39,7 +45,7 @@ export class CalendarDataService {
   }
 
   setNewEvent(eventData: CalendarEvent) {
-    return this.http.post<CalendarEvent>(`${this.path}events/set`, eventData, this.httpOptions).pipe(catchError(this.handleError));
+    return this.http.post<CalendarEvent>(`${this.path}events/set`, eventData, this.httpJsonOptions).pipe(catchError(this.handleError));
   }
 
 }
