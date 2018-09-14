@@ -12,7 +12,7 @@
             <mat-datepicker-toggle matSuffix [for]="eventDatePicker"></mat-datepicker-toggle>
             <mat-datepicker #eventDatePicker disabled="false"></mat-datepicker>
         </mat-form-field>
-        <button mat-icon-button *ngIf="onDate" color="primary" (click)="refresh()">
+        <button mat-icon-button *ngIf="onDate" color="primary" (click)="getEvents()">
             <mat-icon>cached</mat-icon>
         </button>
     </div>

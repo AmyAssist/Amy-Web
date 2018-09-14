@@ -75,14 +75,13 @@ export class NewEventComponent implements OnInit {
     }
   }
 
-  setAllDay() {
+  toggleAllDay() {
     this.allDay = !this.allDay;
   }
 
   startDateChoosen(dateValue): void {
     this.startChoosen = true;
-    const makeDate = new Date(dateValue);
-    this.minDate = new Date(makeDate.getFullYear(), makeDate.getMonth(), makeDate.getDate());
+    this.minDate = new Date(dateValue);
   }
 
   endDateChoosen(dateValue): void {
@@ -112,7 +111,7 @@ export class NewEventComponent implements OnInit {
       } else if (this.timeUnit === 'weeks') {
         this.reminderTime = 7 * 24 * 60 * timeValue;
       }
-      const newEvent = CalendarEvent.setEventData(this.title, start.toString(), end.toString(),
+      const newEvent = CalendarEvent.createEvent(this.title, start.toString(), end.toString(),
         this.description, this.location, this.reminderType, this.reminderTime, '', this.allDay);
       this.calendarService.setNewEvent(newEvent).subscribe();
       this.endDate.setDate(this.endDate.getDate() - 1);

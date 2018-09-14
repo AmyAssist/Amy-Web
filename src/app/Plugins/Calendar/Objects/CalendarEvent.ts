@@ -13,7 +13,7 @@ export class CalendarEvent {
 
     constructor() { }
 
-    static setEventData(title: string, start: string, end: string, description: string, location: string,
+    static createEvent(title: string, start: string, end: string, description: string, location: string,
          reminderType: string, reminderTime: number, recurrence: string, allDay: boolean): CalendarEvent {
         const newEvent = new CalendarEvent();
         newEvent.summary = title;
