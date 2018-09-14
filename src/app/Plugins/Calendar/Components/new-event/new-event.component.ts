@@ -92,7 +92,7 @@ export class NewEventComponent implements OnInit {
   createEvent(timeValue, allDayCheck): void {
     this.correctTime = this.checkIfEndAfterStart();
     if (this.correctTime && this.titleChoosen && this.startChoosen && this.endChoosen) {
-      this.createLocation();
+      this.formatLocation();
       if (this.allDay) {
         this.endDate.setDate(this.endDate.getDate() + 1);
       }
@@ -189,42 +189,19 @@ export class NewEventComponent implements OnInit {
   }
 
   // this method makes sure that the location is displayed the right way
-  createLocation(): void {
-    this.location += this.address;
-    if (this.address === '' && this.postalCode === '' && this.city === '') {
+  formatLocation(): void {
+    if (this.address !== '') {
+      this.location += this.address + ', ';
+    }
+    if(this.postalCode !== '' || this.city !== ''){
+      this.location += this.postalCode + ' ' + this.city + ', ';
+    }    
+    if (this.country !== '') {
       this.location += this.country;
-    } else if (this.address === '' && this.postalCode === '') {
-      this.location += this.city;
-      if (this.country !== '') {
-        this.location += ', ' + this.country;
-      }
-    } else if (this.address === '') {
-      this.location += this.postalCode;
-      if (this.city !== '') {
-        this.location += ' ' + this.city;
-        if (this.country !== '') {
-          this.location += ', ' + this.country;
-        }
-      } else if (this.country !== '') {
-        this.location += ', ' + this.country;
-      }
-    } else {
-      if (this.postalCode !== '') {
-        this.location += ', ' + this.postalCode;
-        if (this.city !== '') {
-          this.location += ' ' + this.city;
-        }
-        if (this.country !== '') {
-          this.location += ', ' + this.country;
-        }
-      } else if (this.city !== '') {
-        this.location += ', ' + this.city;
-        if (this.country !== '') {
-          this.location += ', ' + this.country;
-        }
-      } else if (this.country !== '') {
-        this.location += ', ' + this.country;
-      }
+    }
+    this.location = this.location.replace(' ,', ',');
+    if (this.location.substr(-2, 2) === ', ') {
+      this.location = this.location.slice(0, -2);
     }
   }
 
