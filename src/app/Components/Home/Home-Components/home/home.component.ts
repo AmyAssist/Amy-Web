@@ -8,6 +8,7 @@ import { CommandHandlerService } from '../../Home-Services/command-handler.servi
 import { ChatService } from '../../Home-Services/chat.service';
 import { BackendSoundService } from '../../Home-Services/backendSound.service';
 import { BackendResolver } from '../../../../Services/backendResolver.service';
+import {Response} from '../../Home-Objects/response';
 
 
 @Component({
@@ -95,7 +96,7 @@ export class HomeComponent implements OnInit {
      */
     sendTextFieldMessage() {
         if (this.commandTextValue.trim().length > 0) {
-            this.chat.addMessage(USER_CHAT_NAME[this.options.language], this.commandTextValue, false);
+            this.chat.addMessage(USER_CHAT_NAME[this.options.language], new Response(this.commandTextValue, null, null), false);
             this.commandHandler.sendCommand(this.commandTextValue, false);
         }
         this.commandTextValue = '';
@@ -108,7 +109,7 @@ export class HomeComponent implements OnInit {
      */
     private srResponse(command: string) {
         if (this.srState === 'active') {
-            this.chat.addMessage(USER_CHAT_NAME[this.options.language], command, false);
+            this.chat.addMessage(USER_CHAT_NAME[this.options.language], new Response(command, null, null), false);
             this.commandHandler.sendCommand(command, true);
         }
     }

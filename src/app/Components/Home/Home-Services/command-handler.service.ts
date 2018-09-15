@@ -6,10 +6,8 @@ import {ChatService} from './chat.service';
 import {BackendResolver} from '../../../Services/backendResolver.service';
 import {WebSocketSubject} from 'rxjs/webSocket';
 import {HttpClient} from '@angular/common/http';
+import {Response} from '../Home-Objects/response';
 
-class ChatMessage {
-    msg: string;
-}
 
 @Injectable({
     providedIn: 'root'
@@ -18,7 +16,7 @@ export class CommandHandlerService {
     // shall the response of the KI backend system be read out loud
     private readResponseState = false;
 
-    private socket: WebSocketSubject<ChatMessage | string> = null;
+    private socket: WebSocketSubject<Response | string> = null;
 
     constructor(
         private readonly chat: ChatService,
@@ -37,7 +35,7 @@ export class CommandHandlerService {
                 }
                 this.socket = new WebSocketSubject(url);
                 this.socket.subscribe((data) => {
-                    this.chat.addMessage(AMY_CHAT_NAME[this.options.language], (data as ChatMessage).msg, this.readResponseState);
+                    this.chat.addMessage(AMY_CHAT_NAME[this.options.language], (data as Response), this.readResponseState);
                 }, (error) => {
                     console.error(`WebSocket error: ${error}`);
                 }, () => {
