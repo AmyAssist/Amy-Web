@@ -1,12 +1,15 @@
 .alarmSet-container {
+    background: white;
     padding: 16px;
 }
 
 .alarmEdit-container {
+  background: white;
   margin-top: 16px;
   padding: 16px;
 }
 
 .alarmList-container {
+  background: white;
   margin-top: 16px;
 }
