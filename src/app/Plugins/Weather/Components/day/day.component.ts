@@ -57,10 +57,6 @@ export class DayComponent {
         return moment(matches[1]).tz(matches[2]);
     }
 
-    convertTime(stamp: string): string {
-        return this.getDateFromZonedDateTime(stamp).format('HH:mm:ss');
-    }
-
     convertDateTime(stamp: string): string {
         return this.getDateFromZonedDateTime(stamp).format('dddd, MMMM DD');
     }

@@ -74,6 +74,8 @@ export class WeatherComponent implements OnInit {
         weatherReport.current.precipIconSrc = this.getWeatherIcon(weatherReport.current.precipType);
         weatherReport.current.precipProbability = Math.round(weatherReport.current.precipProbability * 100);
         weatherReport.current.time = this.convertDateTime(weatherReport.current.timestamp, weatherReport.timezone);
+        weatherReport.current.sunriseTime = this.convertTime(parseInt(weatherReport.week.days[0].sunriseTime, 10), weatherReport.timezone);
+        weatherReport.current.sunsetTime = this.convertTime(parseInt(weatherReport.week.days[0].sunsetTime, 10), weatherReport.timezone);
 
         this.showReportInstant = weatherReport.current;
         this.showReportWeek = weatherReport.week.days;
@@ -118,10 +120,11 @@ export class WeatherComponent implements OnInit {
 
 
   convertTime(stamp: number, timezone: string): string {
-    return moment(stamp * 1000).tz(timezone).format('HH:mm:ss');
+    return moment(stamp * 1000).tz(timezone).format('HH:mm');
   }
 
   convertDateTime(stamp: number, timezone: string): string {
     return moment(stamp * 1000).tz(timezone).format('dddd, MMMM DD');
   }
+
 }
