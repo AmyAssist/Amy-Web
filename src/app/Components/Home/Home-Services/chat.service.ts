@@ -28,10 +28,5 @@ export class ChatService {
     if (readLoud) {
       this.ttsService.speak(response.text);
     }
-
-  }
-
-  getMessages() {
-    return this.messages;
   }
 }
