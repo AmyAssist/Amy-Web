@@ -114,11 +114,10 @@ export class NewEventComponent implements OnInit {
       }
       const newEvent = CalendarEvent.createEvent(this.title, start.toString(), end.toString(),
         this.description, this.location, this.reminderType, this.reminderTime, '', this.allDay);
-      this.calendarService.setNewEvent(newEvent).subscribe();
+      this.calendarService.setNewEvent(newEvent);
       this.endDate.setDate(this.endDate.getDate() - 1);
       this.resetValues();
       allDayCheck.checked = false;
-      this.calendarService.updateEvents();
     } else {
       this.hintMessage();
     }

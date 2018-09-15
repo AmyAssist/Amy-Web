@@ -58,7 +58,10 @@ export class CalendarDataService {
   }
 
   setSelectedDate(date: string): void {
-    this.selectedDate = date;
+    if (this.selectedDate !== date) {
+      this.selectedDate = date;
+      this.updateEvents();
+    }
   }
 
   getSelectedDate(): string {
@@ -70,7 +73,8 @@ export class CalendarDataService {
   }
 
   setNewEvent(eventData: CalendarEvent) {
-    return this.http.post<CalendarEvent>(`${this.path}events/set`, eventData, this.httpJsonOptions).pipe(catchError(this.handleError));
+    return this.http.post<CalendarEvent>(`${this.path}events/set`, eventData, this.httpJsonOptions)
+      .pipe(catchError(this.handleError)).subscribe(() => this.updateEvents());
   }
 
 }
