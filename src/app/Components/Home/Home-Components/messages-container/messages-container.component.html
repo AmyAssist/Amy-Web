@@ -3,6 +3,9 @@
     <div class="speech-bubble response">
       <div class="text">
           <p class="mat-body-1">{{message.response.text}}</p>
+          <p *ngIf="message.response.link === 'app-weather-day'">
+            <app-weather-day [dayReport]="message.response.attachment"></app-weather-day>
+          </p>
       </div>
     </div>
   </div>
