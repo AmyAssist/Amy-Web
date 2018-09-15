@@ -1,17 +1,23 @@
-.fromCol {
-    width: 35%;
+#fromCol {
+    width: 30%;
     margin: auto;
     padding-left: 1%;
+    word-wrap: break-word;
 }
 
-.subjectCol {
-    width: 50%;
+#subjectCol {
+    width: 55%;
     margin: auto;
-    padding-left: 1em;
-    padding-right: 1em;
 }
 
-.dateCol {
+#subjectContent {
+    margin-left: 1em;
+    margin-right: 1em; 
+    display: block;
+    word-wrap: break-word;
+}
+
+#dateCol {
     width: 15%;
     margin: auto;
 }
@@ -26,6 +32,6 @@
 }
 
 .importantMail::before {
-    content: '★ ';
+    content: '★';
     color: gold;
 }
