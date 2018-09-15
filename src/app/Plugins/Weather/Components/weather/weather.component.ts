@@ -75,21 +75,12 @@ export class WeatherComponent implements OnInit {
         weatherReport.current.precipProbability = Math.round(weatherReport.current.precipProbability * 100);
         weatherReport.current.time = this.convertDateTime(weatherReport.current.timestamp, weatherReport.timezone);
 
-        for (const weatherReportWeek of weatherReport.week.days) {
-          weatherReportWeek.iconSrc = this.getWeatherIcon(weatherReportWeek.iconType);
-          weatherReportWeek.precipIconSrc = this.getWeatherIcon(weatherReportWeek.precipType);
-          weatherReportWeek.temperatureMax = Math.round(weatherReportWeek.temperatureMax);
-          weatherReportWeek.temperatureMin = Math.round(weatherReportWeek.temperatureMin);
-          weatherReportWeek.sunriseTime = this.convertTime(parseInt(weatherReportWeek.sunriseTime, 10), weatherReport.timezone);
-          weatherReportWeek.sunsetTime = this.convertTime(parseInt(weatherReportWeek.sunsetTime, 10), weatherReport.timezone);
-          weatherReportWeek.precipProbability = Math.round(weatherReportWeek.precipProbability * 100);
-          weatherReportWeek.time = this.convertDateTime(weatherReportWeek.timestamp, weatherReport.timezone);
-        }
         this.showReportInstant = weatherReport.current;
         this.showReportWeek = weatherReport.week.days;
         this.locationSelected = true;
       });
   }
+
 
   getWeatherIcon(iconType: WeatherReportDay['iconType']): string {
     switch (iconType) {
@@ -124,6 +115,7 @@ export class WeatherComponent implements OnInit {
       }
     }
   }
+
 
   convertTime(stamp: number, timezone: string): string {
     return moment(stamp * 1000).tz(timezone).format('HH:mm:ss');

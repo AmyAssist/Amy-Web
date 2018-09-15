@@ -1,0 +1,37 @@
+.flex_layout {
+    margin-top: 16px;
+    margin-bottom: 16px;
+    flex-basis: 25%;
+}
+
+.weather_instant_layout {
+    width: 100%;
+    margin-top: 8px;
+}
+
+
+.weather_instant_icon {
+    height: 120px;
+    width: 120px;
+    object-fit: contain;
+}
+
+.weather_instant_info_icon {
+    height: 30px;
+    width: 30px;
+}
+
+.weather_week_icon {
+    height: 60px;
+    width: 60px;
+    object-fit: contain;
+}
+
+.weather_week_info_icon {
+    height: 20px;
+    width: 20px;
+    object-fit: contain;
+}
+
+.text.color_red { color: rgb(255, 0, 0);}
+.text.color_blue { color: rgb(0, 0, 255); }
