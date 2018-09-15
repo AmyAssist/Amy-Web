@@ -1,7 +1,7 @@
 import { Injectable, OnInit } from '@angular/core';
 import { DatabaseService } from '../../../Services/database.service';
 import { Command } from '../../../Objects/command';
-import { interval } from 'rxjs';
+import {interval, Observable} from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 
 import { ErrorStateMatcher } from '@angular/material/core';
@@ -10,6 +10,7 @@ import { OptionsService } from '../../../Services/options.service';
 import { ChatService } from './chat.service';
 import {BackendResolver} from '../../../Services/backendResolver.service';
 import {WebSocketSubject} from 'rxjs/webSocket';
+import {HttpClient} from '@angular/common/http';
 
 export class CommandErrorStateMatcher implements ErrorStateMatcher {
     error = false;
@@ -29,30 +30,32 @@ export class CommandHandlerService {
     // shall the response of the KI backend system be read out loud
     private readResponseState = false;
 
-    private readonly socket: WebSocketSubject<ChatMessage | string> = null;
+    private socket: WebSocketSubject<ChatMessage | string> = null;
 
     constructor(
         private readonly databaseService: DatabaseService,
         private readonly chat: ChatService,
         private readonly options: OptionsService,
-        private readonly backendResolver: BackendResolver) {
+        private readonly backendResolver: BackendResolver,
+        private readonly http: HttpClient) {
 
-        this.socket = new WebSocketSubject(this.generateWebSocketURL());
-        this.socket.subscribe((data) => {
-            this.chat.addMessage(AMY_CHAT_NAME[this.options.language], (data as ChatMessage).msg, this.readResponseState);
-        }, (error) => {
-            console.error(`WebSocket error: ${error}`);
-        }, () => {
-            console.error('WebSocket closed');
+        this.getWebSocketURL().subscribe(url => {
+            this.socket = new WebSocketSubject(url);
+            this.socket.subscribe((data) => {
+                this.chat.addMessage(AMY_CHAT_NAME[this.options.language], (data as ChatMessage).msg, this.readResponseState);
+            }, (error) => {
+                console.error(`WebSocket error: ${error}`);
+            }, () => {
+                console.error('WebSocket closed');
+            });
+        }, error => {
+            console.log('Error getting websocket url from server');
         });
     }
 
-    private generateWebSocketURL(): string {
-        const restURL = this.backendResolver.backendURL.getValue();
-        const port = 6661;
-        return restURL.replace(/http(s)?:\/\/(.*):([0-9]{1,})(\/.*)?/, `ws$1://$2:${port}`);
+    private getWebSocketURL(): Observable<string> {
+        return this.http.get<string>(this.backendResolver.backendURL.getValue() + 'chat/url', { responseType: 'text' });
     }
-
 
 
     /**
