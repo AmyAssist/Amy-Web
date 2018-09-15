@@ -24,7 +24,6 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { ClockComponent } from './Plugins/Clock/Components/clock/clock.component';
-import { CalendarComponent } from './Plugins/Calendar/Components/calendar/calendar.component';
 import { EmailComponent } from './Plugins/Email/Components/email/email.component';
 
 import { LocationRegistryComponent } from './Plugins/Registry/Components/location-registry/location-registry.component';
@@ -49,6 +48,8 @@ import { WeatherModule } from './Plugins/Weather/weather.module';
 
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+
+import { CalendarModule } from './Plugins/Calendar/calendar.module';
 
 /*
     Routing of the components to the respective links
@@ -91,7 +92,6 @@ const routes: Routes = [
     AppComponent,
     ClockComponent,
     HomeComponent,
-    CalendarComponent,
     EmailComponent,
     LoginComponent,
     LocationRegistryComponent,
@@ -102,6 +102,7 @@ const routes: Routes = [
     MessageListComponent,
   ],
   imports: [
+    CalendarModule,
     MusicModule,
     NavigationModule,
     WeatherModule,

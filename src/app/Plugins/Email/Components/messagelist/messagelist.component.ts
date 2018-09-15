@@ -44,4 +44,16 @@ export class MessageListComponent implements OnInit {
     tabChanged(event) {
         this.showAll = event.index === 0;
     }
+
+    getSentDate(message: MessageDTO): string {
+        const sentDate = message.sentDate;
+        const splitIndex = sentDate.indexOf('T');
+        return sentDate.substring(0, splitIndex);
+    }
+
+    getSentTime(message: MessageDTO): string {
+        const sentDate = message.sentDate;
+        const splitIndex = sentDate.indexOf('T');
+        return sentDate.substring(splitIndex + 1, splitIndex + 6);
+    }
 }
