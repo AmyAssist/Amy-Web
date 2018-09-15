@@ -1,0 +1,14 @@
+/* Used by Navigation-Plugin to show date-time-picker */
+@import "~ng-pick-datetime/assets/style/picker.min.css";
+
+.calendar-background {
+    background: #fff;
+}
+
+.new-event-field {
+    padding: 8px;    
+}
+
+.create-event-button {
+    padding: 8px;
+}

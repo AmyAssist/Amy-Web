@@ -1,0 +1,87 @@
+<div class="mat-elevation-z2 calendar-background">
+  <mat-form-field class="new-event-field">
+    <input matInput [(ngModel)]="title" placeholder="Title" (change)="setTitle()">
+  </mat-form-field>
+
+
+  <div class="new-event-field">
+    <mat-form-field>
+      <input matInput #eventStart [matDatepicker]="eventStartPicker" placeholder="Start" disabled (dateChange)="startDateChoosen(eventStart.value)">
+      <mat-datepicker-toggle matSuffix [for]="eventStartPicker"></mat-datepicker-toggle>
+      <mat-datepicker #eventStartPicker disabled="false"></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field *ngIf="!allDay">
+      <input matInput #startTime type="time" [(ngModel)]="startTime2" (change)="setStart()">
+    </mat-form-field>
+  </div>
+  <div class="new-event-field">
+    <mat-form-field>
+      <input matInput #eventEnd [min]="minDate" [matDatepicker]="eventEndPicker" placeholder="End" disabled (dateChange)="endDateChoosen(eventEnd.value)">
+      <mat-datepicker-toggle matSuffix [for]="eventEndPicker"></mat-datepicker-toggle>
+      <mat-datepicker #eventEndPicker disabled="false"></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field *ngIf="!allDay">
+      <input matInput #endTime type="time" [(ngModel)]="endTime2" (change)="setEnd()">
+    </mat-form-field>
+  </div>
+  <div class="new-event-field">
+    <mat-checkbox #allDayCheck (change)="toggleAllDay()">All day</mat-checkbox>
+  </div>
+
+
+
+  <div class="new-event-field">
+    <mat-form-field>
+      <textarea matInput [(ngModel)]="description" placeholder="Description"></textarea>
+    </mat-form-field>
+  </div>
+
+  <div class="new-event-field">
+    <mat-form-field>
+      <textarea matInput [(ngModel)]="address" placeholder="Address"></textarea>
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field class="new-event-field">
+      <input matInput [(ngModel)]="city" placeholder="City">
+    </mat-form-field>
+    <mat-form-field class="new-event-field">
+      <input matInput [(ngModel)]="country" placeholder="Country">
+    </mat-form-field>
+    <mat-form-field class="new-event-field">
+      <input matInput #postalCodeLength [(ngModel)]="postalCode" maxlength="5" placeholder="Postal Code">
+      <mat-hint align="end">{{postalCodeLength.value.length}} / 5</mat-hint>
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field class="new-event-field">
+      <mat-select [(value)]="reminderType" placeholder="Notification">
+        <mat-option value="email">Email</mat-option>
+        <mat-option value="popup">Popup</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="new-event-field">
+      <input matInput #timeValue type="number" min="0" value="30">
+    </mat-form-field>
+    <mat-form-field class="new-event-field">
+      <mat-select [(value)]="timeUnit">
+        <mat-option value="minutes">Minutes</mat-option>
+        <mat-option value="hours">Hours</mat-option>
+        <mat-option value="days">Days</mat-option>
+        <mat-option value="weeks">Weeks</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+  </div>
+  <div class="create-event-button">
+    <button mat-raised-button color="primary" (click)="createEvent(timeValue.value, allDayCheck)">Create</button>
+  </div>
+  <div class="new-event-field" *ngIf="missingInformation.length !== 0">
+    <h4>{{hintString}}</h4>
+    <p *ngFor="let item of missingInformation" mat-line>{{item}}</p>
+  </div>
+
+
+</div>
