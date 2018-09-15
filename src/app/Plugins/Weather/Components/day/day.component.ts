@@ -49,11 +49,19 @@ export class DayComponent {
         return Math.round(x);
     }
 
-    convertTime(stamp: number, timezone: string): string {
-        return moment(stamp * 1000).tz(timezone).format('HH:mm:ss');
+    private getDateFromZonedDateTime(stamp: string) {
+        // Regex used to extract date and timezone from ZonedDateTime string
+        const regex = /(.*)\[(.*)\]/;
+        const matches = regex.exec(stamp);
+
+        return moment(matches[1]).tz(matches[2]);
     }
 
-    convertDateTime(stamp: number, timezone: string): string {
-        return moment(stamp * 1000).tz(timezone).format('dddd, MMMM DD');
+    convertTime(stamp: string): string {
+        return this.getDateFromZonedDateTime(stamp).format('HH:mm:ss');
+    }
+
+    convertDateTime(stamp: string): string {
+        return this.getDateFromZonedDateTime(stamp).format('dddd, MMMM DD');
     }
 }
