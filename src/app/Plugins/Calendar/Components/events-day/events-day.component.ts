@@ -17,11 +17,8 @@ import { MatInput } from '@angular/material';
 })
 export class EventsDayComponent implements OnInit {
 
-  events: CalendarEvent[];
-  onDate: boolean;
-  noDate: boolean;
-  dateChoosen: boolean;
-  selectedDate: string;
+  datePickerActive: boolean;
+  noDatePicked: boolean;
   dateString: string;
 
   @ViewChild('eventDate', {
@@ -31,23 +28,26 @@ export class EventsDayComponent implements OnInit {
   constructor(private readonly calendarService: CalendarDataService) { }
 
   ngOnInit() {
-    this.events = [];
+    this.calendarService.resetEvents();
     this.chosenDate('today');
+    this.calendarService.updateEvents();
+  }
+
+  get events(): CalendarEvent[] {
+    return this.calendarService.getEvents();
   }
 
   public chosenDate(eventDate: string): void {
-    this.noDate = false;
+    this.noDatePicked = false;
     this.dateString = eventDate;
     if (eventDate === 'today' || eventDate === 'tomorrow') {
       this.getDate(eventDate);
-      this.dateChoosen = false;
-      this.onDate = false;
+      this.datePickerActive = false;
     } else {
-      this.dateChoosen = true;
       const makeDate = new Date(eventDate);
-      this.selectedDate = new LocalDateTime(makeDate.getFullYear(), makeDate.getMonth(), makeDate.getDate(), 0, 0).toString();
+      this.calendarService.setSelectedDate(new LocalDateTime(makeDate.getFullYear(), makeDate.getMonth(), makeDate.getDate(), 0, 0).toString());
     }
-    this.getEvents();
+    this.calendarService.updateEvents();
   }
 
   public getDate(eventDate: string) {
@@ -56,24 +56,17 @@ export class EventsDayComponent implements OnInit {
     if (eventDate === 'tomorrow') {
       currentDate.setDate(currentDate.getDate() + 1);
     }
-    this.selectedDate = currentDate.toISOString().slice(0, -1);
+    this.calendarService.setSelectedDate(currentDate.toISOString().slice(0, -1));
   }
 
-  public getEvents(): void {
-    this.calendarService.getEvents(this.selectedDate).subscribe((data: CalendarEvent[]) => {
-      this.events = [...data];
-    });
-  }
-
-  public getEventsOnDate(): void {
+  public toggleDatePicker(): void {
+    this.dateString = '';
     if (this.eventDate) {
       this.eventDate.value = ``;
     }
-    this.dateChoosen = false;
-    this.noDate = true;
-    this.dateString = ``;
-    this.onDate = true;
-    this.events = [];
+    this.noDatePicked = true;
+    this.datePickerActive = true;
+    this.calendarService.resetEvents();
   }
 
   public getTime(event): string {
@@ -81,14 +74,12 @@ export class EventsDayComponent implements OnInit {
     const startMinute = this.formatTime(event.getStartDate().getMinutes());
     const endHour = this.formatTime(event.getEndDate().getHours());
     const endMinute = this.formatTime(event.getEndDate().getMinutes());
-    const start = `${startHour}:${startMinute}`;
-    const end = `${endHour}:${endMinute}`;
-    return `${start} - ${end}`;
+    return `${startHour}:${startMinute} - ${endHour}:${endMinute}`;
   }
 
   formatTime(time): string {
     if (time < 10) {
-      return '0' + time;
+      return `0${time}`;
     }
     return time;
   }

@@ -13,6 +13,9 @@ import { BackendResolver } from '../../../Services/backendResolver.service';
 })
 export class CalendarDataService {
 
+  events: CalendarEvent[];
+  selectedDate: string;
+
   get path() {
     return this.backend.backendURL.getValue() + 'calendar/';
   }
@@ -36,12 +39,34 @@ export class CalendarDataService {
   constructor(private readonly backend: BackendResolver, private readonly http: HttpClient) {
   }
 
-  getEvents(date: string) {
-    return this.http.get<CalendarEvent[]>(`${this.path}eventsAt/${date}`, this.httpPlainTextOptions).pipe(
-      catchError(this.handleError)).pipe(map((response: CalendarEvent[]) => {
-        response.forEach(l => Object.setPrototypeOf(l, new CalendarEvent()));
-        return response;
-      }));
+  getEvents(): CalendarEvent[] {
+    return this.events;
+  }
+
+  updateEvents(): void {
+    if (this.selectedDate !== '') {
+      this.http.get<CalendarEvent[]>(`${this.path}eventsAt/${this.selectedDate}`, this.httpPlainTextOptions).pipe(
+        catchError(this.handleError)).pipe(map((response: CalendarEvent[]) => {
+          response.forEach(l => Object.setPrototypeOf(l, new CalendarEvent()));
+          return response;
+        })).subscribe((data: CalendarEvent[]) => {
+          this.events = [...data];
+        });
+    } else {
+      this.resetEvents();
+    }
+  }
+
+  setSelectedDate(date: string): void {
+    this.selectedDate = date;
+  }
+
+  getSelectedDate(): string {
+    return this.selectedDate;
+  }
+
+  resetEvents(): void {
+    this.events = [];
   }
 
   setNewEvent(eventData: CalendarEvent) {

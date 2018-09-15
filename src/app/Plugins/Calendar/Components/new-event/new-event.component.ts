@@ -90,6 +90,7 @@ export class NewEventComponent implements OnInit {
   }
 
   createEvent(timeValue, allDayCheck): void {
+    console.log(this.calendarService.getSelectedDate() + ' - ' + this.calendarService.getEvents().length);
     this.correctTime = this.checkIfEndAfterStart();
     if (this.correctTime && this.titleChoosen && this.startChoosen && this.endChoosen) {
       this.formatLocation();
@@ -117,6 +118,7 @@ export class NewEventComponent implements OnInit {
       this.endDate.setDate(this.endDate.getDate() - 1);
       this.resetValues();
       allDayCheck.checked = false;
+      this.calendarService.updateEvents();
     } else {
       this.hintMessage();
     }
