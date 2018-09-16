@@ -11,13 +11,6 @@ import {BackendResolver} from '../../../Services/backendResolver.service';
 import {WebSocketSubject} from 'rxjs/webSocket';
 import {HttpClient} from '@angular/common/http';
 
-export class CommandErrorStateMatcher implements ErrorStateMatcher {
-    error = false;
-    isErrorState(control, form) {
-        return this.error;
-    }
-}
-
 class ChatMessage {
     msg: string;
 }
