@@ -13,7 +13,8 @@ import {
   MatTabsModule,
   MatToolbarModule,
   MatAutocompleteModule,
-  MatProgressSpinnerModule
+  MatProgressSpinnerModule,
+  MatSnackBar,
 } from '@angular/material';
 
 import { MatIconModule } from '@angular/material/icon';
@@ -50,6 +51,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 
 import { CalendarModule } from './Plugins/Calendar/calendar.module';
+import { WorkerUpdateService } from './Services/WorkerUpdateService';
 
 /*
     Routing of the components to the respective links
@@ -130,7 +132,7 @@ const routes: Routes = [
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   exports: [RouterModule],
-  providers: [AuthService, AuthGuard],
+  providers: [AuthService, AuthGuard, MatSnackBar],
   entryComponents: [ErrorDialogComponent],
   bootstrap: [AppComponent]
 })
