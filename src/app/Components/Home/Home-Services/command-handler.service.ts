@@ -1,12 +1,8 @@
-import { Injectable, OnInit } from '@angular/core';
-import { Command } from '../../../Objects/command';
-import {interval, Observable} from 'rxjs';
-import { mergeMap } from 'rxjs/operators';
-
-import { ErrorStateMatcher } from '@angular/material/core';
-import { AMY_CHAT_NAME, AMY_UNKNOWN_COMMAND_RESPONSE } from '../../../Constants/strings';
-import { OptionsService } from '../../../Services/options.service';
-import { ChatService } from './chat.service';
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs';
+import {AMY_CHAT_NAME} from '../../../Constants/strings';
+import {OptionsService} from '../../../Services/options.service';
+import {ChatService} from './chat.service';
 import {BackendResolver} from '../../../Services/backendResolver.service';
 import {WebSocketSubject} from 'rxjs/webSocket';
 import {HttpClient} from '@angular/common/http';
