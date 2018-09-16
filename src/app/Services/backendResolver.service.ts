@@ -20,7 +20,7 @@ export class BackendResolver {
      * You can subscibe to changes of this value.
      * @returns a BehaviorSubject representing the backend URL over time
      */
-    get backendURL() {
+    get backendURL(): BehaviorSubject<string> {
         return this.backendPath;
     }
 

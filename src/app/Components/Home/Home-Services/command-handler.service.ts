@@ -39,22 +39,31 @@ export class CommandHandlerService {
         private readonly backendResolver: BackendResolver,
         private readonly http: HttpClient) {
 
-        this.getWebSocketURL().subscribe(url => {
-            this.socket = new WebSocketSubject(url);
-            this.socket.subscribe((data) => {
-                this.chat.addMessage(AMY_CHAT_NAME[this.options.language], (data as ChatMessage).msg, this.readResponseState);
-            }, (error) => {
-                console.error(`WebSocket error: ${error}`);
-            }, () => {
-                console.error('WebSocket closed');
+        // Get a stream of backend URLs (the user may change the backend URL)
+        this.backendResolver.backendURL.subscribe(backendURL => {
+            // Get websocket stream URL via http rest api
+            this.getWebSocketURL(backendURL).subscribe(url => {
+                // start websocket stream
+                if (this.socket != null) {
+                    // Close old websocket connection
+                    this.socket.unsubscribe();
+                }
+                this.socket = new WebSocketSubject(url);
+                this.socket.subscribe((data) => {
+                    this.chat.addMessage(AMY_CHAT_NAME[this.options.language], (data as ChatMessage).msg, this.readResponseState);
+                }, (error) => {
+                    console.error(`WebSocket error: ${error}`);
+                }, () => {
+                    console.warn('WebSocket closed');
+                });
+            }, error => {
+                console.error('Error getting websocket url from server');
             });
-        }, error => {
-            console.log('Error getting websocket url from server');
         });
     }
 
-    private getWebSocketURL(): Observable<string> {
-        return this.http.get<string>(this.backendResolver.backendURL.getValue() + 'chat/url', { responseType: 'text' });
+    private getWebSocketURL(backendURL: string): Observable<string> {
+        return this.http.get(backendURL + 'chat/url', { responseType: 'text' });
     }
 
 
