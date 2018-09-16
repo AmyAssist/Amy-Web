@@ -34,4 +34,7 @@ COPY --from=source .docker/.htaccess /usr/local/apache2/htdocs/
 
 COPY --from=builder /dist/ /usr/local/apache2/htdocs/
 
+RUN chmod -R g+r /usr/local/apache2/htdocs
+RUN chgrp -R daemon /usr/local/apache2/htdocs
+
 CMD dockerize -template /etc/dockerize-templates/httpd.conf.tmpl:/usr/local/apache2/conf/httpd.conf httpd-foreground
