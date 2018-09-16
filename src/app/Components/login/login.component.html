@@ -3,7 +3,7 @@
   <mat-card-content fxLayout="column" fxLayoutAlign="start start">
     <mat-form-field class="form-full-width">
       <mat-label>Backend URL of Amy-Core</mat-label>
-      <input matInput [(ngModel)]="inputText" [formControl]="urlFormControl" type="url" id="url" placeholder="http://localhost:8080/rest/" required>
+      <input matInput [formControl]="urlFormControl" type="url" id="url" placeholder="http://localhost:8080/rest/" required>
       <mat-error *ngIf="urlFormControl.hasError('url') && !urlFormControl.hasError('required')">
         Please enter a valid url
       </mat-error>
