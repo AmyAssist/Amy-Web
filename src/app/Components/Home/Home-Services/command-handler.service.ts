@@ -1,5 +1,4 @@
 import { Injectable, OnInit } from '@angular/core';
-import { DatabaseService } from '../../../Services/database.service';
 import { Command } from '../../../Objects/command';
 import {interval, Observable} from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
@@ -33,7 +32,6 @@ export class CommandHandlerService {
     private socket: WebSocketSubject<ChatMessage | string> = null;
 
     constructor(
-        private readonly databaseService: DatabaseService,
         private readonly chat: ChatService,
         private readonly options: OptionsService,
         private readonly backendResolver: BackendResolver,
