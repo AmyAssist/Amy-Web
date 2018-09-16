@@ -2,28 +2,24 @@
     <div class="calendar-date-toolbar">
         <button mat-raised-button color="basic" (click)="chosenDate('today')">Today</button>
         <button mat-raised-button color="basic" (click)="chosenDate('tomorrow')">Tomorrow</button>
-        <button mat-raised-button color="basic" (click)="getEventsOnDate()">Other Day</button>
-        <button mat-icon-button *ngIf="!onDate" color="primary" (click)="getEvents()">
-            <mat-icon>cached</mat-icon>
-        </button>
+        <button mat-raised-button color="basic" (click)="toggleDatePicker()">Other Day</button>
 
-        <mat-form-field *ngIf="onDate" class="calendar-date-picker">
+        <mat-form-field *ngIf="datePickerActive" class="calendar-date-picker">
             <input matInput #eventDate [matDatepicker]="eventDatePicker" placeholder="Choose a date" disabled (dateChange)="chosenDate(eventDate.value)">
             <mat-datepicker-toggle matSuffix [for]="eventDatePicker"></mat-datepicker-toggle>
             <mat-datepicker #eventDatePicker disabled="false"></mat-datepicker>
         </mat-form-field>
-        <button mat-icon-button *ngIf="onDate" color="primary" (click)="getEvents()">
-            <mat-icon>cached</mat-icon>
-        </button>
     </div>
     <mat-divider></mat-divider>
     <mat-list>
         <div *ngIf="events.length === 0">
-            <mat-list-item>
+            <mat-list-item *ngIf="!datePickerActive">
                 <p *ngIf="dateString === 'today'" mat-line>You have no events today.</p>
                 <p *ngIf="dateString === 'tomorrow'" mat-line>You have no events tomorrow.</p>
-                <p *ngIf="noDate" mat-line>Please choose a date.</p>
-                <p *ngIf="dateChoosen" mat-line>You have no events on the {{dateString}}.</p>
+            </mat-list-item>
+            <mat-list-item *ngIf="datePickerActive">
+                <p *ngIf="noDatePicked" mat-line>Please choose a date.</p>
+                <p *ngIf="!noDatePicked" mat-line>You have no events on the {{dateString}}.</p>
             </mat-list-item>
         </div>
         <mat-list-item *ngFor="let event of events">
