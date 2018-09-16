@@ -1,4 +1,4 @@
-<p *ngIf='!fetchingMails && fetchingError'>There was an error fetching messages from the backend</p>
+<p *ngIf='!fetchingMails && fetchingError' class="mat-body-1">There was an error fetching messages from the backend</p>
 
 <mat-spinner *ngIf=fetchingMails [diameter]=30></mat-spinner>
 
@@ -14,21 +14,21 @@
 <div *ngFor="let message of messages; let i = index" style="margin-top: 1em">
     <div *ngIf='showAll || message.important'>
         <div fxLayout="row">
-            <div class="fromCol">
+            <div id="fromCol">
                 <span class="mat-h3" [ngClass]="{'unseenMail': !message.seen, 'importantMail': message.important}">
                     {{message.from}}
                 </span>
             </div>
 
-            <div class="subjectCol">
-                <span class="mat-body-1">
+            <div id="subjectCol">
+                <span id="subjectContent" class="mat-body-1">
                     <strong *ngIf=!message.seen>{{message.subject}}</strong>
                     <span *ngIf=message.seen>{{message.subject}}</span>
                 </span>
             </div>
 
-            <div class="dateCol">
-                <div fxLayout="column" class="mat-caption">
+            <div id="dateCol">
+                <div class="mat-caption" fxLayout="column">
                     <span>{{getSentDate(message)}}</span>
                     <span>{{getSentTime(message)}}</span>
                 </div>

@@ -1,3 +1,12 @@
+#main-content {
+    padding: 1em;
+    background: white;
+}
+
+#loginContainer {
+    margin: 1em;
+}
+
 .header {
     margin: 10px 0 30px;
 }
