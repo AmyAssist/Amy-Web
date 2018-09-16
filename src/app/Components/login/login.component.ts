@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
       this.myRoute.navigate(['home']);
     } else {
       this.webAppServerInfoService.getWebAppServerInfo().subscribe((data) => {
-        if(this.urlFormControl.value == '' && data.defaultBackendUrl !== '') {
+        if (this.urlFormControl.value === '' && data.defaultBackendUrl !== '') {
           this.urlFormControl.setValue(data.defaultBackendUrl);
         }
       });
@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    let inputText = this.urlFormControl.value;
+    const inputText = this.urlFormControl.value;
     if (inputText !== '') {
       this.auth.login(inputText);
       this.myRoute.navigate(['home']);
