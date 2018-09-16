@@ -1,4 +1,4 @@
-<div *ngFor="let message of getMessages()">
+<div *ngFor="let message of this.chat.stream | async">
   <div *ngIf="isResponse(message)">
     <div class="speech-bubble response">
       <div class="text">
