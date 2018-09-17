@@ -12,9 +12,9 @@ import {
   MatTableModule,
   MatTabsModule,
   MatToolbarModule,
+  MatAutocompleteModule,
   MatProgressSpinnerModule
 } from '@angular/material';
-
 
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
@@ -24,8 +24,6 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { ClockComponent } from './Plugins/Clock/Components/clock/clock.component';
-import { WeatherComponent } from './Plugins/Weather/Components/weather/weather.component';
-import { CalendarComponent } from './Plugins/Calendar/Components/calendar/calendar.component';
 import { EmailComponent } from './Plugins/Email/Components/email/email.component';
 import { TimerComponent } from './Plugins/Timer/Components/timer/timer.component';
 
@@ -47,8 +45,12 @@ import { NavigationModule } from './Plugins/Navigation/navigation.module';
 import { HomeComponent } from './Components/Home/Home-Components/home/home.component';
 import { MessagesContainerComponent } from './Components/Home/Home-Components/messages-container/messages-container.component';
 
+import { WeatherModule } from './Plugins/Weather/weather.module';
+
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+
+import { CalendarModule } from './Plugins/Calendar/calendar.module';
 
 /*
     Routing of the components to the respective links
@@ -75,11 +77,6 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'weather',
-    component: WeatherComponent,
-    canActivate: [AuthGuard]
-  },
-  {
     path: 'email',
     component: EmailComponent,
     canActivate: [AuthGuard]
@@ -100,9 +97,7 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     ClockComponent,
-    WeatherComponent,
     HomeComponent,
-    CalendarComponent,
     EmailComponent,
     TimerComponent,
     LoginComponent,
@@ -114,8 +109,10 @@ const routes: Routes = [
     MessageListComponent,
   ],
   imports: [
+    CalendarModule,
     MusicModule,
     NavigationModule,
+    WeatherModule,
     MaterialModule,
     BrowserModule,
     FormsModule,
@@ -135,6 +132,7 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     MatRadioModule,
     FormsModule,
+    MatAutocompleteModule,
     MatProgressSpinnerModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],

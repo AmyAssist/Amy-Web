@@ -1,4 +1,4 @@
-<p *ngIf='!fetchingMails && fetchingError'>There was an error fetching messages from the backend</p>
+<p *ngIf='!fetchingMails && fetchingError' class="mat-body-1">There was an error fetching messages from the backend</p>
 
 <mat-spinner *ngIf=fetchingMails [diameter]=30></mat-spinner>
 
@@ -10,20 +10,30 @@
     <mat-tab label='Important'>
     </mat-tab>
 </mat-tab-group>
-<mat-accordion>
-    <div *ngFor="let message of messages; let i = index">
-        <mat-expansion-panel *ngIf='showAll || message.important'>
-            <mat-expansion-panel-header>
-                <mat-panel-title>
-                    <span [ngClass]="{'unseenMail': !message.seen, 'importantMail': message.important}">{{message.from}}</span>
-                </mat-panel-title>
 
-                <mat-panel-description>
+<div *ngFor="let message of messages; let i = index" style="margin-top: 1em">
+    <div *ngIf='showAll || message.important'>
+        <div fxLayout="row">
+            <div id="fromCol">
+                <span class="mat-h3" [ngClass]="{'unseenMail': !message.seen, 'importantMail': message.important}">
+                    {{message.from}}
+                </span>
+            </div>
+
+            <div id="subjectCol">
+                <span id="subjectContent" class="mat-body-1">
                     <strong *ngIf=!message.seen>{{message.subject}}</strong>
                     <span *ngIf=message.seen>{{message.subject}}</span>
-                </mat-panel-description>
-            </mat-expansion-panel-header>
-            {{message.content}}
-        </mat-expansion-panel>
+                </span>
+            </div>
+
+            <div id="dateCol">
+                <div class="mat-caption" fxLayout="column">
+                    <span>{{getSentDate(message)}}</span>
+                    <span>{{getSentTime(message)}}</span>
+                </div>
+            </div>
+        </div>
+        <mat-divider class="messageDivider"></mat-divider>
     </div>
-</mat-accordion>
+</div>

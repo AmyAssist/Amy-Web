@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CalendarEvent } from '../../Objects/CalendarEvent';
+import { CalendarDataService } from '../../Services/calendar-data.service';
 
 @Component({
   selector: 'app-calendar',
@@ -7,9 +9,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CalendarComponent implements OnInit {
 
-  constructor() { }
+  constructor(private readonly calendarService: CalendarDataService) { }
 
   ngOnInit() {
-  }
 
+  }
 }
