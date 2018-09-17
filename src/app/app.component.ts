@@ -8,6 +8,6 @@ import { WorkerUpdateService } from './Services/WorkerUpdateService';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  constructor(readonly auth: AuthService, private update: WorkerUpdateService) { }
+  constructor(readonly auth: AuthService, private readonly update: WorkerUpdateService) { }
   title = 'app';
 }
