@@ -13,7 +13,7 @@ import {
   MatTabsModule,
   MatToolbarModule,
   MatAutocompleteModule,
-  MatProgressSpinnerModule
+  MatProgressSpinnerModule,
 } from '@angular/material';
 
 import { MatIconModule } from '@angular/material/icon';
