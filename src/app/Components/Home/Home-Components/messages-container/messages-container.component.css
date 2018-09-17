@@ -1,5 +1,6 @@
 .text {
-    word-wrap: break-word;
+	word-wrap: break-word;
+	white-space: pre;
 }
 
 /* Speech Bubbles */
@@ -24,7 +25,7 @@
 
 /* Response Bubble */
 .speech-bubble.response {
-	background: #E0E0E0;
+	background: #64b5f6;
     margin-left: 20px;
 	align-self: flex-start;
 
@@ -33,7 +34,7 @@
 
 .speech-bubble.response:after{
 	left: 0;
-	border-right-color: #E0E0E0;
+	border-right-color: #64b5f6;
 	border-left: 0;
 	border-top: 0;
 	margin-top: -10px;
@@ -42,7 +43,7 @@
 
 /* user Bubble */
 .speech-bubble.no-response {
-	background: #9FA8DA;
+	background: #eeeeee;
     margin-right: 20px;
 	align-self: flex-end;
 	margin-left: auto;
@@ -52,7 +53,7 @@
 
 .speech-bubble.no-response:after {
 	right: 0;
-	border-left-color: #9FA8DA;
+	border-left-color: #eeeeee;
 	border-right: 0;
 	border-bottom: 0;
 	margin-top: -10px;
