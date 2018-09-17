@@ -10,7 +10,8 @@ import {
     MatListModule,
     MatDividerModule,
     MatNativeDateModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatSnackBarModule
 } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -61,7 +62,8 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
         MatStepperModule,
         MatButtonToggleModule,
         ReactiveFormsModule,
-        MatAutocompleteModule
+        MatAutocompleteModule,
+        MatSnackBarModule
     ],
     exports: [
         CommonModule,
@@ -91,7 +93,8 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
         MatSidenavModule,
         MatStepperModule,
         MatButtonToggleModule,
-        MatAutocompleteModule
+        MatAutocompleteModule,
+        MatSnackBarModule
     ],
     declarations: [],
     providers: []
