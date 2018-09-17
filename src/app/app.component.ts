@@ -9,5 +9,4 @@ import { WorkerUpdateService } from './Services/WorkerUpdateService';
 })
 export class AppComponent {
   constructor(readonly auth: AuthService, private readonly update: WorkerUpdateService) { }
-  title = 'app';
 }
