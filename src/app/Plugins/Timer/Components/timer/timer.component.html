@@ -2,46 +2,46 @@
   <mat-card>
     <mat-card-title>Set Timer</mat-card-title>
     <div>
-        <section class="setTimer-section">
-            <mat-form-field class="hour-margin">
-              <input matInput type="number" min="0" placeholder="Hour" [(ngModel)]="hour" required>
-            </mat-form-field>
-            <mat-form-field class="minute-margin">
-              <input matInput type="number" min="0" placeholder="Minute" [(ngModel)]="minute" required>
-            </mat-form-field>
-            <mat-form-field class="second-margin">
-              <input matInput type="number" min="0" placeholder="Second" [(ngModel)]="second" required>
-            </mat-form-field>
-            <button mat-raised-button color="primary" (click)="setTimer(hour, minute, second)">Start Timer</button>
-          </section>
+      <section class="setTimer-section">
+        <mat-form-field class="hour-margin">
+          <input matInput type="number" min="0" max="99" placeholder="Hour" [(ngModel)]="hour" required>
+        </mat-form-field>
+        <mat-form-field class="minute-margin">
+          <input matInput type="number" min="0"  max="99" placeholder="Minute" [(ngModel)]="minute" required>
+        </mat-form-field>
+        <mat-form-field class="second-margin">
+          <input matInput type="number" min="0"  max="99" placeholder="Second" [(ngModel)]="second" required>
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="setTimer(hour, minute, second)">Start Timer</button>
+      </section>
     </div>
   </mat-card>
 
   <mat-card>
     <mat-card-title>All Timers</mat-card-title>
     <div>
-        <mat-list role="list" *ngFor="let timer of timerData; let i = index">
-            <mat-list-item role="listitem">
+      <mat-list role="list" *ngFor="let timer of timerData">
+        <mat-list-item role="listitem">
 
-              <div class="timer-container">
-                <p mat-line style="display:inline">Timer {{timer.id}}: </p>
-                <h4 id={{timer.id}} style="display:inline"> {{countdownTimer(timer, timer.id)}}</h4>
+          <div class="timer-container">
+            <p mat-line style="display:inline">Timer {{timer.id}}: </p>
+            <h4 style="display:inline"> {{timerTimeString(timer)}}</h4>
 
-                <div style="margin-inline-end: 100%">
-                  <button mat-icon-button *ngIf="timer.active" (click)="activatedeactivateTimer(timer)">
-                    <mat-icon>pause</mat-icon>
-                  </button>
-                  <button mat-icon-button *ngIf="!timer.active" (click)="activatedeactivateTimer(timer)">
-                    <mat-icon>play_arrow</mat-icon>
-                  </button>
-                <button mat-icon-button (click)="deleteTimer(timer.id)" style="align-content:right">
-                    <mat-icon>delete_forever</mat-icon>
-                </button>
-              </div>
-                <mat-divider></mat-divider>
-              </div>
-            </mat-list-item>
-        </mat-list>
+            <div style="margin-inline-end: 100%">
+              <button mat-icon-button *ngIf="timer.active" (click)="activatedeactivateTimer(timer)">
+                <mat-icon>pause</mat-icon>
+              </button>
+              <button mat-icon-button *ngIf="!timer.active" (click)="activatedeactivateTimer(timer)">
+                <mat-icon>play_arrow</mat-icon>
+              </button>
+              <button mat-icon-button (click)="deleteTimer(timer.id)" style="align-content:right">
+                <mat-icon>delete_forever</mat-icon>
+              </button>
+            </div>
+            <mat-divider></mat-divider>
+          </div>
+        </mat-list-item>
+      </mat-list>
     </div>
   </mat-card>
 </div>

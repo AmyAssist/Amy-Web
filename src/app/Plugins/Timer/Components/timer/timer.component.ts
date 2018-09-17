@@ -19,6 +19,7 @@ export class TimerComponent implements OnInit {
   timerData: Timer[];
   oneTimerData: Timer;
   selectedTimer: Timer;
+  date: Date;
   /*
     Providing the data-service for the clock-component
   */
@@ -27,6 +28,7 @@ export class TimerComponent implements OnInit {
   ngOnInit() {
     this.timerData = new Array<Timer>();
     this.getTimers();
+    setInterval(() => this.date = new Date(), 1000);
   }
 
   /*
@@ -86,45 +88,55 @@ export class TimerComponent implements OnInit {
     });
   }
 
-  displayTimerTime(timer: Timer) {
-    var splitted = timer.remainingTime.toString().split(/[T,H,M,.]+/);
-    for (var i = 0; i <= 4; i++) {
-      if (splitted[i].length === 1) {
-        splitted[i] = '0' + splitted[i];
+  timerTimeString(timer: Timer): string {
+    const countDownDate = new Date(timer.timerTime).getTime();
+    
+    if (!timer.active) {
+      const startIndex = timer.remainingTime.indexOf('T');
+      const hourIndex = timer.remainingTime.indexOf('H');
+      const minuteIndex = timer.remainingTime.indexOf('M');
+      const secondIndex = timer.remainingTime.indexOf('.');
+      var hours = Number.parseInt(timer.remainingTime.substring(startIndex +1, hourIndex));
+      var minutes = Number.parseInt(timer.remainingTime.substring(hourIndex +1, minuteIndex));
+      if(hourIndex == -1){
+        var minutes = Number.parseInt(timer.remainingTime.substring(startIndex +1, minuteIndex));
+      }
+      var seconds = Number.parseInt(timer.remainingTime.substring(minuteIndex +1, secondIndex));
+      if(minuteIndex == -1){
+        var seconds = Number.parseInt(timer.remainingTime.substring(hourIndex +1, secondIndex));
+        if(hourIndex == -1){
+          var seconds = Number.parseInt(timer.remainingTime.substring(startIndex +1, secondIndex));
+        }
+      }
+      if(timer.remainingTime.indexOf('H') == -1){
+        var hours = 0;
+      }
+      if(timer.remainingTime.indexOf('M') == -1){
+        var minutes = 0;
+      }
+      if(timer.remainingTime.indexOf('.') == -1){
+        var seconds = 0;
+      }
+      if(hours > 23){
+       var days =  Math.floor(hours/24);
+       var hours = hours%24;
+      } else{
+        var days = 0;
+      }
+      
+    } else {
+      var now = new Date().getTime();
+      var distance = countDownDate - now;
+      var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      if (distance < 0) {
+        return "00:00:00";
       }
     }
-    document.getElementById(timer.id.toString()).innerHTML = splitted[1] + ":"
-      + splitted[2] + ":" + splitted[3];
-  }
-
-
-  countdownTimer(timer: Timer, i: string) {
-    if (!timer.active) {
-      this.displayTimerTime(timer);
-    }
-    var countDownDate = new Date(timer.timerTime).getTime();
-    if (timer.active) {
-      var x = setInterval(function () {
-        var now = new Date().getTime();
-        var distance = countDownDate - now;
-        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-        document.getElementById(i).innerHTML = days + " Days, " + hours + ":"
-          + minutes + ":" + seconds;
-
-        if (distance < 0) {
-          clearInterval(x);
-          document.getElementById(i).innerHTML = "00:00:00";
-        }
-        if (!timer.active) {
-          clearInterval(x);
-          this.displayTimerTime(timer);
-        }
-      }, 1000);
-    }
+    return days + " Days, " + hours + ":"
+      + minutes + ":" + seconds;
   }
 }
 
