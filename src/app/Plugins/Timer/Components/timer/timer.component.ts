@@ -26,7 +26,7 @@ export class TimerComponent implements OnInit {
   /*
     Providing the data-service for the clock-component
   */
-  constructor(private clockService: TimerDataService) { }
+  constructor(private readonly clockService: TimerDataService) { }
 
   ngOnInit() {
     this.timerData = new Array<Timer>();
@@ -92,50 +92,46 @@ export class TimerComponent implements OnInit {
   }
 
   timerTimeString(timer: Timer): string {
-    const countDownDate = new Date(timer.timerTime).getTime();
+    var countDownDate = new Date(timer.timerTime).getTime();
 
     if (!timer.active) {
       var timerString = timer.remainingTime.split(/[.T]/);
       var firstString = timerString[1];
 
       var hourString = firstString.split('H');
-      if (hourString.length === 1) {
-        var hours = 0;
-        var remainingString = hourString[0];
-      } else {
-        var hours = Number.parseInt(hourString[0]);
-        var remainingString = hourString[1];
+      var hours = 0;
+      var remainingString = hourString[0];
+      if (hourString.length === 2) {
+        hours = Number.parseInt(hourString[0]);
+        remainingString = hourString[1];
       }
 
       var minuteString = remainingString.split('M');
-      if (minuteString.length === 1) {
-        var minutes = 0;
-        var seconds = Number.parseInt(minuteString[0]);
-      } else {
-        var minutes = Number.parseInt(minuteString[0]);
-        var seconds = Number.parseInt(minuteString[1]);
+      var minutes = 0;
+      var seconds = Number.parseInt(minuteString[0]);
+      if (minuteString.length === 2) {
+        minutes = Number.parseInt(minuteString[0]);
+        seconds = Number.parseInt(minuteString[1]);
       }
 
+      var days = 0;
       if (hours > 23) {
-        var days = Math.floor(hours / 24);
-        var hours = hours % 24;
-      } else {
-        var days = 0;
+        days = Math.floor(hours / 24);
+        hours = hours % 24;
       }
 
     } else {
-      var now = new Date().getTime();
-      var distance = countDownDate - now;
+      const now = new Date().getTime();
+      const distance = countDownDate - now;
       var days = Math.floor(distance / (1000 * 60 * 60 * 24));
       var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
       var seconds = Math.floor((distance % (1000 * 60)) / 1000);
       if (distance < 0) {
-        return "00:00:00";
+        return '00:00:00';
       }
     }
-    return days + " Days, " + hours + ":"
-      + minutes + ":" + seconds;
+    return `${days} Days, ${hours}:${minutes}:${seconds}`;
   }
 }
 
