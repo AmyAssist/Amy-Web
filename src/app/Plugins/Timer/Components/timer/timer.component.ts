@@ -20,6 +20,9 @@ export class TimerComponent implements OnInit {
   oneTimerData: Timer;
   selectedTimer: Timer;
   date: Date;
+  hour: number;
+  minute: number;
+  second: number;
   /*
     Providing the data-service for the clock-component
   */
