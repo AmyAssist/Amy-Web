@@ -90,40 +90,37 @@ export class TimerComponent implements OnInit {
 
   timerTimeString(timer: Timer): string {
     const countDownDate = new Date(timer.timerTime).getTime();
-    
+
+
     if (!timer.active) {
-      const startIndex = timer.remainingTime.indexOf('T');
-      const hourIndex = timer.remainingTime.indexOf('H');
-      const minuteIndex = timer.remainingTime.indexOf('M');
-      const secondIndex = timer.remainingTime.indexOf('.');
-      var hours = Number.parseInt(timer.remainingTime.substring(startIndex +1, hourIndex));
-      var minutes = Number.parseInt(timer.remainingTime.substring(hourIndex +1, minuteIndex));
-      if(hourIndex == -1){
-        var minutes = Number.parseInt(timer.remainingTime.substring(startIndex +1, minuteIndex));
-      }
-      var seconds = Number.parseInt(timer.remainingTime.substring(minuteIndex +1, secondIndex));
-      if(minuteIndex == -1){
-        var seconds = Number.parseInt(timer.remainingTime.substring(hourIndex +1, secondIndex));
-        if(hourIndex == -1){
-          var seconds = Number.parseInt(timer.remainingTime.substring(startIndex +1, secondIndex));
-        }
-      }
-      if(timer.remainingTime.indexOf('H') == -1){
+      const timerString = timer.remainingTime.split(/[.T]/);
+      const timerString = timerString[1];
+
+      var hourString = timerString.split('H');
+      if (hourString.length === 1) {
         var hours = 0;
+        const remainingString = hourString[0];
+      } else {
+        var hours = hourString[0];
+        const remainingString = hourString[1];
       }
-      if(timer.remainingTime.indexOf('M') == -1){
+
+      var minuteString = remainingString.split('M');
+      if (minuteString.length === 1) {
         var minutes = 0;
+        var seconds = minuteString[0];
+      } else {
+        var minutes = minuteString[0];
+        var seconds = minuteString[1];
       }
-      if(timer.remainingTime.indexOf('.') == -1){
-        var seconds = 0;
-      }
-      if(hours > 23){
-       var days =  Math.floor(hours/24);
-       var hours = hours%24;
-      } else{
+
+      if (hours > 23) {
+        var days = Math.floor(hours / 24);
+        var hours = hours % 24;
+      } else {
         var days = 0;
       }
-      
+
     } else {
       var now = new Date().getTime();
       var distance = countDownDate - now;
