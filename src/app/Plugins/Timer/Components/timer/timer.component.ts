@@ -94,12 +94,14 @@ export class TimerComponent implements OnInit {
   timerTimeString(timer: Timer): string {
     const countDownDate = new Date(timer.timerTime).getTime();
 
+    var days = 0;
+    var hours = 0;
+    var minutes = 0;
+    var seconds = 0;
     if (!timer.active) {
       const timerString = timer.remainingTime.split(/[.T]/);
       const firstString = timerString[1];
-
       const hourString = firstString.split('H');
-      var hours = 0;
       var remainingString = hourString[0];
       if (hourString.length === 2) {
         hours = Number.parseInt(hourString[0]);
@@ -107,14 +109,12 @@ export class TimerComponent implements OnInit {
       }
 
       const minuteString = remainingString.split('M');
-      var minutes = 0;
-      var seconds = Number.parseInt(minuteString[0]);
+      seconds = Number.parseInt(minuteString[0]);
       if (minuteString.length === 2) {
         minutes = Number.parseInt(minuteString[0]);
         seconds = Number.parseInt(minuteString[1]);
       }
 
-      var days = 0;
       if (hours > 23) {
         days = Math.floor(hours / 24);
         hours = hours % 24;
@@ -123,10 +123,10 @@ export class TimerComponent implements OnInit {
     } else {
       const now = new Date().getTime();
       const distance = countDownDate - now;
-      var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      seconds = Math.floor((distance % (1000 * 60)) / 1000);
       if (distance < 0) {
         return '00:00:00';
       }
