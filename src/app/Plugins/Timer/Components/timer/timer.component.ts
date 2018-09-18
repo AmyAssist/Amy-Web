@@ -92,13 +92,13 @@ export class TimerComponent implements OnInit {
   }
 
   timerTimeString(timer: Timer): string {
-    var countDownDate = new Date(timer.timerTime).getTime();
+    const countDownDate = new Date(timer.timerTime).getTime();
 
     if (!timer.active) {
-      var timerString = timer.remainingTime.split(/[.T]/);
-      var firstString = timerString[1];
+      const timerString = timer.remainingTime.split(/[.T]/);
+      const firstString = timerString[1];
 
-      var hourString = firstString.split('H');
+      const hourString = firstString.split('H');
       var hours = 0;
       var remainingString = hourString[0];
       if (hourString.length === 2) {
@@ -106,7 +106,7 @@ export class TimerComponent implements OnInit {
         remainingString = hourString[1];
       }
 
-      var minuteString = remainingString.split('M');
+      const minuteString = remainingString.split('M');
       var minutes = 0;
       var seconds = Number.parseInt(minuteString[0]);
       if (minuteString.length === 2) {
