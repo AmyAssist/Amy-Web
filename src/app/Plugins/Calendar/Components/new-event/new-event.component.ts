@@ -94,6 +94,7 @@ export class NewEventComponent implements OnInit {
     if (this.correctTime && this.titleChoosen && this.startChoosen && this.endChoosen) {
       this.formatLocation();
       if (this.allDay) {
+        this.minDate.setDate(this.minDate.getDate() + 1);
         this.endDate.setDate(this.endDate.getDate() + 1);
       }
       const startHour = this.startTime2.split(':')[0];
@@ -114,7 +115,6 @@ export class NewEventComponent implements OnInit {
       const newEvent = CalendarEvent.createEvent(this.title, start.toString(), end.toString(),
         this.description, this.location, this.reminderType, this.reminderTime, '', this.allDay);
       this.calendarService.setNewEvent(newEvent);
-      this.endDate.setDate(this.endDate.getDate() - 1);
       this.resetValues();
       allDayCheck.checked = false;
     } else {
