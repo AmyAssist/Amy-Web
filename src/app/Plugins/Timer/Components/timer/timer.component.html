@@ -22,24 +22,21 @@
     <div>
       <mat-list role="list" *ngFor="let timer of timerData">
         <mat-list-item role="listitem">
-
           <div class="timer-container">
-            <p mat-line style="display:inline">Timer {{timer.id}}: </p>
-            <h4 style="display:inline"> {{timerTimeString(timer)}}</h4>
-
-            <div style="margin-inline-end: 100%">
+            <p mat-line>Timer {{timer.id}}: {{timerTimeString(timer)}}</p>
+            <div class="icon-container">
               <button mat-icon-button *ngIf="timer.active" (click)="activatedeactivateTimer(timer)">
                 <mat-icon>pause</mat-icon>
               </button>
               <button mat-icon-button *ngIf="!timer.active" (click)="activatedeactivateTimer(timer)">
                 <mat-icon>play_arrow</mat-icon>
               </button>
-              <button mat-icon-button (click)="deleteTimer(timer.id)" style="align-content:right">
+              <button mat-icon-button (click)="deleteTimer(timer.id)" >
                 <mat-icon>delete_forever</mat-icon>
               </button>
             </div>
-            <mat-divider></mat-divider>
           </div>
+          <mat-divider></mat-divider>
         </mat-list-item>
       </mat-list>
     </div>
