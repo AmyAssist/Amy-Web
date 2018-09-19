@@ -4,13 +4,12 @@ export class WeatherReportDay {
     precipType: string;
     temperatureMin: number;
     temperatureMax: number;
-    timestamp: number;
+    timestamp: string;
     time: string;
     windSpeed: number;
     sunriseTime: string;
     sunsetTime: string;
     iconType: string;
-    timezone: string;
 
     constructor() {
 
