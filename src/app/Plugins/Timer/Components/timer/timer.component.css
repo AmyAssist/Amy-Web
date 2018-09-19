@@ -1,0 +1,7 @@
+@import "~ng-pick-datetime/assets/style/picker.min.css";
+.icon-container{
+    align-content:right;
+}
+.timer-container{
+    display:inline;
+}

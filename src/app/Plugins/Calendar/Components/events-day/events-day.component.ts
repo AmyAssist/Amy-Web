@@ -45,7 +45,7 @@ export class EventsDayComponent implements OnInit {
       this.datePickerActive = false;
     } else {
       const makeDate = new Date(eventDate);
-      this.calendarService.setSelectedDate(new LocalDateTime(makeDate.getFullYear(), makeDate.getMonth(), makeDate.getDate(), 0, 0).toString());
+      this.calendarService.setSelectedDate(new LocalDateTime(makeDate.getFullYear(), makeDate.getMonth(), makeDate.getDate(), 0, 0, 0).toString());
     }
   }
 

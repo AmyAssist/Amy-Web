@@ -25,6 +25,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { ClockComponent } from './Plugins/Clock/Components/clock/clock.component';
 import { EmailComponent } from './Plugins/Email/Components/email/email.component';
+import { TimerComponent } from './Plugins/Timer/Components/timer/timer.component';
 
 import { LocationRegistryComponent } from './Plugins/Registry/Components/location-registry/location-registry.component';
 import { RegistryContainerComponent } from './Plugins/Registry/Components/registry-container/registry-container.component';
@@ -71,6 +72,11 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: 'timer',
+    component: TimerComponent,
+    canActivate: [AuthGuard]
+  },
+  {
     path: 'email',
     component: EmailComponent,
     canActivate: [AuthGuard]
@@ -93,6 +99,7 @@ const routes: Routes = [
     ClockComponent,
     HomeComponent,
     EmailComponent,
+    TimerComponent,
     LoginComponent,
     LocationRegistryComponent,
     ErrorDialogComponent,

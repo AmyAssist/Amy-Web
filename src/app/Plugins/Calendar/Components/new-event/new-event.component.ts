@@ -101,8 +101,8 @@ export class NewEventComponent implements OnInit {
       const startMinute = this.startTime2.split(':')[1];
       const endHour = this.endTime2.split(':')[0];
       const endMinute = this.endTime2.split(':')[1];
-      const start = new LocalDateTime(this.minDate.getFullYear(), this.minDate.getMonth(), this.minDate.getDate(), parseInt(startHour, 10), parseInt(startMinute, 10));
-      const end = new LocalDateTime(this.endDate.getFullYear(), this.endDate.getMonth(), this.endDate.getDate(), parseInt(endHour, 10), parseInt(endMinute, 10));
+      const start = new LocalDateTime(this.minDate.getFullYear(), this.minDate.getMonth(), this.minDate.getDate(), parseInt(startHour, 10), parseInt(startMinute, 10), 0);
+      const end = new LocalDateTime(this.endDate.getFullYear(), this.endDate.getMonth(), this.endDate.getDate(), parseInt(endHour, 10), parseInt(endMinute, 10), 0);
       if (this.timeUnit === 'minutes') {
         this.reminderTime = timeValue;
       } else if (this.timeUnit === 'hours') {

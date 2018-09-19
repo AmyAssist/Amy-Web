@@ -3,8 +3,8 @@
  */
 export class LocalDateTime {
     date: Date;
-    constructor(year: number, month: number, dayOfMonth: number, hour: number, minute: number) {
-        this.date = new Date(year, month, dayOfMonth, hour, minute);
+    constructor(year: number, month: number, dayOfMonth: number, hour: number, minute: number, second: number) {
+        this.date = new Date(year, month, dayOfMonth, hour, minute, second);
     }
 
     private pad(number: number) {
@@ -19,6 +19,7 @@ export class LocalDateTime {
             '-' + this.pad(this.date.getMonth() + 1) +
             '-' + this.pad(this.date.getDate()) +
             'T' + this.pad(this.date.getHours()) +
-            ':' + this.pad(this.date.getMinutes());
+            ':' + this.pad(this.date.getMinutes()) +
+            ':' + this.pad(this.date.getSeconds());
     }
 }
