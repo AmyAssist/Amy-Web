@@ -20,23 +20,7 @@ export class WeatherComponent implements OnInit {
   locationSelected = false;
   noLocationFound = false;
 
-  private _selectedDay: number = 0;
-
-  get selectedDay() {
-    return this._selectedDay;
-  }
-
-  selectNewDay(newSelectedReport) {
-    this._selectedDay = this.showReportWeek.indexOf(newSelectedReport);
-  }
-
-  getClassOf(weatherReport) {
-    if (this.showReportWeek.indexOf(weatherReport) == this.selectedDay) {
-      return 'weather_select_day active';
-    } else {
-      return 'weather_select_day';
-    }
-  }
+  private _selectedDay = 0;
 
   constructor(private readonly weatherService: WeatherDataService) {
   }
@@ -63,6 +47,22 @@ export class WeatherComponent implements OnInit {
   public selectLocation(location: Location): void {
     this.selectedLocation = location;
     this.getWeatherReport(location);
+  }
+
+  get selectedDay() {
+    return this._selectedDay;
+  }
+
+  selectNewDay(newSelectedReport) {
+    this._selectedDay = this.showReportWeek.indexOf(newSelectedReport);
+  }
+
+  getClassOf(weatherReport) {
+    if (this.showReportWeek.indexOf(weatherReport) === this.selectedDay) {
+      return 'weather_select_day active';
+    } else {
+      return 'weather_select_day';
+    }
   }
 
   getWeatherReport(location: Location) {
