@@ -20,6 +20,24 @@ export class WeatherComponent implements OnInit {
   locationSelected = false;
   noLocationFound = false;
 
+  private _selectedDay: number = 0;
+
+  get selectedDay() {
+    return this._selectedDay;
+  }
+
+  selectNewDay(newSelectedReport) {
+    this._selectedDay = this.showReportWeek.indexOf(newSelectedReport);
+  }
+
+  getClassOf(weatherReport) {
+    if (this.showReportWeek.indexOf(weatherReport) == this.selectedDay) {
+      return 'weather_select_day active';
+    } else {
+      return 'weather_select_day';
+    }
+  }
+
   constructor(private readonly weatherService: WeatherDataService) {
   }
 

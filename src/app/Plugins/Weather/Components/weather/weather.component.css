@@ -35,6 +35,20 @@
     margin-top: 16px;
     margin-bottom: 16px;
     flex-basis: 25%;
+
+    background-color: white;
+}
+
+.weather_select_day {
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    border-style: hidden;
+}
+
+.weather_select_day.active {
+    border-style: solid;
+    border-color: #3F51B5;
 }
 
 .text.color_red { color: rgb(255, 0, 0);}
