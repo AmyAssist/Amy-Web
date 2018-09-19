@@ -1,12 +1,12 @@
 <div *ngFor="let message of this.chat.stream | async">
   <div *ngIf="isResponse(message)">
     <div class="speech-bubble response">
-      <div class="text">
-          <p class="mat-body-1">{{message.response.text}}</p>
+      <div>
           <p>
             <app-weather-day *ngIf="message.response.widget === 'app-weather-day'" [dayReport]="message.response.attachment"></app-weather-day>
             <app-route-widget *ngIf="message.response.widget === 'app-route-widget'" [info]="message.response.attachment"></app-route-widget>
           </p>
+          <p class="mat-body-1 text">{{message.response.text}}</p>
       </div>
     </div>
   </div>

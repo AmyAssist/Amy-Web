@@ -1,6 +1,12 @@
-<p>
-  <a href="{{this.info.link}}">
-    {{this.info.linkText}}
-    <img src="{{this.info.imageURL}}" alt="map preview"/>
+<div class="widgetBackground">
+  <a href="{{this.info.link}}" target="_blank" class="widgetLink">
+    <p>
+      <img class="mapImage" src="{{this.info.imageURL}}" alt="map preview"/>
+    </p>
+    <div class="widgetBottomBar mat-body-2">
+      {{this.info.linkText}}
+      <mat-icon _ngcontent-c5="" class="material-icons md-18 mat-icon ng-tns-c5-1" role="img" aria-hidden="true">directions</mat-icon>
+    </div>
   </a>
-</p>
+  <div class="lineSeparator"></div>
+</div>

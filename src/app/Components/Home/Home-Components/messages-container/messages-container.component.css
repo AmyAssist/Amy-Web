@@ -1,13 +1,15 @@
 .text {
 	word-wrap: break-word;
 	white-space: pre-line;
+	padding: 8px;
+>>>>>>> Optimize navigation widget layout
 }
 
 /* Speech Bubbles */
 .speech-bubble {
 	position: relative;
-	padding: 8px;
-    border-radius: .4em;
+    border-radius: .8em;
+	overflow: hidden;
     margin-bottom: 10px;
 	left: 0px;
 	width: fit-content;

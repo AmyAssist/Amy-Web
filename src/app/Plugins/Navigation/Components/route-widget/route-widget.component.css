@@ -1,0 +1,26 @@
+.mapImage {
+    width: 100%;
+    height: auto;
+}
+
+.lineSeparator {
+    width: 100%;
+    height: 1px;
+    background-color: rgb(85, 26, 139);
+}
+
+.widgetBackground {
+    /*background-color: #fafafa;*/
+}
+
+.widgetBottomBar {
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: row;
+}
+
+.widgetLink {
+    text-decoration: none;
+}
