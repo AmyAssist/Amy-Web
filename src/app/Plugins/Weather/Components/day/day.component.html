@@ -1,5 +1,5 @@
 <div class="flex_layout">
-    <p style="text-align:center;" class="text mat-body-2">{{this.convertDateTime(dayReport.timestamp, dayReport.timezone)}}</p>
+    <p style="text-align:center;" class="text mat-body-2">{{this.convertDateTime(dayReport.timestamp)}}</p>
     <p style="text-align:center;">
         <img alt="image" class="weather_week_icon" [attr.src]="this.getWeatherIcon(dayReport.iconType) || 'assets/weather/cloudy.svg'" type="image/svg+xml">
     </p>
