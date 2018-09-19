@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from './Services/auth.service';
+import { WorkerUpdateService } from './Services/WorkerUpdateService';
 
 @Component({
   selector: 'app-root',
@@ -7,6 +8,5 @@ import { AuthService } from './Services/auth.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  constructor(readonly auth: AuthService) { }
-  title = 'app';
+  constructor(readonly auth: AuthService, private readonly update: WorkerUpdateService) { }
 }
