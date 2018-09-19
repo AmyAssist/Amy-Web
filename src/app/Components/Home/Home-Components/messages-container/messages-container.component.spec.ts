@@ -8,6 +8,7 @@ import { OptionsService } from '../../../../Services/options.service';
 import { CommandHandlerService } from '../../Home-Services/command-handler.service';
 import { ChatService } from '../../Home-Services/chat.service';
 import {WeatherModule} from '../../../../Plugins/Weather/weather.module';
+import {NavigationModule} from '../../../../Plugins/Navigation/navigation.module';
 
 describe('MessagesContainerComponent', () => {
   let component: MessagesContainerComponent;
@@ -27,7 +28,8 @@ describe('MessagesContainerComponent', () => {
         MatInputModule,
         FormsModule,
         BrowserAnimationsModule,
-        WeatherModule
+        WeatherModule,
+        NavigationModule
       ],
       providers: [
         { provide: OptionsService, useValue: optionsSpy },
