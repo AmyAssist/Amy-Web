@@ -36,7 +36,7 @@ export class PushNotificationService {
         const sub = await this.swPush.requestSubscription({
             serverPublicKey: key
         });
-        return await this.subscribe(sub, name).toPromise();
+        return this.subscribe(sub, name).toPromise();
     }
 
     public unsubscribeFromNotifications() {
