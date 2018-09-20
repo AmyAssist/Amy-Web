@@ -1,7 +1,5 @@
-import { Injectable, EventEmitter } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { throwError, BehaviorSubject } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 /**
  *    Service for providing and receiving data from the REST interface that is used for general functions of the application.
@@ -13,7 +11,6 @@ export class BackendResolver {
 
     private readonly backendPath = new BehaviorSubject<string>(null);
 
-    constructor(private readonly http: HttpClient) { }
     /**
      * The backend URL to use to connect to the Backend server.
      * The value can be null if currently no backend URL is provided.
