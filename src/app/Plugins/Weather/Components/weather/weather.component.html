@@ -20,7 +20,7 @@
       <p style="text-align:center" class="text color_red text mat-body-2 mat-h3">Register a location first.</p>
     </div>
 
-    <!--Show current weather report information-->
+    <!--Show selected weather report information-->
     <div id="weatherInstantInformation" class="flex_layout" *ngIf="locationSelected" fxLayout="column">
       <div fxLayout="row" fxLayoutAlign="space-around center">
         <div fxLayout="column" *ngIf="locationSelected">
@@ -30,7 +30,15 @@
           <img alt="image" class="weather_instant_info_icon mat-h3" src="assets/weather/sunrise.svg" type="image/svg+xml">
           <img alt="image" class="weather_instant_info_icon mat-h3" src="assets/weather/sunset.svg" type="image/svg+xml">
         </div>
-        <div fxLayout="column" *ngIf="locationSelected">
+        <!-- Selected day is today -> using current correct values -->
+        <div *ngIf="selectedDay == 0" fxLayout="column">
+          <p style="text-align:right" class="text mat-body-3 mat-h3">{{showReportInstant.precipProbability}}%</p>
+          <p style="text-align:right" class="text mat-body-3 mat-h3">{{showReportInstant.windSpeed}}km/h</p>
+          <p style="text-align:right" class="text mat-body-3 mat-h3">{{showReportWeek[selectedDay].sunriseTime}}</p>
+          <p style="text-align:right" class="text mat-body-3 mat-h3">{{showReportWeek[selectedDay].sunsetTime}}</p>
+        </div>
+        <!-- Selected day is in the future -> using forecasted values -->
+        <div *ngIf="selectedDay != 0" fxLayout="column">
           <p style="text-align:right" class="text mat-body-3 mat-h3">{{showReportWeek[selectedDay].precipProbability}}%</p>
           <p style="text-align:right" class="text mat-body-3 mat-h3">{{showReportWeek[selectedDay].windSpeed}}km/h</p>
           <p style="text-align:right" class="text mat-body-3 mat-h3">{{showReportWeek[selectedDay].sunriseTime}}</p>
@@ -40,28 +48,39 @@
     </div>
 
     <!--Show current weather report-->
-    <div id="weatherInstant" class="flex_layout" *ngIf="locationSelected" fxLayout="column" fxLayoutAlign="space-around center">
+    <!-- Selected day is today -> using current correct values -->
+    <div *ngIf="locationSelected && selectedDay == 0" id="weatherInstant" class="flex_layout" fxLayout="column"
+      fxLayoutAlign="space-around center">
+      <img alt="image" class="weather_instant_icon" [attr.src]="showReportInstant.iconSrc" type="image/svg+xml" *ngIf="locationSelected">
+      <p style="text-align:center;" class="mat-h1" *ngIf="locationSelected">
+        <br />
+        {{showReportInstant.temperature}}°C
+        <br />
+        {{showReportInstant.summary}}
+      </p>
+    </div>
+    <!-- Selected day is in the future -> using forecasted values -->
+    <div *ngIf="locationSelected && selectedDay != 0" id="weatherInstant" class="flex_layout" fxLayout="column"
+      fxLayoutAlign="space-around center">
       <img alt="image" class="weather_instant_icon" [attr.src]="showReportWeek[selectedDay].iconSrc" type="image/svg+xml"
         *ngIf="locationSelected">
       <p style="text-align:center;" class="mat-h1" *ngIf="locationSelected">
         <br />
-        <span *ngIf="selectedDay == 0">
-          {{showReportInstant.temperature}}°C
+        <span class="text color_red">
+          {{showReportWeek[selectedDay].temperatureMax}}°C
         </span>
-        <span *ngIf="selectedDay != 0">
-          <span class="text color_red">
-            {{showReportWeek[selectedDay].temperatureMax}}°C
-          </span>
-          <span class="text color_blue">
-            {{showReportWeek[selectedDay].temperatureMin}}°C
-          </span>
+        <span class="text color_blue">
+          {{showReportWeek[selectedDay].temperatureMin}}°C
         </span>
-        <br />{{showReportWeek[selectedDay].summary}}
+        <br />
+        {{showReportWeek[selectedDay].summary}}
       </p>
     </div>
 
   </div>
+
   <mat-divider style="width: 100%"></mat-divider>
+
   <div id="weatherWeekLayout" *ngIf="locationSelected" fxLayout="row wrap" fxLayoutAlign="space-around stretch">
 
     <!--Show weather report of the week-->
