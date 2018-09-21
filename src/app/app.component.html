@@ -4,18 +4,20 @@
       <mat-icon>home</mat-icon>
       Home</button>
     <span class="fill-remaining-space"></span>
-    <div fxLayout="row" fxShow="false" fxShow.gt-sm>
+    <div fxLayout="row" fxShow="false" fxShow.gt-md>
       <button mat-button routerLink="music">Music</button>
       <button mat-button routerLink="clock">Alarm</button>
+      <button mat-button routerLink="timer">Timer</button>
       <button mat-button routerLink="calendar">Calendar</button>
       <button mat-button routerLink="weather">Weather</button>
       <button mat-button routerLink="navigation">Navigation</button>
       <button mat-button routerLink="email">E-Mail</button>
       <button mat-button routerLink="registry">Registry</button>
+      <button mat-button routerLink="push">Push Notification</button>
       <button mat-button *ngIf="!auth.loggedIn()" routerLink="login">Login</button>
       <button mat-button *ngIf="auth.loggedIn()" (click)="auth.logout()">Logout</button>
     </div>
-    <button mat-button [mat-menu-trigger-for]="menu" fxHide="false" fxHide.gt-sm>
+    <button mat-button [mat-menu-trigger-for]="menu" fxHide="false" fxHide.gt-md>
       <mat-icon>menu</mat-icon>
     </button>
 
@@ -23,11 +25,13 @@
   <mat-menu x-position="before" #menu="matMenu">
     <button mat-button routerLink="music">Music</button>
     <button mat-button routerLink="clock">Alarm</button>
+    <button mat-button routerLink="timer">Timer</button>
     <button mat-button routerLink="calendar">Calendar</button>
     <button mat-button routerLink="weather">Weather</button>
     <button mat-button routerLink="navigation">Navigation</button>
     <button mat-button routerLink="email">E-Mail</button>
     <button mat-button routerLink="registry">Registry</button>
+    <button mat-button routerLink="push">Push Notification</button>
     <button mat-button *ngIf="!auth.loggedIn()" routerLink="login">Login</button>
     <button mat-button *ngIf="auth.loggedIn()" (click)="auth.logout()">Logout</button>
   </mat-menu>
