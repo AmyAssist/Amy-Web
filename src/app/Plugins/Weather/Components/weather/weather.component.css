@@ -5,6 +5,7 @@
 .weather_instant_layout {
     width: 100%; 
     margin-top: 8px;
+    padding: 8px;
 }
 
 
@@ -37,6 +38,10 @@
     flex-basis: 25%;
 
     background-color: white;
+}
+
+.flex_layout.big {
+    min-width: 300px;
 }
 
 .weather_select_day {
