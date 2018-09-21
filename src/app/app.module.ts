@@ -33,6 +33,7 @@ import { ContactRegistryComponent } from './Plugins/Registry/Components/contact-
 import { MessageListComponent } from './Plugins/Email/Components/messagelist/messagelist.component';
 
 import { ErrorDialogComponent } from './Components/error-dialog/error-dialog.component';
+import { PushComponent } from './Components/push/push.component';
 import { LoginComponent } from './Components/login/login.component';
 
 import { AuthService } from './Services/auth.service';
@@ -87,6 +88,10 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: 'push',
+    component: PushComponent
+  },
+  {
     path: 'login',
     component: LoginComponent
   }
@@ -100,6 +105,7 @@ const routes: Routes = [
     HomeComponent,
     EmailComponent,
     TimerComponent,
+    PushComponent,
     LoginComponent,
     LocationRegistryComponent,
     ErrorDialogComponent,
