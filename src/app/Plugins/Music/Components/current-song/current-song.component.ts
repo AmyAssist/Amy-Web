@@ -42,13 +42,7 @@ export class CurrentSongComponent implements OnInit, OnDestroy {
   currentTitle: string;
   currentImageUrl: string;
 
-  constructor(private readonly musicService: MusicDataService, private readonly musicTransService: MusicDataTransferService) {
-    this.subscription = this.musicTransService.getMessage().subscribe(message => {
-      this.message = message;
-      console.log(message);
-      this.getCurrentSong();
-    });
-  }
+  constructor(private readonly musicService: MusicDataService, private readonly musicTransService: MusicDataTransferService) {  }
 
   ngOnInit() {
     this.musicData = new Music;
@@ -58,6 +52,12 @@ export class CurrentSongComponent implements OnInit, OnDestroy {
 
     this.getCurrentSong();
     this.getVolume();
+
+    this.subscription = this.musicTransService.getMessage().subscribe(message => {
+      this.message = message;
+      console.log(message);
+      this.getCurrentSong();
+    });
 
     setInterval(() => this.getCurrentSong(), 5000);
   }
@@ -82,11 +82,15 @@ export class CurrentSongComponent implements OnInit, OnDestroy {
         this.musicData = { ...data };
         this.currentArtist = this.musicData.artists[0].toString();
         this.currentTitle = this.musicData.name;
+        this.musicCoverUrl = this.musicData.imageUrl;
         this.playing = true;
+        console.log('cover set 1');
         if (this.musicTransService.getImageChanged) {
           this.musicCoverUrl = this.musicTransService.getImageUrl();
           this.musicTransService.setImageChanged(false);
+          console.log(this.musicTransService.getImageChanged , 'test bool');
         } else {
+          console.log('cover set 2');
           this.musicCoverUrl = this.musicData.imageUrl;
         }
       });
