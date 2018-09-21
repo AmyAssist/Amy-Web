@@ -1,5 +1,6 @@
 .text {
-    word-wrap: break-word;
+	word-wrap: break-word;
+	white-space: pre;
 }
 
 /* Speech Bubbles */
@@ -11,6 +12,7 @@
 	left: 0px;
 	width: fit-content;
 	max-width: 70%;
+	color: white;
 }
 /* Bubble pointer */
 .speech-bubble:after{
@@ -24,7 +26,7 @@
 
 /* Response Bubble */
 .speech-bubble.response {
-	background: #E0E0E0;
+	background: #3F51B5;
     margin-left: 20px;
 	align-self: flex-start;
 
@@ -33,7 +35,7 @@
 
 .speech-bubble.response:after{
 	left: 0;
-	border-right-color: #E0E0E0;
+	border-right-color: #3F51B5;
 	border-left: 0;
 	border-top: 0;
 	margin-top: -10px;
@@ -42,7 +44,7 @@
 
 /* user Bubble */
 .speech-bubble.no-response {
-	background: #9FA8DA;
+	background: #616161;
     margin-right: 20px;
 	align-self: flex-end;
 	margin-left: auto;
@@ -52,7 +54,7 @@
 
 .speech-bubble.no-response:after {
 	right: 0;
-	border-left-color: #9FA8DA;
+	border-left-color: #616161;
 	border-right: 0;
 	border-bottom: 0;
 	margin-top: -10px;
