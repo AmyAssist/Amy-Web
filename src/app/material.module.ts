@@ -1,36 +1,37 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { HttpClientModule } from '@angular/common/http';
+import { NgModule } from '@angular/core';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
+    MatAutocompleteModule,
     MatButtonModule,
     MatCheckboxModule,
-    MatToolbarModule,
-    MatGridListModule,
-    MatMenuModule,
-    MatListModule,
     MatDividerModule,
+    MatGridListModule,
+    MatListModule,
+    MatMenuModule,
     MatNativeDateModule,
-    MatAutocompleteModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatToolbarModule
 } from '@angular/material';
-import { BrowserModule } from '@angular/platform-browser';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatSelectModule } from '@angular/material/select';
-import { MatInputModule } from '@angular/material/input';
-import { MatCardModule } from '@angular/material/card';
-import { MatExpansionModule } from '@angular/material/expansion';
-import { MatIconModule } from '@angular/material/icon';
-import { MatTabsModule } from '@angular/material/tabs';
-import { MatSliderModule } from '@angular/material/slider';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
-import { RouterModule, Routes } from '@angular/router';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatStepperModule } from '@angular/material/stepper';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatCardModule } from '@angular/material/card';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatSliderModule } from '@angular/material/slider';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatTabsModule } from '@angular/material/tabs';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule } from '@angular/router';
+
 
 @NgModule({
     imports: [
@@ -63,7 +64,8 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
         MatButtonToggleModule,
         ReactiveFormsModule,
         MatAutocompleteModule,
-        MatSnackBarModule
+        MatSnackBarModule,
+        MatProgressBarModule
     ],
     exports: [
         CommonModule,
@@ -94,7 +96,8 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
         MatStepperModule,
         MatButtonToggleModule,
         MatAutocompleteModule,
-        MatSnackBarModule
+        MatSnackBarModule,
+        MatProgressBarModule
     ],
     declarations: [],
     providers: []
