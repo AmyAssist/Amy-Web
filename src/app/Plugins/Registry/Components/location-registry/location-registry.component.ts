@@ -10,12 +10,10 @@ import { AsyncTableDataSource } from '../../AsyncTableDataSource';
  * @author Benno Krauß
  */
 @Component({
-    selector: 'app-locationregistry',
+    selector: 'app-location-registry',
     templateUrl: './location-registry.component.html',
     styleUrls: ['./location-registry.component.css'],
-    providers: [
-        LocationValidatorService
-    ]
+    providers: [LocationValidatorService]
 })
 export class LocationRegistryComponent implements OnInit {
 
@@ -26,12 +24,13 @@ export class LocationRegistryComponent implements OnInit {
 
 
 
-    constructor(private readonly registryService: LocationRegistryDataService, private readonly locationValidator: LocationValidatorService,
+    constructor(private readonly registryService: LocationRegistryDataService,
+        private readonly validatorService: LocationValidatorService,
         private readonly dialog: MatDialog) {
     }
 
     ngOnInit() {
-        this.dataSource = new AsyncTableDataSource<Location>([], Location, this.locationValidator,
+        this.dataSource = new AsyncTableDataSource<Location>([], Location, this.validatorService,
             this.insertLocation.bind(this),
             this.updateLocation.bind(this),
             this.deleteLocation.bind(this));
@@ -50,7 +49,6 @@ export class LocationRegistryComponent implements OnInit {
                 const l: Location = this.copyLocationObject(loc);
                 result.push(l);
             }
-            console.log('got locations', result);
             this.dataSource.updateDatasource(result, { emitEvent: true });
         });
     }
