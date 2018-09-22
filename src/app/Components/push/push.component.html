@@ -4,13 +4,20 @@
     <p *ngIf="!this.enabled">Push Notification are not enabled in this Browser!</p>
     <div *ngIf="this.enabled">
       <div *ngIf="!this.isSubscripted">
-        <button mat-raised-button color="primary" (click)="activate(name.value)">Activate</button>
+        <button mat-raised-button color="primary" [disabled]="isProcessing" (click)="activate(name.value)">Activate</button>
         <mat-form-field style="margin-left: 8px">
           <mat-label>Name</mat-label>
           <input matInput type="text" #name>
         </mat-form-field>
       </div>
+      <button mat-raised-button *ngIf="this.isSubscripted" color="primary" [disabled]="isProcessing" (click)="deactivate()">Deactivate</button>
+      <div>
+        <mat-spinner *ngIf="isProcessing" diameter="30" aria-label="processing"></mat-spinner>
+      </div>
+      <mat-error *ngIf="error">
+        {{error}}
+      </mat-error>
+      <p *ngIf="success">{{success}}</p>
     </div>
-    <button mat-raised-button *ngIf="this.isSubscripted" color="primary" (click)="deactivate()">Deactivate</button>
   </section>
 </div>

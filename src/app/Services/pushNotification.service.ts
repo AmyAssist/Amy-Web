@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { SwPush } from '@angular/service-worker';
-import { map } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 import { BackendResolver } from './backendResolver.service';
 
 @Injectable({
@@ -44,7 +44,8 @@ export class PushNotificationService {
     }
 
     public isSubscripted(): Promise<boolean> {
-        return this.swPush.subscription.pipe(map(sub => sub !== null)).toPromise();
+        return new Promise((resolve: (value: boolean) => void, reject) =>
+            this.swPush.subscription.pipe(take(1), map(sub => sub !== null)).subscribe(b => resolve(b), e => reject(e)));
     }
 
     public isEnabled(): boolean {
