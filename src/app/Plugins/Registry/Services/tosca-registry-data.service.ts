@@ -10,7 +10,7 @@ import { Tosca } from '../Objects/tosca';
 })
 export class ToscaRegistryDataService {
   get path() {
-    return this.backend.backendURL.getValue() + 'tosca/configurations';
+    return this.backend.backendURL.getValue() + 'tosca/configurations/';
   }
 
   httpOptionsSendJSON = {
