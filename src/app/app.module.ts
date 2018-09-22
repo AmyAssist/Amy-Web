@@ -23,16 +23,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { ClockComponent } from './Plugins/Clock/Components/clock/clock.component';
-import { EmailComponent } from './Plugins/Email/Components/email/email.component';
-import { TimerComponent } from './Plugins/Timer/Components/timer/timer.component';
 
 import { LocationRegistryComponent } from './Plugins/Registry/Components/location-registry/location-registry.component';
 import { RegistryContainerComponent } from './Plugins/Registry/Components/registry-container/registry-container.component';
 import { ContactRegistryComponent } from './Plugins/Registry/Components/contact-registry/contact-registry.component';
-import { MessageListComponent } from './Plugins/Email/Components/messagelist/messagelist.component';
 
 import { ErrorDialogComponent } from './Components/error-dialog/error-dialog.component';
+import { PushComponent } from './Components/push/push.component';
 import { LoginComponent } from './Components/login/login.component';
 
 import { AuthService } from './Services/auth.service';
@@ -51,6 +48,9 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 
 import { CalendarModule } from './Plugins/Calendar/calendar.module';
+import { EmailModule } from './Plugins/Email/email.module';
+import { ClockModule } from './Plugins/Clock/clock.module';
+import { TimerModule } from './Plugins/Timer/timer.module';
 
 /*
     Routing of the components to the respective links
@@ -67,24 +67,13 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'clock',
-    component: ClockComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'timer',
-    component: TimerComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'email',
-    component: EmailComponent,
-    canActivate: [AuthGuard]
-  },
-  {
     path: 'registry',
     component: RegistryContainerComponent,
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'push',
+    component: PushComponent
   },
   {
     path: 'login',
@@ -96,22 +85,22 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    ClockComponent,
     HomeComponent,
-    EmailComponent,
-    TimerComponent,
+    PushComponent,
     LoginComponent,
     LocationRegistryComponent,
     ErrorDialogComponent,
     RegistryContainerComponent,
     ContactRegistryComponent,
     MessagesContainerComponent,
-    MessageListComponent,
   ],
   imports: [
     CalendarModule,
+    ClockModule,
+    EmailModule,
     MusicModule,
     NavigationModule,
+    TimerModule,
     WeatherModule,
     MaterialModule,
     BrowserModule,
