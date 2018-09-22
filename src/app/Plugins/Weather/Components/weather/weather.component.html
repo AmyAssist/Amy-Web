@@ -1,5 +1,5 @@
 <div id="completeLayout" fxLayout="column" fxLayoutAlign="space-around center" class="mat-elevation-z2">
-  <mat-progress-bar *ngIf="!locationSelected" mode="indeterminate"></mat-progress-bar>
+  <mat-progress-bar *ngIf="!locationSelected && !noLocationFound" mode="indeterminate"></mat-progress-bar>
   <div id="WeatherInstantLayout" class="weather_instant_layout" fxLayout="row wrap" fxLayoutAlign="space-around center">
 
     <!--Select location for weather report-->
