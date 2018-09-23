@@ -2,9 +2,10 @@
   <div *ngIf="isResponse(message)">
     <div class="speech-bubble response">
       <div>
-          <p>
+          <p class="widgetContainer">
             <app-weather-day *ngIf="message.response.widget === 'app-weather-day'" [dayReport]="message.response.attachment"></app-weather-day>
             <app-route-widget *ngIf="message.response.widget === 'app-route-widget'" [info]="message.response.attachment"></app-route-widget>
+            <app-current-song *ngIf="message.response.widget === 'app-current-song'"></app-current-song>
           </p>
           <p class="mat-body-1 text">{{message.response.text}}</p>
       </div>
