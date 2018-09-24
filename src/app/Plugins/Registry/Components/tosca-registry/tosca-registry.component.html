@@ -1,0 +1,53 @@
+<div>
+  <mat-table class="table-margin-bottom" #table [dataSource]="dataSource">
+
+    <ng-container matColumnDef="key">
+      <mat-header-cell *matHeaderCellDef>Key</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <mat-form-field floatLabel="{{ row.editing ? 'float' : 'never'}}">
+          <input matInput [formControl]="row.validator.controls['key']" [readonly]="!row.editing" placeholder="Key" [(ngModel)]="row.currentData.key">
+        </mat-form-field>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="value">
+      <mat-header-cell *matHeaderCellDef>Value</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <mat-form-field floatLabel="{{ row.editing ? 'float' : 'never'}}">
+          <input matInput [formControl]="row.validator.controls['value']" [readonly]="!row.editing" placeholder="Value" [(ngModel)]="row.currentData.value">
+        </mat-form-field>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="tag">
+      <mat-header-cell *matHeaderCellDef>Tag</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <mat-form-field floatLabel="{{ row.editing ? 'float' : 'never'}}">
+          <input matInput [formControl]="row.validator.controls['tag']" [readonly]="!row.editing" placeholder="Tag" [(ngModel)]="row.currentData.tag">
+        </mat-form-field>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="actionsColumn">
+      <mat-header-cell *matHeaderCellDef>
+        <button mat-icon-button color="accent" (click)="dataSource.createNew()">
+          <em class="fa fa-plus mat-icon"></em>
+        </button>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <button *ngIf="!row.editing" mat-icon-button color="primary" focusable="false" (click)="row.startEdit()">
+          <em class="fa fa-pencil mat-icon"></em>
+        </button>
+        <button *ngIf="row.editing" mat-icon-button color="primary" focusable="false" (click)="dataSource.confirmHandler(row)">
+          <em class="fa fa-check mat-icon"></em>
+        </button>
+        <button mat-icon-button color="primary" focusable="false" (click)="dataSource.deleteOrCancelHandler(row)">
+          <em class="fa fa-times mat-icon"></em>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</div>
