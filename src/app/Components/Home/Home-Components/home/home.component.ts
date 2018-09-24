@@ -50,6 +50,8 @@ export class HomeComponent implements OnInit {
     // is the input field active
     private _keyboardActive = false;
 
+    private muteSoundWhileSr: boolean;
+
     constructor(
         private readonly speechRecognitionService: SpeechRecognitionService,
         private readonly ttsService: TTSService,
@@ -68,7 +70,7 @@ export class HomeComponent implements OnInit {
             setTimeout(() => {
                 const table = this.scrollView.nativeElement.lastChild;
                 if (table.lastChild && table.lastChild.scrollIntoView) {
-                    table.lastChild.scrollIntoView({block: 'start', behavior: 'smooth'});
+                    table.lastChild.scrollIntoView({ block: 'start', behavior: 'smooth' });
                 }
             }, 10);
         });
@@ -145,11 +147,19 @@ export class HomeComponent implements OnInit {
     triggerSR() {
         if (this.srState !== 'active') {
             this.srState = 'active';
+            this.muteSoundWhileSr = false;
+            if (this.options.soundEnabled) {
+                this.triggerSound();
+                this.muteSoundWhileSr = true;
+            }
             if (this.backendSound.checkBackendSoundState()) {
                 this.backendSoundMuted = true;
                 this.backendSound.mute().subscribe();
             }
             this.speechRecognitionService.recognize((result) => {
+                if (this.muteSoundWhileSr) {
+                    this.options.unmute();
+                }
                 this.srResponse(result);
                 this.srState = 'inactive';
                 if (this.backendSoundMuted) {
@@ -159,6 +169,9 @@ export class HomeComponent implements OnInit {
             });
         } else {
             this.srState = 'inactive';
+            if (this.muteSoundWhileSr) {
+                this.options.unmute();
+            }
             if (this.backendSoundMuted) {
                 this.backendSoundMuted = false;
                 this.backendSound.unmute().subscribe();
