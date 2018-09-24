@@ -50,8 +50,6 @@ export class HomeComponent implements OnInit {
     // is the input field active
     private _keyboardActive = false;
 
-    private muteSoundWhileSr: boolean;
-
     constructor(
         private readonly speechRecognitionService: SpeechRecognitionService,
         private readonly ttsService: TTSService,
@@ -147,19 +145,12 @@ export class HomeComponent implements OnInit {
     triggerSR() {
         if (this.srState !== 'active') {
             this.srState = 'active';
-            this.muteSoundWhileSr = false;
-            if (this.options.soundEnabled) {
-                this.triggerSound();
-                this.muteSoundWhileSr = true;
-            }
+            this.ttsService.stop();
             if (this.backendSound.checkBackendSoundState()) {
                 this.backendSoundMuted = true;
                 this.backendSound.mute().subscribe();
             }
             this.speechRecognitionService.recognize((result) => {
-                if (this.muteSoundWhileSr) {
-                    this.options.unmute();
-                }
                 this.srResponse(result);
                 this.srState = 'inactive';
                 if (this.backendSoundMuted) {
@@ -169,9 +160,6 @@ export class HomeComponent implements OnInit {
             });
         } else {
             this.srState = 'inactive';
-            if (this.muteSoundWhileSr) {
-                this.options.unmute();
-            }
             if (this.backendSoundMuted) {
                 this.backendSoundMuted = false;
                 this.backendSound.unmute().subscribe();
