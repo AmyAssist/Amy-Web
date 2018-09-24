@@ -56,7 +56,7 @@ export class RoutePlannerComponent implements OnInit {
     return t ? t.name : '';
   }
 
-  constructor(private readonly navigationService: NavigationDataService, private calcService: CalcService) { }
+  constructor(private readonly navigationService: NavigationDataService, private readonly calcService: CalcService) { }
 
   ngOnInit() {
     this.showWay = false;
