@@ -6,10 +6,12 @@ import { combineLatest, Observable } from 'rxjs';
 import { FormControl } from '@angular/forms';
 import { map, startWith } from 'rxjs/operators';
 
-class Tag {
-    constructor(readonly name: string) { }
-}
+/*
+  Component for the Navigation-Plugin
+  The functionalities are splitted in multiple components that unite in this one
 
+  @author: Tobias Siemonsen
+*/
 @Component({
     selector: 'app-navigation',
     templateUrl: './navigation.component.html',

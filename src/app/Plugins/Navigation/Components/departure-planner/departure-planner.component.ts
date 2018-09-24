@@ -10,6 +10,12 @@ class Tag {
     constructor(readonly name: string) { }
 }
 
+/*
+  Component for the departure-planner functionality of the Navigation-Plugin
+  it is Part of the navigation component
+
+  @author: Tobias Siemonsen
+*/
 @Component({
     selector: 'app-departure-planner',
     templateUrl: './departure-planner.component.html',
@@ -22,25 +28,13 @@ export class DeparturePlannerComponent implements OnInit {
     from: string;
     to: string;
     timeDate: Date;
-    travelMode1: string;
-    travelMode2: string;
-    showWay: boolean;
-    showMode: boolean;
+    travelMode: string;
     showWhen: boolean;
     whenTime: string;
     whenTimeDate: Date;
     bestTransport: BestTransportResult;
-    Time: string;
 
     transit: boolean;
-    resultMode: string;
-    resultDistance: string;
-    resultDuration: string;
-    resultArrivalTime: string;
-    resultDepartureTime: string;
-    resultStartAddress: string;
-    resultEndAddress: string;
-
 
     tags: Observable<Tag[]>;
     originFilteredTags: Observable<Tag[]>;
@@ -56,9 +50,7 @@ export class DeparturePlannerComponent implements OnInit {
     constructor(private readonly navigationService: NavigationDataService) { }
 
     ngOnInit() {
-        this.showWay = false;
         this.showWhen = false;
-        this.showMode = false;
         this.transit = false;
         this.navPathData = new NavPath();
         this.bestTransport = new BestTransportResult();
@@ -66,6 +58,10 @@ export class DeparturePlannerComponent implements OnInit {
         this.loadTags();
     }
 
+    /*
+        This method loads the tags from the backend so they can be displayed in the UI
+        and work as an entry string
+    */
     loadTags() {
         this.tags = this.navigationService.getTags().pipe(map(tags => tags.map(t => new Tag(t))));
 
@@ -90,18 +86,24 @@ export class DeparturePlannerComponent implements OnInit {
         ).pipe(mapping);
     }
 
+    /*
+        This Method executes the main functionality, it calls the createRoute Method
+        and send the object with the backend service to the backend,
+        then it uses the recieved time object to display it.
+    */
     async searchWhen(from: string | Tag, to: string | Tag, date: string) {
         this.createRoute(from, to, date);
-        this.navPathData.travelmode = this.travelMode2;
+        this.navPathData.travelmode = this.travelMode;
         this.navigationService.when(this.navPathData).subscribe((data: string) => {
             this.whenTime = data;
             this.whenTimeDate = new Date(this.whenTime);
-            this.showWay = false;
             this.showWhen = true;
-            this.showMode = false;
         });
     }
 
+    /*
+        This Method creates an navPath object which is send to the navigation backend to calculate the best travel mode
+    */
     createRoute(from: string | Tag, to: string | Tag, date: string) {
         if (from instanceof Tag) {
             this.navPathData.originTag = from.name;
@@ -115,37 +117,5 @@ export class DeparturePlannerComponent implements OnInit {
         }
         this.timeDate = new Date(date);
         this.navPathData.time = this.timeDate.toISOString();
-    }
-
-    calcResult() {
-        if (this.bestTransport.mode.toString() === 'DRIVING') {
-            this.resultMode = 'car';
-            this.transit = false;
-        } else if (this.bestTransport.mode.toString() === 'TRANSIT') {
-            this.resultMode = 'transit';
-            this.transit = true;
-        } else if (this.bestTransport.mode.toString() === 'BICYCLING') {
-            this.resultMode = 'bicycle';
-            this.transit = false;
-        }
-
-        this.resultDistance = this.bestTransport.route.legs[0].distance.humanReadable;
-        this.resultDuration = this.bestTransport.route.legs[0].duration.humanReadable;
-        if (this.transit) {
-            const blank = ' ';
-            this.resultArrivalTime = `${this.bestTransport.route.legs[0].arrivalTime.dayOfMonth}
-              /${this.bestTransport.route.legs[0].arrivalTime.monthOfYear}
-              /${this.bestTransport.route.legs[0].arrivalTime.year} ${blank}
-              ${this.bestTransport.route.legs[0].arrivalTime.hourOfDay}
-              :${this.bestTransport.route.legs[0].arrivalTime.minuteOfHour}`;
-            this.resultDepartureTime = `${this.bestTransport.route.legs[0].departureTime.dayOfMonth}
-              /${this.bestTransport.route.legs[0].departureTime.monthOfYear}
-              /${this.bestTransport.route.legs[0].departureTime.year} ${blank}
-              ${this.bestTransport.route.legs[0].departureTime.hourOfDay}
-              :${this.bestTransport.route.legs[0].departureTime.minuteOfHour}`;
-        }
-        this.resultStartAddress = this.bestTransport.route.legs[0].startAddress;
-        this.resultEndAddress = this.bestTransport.route.legs[0].endAddress;
-        console.log(this.transit);
     }
 }

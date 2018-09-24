@@ -19,7 +19,7 @@
 </div>
 
 <mat-form-field>
-  <mat-select [(value)]="travelMode1" placeholder="Travel Mode">
+  <mat-select [(value)]="travelMode" placeholder="Travel Mode">
     <mat-option value="DRIVING">Car</mat-option>
     <mat-option value="BICYCLING">Bicycle</mat-option>
     <mat-option value="TRANSIT">Transit</mat-option>
@@ -38,22 +38,22 @@
 <div *ngIf="showWay" style="margin-top: 1em">
   <div *ngIf="!transit">
     <h3>Route:</h3>
-    <p>Best Travel Mode: {{resultMode}}</p>
-    <p>Distance: {{resultDistance}}</p>
-    <p>Duration: {{resultDuration}}</p>
-    <p>Start-address: {{resultStartAddress}}</p>
-    <p>End-address: {{resultEndAddress}}</p>
+    <p>Best Travel Mode: {{result.resultMode}}</p>
+    <p>Distance: {{result.resultDistance}}</p>
+    <p>Duration: {{result.resultDuration}}</p>
+    <p>Start-address: {{result.resultStartAddress}}</p>
+    <p>End-address: {{result.resultEndAddress}}</p>
   </div>
   <div *ngIf="transit">
     <h3>Route:</h3>
-    <p>Best Travel Mode: {{resultMode}}</p>
-    <p>Distance: {{resultDistance}}</p>
-    <p>Duration: {{resultDuration}}</p>
-    <p>Start-address: {{resultStartAddress}}</p>
-    <p>End-address: {{resultEndAddress}}</p>
+    <p>Best Travel Mode: {{result.resultMode}}</p>
+    <p>Distance: {{result.resultDistance}}</p>
+    <p>Duration: {{result.resultDuration}}</p>
+    <p>Start-address: {{result.resultStartAddress}}</p>
+    <p>End-address: {{result.resultEndAddress}}</p>
 
-    <p>Departure-time: {{resultDepartureTime}}</p>
-    <p>Arrival-time: {{resultArrivalTime}}</p>
+    <p>Departure-time: {{result.resultDepartureTime}}</p>
+    <p>Arrival-time: {{result.resultArrivalTime}}</p>
   </div>
 </div>
 
