@@ -8,7 +8,7 @@ export class MusicDataTransferService {
 
   private readonly subject = new Subject<any>();
   imageUrl: string;
-  imageChanged: boolean;
+  imageChanged = false;
 
   constructor() {
     this.imageChanged = false;
@@ -18,7 +18,7 @@ export class MusicDataTransferService {
     this.imageUrl = newUrl;
   }
 
-  getImageUrl() {
+  getImageUrl(): string {
     return this.imageUrl;
   }
 
@@ -26,7 +26,7 @@ export class MusicDataTransferService {
     this.imageChanged = changed;
   }
 
-  getImageChanged() {
+  getImageChanged(): boolean {
     return this.imageChanged;
   }
 

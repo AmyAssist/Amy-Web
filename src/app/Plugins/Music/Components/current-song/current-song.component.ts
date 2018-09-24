@@ -71,7 +71,6 @@ export class CurrentSongComponent implements OnInit, OnDestroy {
   }
 
   refresh() {
-    console.log('test');
     this.getCurrentSong();
     this.getVolume();
   }
@@ -85,15 +84,12 @@ export class CurrentSongComponent implements OnInit, OnDestroy {
         this.musicData = { ...data };
         this.currentArtist = this.musicData.artists[0].toString();
         this.currentTitle = this.musicData.name;
-        this.musicCoverUrl = this.musicData.imageUrl;
         this.playing = true;
-        console.log('cover set 1');
-        if (this.musicTransService.getImageChanged) {
+        this.musicCoverUrl = this.musicData.imageUrl;
+        if (this.musicTransService.getImageChanged()) {
           this.musicCoverUrl = this.musicTransService.getImageUrl();
           this.musicTransService.setImageChanged(false);
-          console.log(this.musicTransService.getImageChanged , 'test bool');
         } else {
-          console.log('cover set 2');
           this.musicCoverUrl = this.musicData.imageUrl;
         }
       });
