@@ -4,7 +4,7 @@
 
 <button mat-raised-button *ngIf=!fetchingMails (click)='refresh()'>REFRESH</button>
 
-<mat-tab-group mat-stretch-tabs (selectedTabChange)='tabChanged($event)'>
+<mat-tab-group style="margin-top: 1em" mat-stretch-tabs (selectedTabChange)='tabChanged($event)'>
     <mat-tab label='All'>
     </mat-tab>
     <mat-tab label='Important'>

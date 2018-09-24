@@ -1,30 +1,29 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {Location} from '../../Objects/location';
-import {AsyncTableDataSource} from '../../AsyncTableDataSource';
-import {ContactRegistryDataService} from '../../Services/contact-registry-data.service';
-import {ContactValidatorService} from './contact-validator.service';
-import {Contact} from '../../Objects/contact';
-import {ErrorDialogComponent} from '../../../../Components/error-dialog/error-dialog.component';
-import {MatDialog} from '@angular/material';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { AsyncTableDataSource } from '../../AsyncTableDataSource';
+import { ContactRegistryDataService } from '../../Services/contact-registry-data.service';
+import { ContactValidatorService } from './contact-validator.service';
+import { Contact } from '../../Objects/contact';
+import { ErrorDialogComponent } from '../../../../Components/error-dialog/error-dialog.component';
+import { MatDialog } from '@angular/material';
 
 @Component({
     selector: 'app-contact-registry',
     templateUrl: './contact-registry.component.html',
     styleUrls: ['./contact-registry.component.css'],
-    providers: [ ContactValidatorService ]
+    providers: [ContactValidatorService]
 })
 export class ContactRegistryComponent implements OnInit {
 
-    dataSource: AsyncTableDataSource<Location>;
+    dataSource: AsyncTableDataSource<Contact>;
 
     displayedColumns = ['firstName', 'lastName', 'email', 'tag', 'important', 'actionsColumn'];
 
     constructor(private readonly registryService: ContactRegistryDataService,
-                private readonly validatorService: ContactValidatorService,
-                private readonly dialog: MatDialog) {}
+        private readonly validatorService: ContactValidatorService,
+        private readonly dialog: MatDialog) { }
 
     ngOnInit() {
-        this.dataSource = new AsyncTableDataSource<Location>([], Location, this.validatorService,
+        this.dataSource = new AsyncTableDataSource<Contact>([], Contact, this.validatorService,
             this.insertContact.bind(this),
             this.updateContact.bind(this),
             this.deleteContact.bind(this));
@@ -33,7 +32,7 @@ export class ContactRegistryComponent implements OnInit {
     }
 
     refreshContacts() {
-        this.registryService.getAll().subscribe((value: Location[]) => {
+        this.registryService.getAll().subscribe((value: Contact[]) => {
             this.dataSource.updateDatasource(value, { emitEvent: true });
         });
     }

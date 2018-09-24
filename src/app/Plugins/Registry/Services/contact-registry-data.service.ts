@@ -3,7 +3,6 @@ import { catchError } from 'rxjs/operators';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { BackendResolver } from '../../../Services/backendResolver.service';
 import { throwError } from 'rxjs';
-import { Location } from '../Objects/location';
 import { Contact } from '../Objects/contact';
 
 @Injectable({
@@ -58,8 +57,8 @@ export class ContactRegistryDataService {
 
     /**
      *
-     * @param {Location} l
-     * @returns {Observable<Location>} the newly created entity with primary key set
+     * @param {Contact} c
+     * @returns {Observable<Contact>} the newly created entity with primary key set
      */
     post(c: Contact) {
         return this.http.post<Contact>(this.path, c, this.generateHeaders(true, true)).pipe(catchError(this.handleError));
