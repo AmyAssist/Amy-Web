@@ -7,8 +7,8 @@ export class ToscaValidatorService implements ValidatorService {
     getRowValidator(): FormGroup {
         return new FormGroup({
             'key': new FormControl(null, Validators.required),
-            'value': new FormControl(null, Validators.required),
-            'tag': new FormControl(),
+            'value': new FormControl(),
+            'tag': new FormControl(null, Validators.required),
         });
     }
 }
