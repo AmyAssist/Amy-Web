@@ -42,6 +42,8 @@ export class CurrentSongComponent implements OnInit, OnDestroy {
   currentTitle: string;
   currentImageUrl: string;
 
+  refreshSong;
+
   constructor(private readonly musicService: MusicDataService, private readonly musicTransService: MusicDataTransferService) {  }
 
   ngOnInit() {
@@ -59,12 +61,13 @@ export class CurrentSongComponent implements OnInit, OnDestroy {
       this.getCurrentSong();
     });
 
-    setInterval(() => this.getCurrentSong(), 5000);
+     this.refreshSong = setInterval(() => this.getCurrentSong(), 5000);
   }
 
   ngOnDestroy() {
     // unsubscribe to ensure no memory leaks
     this.subscription.unsubscribe();
+    clearInterval(this.refreshSong);
   }
 
   refresh() {

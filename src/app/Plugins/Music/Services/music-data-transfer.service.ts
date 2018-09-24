@@ -6,7 +6,7 @@ import { Observable, Subject } from 'rxjs';
 })
 export class MusicDataTransferService {
 
-  private subject = new Subject<any>();
+  private readonly subject = new Subject<any>();
   imageUrl: string;
   imageChanged: boolean;
 
