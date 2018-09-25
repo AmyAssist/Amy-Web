@@ -2,14 +2,4 @@
     <p style="text-align:center;">
         <img alt="image" class="weather_week_icon" [attr.src]="this.getWeatherIcon(dayReport.iconType) || 'assets/weather/cloudy.svg'" type="image/svg+xml">
     </p>
-    <!--<div id="weatherWeekInformation" fxLayout="row" fxLayoutAlign="space-evenly center">
-        <div fxLayout="column">
-            <p class="text mat-body-2">Currently {{this.round(dayReport.temperature)}}°C</p>
-            <p class="text mat-body-2">Wind {{this.round(dayReport.windSpeed)}} m/s</p>
-        </div>
-        <div fxLayout="column">
-            <img alt="image" class="weather_week_info_icon" [attr.src]="this.getWeatherIcon(dayReport.precipType) || 'assets/weather/rain.svg'" type="image/svg+xml">
-            <p class="text mat-body-2">{{this.round(dayReport.precipProbability * 100)}}%</p>
-        </div>
-    </div>-->
 </div>
