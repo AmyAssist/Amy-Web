@@ -1,6 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {WeatherReportDay} from '../../Objects/weatherReportDay';
 import * as moment from 'moment-timezone';
+import {WeatherReportInstant} from '../../Objects/weatherReportInstant';
 
 
 @Component({
@@ -9,7 +10,7 @@ import * as moment from 'moment-timezone';
     styleUrls: ['./day.component.css']
 })
 export class DayComponent {
-    @Input() dayReport: WeatherReportDay;
+    @Input() dayReport: WeatherReportInstant;
 
     getWeatherIcon(iconType: WeatherReportDay['iconType']): string {
         switch (iconType) {

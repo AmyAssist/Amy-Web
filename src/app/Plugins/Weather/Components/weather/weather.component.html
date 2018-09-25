@@ -24,7 +24,7 @@
     <div id="weatherInstantInformation" class="flex_layout" *ngIf="locationSelected" fxLayout="column">
       <div fxLayout="row" fxLayoutAlign="space-around center">
         <div fxLayout="column" *ngIf="locationSelected" style="margin-right: 8px">
-          <img alt="image" class="weather_instant_info_icon mat-h3" [attr.src]="showReportWeek[selectedDay].precipIconSrc"
+          <img alt="image" class="weather_instant_info_icon mat-h3" [attr.src]="this.getWeatherIcon(showReportWeek[selectedDay].precipType)"
             type="image/svg+xml">
           <img alt="image" class="weather_instant_info_icon mat-h3" src="assets/weather/wind.svg" type="image/svg+xml">
           <img alt="image" class="weather_instant_info_icon mat-h3" src="assets/weather/sunrise.svg" type="image/svg+xml">
@@ -50,7 +50,7 @@
     <!-- Selected day is today -> using current correct values -->
     <div fxFlex *ngIf="locationSelected && selectedDay == 0" id="weatherInstant" class="flex_layout big" fxLayout="column"
       fxLayoutAlign="space-around center">
-      <img alt="image" class="weather_instant_icon" [attr.src]="showReportInstant.iconSrc" type="image/svg+xml" *ngIf="locationSelected">
+      <img alt="image" class="weather_instant_icon" [attr.src]="this.getWeatherIcon(showReportInstant.iconType)" type="image/svg+xml" *ngIf="locationSelected">
       <p style="text-align:center;" class="mat-h1" *ngIf="locationSelected">
         <br />
         {{showReportInstant.temperature}}°C
@@ -61,7 +61,7 @@
     <!-- Selected day is in the future -> using forecasted values -->
     <div fxFlex *ngIf="locationSelected && selectedDay != 0" id="weatherInstant" class="flex_layout big" fxLayout="column"
       fxLayoutAlign="space-around center">
-      <img alt="image" class="weather_instant_icon" [attr.src]="showReportWeek[selectedDay].iconSrc" type="image/svg+xml"
+      <img alt="image" class="weather_instant_icon" [attr.src]="this.getWeatherIcon(showReportWeek[selectedDay].iconType)" type="image/svg+xml"
         *ngIf="locationSelected">
       <p style="text-align:center;" class="mat-h1" *ngIf="locationSelected">
         <br />
@@ -88,7 +88,7 @@
       <button [class]="getClassOf(weatherReportWeek)" (click)="selectNewDay(weatherReportWeek)">
         <p style="text-align:center;" class="text mat-body-2">{{weatherReportWeek.time}}</p>
         <p style="text-align:center;">
-          <img alt="image" class="weather_week_icon" [attr.src]="weatherReportWeek.iconSrc" type="image/svg+xml">
+          <img alt="image" class="weather_week_icon" [attr.src]="this.getWeatherIcon(weatherReportWeek.iconType)" type="image/svg+xml">
         </p>
         <div id="weatherWeekInformation" fxLayout="row" fxLayoutAlign="space-evenly center">
           <div fxLayout="column">
@@ -96,7 +96,7 @@
             <p class="text color_blue mat-body-2">{{weatherReportWeek.temperatureMin}}°C</p>
           </div>
           <div fxLayout="column">
-            <img alt="image" class="weather_week_info_icon" [attr.src]="weatherReportWeek.precipIconSrc" type="image/svg+xml">
+            <img alt="image" class="weather_week_info_icon" [attr.src]="this.getWeatherIcon(weatherReportWeek.precipType)" type="image/svg+xml">
             <p class="text mat-body-2">{{weatherReportWeek.precipProbability}}%</p>
           </div>
         </div>
