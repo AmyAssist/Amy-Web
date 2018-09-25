@@ -6,7 +6,7 @@
 .lineSeparator {
     width: 100%;
     height: 1px;
-    background-color: rgb(85, 26, 139);
+    background-color: white;
 }
 
 .widgetBackground {
@@ -14,6 +14,7 @@
 }
 
 .widgetBottomBar {
+    color: white;
     padding: 10px;
     display: flex;
     justify-content: center;
