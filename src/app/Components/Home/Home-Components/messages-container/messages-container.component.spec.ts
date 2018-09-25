@@ -9,6 +9,7 @@ import { CommandHandlerService } from '../../Home-Services/command-handler.servi
 import { ChatService } from '../../Home-Services/chat.service';
 import {WeatherModule} from '../../../../Plugins/Weather/weather.module';
 import {NavigationModule} from '../../../../Plugins/Navigation/navigation.module';
+import {MusicModule} from '../../../../Plugins/Music/music.module';
 
 describe('MessagesContainerComponent', () => {
   let component: MessagesContainerComponent;
@@ -29,7 +30,8 @@ describe('MessagesContainerComponent', () => {
         FormsModule,
         BrowserAnimationsModule,
         WeatherModule,
-        NavigationModule
+        NavigationModule,
+        MusicModule
       ],
       providers: [
         { provide: OptionsService, useValue: optionsSpy },
