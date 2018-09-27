@@ -27,6 +27,7 @@ import { AppComponent } from './app.component';
 import { LocationRegistryComponent } from './Plugins/Registry/Components/location-registry/location-registry.component';
 import { RegistryContainerComponent } from './Plugins/Registry/Components/registry-container/registry-container.component';
 import { ContactRegistryComponent } from './Plugins/Registry/Components/contact-registry/contact-registry.component';
+import { ToscaRegistryComponent } from './Plugins/Registry/Components/tosca-registry/tosca-registry.component';
 
 import { ErrorDialogComponent } from './Components/error-dialog/error-dialog.component';
 import { PushComponent } from './Components/push/push.component';
@@ -92,6 +93,7 @@ const routes: Routes = [
     ErrorDialogComponent,
     RegistryContainerComponent,
     ContactRegistryComponent,
+    ToscaRegistryComponent,
     MessagesContainerComponent,
   ],
   imports: [

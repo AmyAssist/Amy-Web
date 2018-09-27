@@ -1,5 +1,7 @@
 import { forwardRef, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { BrowserModule, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
+import { GestureConfig } from '@angular/material';
 
 import { MusicComponent } from './Components/music/music.component';
 import { MusicDataService } from './Services/music-data.service';
@@ -25,6 +27,8 @@ import { DevicesComponent } from '../../Plugins/Music/Components/devices/devices
     ContentComponent,
     DevicesComponent
   ],
-  providers: [forwardRef(() => MusicDataService)]
+  providers: [
+    { provide: HAMMER_GESTURE_CONFIG, useClass: GestureConfig },
+    forwardRef(() => MusicDataService)]
 })
 export class MusicModule { }
