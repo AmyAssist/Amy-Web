@@ -42,13 +42,9 @@ export class CurrentSongComponent implements OnInit, OnDestroy {
   currentTitle: string;
   currentImageUrl: string;
 
-  constructor(private readonly musicService: MusicDataService, private readonly musicTransService: MusicDataTransferService) {
-    this.subscription = this.musicTransService.getMessage().subscribe(message => {
-      this.message = message;
-      console.log(message);
-      this.getCurrentSong();
-    });
-  }
+  refreshSong;
+
+  constructor(private readonly musicService: MusicDataService, private readonly musicTransService: MusicDataTransferService) {  }
 
   ngOnInit() {
     this.musicData = new Music;
@@ -59,16 +55,22 @@ export class CurrentSongComponent implements OnInit, OnDestroy {
     this.getCurrentSong();
     this.getVolume();
 
-    setInterval(() => this.getCurrentSong(), 5000);
+    this.subscription = this.musicTransService.getMessage().subscribe(message => {
+      this.message = message;
+      console.log(message);
+      this.getCurrentSong();
+    });
+
+     this.refreshSong = setInterval(() => this.getCurrentSong(), 5000);
   }
 
   ngOnDestroy() {
     // unsubscribe to ensure no memory leaks
     this.subscription.unsubscribe();
+    clearInterval(this.refreshSong);
   }
 
   refresh() {
-    console.log('test');
     this.getCurrentSong();
     this.getVolume();
   }
@@ -83,7 +85,8 @@ export class CurrentSongComponent implements OnInit, OnDestroy {
         this.currentArtist = this.musicData.artists[0].toString();
         this.currentTitle = this.musicData.name;
         this.playing = true;
-        if (this.musicTransService.getImageChanged) {
+        this.musicCoverUrl = this.musicData.imageUrl;
+        if (this.musicTransService.getImageChanged()) {
           this.musicCoverUrl = this.musicTransService.getImageUrl();
           this.musicTransService.setImageChanged(false);
         } else {

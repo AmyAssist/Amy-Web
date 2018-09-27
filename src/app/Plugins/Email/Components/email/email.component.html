@@ -2,7 +2,7 @@
 
   <h1 class='mat-display-1 header'>E-Mail</h1>
 
-  <p *ngIf=checkingConnection>Checking if connection already exists...</p>
+  <p *ngIf=checkingConnection class="mat-body-1">Checking if connection already exists...</p>
 
   <div *ngIf='!connected && !checkingConnection' id="loginContainer">
 
@@ -39,6 +39,6 @@
 
   <div *ngIf='connected && !checkingConnection'>
     <button mat-raised-button color="primary" style="float: right" (click)="disconnect()">Log Out</button>
-    <app-email-messagelist stlye="margin-top: 1em"></app-email-messagelist>
+    <app-email-messagelist></app-email-messagelist>
   </div>
 </div>

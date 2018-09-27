@@ -6,9 +6,9 @@ import { Observable, Subject } from 'rxjs';
 })
 export class MusicDataTransferService {
 
-  private subject = new Subject<any>();
+  private readonly subject = new Subject<any>();
   imageUrl: string;
-  imageChanged: boolean;
+  imageChanged = false;
 
   constructor() {
     this.imageChanged = false;
@@ -18,7 +18,7 @@ export class MusicDataTransferService {
     this.imageUrl = newUrl;
   }
 
-  getImageUrl() {
+  getImageUrl(): string {
     return this.imageUrl;
   }
 
@@ -26,7 +26,7 @@ export class MusicDataTransferService {
     this.imageChanged = changed;
   }
 
-  getImageChanged() {
+  getImageChanged(): boolean {
     return this.imageChanged;
   }
 
