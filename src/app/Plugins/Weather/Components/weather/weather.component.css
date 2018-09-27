@@ -39,9 +39,18 @@
     background-color: white;
 }
 
-.flex_layout.big {
-    min-width: 300px;
+@media (min-width: 320px){
+    .flex_layout.big {
+        min-width: 300px;
+    }
 }
+
+@media (min-width: 220px) and (max-width: 319px){
+    .flex_layout.big {
+        min-width: 200px;
+    }
+}
+
 
 .weather_select_day {
     width: 100%;

@@ -69,7 +69,7 @@ export class HomeComponent implements OnInit {
             setTimeout(() => {
                 const table = this.scrollView.nativeElement.lastChild;
                 if (table.lastChild && table.lastChild.scrollIntoView) {
-                    table.lastChild.scrollIntoView({block: 'start', behavior: 'smooth'});
+                    table.lastChild.scrollIntoView({ block: 'start', behavior: 'smooth' });
                 }
             }, 10);
         });
@@ -146,6 +146,7 @@ export class HomeComponent implements OnInit {
     triggerSR() {
         if (this.srState !== 'active') {
             this.srState = 'active';
+            this.ttsService.stop();
             if (this.backendSound.checkBackendSoundState()) {
                 this.backendSoundMuted = true;
                 this.backendSound.mute().subscribe();
