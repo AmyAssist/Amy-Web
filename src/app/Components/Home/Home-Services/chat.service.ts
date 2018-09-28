@@ -2,6 +2,7 @@ import { Injectable, NgZone } from '@angular/core';
 import { TTSService } from '../../../Services/tts.service';
 import { Message } from '../Home-Objects/message';
 import {BehaviorSubject} from 'rxjs';
+import {Response} from '../Home-Objects/response';
 
 @Injectable({
   providedIn: 'root'
@@ -21,16 +22,11 @@ export class ChatService {
      * @param name Name of the Message Source
      * @param value String of the Message
      */
-  public addMessage(from: string, value: string, readLoud: boolean) {
-    this.messages.push({ from, value });
+  public addMessage(from: string, response: Response, readLoud: boolean) {
+    this.messages.push({ from, response });
     this.stream.next(this.messages);
     if (readLoud) {
-      this.ttsService.speak(value);
+      this.ttsService.speak(response.text);
     }
-
-  }
-
-  getMessages() {
-    return this.messages;
   }
 }

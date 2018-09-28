@@ -10,6 +10,9 @@ export class WeatherReportInstant {
     iconSrc = 'assets/weather/cloudy.svg';
     time: string;
 
+    sunriseTime: string;
+    sunsetTime: string;
+
     constructor() {
 
     }

@@ -1,4 +1,12 @@
+import {Response} from './response';
+
 export class Message {
+
     from: string;
-    value: string;
+    response: Response;
+
+    constructor(from: string, response: Response) {
+        this.from = from;
+        this.response = response;
+    }
 }

@@ -7,6 +7,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { OptionsService } from '../../../../Services/options.service';
 import { CommandHandlerService } from '../../Home-Services/command-handler.service';
 import { ChatService } from '../../Home-Services/chat.service';
+import {WeatherModule} from '../../../../Plugins/Weather/weather.module';
+import {NavigationModule} from '../../../../Plugins/Navigation/navigation.module';
+import {MusicModule} from '../../../../Plugins/Music/music.module';
 
 describe('MessagesContainerComponent', () => {
   let component: MessagesContainerComponent;
@@ -25,7 +28,10 @@ describe('MessagesContainerComponent', () => {
         MatButtonModule,
         MatInputModule,
         FormsModule,
-        BrowserAnimationsModule
+        BrowserAnimationsModule,
+        WeatherModule,
+        NavigationModule,
+        MusicModule
       ],
       providers: [
         { provide: OptionsService, useValue: optionsSpy },

@@ -1,18 +1,18 @@
 .text {
 	word-wrap: break-word;
 	white-space: pre-line;
+	padding: 8px;
 }
 
 /* Speech Bubbles */
 .speech-bubble {
 	position: relative;
-	padding: 8px;
-    border-radius: .4em;
+    border-radius: .6em;
     margin-bottom: 10px;
 	left: 0px;
 	width: fit-content;
-	max-width: 70%;
 	color: white;
+	max-width: 50%;
 }
 /* Bubble pointer */
 .speech-bubble:after{
@@ -59,4 +59,11 @@
 	border-bottom: 0;
 	margin-top: -10px;
 	margin-right: -20px;
+}
+
+
+.widgetContainer {
+	border-top-left-radius: .6em;
+	border-top-right-radius: .6em;
+	overflow: hidden;
 }
