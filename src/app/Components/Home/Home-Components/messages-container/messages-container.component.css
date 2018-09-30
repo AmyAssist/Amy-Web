@@ -12,8 +12,13 @@
 	left: 0px;
 	width: fit-content;
 	color: white;
-	max-width: 50%;
+	max-width: 75%;
 }
+@media (min-width: 720px) {
+.speech-bubble {
+    max-width: 50%;
+}}
+
 /* Bubble pointer */
 .speech-bubble:after{
 	content: '';
@@ -23,6 +28,7 @@
 	height: 0;
 	border: 20px solid transparent;
 }
+
 
 /* Response Bubble */
 .speech-bubble.response {
