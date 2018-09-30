@@ -9,6 +9,7 @@ import { NavigationRoutingModule } from './navigation-routing.module';
 import { RoutePlannerComponent } from '../../Plugins/Navigation/Components/route-planner/route-planner.component';
 import { DeparturePlannerComponent } from '../../Plugins/Navigation/Components/departure-planner/departure-planner.component';
 import { TravelModeComponent } from '../../Plugins/Navigation/Components/travel-mode/travel-mode.component';
+import { RouteWidgetComponent } from './Components/route-widget/route-widget.component';
 
 @NgModule({
   imports: [
@@ -24,7 +25,11 @@ import { TravelModeComponent } from '../../Plugins/Navigation/Components/travel-
     NavigationComponent,
     RoutePlannerComponent,
     DeparturePlannerComponent,
-    TravelModeComponent
+    TravelModeComponent,
+    RouteWidgetComponent
+  ],
+  exports: [
+    RouteWidgetComponent
   ],
   providers: [forwardRef(() => NavigationDataService)]
 })

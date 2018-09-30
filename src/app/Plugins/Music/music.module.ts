@@ -29,6 +29,9 @@ import { DevicesComponent } from '../../Plugins/Music/Components/devices/devices
   ],
   providers: [
     { provide: HAMMER_GESTURE_CONFIG, useClass: GestureConfig },
-    forwardRef(() => MusicDataService)]
+    forwardRef(() => MusicDataService)],
+  exports: [
+    CurrentSongComponent
+  ]
 })
 export class MusicModule { }

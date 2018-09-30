@@ -9,7 +9,7 @@ import { ChatService } from '../../Home-Services/chat.service';
   templateUrl: './messages-container.component.html',
   styleUrls: ['./messages-container.component.css']
 })
-export class MessagesContainerComponent implements OnInit {
+export class MessagesContainerComponent {
 
 
   constructor(
@@ -17,15 +17,7 @@ export class MessagesContainerComponent implements OnInit {
     private readonly options: OptionsService
   ) { }
 
-  ngOnInit() {
-  }
-
-  isResponse(message: Message){
+  isResponse(message: Message) {
     return message.from === AMY_CHAT_NAME[this.options.language];
   }
-
-  getMessages() {
-    return this.chat.getMessages();
-  }
-
 }
