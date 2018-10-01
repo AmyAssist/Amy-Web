@@ -1,16 +1,24 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { NavigationDataService } from '../../Services/navigation-data.service';
+import { CalcService } from '../../Services/calc.service';
 import { NavPath } from '../../Objects/navPath';
 import { BestTransportResult } from '../../Objects/bestTransportResult';
 import { combineLatest, Observable } from 'rxjs';
 import { FormControl } from '@angular/forms';
 import { map, startWith } from 'rxjs/operators';
 import { Coordinate } from '../../Objects/Coordinate';
+import { ResultRoute } from '../../Objects/resultRoute';
 
 class Tag {
   constructor(readonly name: string) { }
 }
 
+/*
+  Component for the best travel mode functionality of the Navigation-Plugin
+  it is Part of the navigation component
+
+  @author: Tobias Siemonsen
+*/
 @Component({
   selector: 'app-travel-mode',
   templateUrl: './travel-mode.component.html',
@@ -19,29 +27,13 @@ class Tag {
 })
 export class TravelModeComponent implements OnInit {
 
+  result: ResultRoute;
   navPathData: NavPath;
-  from: string;
-  to: string;
   timeDate: Date;
-  travelMode1: string;
-  travelMode2: string;
-  showWay: boolean;
   showMode: boolean;
-  showWhen: boolean;
-  whenTime: string;
-  whenTimeDate: Date;
   bestTransport: BestTransportResult;
-  Time: string;
 
   transit: boolean;
-  resultMode: string;
-  resultDistance: string;
-  resultDuration: string;
-  resultArrivalTime: string;
-  resultDepartureTime: string;
-  resultStartAddress: string;
-  resultEndAddress: string;
-
 
   tags: Observable<Tag[]>;
   originFilteredTags: Observable<Tag[]>;
@@ -52,6 +44,9 @@ export class TravelModeComponent implements OnInit {
 
   link: string = null;
 
+  /*
+    This method creates a Google Maps link for the calculated route.
+  */
   createLink(from: Coordinate, to: Coordinate, mode: string) {
     this.link = `https://www.google.com/maps/dir/?api=1&origin=${from.lat},${from.lng}&destination=${to.lat},${to.lng}&travelmode=${mode}`;
   }
@@ -60,11 +55,9 @@ export class TravelModeComponent implements OnInit {
     return t ? t.name : '';
   }
 
-  constructor(private readonly navigationService: NavigationDataService) { }
+  constructor(private readonly navigationService: NavigationDataService, private readonly calcService: CalcService) { }
 
   ngOnInit() {
-    this.showWay = false;
-    this.showWhen = false;
     this.showMode = false;
     this.transit = false;
     this.navPathData = new NavPath();
@@ -73,6 +66,10 @@ export class TravelModeComponent implements OnInit {
     this.loadTags();
   }
 
+  /*
+    This method loads the tags from the backend so they can be displayed in the UI
+    and work as an entry string
+  */
   loadTags() {
     this.tags = this.navigationService.getTags().pipe(map(tags => tags.map(t => new Tag(t))));
 
@@ -97,19 +94,24 @@ export class TravelModeComponent implements OnInit {
     ).pipe(mapping);
   }
 
+  /*
+    This method implements the main functionality, it creates a navPath object and sends it to the Navigation Backend.
+    The recieved Object is send to the calc-Service to create a result Object with strings that get displayed in the UI.
+  */
   async bestType(from: string, to: string, date: string) {
     this.createRoute(from, to, date);
     this.navigationService.best(this.navPathData).subscribe((data: BestTransportResult) => {
       this.bestTransport = { ...data };
-      this.calcResult();
-      this.showWay = false;
-      this.showWhen = false;
+      this.result = this.calcService.calcResult(this.bestTransport, this.transit);
       this.showMode = true;
       this.createLink(this.bestTransport.route.legs[0].startLocation,
         this.bestTransport.route.legs[0].endLocation, this.bestTransport.mode);
     });
   }
 
+  /*
+    This Method creates an navPath object which is send to the navigation backend to calculate the best travel mode
+  */
   createRoute(from: string | Tag, to: string | Tag, date: string) {
     if (from instanceof Tag) {
       this.navPathData.originTag = from.name;
@@ -123,37 +125,5 @@ export class TravelModeComponent implements OnInit {
     }
     this.timeDate = new Date(date);
     this.navPathData.time = this.timeDate.toISOString();
-  }
-
-  calcResult() {
-    if (this.bestTransport.mode.toString() === 'DRIVING') {
-      this.resultMode = 'car';
-      this.transit = false;
-    } else if (this.bestTransport.mode.toString() === 'TRANSIT') {
-      this.resultMode = 'transit';
-      this.transit = true;
-    } else if (this.bestTransport.mode.toString() === 'BICYCLING') {
-      this.resultMode = 'bicycle';
-      this.transit = false;
-    }
-
-    this.resultDistance = this.bestTransport.route.legs[0].distance.humanReadable;
-    this.resultDuration = this.bestTransport.route.legs[0].duration.humanReadable;
-    if (this.transit) {
-      const blank = ' ';
-      this.resultArrivalTime = `${this.bestTransport.route.legs[0].arrivalTime.dayOfMonth}
-              /${this.bestTransport.route.legs[0].arrivalTime.monthOfYear}
-              /${this.bestTransport.route.legs[0].arrivalTime.year} ${blank}
-              ${this.bestTransport.route.legs[0].arrivalTime.hourOfDay}
-              :${this.bestTransport.route.legs[0].arrivalTime.minuteOfHour}`;
-      this.resultDepartureTime = `${this.bestTransport.route.legs[0].departureTime.dayOfMonth}
-              /${this.bestTransport.route.legs[0].departureTime.monthOfYear}
-              /${this.bestTransport.route.legs[0].departureTime.year} ${blank}
-              ${this.bestTransport.route.legs[0].departureTime.hourOfDay}
-              :${this.bestTransport.route.legs[0].departureTime.minuteOfHour}`;
-    }
-    this.resultStartAddress = this.bestTransport.route.legs[0].startAddress;
-    this.resultEndAddress = this.bestTransport.route.legs[0].endAddress;
-    console.log(this.transit);
   }
 }
