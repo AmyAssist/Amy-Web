@@ -1,13 +1,13 @@
 {
   "name": "amy-webapp",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "homepage": "https://github.com/AmyAssist/Amy-Web",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "buildProd" : "ng build --prod",
+    "buildProd": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
