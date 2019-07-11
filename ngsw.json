@@ -1,0 +1,97 @@
+{
+  "configVersion": 1,
+  "index": "/Amy-Web/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "urls": [
+        "/Amy-Web/favicon.ico",
+        "/Amy-Web/index.html",
+        "/Amy-Web/main.8f3458c6c33793cfedf8.js",
+        "/Amy-Web/polyfills.365f83d1558eb4ac4dc9.js",
+        "/Amy-Web/runtime.a66f828dca56eeb90e02.js",
+        "/Amy-Web/styles.ee7c9a20422c197ae34e.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "urls": [
+        "/Amy-Web/assets/chat/test-7.png",
+        "/Amy-Web/assets/icons/icon-128x128.png",
+        "/Amy-Web/assets/icons/icon-144x144.png",
+        "/Amy-Web/assets/icons/icon-152x152.png",
+        "/Amy-Web/assets/icons/icon-192x192.png",
+        "/Amy-Web/assets/icons/icon-384x384.png",
+        "/Amy-Web/assets/icons/icon-512x512.png",
+        "/Amy-Web/assets/icons/icon-72x72.png",
+        "/Amy-Web/assets/icons/icon-96x96.png",
+        "/Amy-Web/assets/music/defaultMusicCover.png",
+        "/Amy-Web/assets/weather/cloudy.svg",
+        "/Amy-Web/assets/weather/hazy.svg",
+        "/Amy-Web/assets/weather/moon.svg",
+        "/Amy-Web/assets/weather/rain.svg",
+        "/Amy-Web/assets/weather/sleet.svg",
+        "/Amy-Web/assets/weather/snows.svg",
+        "/Amy-Web/assets/weather/storm.svg",
+        "/Amy-Web/assets/weather/sunny.svg",
+        "/Amy-Web/assets/weather/sunrise.svg",
+        "/Amy-Web/assets/weather/sunset.svg",
+        "/Amy-Web/assets/weather/wind.svg"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "/Amy-Web/assets/chat/test-7.png": "6fb64cc3a479bf767b8eed1a2819dbf45bc23a1b",
+    "/Amy-Web/assets/icons/icon-128x128.png": "d83e7a0cac89ec59c9c575963b84c8f854f4f224",
+    "/Amy-Web/assets/icons/icon-144x144.png": "ae89c990533c4ebea0aec5c2bcee48d53fd18935",
+    "/Amy-Web/assets/icons/icon-152x152.png": "a88561195bdd582581f15604b678a137cc5d207e",
+    "/Amy-Web/assets/icons/icon-192x192.png": "97dc95f9b137c751e391c2de3c19f0df810f5295",
+    "/Amy-Web/assets/icons/icon-384x384.png": "c23184a8386819f7276afdcf93a7914a8bfd1edd",
+    "/Amy-Web/assets/icons/icon-512x512.png": "bbd6c44cfe62be3cd87ddaa6a4feef9389805f5e",
+    "/Amy-Web/assets/icons/icon-72x72.png": "4bb1156a5be6c35f9acb4622a19efadd7b96e9d3",
+    "/Amy-Web/assets/icons/icon-96x96.png": "c52750445542119246ac27f863a256aa7827662d",
+    "/Amy-Web/assets/music/defaultMusicCover.png": "78d64788b250f1d6369742c4901bbee42335d765",
+    "/Amy-Web/assets/weather/cloudy.svg": "672c00810c190ad516097483c45e0f6ce2af785f",
+    "/Amy-Web/assets/weather/hazy.svg": "10634ad9d0662bc23de00ad0a4702baee76cb833",
+    "/Amy-Web/assets/weather/moon.svg": "10c0e2ba5e0cd546d988ae1b8d558c2295070830",
+    "/Amy-Web/assets/weather/rain.svg": "8a0b70f33d75a99706071362b3cd857498f83ca1",
+    "/Amy-Web/assets/weather/sleet.svg": "7931ddd5e118fda2a71f5b696ad6d44deba2645e",
+    "/Amy-Web/assets/weather/snows.svg": "a069f86ed5146cceb872332be7ad7f192af603ab",
+    "/Amy-Web/assets/weather/storm.svg": "b09c6b4cafb79d1f556127f27b06952369bea944",
+    "/Amy-Web/assets/weather/sunny.svg": "54eaf41ae4756c1eed41705e1707d49cadcc1bee",
+    "/Amy-Web/assets/weather/sunrise.svg": "e7f2246461431b03c5497c4801b009c9a5745d1c",
+    "/Amy-Web/assets/weather/sunset.svg": "000357282c7c3304741f49c2627f775dcf332152",
+    "/Amy-Web/assets/weather/wind.svg": "ca0a74ee629ebe41887dab92eddc27bc9be54d45",
+    "/Amy-Web/favicon.ico": "256571b8f86053f2c8424905ad5c66bdc174ee61",
+    "/Amy-Web/index.html": "44bf7c494e8f28e0a91e08753e7806f6537565f2",
+    "/Amy-Web/main.8f3458c6c33793cfedf8.js": "11d9f9e2d880e0182e94e5f6e97367d96e14c44e",
+    "/Amy-Web/polyfills.365f83d1558eb4ac4dc9.js": "da4e8578d50ec126ead547642ae7d97788afa37f",
+    "/Amy-Web/runtime.a66f828dca56eeb90e02.js": "078e320cc6fdaf355836c3b1c52b059cdd33fc7e",
+    "/Amy-Web/styles.ee7c9a20422c197ae34e.css": "a9dfeaf72684d055d993d9b7c58eb870736eae92"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ]
+}
